@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서당 — 작은 학원을 위한 가장 간단한 관리 앱</title>
+<meta name="description" content="반 편성부터 출결, 수강료, 학부모 알림까지. 소규모 학원과 공부방을 위한 학원 관리 앱, 서당.">
+<meta property="og:title" content="서당 — 학원 관리 앱">
+<meta property="og:description" content="반 편성부터 출결, 수강료, 학부모 알림까지. 작은 학원을 위한 가장 간단한 관리 앱.">
+<meta property="og:url" content="https://seodang.app">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --ink: #191c22;
+    --ink-soft: #4d525c;
+    --ink-faint: #9298a3;
+    --paper: #f7f8fa;
+    --white: #ffffff;
+    --brand: #2b5cd9;
+    --brand-deep: #1e46ab;
+    --brand-soft: #eef2fd;
+    --green: #1fb871;
+    --green-soft: #e7f8f0;
+    --red: #e5484d;
+    --red-soft: #fdeeee;
+    --line: #e7e9ee;
+    --radius: 18px;
+    --shadow: 0 8px 30px rgba(25, 28, 34, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', 'Malgun Gothic', sans-serif;
+    color: var(--ink); background: var(--white); line-height: 1.65;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  h2.title { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.35; }
+  p.sub { color: var(--ink-soft); margin-top: 12px; font-size: 1.02rem; }
+
+  /* ---------- scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.on { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: 0.1s; } .reveal.d2 { transition-delay: 0.2s; } .reveal.d3 { transition-delay: 0.3s; }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent; transition: border-color 0.3s;
+  }
+  header.scrolled { border-bottom-color: var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; text-decoration: none; color: var(--ink); }
+  .logo span { color: var(--brand); }
+  nav.gnb { display: flex; gap: 4px; }
+  nav.gnb a {
+    color: var(--ink-soft); text-decoration: none; font-size: 0.93rem; font-weight: 600;
+    padding: 8px 14px; border-radius: 10px; transition: background 0.15s, color 0.15s;
+  }
+  nav.gnb a:hover { background: var(--brand-soft); color: var(--brand-deep); }
+  .nav-cta {
+    background: var(--ink); color: #fff !important; border-radius: 12px; padding: 9px 18px !important;
+  }
+  .nav-cta:hover { background: var(--brand) !important; color: #fff !important; }
+  @media (max-width: 720px) { nav.gnb a:not(.nav-cta) { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 72px 0 40px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  @media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
+  .hero .badge {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--brand-soft); color: var(--brand-deep);
+    font-size: 0.85rem; font-weight: 700; padding: 7px 16px; border-radius: 999px; margin-bottom: 22px;
+  }
+  .hero .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.4; transform: scale(0.8);} }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 800; letter-spacing: -1.5px; line-height: 1.25; }
+  .hero h1 em { font-style: normal; color: var(--brand); position: relative; }
+  .hero p.lead { margin-top: 20px; color: var(--ink-soft); font-size: 1.1rem; max-width: 460px; }
+  .cta-row { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 14px;
+    text-decoration: none; font-weight: 700; font-size: 1rem; border: none; cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s;
+  }
+  .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 6px 18px rgba(43, 92, 217, 0.3); }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--brand-deep); }
+  .btn-ghost { background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
+  .btn-ghost:hover { background: var(--brand-soft); }
+  .cta-note { margin-top: 12px; font-size: 0.85rem; color: var(--ink-faint); }
+
+  /* ---------- phone mockup ---------- */
+  .phone-zone { position: relative; display: flex; justify-content: center; padding: 20px 0; }
+  .phone {
+    width: 290px; background: var(--ink); border-radius: 38px; padding: 10px;
+    box-shadow: 0 24px 60px rgba(25, 28, 34, 0.25); position: relative; z-index: 2;
+  }
+  .screen { background: var(--paper); border-radius: 30px; overflow: hidden; }
+  .app-bar { background: var(--white); padding: 16px 18px 12px; display: flex; justify-content: space-between; align-items: center; }
+  .app-bar .t { font-weight: 800; font-size: 0.98rem; }
+  .app-bar .bell { position: relative; font-size: 1rem; }
+  .app-bar .bell::after {
+    content: ''; position: absolute; top: -2px; right: -3px; width: 7px; height: 7px;
+    background: var(--red); border-radius: 50%;
+  }
+  .app-body { padding: 12px 14px 18px; }
+  .app-card { background: var(--white); border-radius: 14px; padding: 13px 14px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(25,28,34,0.05); }
+  .app-card .label { font-size: 0.68rem; color: var(--ink-faint); font-weight: 700; margin-bottom: 6px; }
+  .class-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; }
+  .class-row + .class-row { border-top: 1px solid var(--paper); }
+  .class-row .nm { font-size: 0.83rem; font-weight: 700; }
+  .class-row .tm { font-size: 0.72rem; color: var(--ink-faint); }
+  .chip { font-size: 0.68rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+  .chip.blue { background: var(--brand-soft); color: var(--brand-deep); }
+  .chip.green { background: var(--green-soft); color: var(--green); }
+  .stu-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
+  .stu-row .nm { font-size: 0.83rem; font-weight: 600; }
+  .toggle2 { display: flex; gap: 5px; }
+  .tbtn {
+    font-size: 0.68rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--white); color: var(--ink-faint);
+  }
+  .tbtn.on-p { background: var(--green-soft); color: var(--green); border-color: transparent; }
+  .tbtn.on-a { background: var(--red-soft); color: var(--red); border-color: transparent; }
+  /* floating cards */
+  .float-card {
+    position: absolute; background: var(--white); border-radius: 14px; box-shadow: var(--shadow);
+    padding: 12px 16px; font-size: 0.8rem; z-index: 3; display: flex; gap: 10px; align-items: center;
+    opacity: 0; animation: floatIn 0.8s forwards ease;
+  }
+  .float-card .ic { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .float-card b { display: block; font-size: 0.82rem; }
+  .float-card small { color: var(--ink-faint); font-size: 0.72rem; }
+  .fc1 { top: 8%; left: -4%; animation-delay: 0.5s; } .fc1 .ic { background: var(--green-soft); }
+  .fc2 { bottom: 14%; right: -6%; animation-delay: 1s; } .fc2 .ic { background: var(--brand-soft); }
+  @keyframes floatIn { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: none;} }
+  @media (max-width: 480px) { .fc1 { left: 0; } .fc2 { right: 0; } }
+
+  /* ---------- pain strip ---------- */
+  .pain { background: var(--ink); color: #fff; padding: 68px 0; margin-top: 48px; }
+  .pain h2 { text-align: center; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -0.5px; }
+  .pain .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; }
+  .pain .card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 26px 24px;
+  }
+  .pain .card .q { font-size: 1rem; font-weight: 700; line-height: 1.5; }
+  .pain .card .a { margin-top: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.65); }
+  .pain .card .a b { color: #8fb0ff; }
+
+  /* ---------- feature tabs ---------- */
+  .features { padding: 84px 0; }
+  .tab-switch {
+    display: inline-flex; background: var(--paper); border-radius: 14px; padding: 5px; margin-top: 28px; gap: 4px;
+  }
+  .tab-switch button {
+    border: none; background: transparent; font-family: inherit; font-size: 0.95rem; font-weight: 700;
+    padding: 10px 26px; border-radius: 10px; cursor: pointer; color: var(--ink-faint); transition: all 0.15s;
+  }
+  .tab-switch button.on { background: var(--white); color: var(--ink); box-shadow: 0 2px 8px rgba(25,28,34,0.08); }
+  .tab-panel { display: none; margin-top: 36px; }
+  .tab-panel.on { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; animation: fadeUp 0.45s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px);} to { opacity: 1; transform: none;} }
+  .fcard { background: var(--paper); border-radius: var(--radius); padding: 28px 24px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .fcard:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .fcard .ico { width: 46px; height: 46px; border-radius: 13px; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; box-shadow: 0 2px 8px rgba(25,28,34,0.06); }
+  .fcard h3 { margin: 16px 0 8px; font-size: 1.05rem; font-weight: 700; }
+  .fcard p { color: var(--ink-soft); font-size: 0.92rem; }
+
+  /* ---------- interactive demo ---------- */
+  .demo { background: var(--paper); padding: 84px 0; }
+  .demo .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 860px) { .demo .wrap { grid-template-columns: 1fr; } }
+  .demo-widget { background: var(--white); border-radius: 22px; box-shadow: var(--shadow); padding: 26px; }
+  .demo-widget .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .demo-widget .head b { font-size: 1.05rem; }
+  .demo-widget .head small { color: var(--ink-faint); font-size: 0.8rem; }
+  .demo-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 4px; border-bottom: 1px solid var(--paper); }
+  .demo-row .nm { font-weight: 700; font-size: 0.97rem; }
+  .demo-row .note { display: block; font-size: 0.75rem; color: var(--ink-faint); font-weight: 500; }
+  .demo-row .btns { display: flex; gap: 8px; }
+  .demo-row .btns button {
+    font-family: inherit; font-size: 0.82rem; font-weight: 700; padding: 8px 16px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--white); color: var(--ink-faint); cursor: pointer; transition: all 0.12s;
+  }
+  .demo-row .btns button.p.on { background: var(--green); color: #fff; border-color: transparent; }
+  .demo-row .btns button.a.on { background: var(--red); color: #fff; border-color: transparent; }
+  .demo-toast {
+    margin-top: 18px; border-radius: 13px; padding: 13px 16px; font-size: 0.85rem; font-weight: 600;
+    display: flex; gap: 10px; align-items: center; opacity: 0; transform: translateY(6px); transition: all 0.3s ease;
+    background: var(--brand-soft); color: var(--brand-deep);
+  }
+  .demo-toast.show { opacity: 1; transform: none; }
+  .demo-toast.quiet { background: var(--green-soft); color: var(--green); }
+  .demo-text .step-list { margin-top: 24px; }
+  .demo-text .step-item { display: flex; gap: 14px; padding: 12px 0; }
+  .demo-text .step-item .n {
+    flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--white);
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: var(--brand);
+    box-shadow: 0 2px 6px rgba(25,28,34,0.08);
+  }
+  .demo-text .step-item p { font-size: 0.95rem; color: var(--ink-soft); }
+  .demo-text .step-item p b { color: var(--ink); }
+
+  /* ---------- parents ---------- */
+  .parents { padding: 84px 0; }
+  .parents .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 40px; }
+  .pcard { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; position: relative; overflow: hidden; }
+  .pcard .num { position: absolute; top: 14px; right: 20px; font-size: 3rem; font-weight: 800; color: var(--paper); z-index: 0; }
+  .pcard h3 { font-size: 1.05rem; font-weight: 700; position: relative; }
+  .pcard p { margin-top: 8px; color: var(--ink-soft); font-size: 0.92rem; position: relative; }
+  .pcard .code {
+    display: inline-block; margin-top: 14px; background: var(--ink); color: #9dff9d; font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 0.85rem; padding: 7px 14px; border-radius: 9px; letter-spacing: 1px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq { background: var(--paper); padding: 84px 0; }
+  .faq .list { margin-top: 36px; max-width: 760px; }
+  .faq-item { background: var(--white); border-radius: 14px; margin-bottom: 10px; overflow: hidden; }
+  .faq-item button {
+    width: 100%; text-align: left; border: none; background: none; font-family: inherit; cursor: pointer;
+    padding: 20px 22px; font-size: 0.98rem; font-weight: 700; color: var(--ink);
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  .faq-item .arrow { transition: transform 0.25s ease; color: var(--ink-faint); flex: none; }
+  .faq-item.open .arrow { transform: rotate(180deg); }
+  .faq-item .body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-item .body p { padding: 0 22px 20px; color: var(--ink-soft); font-size: 0.93rem; }
+
+  /* ---------- bottom CTA ---------- */
+  .bottom-cta { padding: 96px 0; text-align: center; }
+  .bottom-cta h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; letter-spacing: -1px; line-height: 1.35; }
+  .bottom-cta p { color: var(--ink-soft); margin-top: 14px; }
+  .bottom-cta .cta-row { justify-content: center; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 44px 0 60px; }
+  footer .links { margin-bottom: 16px; }
+  footer .links a { color: var(--ink-soft); text-decoration: none; font-size: 0.9rem; margin-right: 20px; font-weight: 600; }
+  footer .links a:hover { color: var(--brand); }
+  footer .biz { color: var(--ink-faint); font-size: 0.83rem; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <div class="wrap">
+    <a class="logo" href="#">서<span>당</span></a>
+    <nav class="gnb">
+      <a href="#features">기능</a>
+      <a href="#demo">체험하기</a>
+      <a href="#parents">학부모</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="#download">앱 다운로드</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="badge"><span class="dot"></span>Google Play 출시 준비 중</div>
+      <h1>출결·수강료·알림,<br>작은 학원 관리는<br><em>서당</em> 하나로</h1>
+      <p class="lead">엑셀도, 수기 장부도, 단체 문자방도 이제 그만.
+      카카오 로그인 한 번이면 우리 학원 관리가 5분 만에 시작됩니다.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#download">출시 알림 받기</a>
+        <a class="btn btn-ghost" href="#demo">먼저 체험해보기</a>
+      </div>
+      <p class="cta-note">소규모 학원·공부방·교습소 전용 · 설치비 없음</p>
+    </div>
+    <div class="phone-zone">
+      <div class="float-card fc1">
+        <div class="ic">✅</div>
+        <div><b>출석 완료</b><small>월수금 수학반 · 8명</small></div>
+      </div>
+      <div class="float-card fc2">
+        <div class="ic">🔔</div>
+        <div><b>학부모 알림 전송</b><small>휴강 안내 · 12명에게</small></div>
+      </div>
+      <div class="phone">
+        <div class="screen">
+          <div class="app-bar"><span class="t">서당수학학원</span><span class="bell">🔔</span></div>
+          <div class="app-body">
+            <div class="app-card">
+              <div class="label">오늘 수업</div>
+              <div class="class-row">
+                <div><div class="nm">월수금 수학반</div><div class="tm">16:00 · 8명</div></div>
+                <span class="chip green">출석 완료</span>
+              </div>
+              <div class="class-row">
+                <div><div class="nm">중등 심화반</div><div class="tm">18:30 · 6명</div></div>
+                <span class="chip blue">진행 예정</span>
+              </div>
+            </div>
+            <div class="app-card">
+              <div class="label">출석 체크 — 월수금 수학반</div>
+              <div class="stu-row"><span class="nm">김하늘</span>
+                <div class="toggle2"><span class="tbtn on-p">출석</span><span class="tbtn">결석</span></div></div>
+              <div class="stu-row"><span class="nm">이도윤</span>
+                <div class="toggle2"><span class="tbtn on-p">출석</span><span class="tbtn">결석</span></div></div>
+              <div class="stu-row"><span class="nm">박서연</span>
+                <div class="toggle2"><span class="tbtn">출석</span><span class="tbtn on-a">결석</span></div></div>
+            </div>
+            <div class="app-card">
+              <div class="label">7월 수강료</div>
+              <div class="class-row">
+                <div><div class="nm">납부 12 · 미납 2</div><div class="tm">1,960,000원 수납</div></div>
+                <span class="chip blue">관리</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pain">
+  <div class="wrap">
+    <h2 class="reveal">혹시 아직도 이렇게 관리하고 계신가요?</h2>
+    <div class="cards">
+      <div class="card reveal d1">
+        <div class="q">"출석부는 종이에, 수강료는 엑셀에, 공지는 단체 문자방에…"</div>
+        <div class="a">→ 서당에서는 <b>한 앱에서</b> 반·출결·수강료·공지가 전부 연결됩니다.</div>
+      </div>
+      <div class="card reveal d2">
+        <div class="q">"어머니, 오늘 민준이가 안 왔는데요… 전화 돌리는 게 일이에요."</div>
+        <div class="a">→ 무단결석이면 <b>학부모에게 자동 알림</b>. 미리 통보된 결석은 조용히 기록만.</div>
+      </div>
+      <div class="card reveal d3">
+        <div class="q">"이번 달 누가 수강료를 안 냈더라?"</div>
+        <div class="a">→ 월별 청구 내역과 납부 여부가 <b>한 화면에</b>. 체크만 하면 끝.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="wrap" style="text-align:center;">
+    <h2 class="title reveal">누구에게나 꼭 맞게</h2>
+    <p class="sub reveal">원장님과 학부모, 각자 필요한 것만 보입니다.</p>
+    <div class="tab-switch reveal">
+      <button class="on" data-tab="t-owner">🏫 원장님</button>
+      <button data-tab="t-parent">👨‍👩‍👧 학부모</button>
+    </div>
+
+    <div class="tab-panel on" id="t-owner">
+      <div class="fcard"><div class="ico">📚</div><h3>반 관리</h3><p>요일·시간만 정하면 수업 회차가 자동 생성. 정규반은 매주 자동 연장, 특강반은 기간만 설정.</p></div>
+      <div class="fcard"><div class="ico">✅</div><h3>출결 관리</h3><p>오늘 수업이 홈 화면에 바로. 탭 한 번으로 출석·결석 기록, 언제든 수정 가능.</p></div>
+      <div class="fcard"><div class="ico">💳</div><h3>수강료 관리</h3><p>학생별 수강료와 월별 청구·납부 현황을 한눈에. 미납 학생도 바로 보입니다.</p></div>
+      <div class="fcard"><div class="ico">📣</div><h3>공지·휴강 알림</h3><p>공지사항, 휴강·보강 안내가 학부모에게 푸시로 자동 전달. 문자비 0원.</p></div>
+    </div>
+
+    <div class="tab-panel" id="t-parent">
+      <div class="fcard"><div class="ico">🔗</div><h3>코드로 간편 연결</h3><p>학원이 알려준 학생 코드만 입력하면 자녀와 연결 완료. 회원가입은 카카오로 3초.</p></div>
+      <div class="fcard"><div class="ico">🗓️</div><h3>일정 확인</h3><p>자녀의 이번 주 수업 일정을 언제든 확인. 휴강·보강도 실시간 알림으로.</p></div>
+      <div class="fcard"><div class="ico">📋</div><h3>출결 기록</h3><p>지난 출결 내역과 결석 사유까지 투명하게. 학원에 물어볼 필요가 없습니다.</p></div>
+      <div class="fcard"><div class="ico">✉️</div><h3>결석 사전 통보</h3><p>결석 예정이면 앱에서 미리 통보. 학원에 전화하지 않아도 자동으로 전달됩니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="wrap">
+    <div class="demo-text reveal">
+      <h2 class="title">출석 체크,<br>직접 눌러보세요</h2>
+      <p class="sub">실제 앱과 같은 방식입니다. 오른쪽(모바일은 아래) 위젯에서 학생들의 출결을 바꿔보세요.</p>
+      <div class="step-list">
+        <div class="step-item"><div class="n">1</div><p><b>탭 한 번</b>으로 출석/결석이 기록됩니다.</p></div>
+        <div class="step-item"><div class="n">2</div><p>결석 처리하면 — <b>사전 통보가 없던 학생만</b> 학부모에게 알림이 갑니다.</p></div>
+        <div class="step-item"><div class="n">3</div><p>미리 통보된 결석(박서연)은 <b>조용히 기록만</b> 됩니다. 불필요한 알림이 없어요.</p></div>
+      </div>
+    </div>
+    <div class="demo-widget reveal d1">
+      <div class="head"><b>월수금 수학반 · 출석</b><small>오늘 16:00</small></div>
+      <div class="demo-row" data-name="김하늘" data-notice="none">
+        <div class="nm">김하늘</div>
+        <div class="btns"><button class="p on">출석</button><button class="a">결석</button></div>
+      </div>
+      <div class="demo-row" data-name="이도윤" data-notice="none">
+        <div class="nm">이도윤</div>
+        <div class="btns"><button class="p on">출석</button><button class="a">결석</button></div>
+      </div>
+      <div class="demo-row" data-name="박서연" data-notice="told">
+        <div class="nm">박서연 <span class="note">학부모가 결석 사전 통보 ✓</span></div>
+        <div class="btns"><button class="p">출석</button><button class="a on">결석</button></div>
+      </div>
+      <div class="demo-toast" id="toast"></div>
+    </div>
+  </div>
+</section>
+
+<section class="parents" id="parents">
+  <div class="wrap" style="text-align:center;">
+    <h2 class="title reveal">학부모 연결은 코드 하나면 끝</h2>
+    <p class="sub reveal">앱 설치를 강요하는 복잡한 절차 없이, 코드 한 줄로.</p>
+    <div class="grid">
+      <div class="pcard reveal"><div class="num">1</div><h3>학원이 코드 전달</h3><p>학생마다 자동 발급되는 고유 코드를 학부모에게 알려주세요.</p><span class="code">STU-K3M7</span></div>
+      <div class="pcard reveal d1"><div class="num">2</div><h3>학부모가 입력</h3><p>카카오로 로그인하고 코드를 입력하면 자녀와 바로 연결됩니다.</p></div>
+      <div class="pcard reveal d2"><div class="num">3</div><h3>자동으로 소식 도착</h3><p>일정·출결·공지·휴강 알림이 학부모 앱으로 실시간 전달됩니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <h2 class="title reveal">자주 묻는 질문</h2>
+    <div class="list reveal">
+      <div class="faq-item">
+        <button>이용 요금이 있나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>출시 시점에는 무료로 제공됩니다. 유료 플랜이 도입되더라도 기존 사용 학원에는 충분한 사전 안내를 드립니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button>학부모도 꼭 앱을 설치해야 하나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>학원 관리 기능(출결·수강료·반 관리)은 학부모 설치 없이도 전부 사용할 수 있습니다. 학부모가 앱을 설치하면 알림·일정 확인·결석 통보 기능이 추가로 연결됩니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button>문자 발송 비용이 드나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>아니요. 서당의 알림은 앱 푸시로 전달되므로 건당 문자비가 들지 않습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button>수강료 결제도 앱에서 되나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>서당은 수강료 청구 내역의 기록·안내를 도와드립니다. 결제(수납) 자체는 학원의 기존 방식(계좌이체 등)을 그대로 쓰시면 되고, 납부 여부를 앱에서 체크하는 방식입니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button>학생 정보는 안전하게 관리되나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>모든 데이터는 암호화되어 전송·저장되며, 학부모는 본인 자녀의 정보만 볼 수 있도록 권한이 설계되어 있습니다. 자세한 내용은 개인정보처리방침을 확인해주세요.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bottom-cta" id="download">
+  <div class="wrap">
+    <h2 class="reveal">작은 학원의 하루가 가벼워지도록,<br>서당이 함께합니다</h2>
+    <p class="reveal d1">2026년 여름, Google Play 정식 출시 예정</p>
+    <div class="cta-row reveal d2" style="margin-top: 30px;">
+      <a class="btn btn-primary" href="#" aria-disabled="true">Google Play 출시 준비 중</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="terms.html">이용약관</a>
+      <a href="privacy.html">개인정보처리방침</a>
+    </div>
+    <div class="biz">
+      서당 · 대표 임호균<br>
+      문의: 준비 중<br>
+      © 2026 Seodang. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---------- header shadow ----------
+const hd = document.getElementById('hd');
+addEventListener('scroll', () => hd.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+// ---------- scroll reveal ----------
+const io = new IntersectionObserver((es) => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ---------- feature tabs ----------
+document.querySelectorAll('.tab-switch button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-switch button').forEach(b => b.classList.remove('on'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById(btn.dataset.tab).classList.add('on');
+  });
+});
+
+// ---------- attendance demo ----------
+const toast = document.getElementById('toast');
+let toastTimer;
+function showToast(msg, quiet) {
+  toast.textContent = msg;
+  toast.classList.toggle('quiet', !!quiet);
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+}
+document.querySelectorAll('.demo-row').forEach(row => {
+  const pBtn = row.querySelector('.p'), aBtn = row.querySelector('.a');
+  const name = row.dataset.name, told = row.dataset.notice === 'told';
+  pBtn.addEventListener('click', () => {
+    pBtn.classList.add('on'); aBtn.classList.remove('on');
+    showToast(`✅ ${name} 출석 처리 — 기록 완료`, true);
+  });
+  aBtn.addEventListener('click', () => {
+    aBtn.classList.add('on'); pBtn.classList.remove('on');
+    if (told) showToast(`🤫 ${name} 결석 — 사전 통보된 결석이라 알림 없이 기록만 했어요`, true);
+    else showToast(`🔔 ${name} 결석 — 학부모에게 무단결석 알림을 보냈어요`);
+  });
+});
+
+// ---------- FAQ accordion ----------
+document.querySelectorAll('.faq-item button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement, body = item.querySelector('.body');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open'); i.querySelector('.body').style.maxHeight = null;
+    });
+    if (!isOpen) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
+  });
+});
+</script>
+
+</body>
+</html>
