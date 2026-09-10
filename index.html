@@ -171,6 +171,34 @@
   .pain .card .a { margin-top: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.65); }
   .pain .card .a b { color: #8fb8ff; }
 
+
+  /* ---------- compare table ---------- */
+  .cmp { padding: 84px 0; background: var(--paper); }
+  .cmp .tbl { margin-top: 36px; background: var(--white); border-radius: 22px; box-shadow: var(--shadow); overflow: hidden; }
+  .cmp table { width: 100%; border-collapse: collapse; }
+  .cmp th, .cmp td { padding: 16px 18px; text-align: center; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+  .cmp th { font-size: 0.85rem; font-weight: 700; color: var(--ink-faint); background: var(--paper); letter-spacing: 0.3px; }
+  .cmp th.sd { color: var(--brand); background: var(--brand-soft); font-size: 1rem; }
+  .cmp td:first-child, .cmp th:first-child { text-align: left; font-weight: 700; }
+  .cmp td:first-child small { display: block; font-weight: 500; color: var(--ink-faint); font-size: 0.78rem; margin-top: 2px; }
+  .cmp td.sd { background: rgba(49,130,246,0.05); font-weight: 800; color: var(--brand-deep); }
+  .cmp tr:last-child td { border-bottom: none; }
+  .cmp .y { color: var(--green); font-weight: 800; }
+  .cmp .n { color: var(--ink-faint); }
+  .cmp .m { color: #d98a00; font-weight: 700; }
+  .cmp .note { margin-top: 14px; font-size: 0.8rem; color: var(--ink-faint); text-align: center; }
+  @media (max-width: 720px) { .cmp th, .cmp td { padding: 12px 10px; font-size: 0.85rem; } }
+
+  /* ---------- owner-only ---------- */
+  .owner { padding: 84px 0; }
+  .owner .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 36px; }
+  .ocard { border: 1.5px solid var(--line); border-radius: var(--radius); padding: 22px 22px; background: var(--white); text-align: left; position: relative; }
+  .ocard .lock { position: absolute; top: 16px; right: 16px; font-size: 0.66rem; font-weight: 800; color: var(--brand); background: var(--brand-soft); padding: 3px 9px; border-radius: 999px; }
+  .ocard h3 { font-size: 1rem; font-weight: 700; padding-right: 60px; }
+  .ocard p { margin-top: 8px; color: var(--ink-soft); font-size: 0.9rem; }
+  .owner .why { margin-top: 28px; background: var(--paper); border-radius: 16px; padding: 18px 22px; font-size: 0.92rem; color: var(--ink-soft); }
+  .owner .why b { color: var(--ink); }
+
   /* ---------- feature tabs ---------- */
   .features { padding: 84px 0; }
   .tab-switch { display: inline-flex; background: var(--paper); border-radius: 14px; padding: 5px; margin-top: 28px; gap: 4px; }
@@ -185,44 +213,13 @@
   .fcard { background: var(--paper); border-radius: var(--radius); padding: 28px 24px; text-align: left; transition: transform 0.15s ease, box-shadow 0.15s ease; }
   .fcard:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
   .fcard .ico { width: 46px; height: 46px; border-radius: 13px; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; box-shadow: 0 2px 8px rgba(25,28,34,0.06); }
-  .fcard h3 { margin: 16px 0 8px; font-size: 1.05rem; font-weight: 700; }
+  .fcard h3 { margin: 16px 0 8px; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; }
+  .fcard.hi { background: var(--ink); color: #fff; }
+  .fcard.hi p { color: rgba(255,255,255,0.72); }
+  .fcard.hi .ico { background: rgba(255,255,255,0.1); box-shadow: none; }
+  .fcard.hi .new { background: #fff; }
   .fcard p { color: var(--ink-soft); font-size: 0.92rem; }
   .fcard .new { display: inline-block; font-size: 0.66rem; font-weight: 800; color: var(--brand); background: var(--brand-soft); padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
-
-  /* ---------- interactive demo ---------- */
-  .demo { background: var(--paper); padding: 84px 0; }
-  .demo .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-  @media (max-width: 860px) { .demo .wrap { grid-template-columns: 1fr; } }
-  .demo-widget { background: var(--white); border-radius: 22px; box-shadow: var(--shadow); padding: 26px; }
-  .demo-widget .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-  .demo-widget .head b { font-size: 1.05rem; }
-  .demo-widget .head small { color: var(--ink-faint); font-size: 0.8rem; }
-  .demo-row { display: flex; justify-content: space-between; align-items: center; padding: 13px 4px; border-bottom: 1px solid var(--paper); }
-  .demo-row .nm { font-weight: 700; font-size: 0.97rem; }
-  .demo-row .note { display: block; font-size: 0.75rem; color: var(--ink-faint); font-weight: 500; }
-  .demo-row .btns { display: flex; gap: 8px; }
-  .demo-row .btns button {
-    font-family: inherit; font-size: 0.82rem; font-weight: 700; padding: 8px 16px; border-radius: 999px;
-    border: 1px solid var(--line); background: var(--white); color: var(--ink-faint); cursor: pointer; transition: all 0.12s;
-  }
-  .demo-row .btns button.p.on { background: var(--green); color: #fff; border-color: transparent; }
-  .demo-row .btns button.a.on { background: var(--red); color: #fff; border-color: transparent; }
-  .demo-toast {
-    margin-top: 18px; border-radius: 13px; padding: 13px 16px; font-size: 0.85rem; font-weight: 600;
-    display: flex; gap: 10px; align-items: center; opacity: 0; transform: translateY(6px); transition: all 0.3s ease;
-    background: var(--brand-soft); color: var(--brand-deep);
-  }
-  .demo-toast.show { opacity: 1; transform: none; }
-  .demo-toast.quiet { background: var(--green-soft); color: var(--green); }
-  .demo-text .step-list { margin-top: 24px; }
-  .demo-text .step-item { display: flex; gap: 14px; padding: 12px 0; }
-  .demo-text .step-item .n {
-    flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--white);
-    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; color: var(--brand);
-    box-shadow: 0 2px 6px rgba(25,28,34,0.08);
-  }
-  .demo-text .step-item p { font-size: 0.95rem; color: var(--ink-soft); }
-  .demo-text .step-item p b { color: var(--ink); }
 
   /* ---------- money section ---------- */
   .money { padding: 84px 0; }
@@ -291,8 +288,9 @@
   <div class="wrap">
     <a class="logo" href="#"><span class="mark"></span>서당</a>
     <nav class="gnb">
+      <a href="#compare">비교</a>
       <a href="#features">기능</a>
-      <a href="#demo">체험하기</a>
+      <a href="#owner">원장 전용</a>
       <a href="#money">카드 결제</a>
       <a href="#parents">학부모</a>
       <a href="#faq">FAQ</a>
@@ -307,7 +305,7 @@
       <div class="badge"><span class="dot"></span>2026년 9월 · 파일럿 학원 운영 중</div>
       <h1>원장님 전화기가<br><em>조용해집니다.</em></h1>
       <p class="lead">학부모가 매일 묻던 것을 <b>앱이 먼저 답합니다.</b>
-      출결·수강료·카드 결제·셔틀 실시간 위치까지, 작은 학원과 스포츠 교습소를 위한 관리 앱.</p>
+      셔틀 실시간 위치 · 수수료 없는 카드 결제 · 법정 환불 자동 계산 — 다른 프로그램에 없는 세 가지를 작은 학원에 맞춰 넣었습니다.</p>
       <div class="ask">
         <span>셔틀 지금 어디예요?</span>
         <span>오늘 잘 갔나요?</span>
@@ -316,7 +314,7 @@
       </div>
       <div class="cta-row">
         <a class="btn btn-primary" href="/app/">PC 웹에서 시작하기</a>
-        <a class="btn btn-ghost" href="#demo">먼저 눌러보기</a>
+        <a class="btn btn-ghost" href="#compare">다른 프로그램과 비교</a>
       </div>
       <p class="cta-note">카카오 로그인 · 설치비 없음 · 문자비 0원 · 현재 파일럿 학원에 무료 제공</p>
     </div>
@@ -355,7 +353,7 @@
 <section class="stats">
   <div class="wrap">
     <div class="grid">
-      <div class="stat reveal"><div class="n">0.8<small>%</small></div><div class="d">카드 결제 수수료 — <b>PG 마진 없이</b> 학원 가맹점 요율 그대로</div></div>
+      <div class="stat reveal"><div class="n">0<small>원</small></div><div class="d">서당이 받는 결제 수수료 — <b>중간 결제사 마진 없이</b> 학원 가맹점 요율 그대로</div></div>
       <div class="stat reveal d1"><div class="n">0<small>원</small></div><div class="d">문자·알림톡 비용 — <b>앱 푸시</b>로 휴강·결석·청구 알림</div></div>
       <div class="stat reveal d2"><div class="n">30<small>곳</small></div><div class="d">셔틀 정류장을 <b>한 번에</b> 길안내 — 앱을 오갈 일 없이</div></div>
       <div class="stat reveal d3"><div class="n">5<small>일</small></div><div class="d">법정 환불 기한 안에 <b>자동 계산</b> — 시행령 별표 4 기준</div></div>
@@ -383,10 +381,40 @@
   </div>
 </section>
 
+
+<section class="cmp" id="compare">
+  <div class="wrap" style="text-align:center;">
+    <span class="eyebrow reveal">왜 서당인가</span>
+    <h2 class="title reveal">기존 학원 관리 프로그램과<br>무엇이 다른가요?</h2>
+    <p class="sub reveal">출석·청구는 어디나 됩니다. 서당은 <b>그 다음</b>을 만들었습니다.</p>
+    <div class="tbl reveal d1">
+      <table>
+        <thead>
+          <tr><th></th><th>엑셀·수기</th><th>기존 원생관리 프로그램</th><th class="sd">서당</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>셔틀 실시간 위치<small>학부모 앱 · 정류장별 도착 시각</small></td><td class="n">✕</td><td class="n">✕</td><td class="sd"><span class="y">✓</span> 노선도 + 「몇 번째 · 몇 분 후」</td></tr>
+          <tr><td>기사님 길안내<small>정류장 여러 곳을 한 번에</small></td><td class="n">✕</td><td class="n">✕</td><td class="sd"><span class="y">✓</span> 앱 내장 티맵 · 30곳 한 번에</td></tr>
+          <tr><td>카드 결제 수수료<small>서당·중간 결제사 몫</small></td><td class="n">—</td><td class="m">결제사 마진 붙음</td><td class="sd"><span class="y">없음</span> 학원 가맹점 요율만</td></tr>
+          <tr><td>카드 단말기<small>신규 개원 학원</small></td><td class="n">필요</td><td class="m">대부분 필요</td><td class="sd"><span class="y">불필요</span> 앱에서 가맹 신청</td></tr>
+          <tr><td>문자·알림톡 비용<small>휴강·결석·청구 알림</small></td><td class="m">건당 과금</td><td class="m">건당 과금</td><td class="sd"><span class="y">0원</span> 앱 푸시</td></tr>
+          <tr><td>법정 환불액 계산<small>학원법 시행령 별표 4</small></td><td class="n">감으로</td><td class="m">날짜로 근사</td><td class="sd"><span class="y">✓</span> 실제 수업 회차 기준 · 근거 저장</td></tr>
+          <tr><td>요일별 수강<small>주 2회 반에서 토요일만</small></td><td class="n">✕</td><td class="m">반을 쪼개야 함</td><td class="sd"><span class="y">✓</span> 등록 하나로 · 요금 자동</td></tr>
+          <tr><td>회당·횟수권 요금<small>휴강하면 자동 감액</small></td><td class="n">✕</td><td class="m">일부</td><td class="sd"><span class="y">✓</span> 월정액·회당·횟수권 3종</td></tr>
+          <tr><td>직원 급여 계산<small>출근 체크 하나로</small></td><td class="n">✕</td><td class="m">일부</td><td class="sd"><span class="y">✓</span> 월급·일당·시급 · 대타 반영</td></tr>
+          <tr><td>이탈 신호<small>출석 떨어지는 학생</small></td><td class="n">✕</td><td class="n">✕</td><td class="sd"><span class="y">✓</span> 매주 원장에게 먼저 알림</td></tr>
+          <tr><td>원장 PC + 기사·학부모 앱<small>같은 데이터</small></td><td class="n">✕</td><td class="m">PC 위주</td><td class="sd"><span class="y">✓</span> PC 웹 · Android · iOS 준비 중</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note reveal">* 「기존 원생관리 프로그램」은 국내에 널리 쓰이는 학원 관리 소프트웨어의 일반적인 구성을 기준으로 했습니다. 제품마다 차이가 있을 수 있습니다.</p>
+  </div>
+</section>
+
 <section class="features" id="features">
   <div class="wrap" style="text-align:center;">
-    <h2 class="title reveal">누구에게나 꼭 맞게</h2>
-    <p class="sub reveal">원장님과 학부모, 각자 필요한 것만 보입니다. 원장님은 PC 웹, 기사님과 학부모는 앱.</p>
+    <h2 class="title reveal">학원 하루 전체를 한 앱에</h2>
+    <p class="sub reveal">아침 셔틀부터 월말 청구, 퇴원 환불까지. 원장님은 PC 웹, 기사님과 학부모는 앱 — 같은 데이터를 봅니다.</p>
     <div class="tab-switch reveal">
       <button class="on" data-tab="t-owner">🏫 원장님</button>
       <button data-tab="t-parent">👨‍👩‍👧 학부모</button>
@@ -394,10 +422,10 @@
 
     <div class="tab-panel on" id="t-owner">
       <div class="fcard"><div class="ico">✅</div><h3>출결·보강</h3><p>오늘 수업이 홈에 바로. 탭 한 번으로 출석·결석, 사전 통보 없는 결석만 학부모에게 알림. 보강은 학부모가 신청하고 원장이 승인.</p></div>
-      <div class="fcard"><div class="ico">💳</div><h3>청구·카드 결제<span class="new">NEW</span></h3><p>요금표 한 번 정하면 매월 자동 청구. 학부모는 앱에서 카드로 결제하고, 돈은 학원 계좌로 바로 들어옵니다. 단말기 없어도 됩니다.</p></div>
-      <div class="fcard"><div class="ico">🚌</div><h3>셔틀 실시간<span class="new">NEW</span></h3><p>기사님 앱에 티맵 길안내가 내장. 정류장 30곳을 한 번에 돌고, 학부모는 버스 위치와 도착 시각을 실시간으로 봅니다.</p></div>
-      <div class="fcard"><div class="ico">⚖️</div><h3>법정 환불 계산<span class="new">NEW</span></h3><p>중도 퇴원·요일 변경 시 환불액을 학원법 기준으로 자동 계산. 근거가 스냅샷으로 남습니다.</p></div>
-      <div class="fcard"><div class="ico">📅</div><h3>요일별 수강</h3><p>주 2회 반에서 토요일만 듣는 회원도 등록 하나로. 요금표가 주 N회에 맞춰 금액을 채웁니다.</p></div>
+      <div class="fcard hi"><div class="ico">💳</div><h3>청구·카드 결제<span class="new">NEW</span></h3><p>요금표 한 번 정하면 매월 자동 청구. 학부모는 앱에서 카드로 결제하고, 돈은 학원 계좌로 바로 들어옵니다. 단말기 없어도 됩니다.</p></div>
+      <div class="fcard hi"><div class="ico">🚌</div><h3>셔틀 실시간<span class="new">NEW</span></h3><p>기사님 앱에 티맵 길안내가 내장. 정류장 30곳을 한 번에 돌고, 학부모는 버스 위치와 도착 시각을 실시간으로 봅니다.</p></div>
+      <div class="fcard hi"><div class="ico">⚖️</div><h3>법정 환불 계산<span class="new">NEW</span></h3><p>중도 퇴원·요일 변경 시 환불액을 학원법 기준으로 자동 계산. 근거가 스냅샷으로 남습니다.</p></div>
+      <div class="fcard hi"><div class="ico">📅</div><h3>요일별 수강<span class="new">NEW</span></h3><p>주 2회 반에서 토요일만 듣는 회원도 등록 하나로. 요금표가 주 N회에 맞춰 금액을 채웁니다.</p></div>
       <div class="fcard"><div class="ico">👥</div><h3>직원·급여</h3><p>초대 코드로 직원 합류. 출근 체크 하나로 월급·일당·시급이 담당 수업 시간 기준으로 계산됩니다.</p></div>
       <div class="fcard"><div class="ico">📣</div><h3>공지·문의·분실물</h3><p>공지는 푸시로, 문의는 스레드로, 분실물은 사진으로. 학부모 단체 문자방을 닫아도 됩니다.</p></div>
       <div class="fcard"><div class="ico">📊</div><h3>통계·이탈 신호</h3><p>출석률과 유입·이탈을 매주 리포트로. 출석이 떨어지는 학생은 원장에게 먼저 알립니다.</p></div>
@@ -414,34 +442,23 @@
   </div>
 </section>
 
-<section class="demo" id="demo">
-  <div class="wrap">
-    <div class="demo-text reveal">
-      <span class="eyebrow">직접 눌러보기</span>
-      <h2 class="title">출석 체크,<br>알림은 필요한 곳에만</h2>
-      <p class="sub">실제 앱과 같은 방식입니다. 학생들의 출결을 바꿔보세요.</p>
-      <div class="step-list">
-        <div class="step-item"><div class="n">1</div><p><b>탭 한 번</b>으로 출석/결석이 기록됩니다.</p></div>
-        <div class="step-item"><div class="n">2</div><p>결석 처리하면 — <b>사전 통보가 없던 학생만</b> 학부모에게 알림이 갑니다.</p></div>
-        <div class="step-item"><div class="n">3</div><p>미리 통보된 결석(박서연)은 <b>조용히 기록만</b>. 대신 보강을 신청할 수 있다고 학부모에게 알려줍니다.</p></div>
-      </div>
+
+<section class="owner" id="owner">
+  <div class="wrap" style="text-align:center;">
+    <span class="eyebrow reveal">원장 전용</span>
+    <h2 class="title reveal">돈과 사람에 관한 결정은<br>원장님만 할 수 있습니다</h2>
+    <p class="sub reveal">직원 계정으로는 출석·학생·반 관리까지. 아래는 <b>원장 계정에서만</b> 열리는 기능입니다.</p>
+    <div class="grid">
+      <div class="ocard reveal"><span class="lock">원장만</span><h3>요금표 · 할인 규칙</h3><p>주 N회 → 금액 표를 정하고 형제 할인 등 규칙을 만듭니다. 요금을 올리면 다음 달부터 전원 자동 반영, 보호자에게 고지.</p></div>
+      <div class="ocard reveal d1"><span class="lock">원장만</span><h3>환불 확정 · 수강 변경 정산</h3><p>법정 환불액 계산은 직원도 보지만, <b>확정과 지급 상태 변경</b>은 원장만. 요일을 줄일 때의 재정산·크레딧 처리도 같습니다.</p></div>
+      <div class="ocard reveal d2"><span class="lock">원장만</span><h3>카드 결제 신청 · 결제 취소 · 청구서 파기</h3><p>결제선생 가맹 신청, 결제된 건의 취소(환불), 미결제 청구서 파기. 돈이 나가는 조작은 원장 손에서만.</p></div>
+      <div class="ocard reveal d3"><span class="lock">원장만</span><h3>직원 급여 열람 · 월 정산</h3><p>직원 목록에서 급여 금액은 원장에게만 보입니다. 직원끼리는 서로의 급여를 볼 수 없고, 본인 것만 봅니다.</p></div>
+      <div class="ocard reveal"><span class="lock">원장만</span><h3>직원 초대 · 내보내기</h3><p>초대 코드 발급과 직원 비활성화. 나간 직원은 앱 접근이 즉시 막히고, 급여·출근 기록은 법정 기간 보관됩니다.</p></div>
+      <div class="ocard reveal d1"><span class="lock">원장만</span><h3>셔틀차 등록 · 운전 담당 배정</h3><p>차량을 등록하고 어느 직원이 운전하는지 정합니다. 배정된 직원의 앱에만 [운행] 버튼이 나타납니다.</p></div>
+      <div class="ocard reveal d2"><span class="lock">원장만</span><h3>공지 발송 · 보강 승인</h3><p>학부모 전체에게 가는 공지와, 학부모가 신청한 보강의 승인·반려. 학원 이름으로 나가는 말은 원장이 정합니다.</p></div>
+      <div class="ocard reveal d3"><span class="lock">원장만</span><h3>학원 설정 · 계좌 · 청구일</h3><p>학원 정보, 입금 계좌, 매월 자동 청구일, 학원 위치(셔틀 복귀 지점). 학원의 기본값은 한 사람이 관리합니다.</p></div>
     </div>
-    <div class="demo-widget reveal d1">
-      <div class="head"><b>토·일 초급반 · 출석</b><small>오늘 16:00</small></div>
-      <div class="demo-row" data-name="김하늘" data-notice="none">
-        <div class="nm">김하늘</div>
-        <div class="btns"><button class="p on">출석</button><button class="a">결석</button></div>
-      </div>
-      <div class="demo-row" data-name="이도윤" data-notice="none">
-        <div class="nm">이도윤</div>
-        <div class="btns"><button class="p on">출석</button><button class="a">결석</button></div>
-      </div>
-      <div class="demo-row" data-name="박서연" data-notice="told">
-        <div class="nm">박서연 <span class="note">학부모가 결석 사전 통보 ✓</span></div>
-        <div class="btns"><button class="p">출석</button><button class="a on">결석</button></div>
-      </div>
-      <div class="demo-toast" id="toast"></div>
-    </div>
+    <div class="why reveal"><b>왜 나누었나요.</b> 직원이 출석을 찍고 학생을 등록하는 건 매일 있는 일이라 막지 않습니다. 하지만 요금·환불·급여·직원 권한은 한 번 잘못 건드리면 되돌리기 어렵고, 학부모와의 분쟁으로 이어집니다. 그래서 이 여덟 가지는 화면에서도, 서버에서도 원장 계정만 통과시킵니다.</div>
   </div>
 </section>
 
@@ -452,18 +469,18 @@
       <h2 class="title">수수료를 붙이지 않았습니다.<br>학원 가맹점 요율 그대로.</h2>
       <p class="sub">서당은 결제 대금을 거치지 않습니다. 학부모가 낸 돈은 <b>학원 계좌로 직접</b> 들어가고, 서당은 그 사실만 기록합니다.</p>
       <ul class="points">
-        <li><b>PG 마진이 없습니다.</b> 온라인 결제사를 끼면 1.1~2.4%가 되는 수수료가, 학원 자기 가맹점 요율(비대면 평균 0.8%)로 끝납니다.</li>
+        <li><b>중간 결제사 마진이 없습니다.</b> 온라인 결제사를 끼면 학원 요율 위에 그쪽 몫이 얹히는데, 서당은 학원 자기 가맹점 요율에서 끝납니다. 서당 몫은 0원.</li>
         <li><b>단말기가 필요 없습니다.</b> 가맹점이 아직 없어도 결제선생이 신규 개설을 대행합니다. 앱에서 [카드 결제 신청] 한 번.</li>
         <li><b>카드번호는 서당을 거치지 않습니다.</b> 결제창은 결제선생(카카오페이 계열)이 띄우고, 서당은 결과만 받습니다.</li>
         <li><b>취소·환불도 앱 안에서.</b> 원장이 [결제 취소]를 누르면 장부와 카드 취소가 같이 처리됩니다.</li>
       </ul>
     </div>
     <div class="compare reveal d1">
-      <div class="row"><div class="k">학원이 내는 결제 수수료<small>수강료 13만원 기준</small></div><div><div class="v bad">온라인 PG 약 1,430~3,120원</div><div class="v good">서당 약 1,040원</div></div></div>
+      <div class="row"><div class="k">중간 결제사 마진<small>학원 요율 위에 얹히는 몫</small></div><div><div class="v bad">온라인 결제사 있음</div><div class="v good">서당 없음</div></div></div>
       <div class="row"><div class="k">문자·알림톡 비용<small>휴강·결석·청구 알림</small></div><div class="v good">0원</div></div>
       <div class="row"><div class="k">서당 결제 수수료<small>학원·학부모 모두</small></div><div class="v good">0원</div></div>
       <div class="row"><div class="k">카드 단말기<small>신규 개원 학원</small></div><div class="v good">불필요</div></div>
-      <div class="foot">* 가맹점 수수료율은 학원의 매출 규모에 따라 카드사가 정합니다. 0.8%는 결제선생 비대면 결제 평균이며, 서당이 추가로 받는 금액은 없습니다.</div>
+      <div class="foot">* 카드 가맹점 수수료율은 학원의 매출 구간에 따라 카드사가 정하며 학원이 카드사에 직접 냅니다. 서당과 중간 결제사가 추가로 받는 금액은 없습니다.</div>
     </div>
   </div>
 </section>
@@ -593,30 +610,6 @@ document.querySelectorAll('.tab-switch button').forEach(btn => {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
     btn.classList.add('on');
     document.getElementById(btn.dataset.tab).classList.add('on');
-  });
-});
-
-// ---------- attendance demo ----------
-const toast = document.getElementById('toast');
-let toastTimer;
-function showToast(msg, quiet) {
-  toast.textContent = msg;
-  toast.classList.toggle('quiet', !!quiet);
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove('show'), 3400);
-}
-document.querySelectorAll('.demo-row').forEach(row => {
-  const pBtn = row.querySelector('.p'), aBtn = row.querySelector('.a');
-  const name = row.dataset.name, told = row.dataset.notice === 'told';
-  pBtn.addEventListener('click', () => {
-    pBtn.classList.add('on'); aBtn.classList.remove('on');
-    showToast(`✅ ${name} 출석 — 기록 완료`, true);
-  });
-  aBtn.addEventListener('click', () => {
-    aBtn.classList.add('on'); pBtn.classList.remove('on');
-    if (told) showToast(`🤫 ${name} 결석 — 사전 통보라 알림 없이 기록. 학부모에게 「보강 신청 가능」만 안내했어요`, true);
-    else showToast(`🔔 ${name} 결석 — 학부모에게 무단결석 알림을 보냈어요`);
   });
 });
 
