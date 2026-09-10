@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>서당 — 작은 학원을 위한 가장 간단한 관리 앱</title>
-<meta name="description" content="반 편성부터 출결, 수강료, 학부모 알림까지. 소규모 학원과 공부방을 위한 학원 관리 앱, 서당.">
-<meta property="og:title" content="서당 — 학원 관리 앱">
-<meta property="og:description" content="반 편성부터 출결, 수강료, 학부모 알림까지. 작은 학원을 위한 가장 간단한 관리 앱.">
+<title>서당 — 학원 원장님의 전화기가 조용해지는 앱</title>
+<meta name="description" content="셔틀 어디예요, 오늘 갔어요, 수강료 얼마예요 — 학부모가 매일 묻던 것을 앱이 먼저 답합니다. 출결·수강료·카드 결제·셔틀 실시간·법정 환불 계산까지, 작은 학원을 위한 서당.">
+<meta property="og:title" content="서당 — 학원 원장님의 전화기가 조용해지는 앱">
+<meta property="og:description" content="출결·수강료·카드 결제·셔틀 실시간 위치·법정 환불 계산. 작은 학원과 스포츠 교습소를 위한 관리 앱.">
 <meta property="og:url" content="https://seodang.app">
 <meta property="og:type" content="website">
 <style>
@@ -16,13 +16,15 @@
     --ink-faint: #9298a3;
     --paper: #f7f8fa;
     --white: #ffffff;
-    --brand: #2b5cd9;
-    --brand-deep: #1e46ab;
-    --brand-soft: #eef2fd;
+    --brand: #3182f6;
+    --brand-deep: #1b64da;
+    --brand-soft: #e8f1fe;
     --green: #1fb871;
     --green-soft: #e7f8f0;
     --red: #e5484d;
     --red-soft: #fdeeee;
+    --amber: #e8a317;
+    --amber-soft: #fff5dc;
     --line: #e7e9ee;
     --radius: 18px;
     --shadow: 0 8px 30px rgba(25, 28, 34, 0.08);
@@ -37,6 +39,7 @@
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
   h2.title { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.35; }
   p.sub { color: var(--ink-soft); margin-top: 12px; font-size: 1.02rem; }
+  .eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 800; letter-spacing: 1.5px; color: var(--brand); margin-bottom: 12px; }
 
   /* ---------- scroll reveal ---------- */
   .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -51,23 +54,21 @@
   }
   header.scrolled { border-bottom-color: var(--line); }
   header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; text-decoration: none; color: var(--ink); }
-  .logo span { color: var(--brand); }
+  .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; text-decoration: none; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .logo .mark { width: 26px; height: 26px; border-radius: 7px; background: #504E48; display: inline-block; }
   nav.gnb { display: flex; gap: 4px; }
   nav.gnb a {
     color: var(--ink-soft); text-decoration: none; font-size: 0.93rem; font-weight: 600;
     padding: 8px 14px; border-radius: 10px; transition: background 0.15s, color 0.15s;
   }
   nav.gnb a:hover { background: var(--brand-soft); color: var(--brand-deep); }
-  .nav-cta {
-    background: var(--ink); color: #fff !important; border-radius: 12px; padding: 9px 18px !important;
-  }
+  .nav-cta { background: var(--ink); color: #fff !important; border-radius: 12px; padding: 9px 18px !important; }
   .nav-cta:hover { background: var(--brand) !important; color: #fff !important; }
   @media (max-width: 720px) { nav.gnb a:not(.nav-cta) { display: none; } }
 
   /* ---------- hero ---------- */
-  .hero { padding: 72px 0 40px; }
-  .hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  .hero { padding: 64px 0 24px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
   @media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
   .hero .badge {
     display: inline-flex; align-items: center; gap: 8px; background: var(--brand-soft); color: var(--brand-deep);
@@ -75,55 +76,67 @@
   }
   .hero .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); animation: pulse 1.8s infinite; }
   @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.4; transform: scale(0.8);} }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 800; letter-spacing: -1.5px; line-height: 1.25; }
-  .hero h1 em { font-style: normal; color: var(--brand); position: relative; }
-  .hero p.lead { margin-top: 20px; color: var(--ink-soft); font-size: 1.1rem; max-width: 460px; }
-  .cta-row { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero h1 { font-size: clamp(2.1rem, 5.2vw, 3.3rem); font-weight: 800; letter-spacing: -1.8px; line-height: 1.2; }
+  .hero h1 em { font-style: normal; color: var(--brand); }
+  .hero p.lead { margin-top: 20px; color: var(--ink-soft); font-size: 1.1rem; max-width: 480px; }
+  .hero p.lead b { color: var(--ink); font-weight: 700; }
+  .ask { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .ask span {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 14px; font-size: 0.86rem; font-weight: 600; color: var(--ink-soft);
+  }
+  .ask span::before { content: '“'; color: var(--ink-faint); } .ask span::after { content: '”'; color: var(--ink-faint); }
+  .cta-row { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 14px;
     text-decoration: none; font-weight: 700; font-size: 1rem; border: none; cursor: pointer;
     transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s;
   }
-  .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 6px 18px rgba(43, 92, 217, 0.3); }
+  .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 6px 18px rgba(49, 130, 246, 0.3); }
   .btn-primary:hover { transform: translateY(-2px); background: var(--brand-deep); }
   .btn-ghost { background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
   .btn-ghost:hover { background: var(--brand-soft); }
   .cta-note { margin-top: 12px; font-size: 0.85rem; color: var(--ink-faint); }
 
-  /* ---------- phone mockup ---------- */
+  /* ---------- shuttle mockup ---------- */
   .phone-zone { position: relative; display: flex; justify-content: center; padding: 20px 0; }
   .phone {
-    width: 290px; background: var(--ink); border-radius: 38px; padding: 10px;
+    width: 300px; background: var(--ink); border-radius: 38px; padding: 10px;
     box-shadow: 0 24px 60px rgba(25, 28, 34, 0.25); position: relative; z-index: 2;
   }
   .screen { background: var(--paper); border-radius: 30px; overflow: hidden; }
   .app-bar { background: var(--white); padding: 16px 18px 12px; display: flex; justify-content: space-between; align-items: center; }
   .app-bar .t { font-weight: 800; font-size: 0.98rem; }
-  .app-bar .bell { position: relative; font-size: 1rem; }
-  .app-bar .bell::after {
-    content: ''; position: absolute; top: -2px; right: -3px; width: 7px; height: 7px;
-    background: var(--red); border-radius: 50%;
-  }
+  .app-bar .live { font-size: 0.68rem; font-weight: 800; color: var(--green); display: flex; align-items: center; gap: 5px; }
+  .app-bar .live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 1.2s infinite; }
   .app-body { padding: 12px 14px 18px; }
-  .app-card { background: var(--white); border-radius: 14px; padding: 13px 14px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(25,28,34,0.05); }
-  .app-card .label { font-size: 0.68rem; color: var(--ink-faint); font-weight: 700; margin-bottom: 6px; }
-  .class-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; }
-  .class-row + .class-row { border-top: 1px solid var(--paper); }
-  .class-row .nm { font-size: 0.83rem; font-weight: 700; }
-  .class-row .tm { font-size: 0.72rem; color: var(--ink-faint); }
-  .chip { font-size: 0.68rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
-  .chip.blue { background: var(--brand-soft); color: var(--brand-deep); }
-  .chip.green { background: var(--green-soft); color: var(--green); }
-  .stu-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
-  .stu-row .nm { font-size: 0.83rem; font-weight: 600; }
-  .toggle2 { display: flex; gap: 5px; }
-  .tbtn {
-    font-size: 0.68rem; font-weight: 700; padding: 4px 10px; border-radius: 999px;
-    border: 1px solid var(--line); background: var(--white); color: var(--ink-faint);
+  .mystop {
+    background: var(--brand); color: #fff; border-radius: 14px; padding: 12px 14px; margin-bottom: 12px;
   }
-  .tbtn.on-p { background: var(--green-soft); color: var(--green); border-color: transparent; }
-  .tbtn.on-a { background: var(--red-soft); color: var(--red); border-color: transparent; }
-  /* floating cards */
+  .mystop .l { font-size: 0.68rem; opacity: 0.8; font-weight: 700; }
+  .mystop .v { font-size: 1.05rem; font-weight: 800; margin-top: 2px; }
+  .mystop .v small { font-size: 0.78rem; font-weight: 600; opacity: 0.9; margin-left: 6px; }
+  .line-card { background: var(--white); border-radius: 14px; padding: 12px 14px 8px; box-shadow: 0 2px 8px rgba(25,28,34,0.05); position: relative; }
+  .stop { display: flex; align-items: center; gap: 12px; height: 38px; position: relative; }
+  .stop .rail { width: 18px; display: flex; justify-content: center; position: relative; align-self: stretch; }
+  .stop .rail::before { content: ''; position: absolute; top: 0; bottom: 0; width: 3px; background: var(--line); }
+  .stop:first-child .rail::before { top: 50%; } .stop:last-child .rail::before { bottom: 50%; }
+  .stop .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--white); border: 3px solid var(--ink-faint); position: relative; z-index: 1; transition: all 0.4s; }
+  .stop .nm { font-size: 0.85rem; font-weight: 700; flex: 1; transition: all 0.4s; }
+  .stop .eta { font-size: 0.75rem; color: var(--ink-faint); font-weight: 600; transition: all 0.4s; }
+  .stop.passed .dot { border-color: var(--line); background: var(--line); }
+  .stop.passed .nm { color: var(--ink-faint); text-decoration: line-through; font-weight: 500; }
+  .stop.passed .eta { color: var(--ink-faint); }
+  .stop.next .dot { border-color: var(--brand); background: var(--brand); box-shadow: 0 0 0 5px var(--brand-soft); }
+  .stop.next .nm { color: var(--brand-deep); }
+  .stop.next .eta { color: var(--brand); font-weight: 800; }
+  .stop.mine .nm::after { content: '우리 아이'; font-size: 0.62rem; background: var(--amber-soft); color: #8a5a00; padding: 2px 7px; border-radius: 999px; margin-left: 6px; font-weight: 800; }
+  .bus {
+    position: absolute; left: 14px; width: 30px; height: 30px; border-radius: 10px; background: var(--ink); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 0.95rem; z-index: 3;
+    box-shadow: 0 4px 12px rgba(25,28,34,0.3); transition: top 0.9s cubic-bezier(.4,.1,.2,1);
+    transform: translateX(-6px);
+  }
   .float-card {
     position: absolute; background: var(--white); border-radius: 14px; box-shadow: var(--shadow);
     padding: 12px 16px; font-size: 0.8rem; z-index: 3; display: flex; gap: 10px; align-items: center;
@@ -132,13 +145,22 @@
   .float-card .ic { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
   .float-card b { display: block; font-size: 0.82rem; }
   .float-card small { color: var(--ink-faint); font-size: 0.72rem; }
-  .fc1 { top: 8%; left: -4%; animation-delay: 0.5s; } .fc1 .ic { background: var(--green-soft); }
-  .fc2 { bottom: 14%; right: -6%; animation-delay: 1s; } .fc2 .ic { background: var(--brand-soft); }
+  .fc1 { top: 6%; left: -6%; animation-delay: 0.5s; } .fc1 .ic { background: var(--green-soft); }
+  .fc2 { bottom: 10%; right: -8%; animation-delay: 1s; } .fc2 .ic { background: var(--brand-soft); }
   @keyframes floatIn { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: none;} }
   @media (max-width: 480px) { .fc1 { left: 0; } .fc2 { right: 0; } }
 
+  /* ---------- stat strip ---------- */
+  .stats { padding: 28px 0 56px; }
+  .stats .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .stat { background: var(--paper); border-radius: 16px; padding: 20px 22px; }
+  .stat .n { font-size: 1.9rem; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+  .stat .n small { font-size: 1rem; font-weight: 700; margin-left: 2px; }
+  .stat .d { margin-top: 6px; font-size: 0.86rem; color: var(--ink-soft); }
+  .stat .d b { color: var(--ink); }
+
   /* ---------- pain strip ---------- */
-  .pain { background: var(--ink); color: #fff; padding: 68px 0; margin-top: 48px; }
+  .pain { background: var(--ink); color: #fff; padding: 68px 0; }
   .pain h2 { text-align: center; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -0.5px; }
   .pain .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; }
   .pain .card {
@@ -147,13 +169,11 @@
   }
   .pain .card .q { font-size: 1rem; font-weight: 700; line-height: 1.5; }
   .pain .card .a { margin-top: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.65); }
-  .pain .card .a b { color: #8fb0ff; }
+  .pain .card .a b { color: #8fb8ff; }
 
   /* ---------- feature tabs ---------- */
   .features { padding: 84px 0; }
-  .tab-switch {
-    display: inline-flex; background: var(--paper); border-radius: 14px; padding: 5px; margin-top: 28px; gap: 4px;
-  }
+  .tab-switch { display: inline-flex; background: var(--paper); border-radius: 14px; padding: 5px; margin-top: 28px; gap: 4px; }
   .tab-switch button {
     border: none; background: transparent; font-family: inherit; font-size: 0.95rem; font-weight: 700;
     padding: 10px 26px; border-radius: 10px; cursor: pointer; color: var(--ink-faint); transition: all 0.15s;
@@ -162,11 +182,12 @@
   .tab-panel { display: none; margin-top: 36px; }
   .tab-panel.on { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; animation: fadeUp 0.45s ease; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(14px);} to { opacity: 1; transform: none;} }
-  .fcard { background: var(--paper); border-radius: var(--radius); padding: 28px 24px; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .fcard { background: var(--paper); border-radius: var(--radius); padding: 28px 24px; text-align: left; transition: transform 0.15s ease, box-shadow 0.15s ease; }
   .fcard:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
   .fcard .ico { width: 46px; height: 46px; border-radius: 13px; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; box-shadow: 0 2px 8px rgba(25,28,34,0.06); }
   .fcard h3 { margin: 16px 0 8px; font-size: 1.05rem; font-weight: 700; }
   .fcard p { color: var(--ink-soft); font-size: 0.92rem; }
+  .fcard .new { display: inline-block; font-size: 0.66rem; font-weight: 800; color: var(--brand); background: var(--brand-soft); padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
 
   /* ---------- interactive demo ---------- */
   .demo { background: var(--paper); padding: 84px 0; }
@@ -203,10 +224,28 @@
   .demo-text .step-item p { font-size: 0.95rem; color: var(--ink-soft); }
   .demo-text .step-item p b { color: var(--ink); }
 
+  /* ---------- money section ---------- */
+  .money { padding: 84px 0; }
+  .money .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 860px) { .money .wrap { grid-template-columns: 1fr; } }
+  .money ul.points { margin-top: 22px; list-style: none; }
+  .money ul.points li { display: flex; gap: 12px; padding: 10px 0; font-size: 0.97rem; color: var(--ink-soft); }
+  .money ul.points li::before { content: '✓'; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--green-soft); color: var(--green); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+  .money ul.points li b { color: var(--ink); }
+  .compare { background: var(--paper); border-radius: 22px; padding: 26px; }
+  .compare .row { display: grid; grid-template-columns: 1.1fr 1fr; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .compare .row:last-child { border-bottom: none; }
+  .compare .row .k { font-weight: 700; font-size: 0.95rem; }
+  .compare .row .k small { display: block; font-weight: 500; color: var(--ink-faint); font-size: 0.78rem; margin-top: 2px; }
+  .compare .row .v { text-align: right; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.5px; }
+  .compare .row .v.good { color: var(--green); }
+  .compare .row .v.bad { color: var(--ink-faint); text-decoration: line-through; font-weight: 600; font-size: 1rem; }
+  .compare .foot { margin-top: 12px; font-size: 0.78rem; color: var(--ink-faint); }
+
   /* ---------- parents ---------- */
-  .parents { padding: 84px 0; }
+  .parents { padding: 84px 0; background: var(--paper); }
   .parents .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 40px; }
-  .pcard { border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; position: relative; overflow: hidden; }
+  .pcard { background: var(--white); border-radius: var(--radius); padding: 28px 24px; position: relative; overflow: hidden; text-align: left; }
   .pcard .num { position: absolute; top: 14px; right: 20px; font-size: 3rem; font-weight: 800; color: var(--paper); z-index: 0; }
   .pcard h3 { font-size: 1.05rem; font-weight: 700; position: relative; }
   .pcard p { margin-top: 8px; color: var(--ink-soft); font-size: 0.92rem; position: relative; }
@@ -216,9 +255,9 @@
   }
 
   /* ---------- FAQ ---------- */
-  .faq { background: var(--paper); padding: 84px 0; }
+  .faq { padding: 84px 0; }
   .faq .list { margin-top: 36px; max-width: 760px; }
-  .faq-item { background: var(--white); border-radius: 14px; margin-bottom: 10px; overflow: hidden; }
+  .faq-item { background: var(--paper); border-radius: 14px; margin-bottom: 10px; overflow: hidden; }
   .faq-item button {
     width: 100%; text-align: left; border: none; background: none; font-family: inherit; cursor: pointer;
     padding: 20px 22px; font-size: 0.98rem; font-weight: 700; color: var(--ink);
@@ -230,10 +269,13 @@
   .faq-item .body p { padding: 0 22px 20px; color: var(--ink-soft); font-size: 0.93rem; }
 
   /* ---------- bottom CTA ---------- */
-  .bottom-cta { padding: 96px 0; text-align: center; }
+  .bottom-cta { padding: 96px 0; text-align: center; background: var(--ink); color: #fff; }
   .bottom-cta h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; letter-spacing: -1px; line-height: 1.35; }
-  .bottom-cta p { color: var(--ink-soft); margin-top: 14px; }
+  .bottom-cta p { color: rgba(255,255,255,0.7); margin-top: 14px; }
   .bottom-cta .cta-row { justify-content: center; }
+  .bottom-cta .btn-ghost { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.2); }
+  .bottom-cta .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+  .bottom-cta .cta-note { color: rgba(255,255,255,0.5); }
 
   /* ---------- footer ---------- */
   footer { border-top: 1px solid var(--line); padding: 44px 0 60px; }
@@ -247,14 +289,14 @@
 
 <header id="hd">
   <div class="wrap">
-    <a class="logo" href="#">서<span>당</span></a>
+    <a class="logo" href="#"><span class="mark"></span>서당</a>
     <nav class="gnb">
       <a href="#features">기능</a>
       <a href="#demo">체험하기</a>
+      <a href="#money">카드 결제</a>
       <a href="#parents">학부모</a>
       <a href="#faq">FAQ</a>
-      <a href="#download">앱 다운로드</a>
-      <a class="nav-cta" href="/app/">로그인</a>
+      <a class="nav-cta" href="/app/">PC로 시작하기</a>
     </nav>
   </div>
 </header>
@@ -262,55 +304,46 @@
 <section class="hero">
   <div class="wrap">
     <div>
-      <div class="badge"><span class="dot"></span>Google Play 출시 준비 중</div>
-      <h1>출결·수강료·알림,<br>작은 학원 관리는<br><em>서당</em> 하나로</h1>
-      <p class="lead">엑셀도, 수기 장부도, 단체 문자방도 이제 그만.
-      카카오 로그인 한 번이면 우리 학원 관리가 5분 만에 시작됩니다.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="/app/">웹에서 시작하기</a>
-        <a class="btn btn-ghost" href="#demo">먼저 체험해보기</a>
+      <div class="badge"><span class="dot"></span>2026년 9월 · 파일럿 학원 운영 중</div>
+      <h1>원장님 전화기가<br><em>조용해집니다.</em></h1>
+      <p class="lead">학부모가 매일 묻던 것을 <b>앱이 먼저 답합니다.</b>
+      출결·수강료·카드 결제·셔틀 실시간 위치까지, 작은 학원과 스포츠 교습소를 위한 관리 앱.</p>
+      <div class="ask">
+        <span>셔틀 지금 어디예요?</span>
+        <span>오늘 잘 갔나요?</span>
+        <span>수강료 카드로 되나요?</span>
+        <span>중간에 그만두면 얼마 돌려받아요?</span>
       </div>
-      <p class="cta-note">소규모 학원·공부방·교습소 전용 · 설치비 없음</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/app/">PC 웹에서 시작하기</a>
+        <a class="btn btn-ghost" href="#demo">먼저 눌러보기</a>
+      </div>
+      <p class="cta-note">카카오 로그인 · 설치비 없음 · 문자비 0원 · 현재 파일럿 학원에 무료 제공</p>
     </div>
     <div class="phone-zone">
       <div class="float-card fc1">
-        <div class="ic">✅</div>
-        <div><b>출석 완료</b><small>월수금 수학반 · 8명</small></div>
+        <div class="ic">🚌</div>
+        <div><b>셔틀에 탑승했어요</b><small>예림 · 래미안 3단지 · 16:12</small></div>
       </div>
       <div class="float-card fc2">
-        <div class="ic">🔔</div>
-        <div><b>학부모 알림 전송</b><small>휴강 안내 · 12명에게</small></div>
+        <div class="ic">💳</div>
+        <div><b>9월 수강료 결제 완료</b><small>카드 · 130,000원</small></div>
       </div>
       <div class="phone">
         <div class="screen">
-          <div class="app-bar"><span class="t">서당수학학원</span><span class="bell">🔔</span></div>
+          <div class="app-bar"><span class="t">셔틀 · 1호차</span><span class="live">운행 중</span></div>
           <div class="app-body">
-            <div class="app-card">
-              <div class="label">오늘 수업</div>
-              <div class="class-row">
-                <div><div class="nm">월수금 수학반</div><div class="tm">16:00 · 8명</div></div>
-                <span class="chip green">출석 완료</span>
-              </div>
-              <div class="class-row">
-                <div><div class="nm">중등 심화반</div><div class="tm">18:30 · 6명</div></div>
-                <span class="chip blue">진행 예정</span>
-              </div>
+            <div class="mystop">
+              <div class="l">우리 아이 정류장</div>
+              <div class="v" id="mystop-v">3번째 <small>약 12분 후 · 16:24</small></div>
             </div>
-            <div class="app-card">
-              <div class="label">출석 체크 — 월수금 수학반</div>
-              <div class="stu-row"><span class="nm">김하늘</span>
-                <div class="toggle2"><span class="tbtn on-p">출석</span><span class="tbtn">결석</span></div></div>
-              <div class="stu-row"><span class="nm">이도윤</span>
-                <div class="toggle2"><span class="tbtn on-p">출석</span><span class="tbtn">결석</span></div></div>
-              <div class="stu-row"><span class="nm">박서연</span>
-                <div class="toggle2"><span class="tbtn">출석</span><span class="tbtn on-a">결석</span></div></div>
-            </div>
-            <div class="app-card">
-              <div class="label">7월 수강료</div>
-              <div class="class-row">
-                <div><div class="nm">납부 12 · 미납 2</div><div class="tm">1,960,000원 수납</div></div>
-                <span class="chip blue">관리</span>
-              </div>
+            <div class="line-card" id="line">
+              <div class="bus" id="bus">🚌</div>
+              <div class="stop" data-i="0"><div class="rail"><div class="dot"></div></div><div class="nm">학원 출발</div><div class="eta">16:05</div></div>
+              <div class="stop" data-i="1"><div class="rail"><div class="dot"></div></div><div class="nm">정문 앞</div><div class="eta">16:12</div></div>
+              <div class="stop mine" data-i="2"><div class="rail"><div class="dot"></div></div><div class="nm">래미안 3단지</div><div class="eta">16:24</div></div>
+              <div class="stop" data-i="3"><div class="rail"><div class="dot"></div></div><div class="nm">중앙공원</div><div class="eta">16:31</div></div>
+              <div class="stop" data-i="4"><div class="rail"><div class="dot"></div></div><div class="nm">학원 도착</div><div class="eta">16:40</div></div>
             </div>
           </div>
         </div>
@@ -319,21 +352,32 @@
   </div>
 </section>
 
+<section class="stats">
+  <div class="wrap">
+    <div class="grid">
+      <div class="stat reveal"><div class="n">0.8<small>%</small></div><div class="d">카드 결제 수수료 — <b>PG 마진 없이</b> 학원 가맹점 요율 그대로</div></div>
+      <div class="stat reveal d1"><div class="n">0<small>원</small></div><div class="d">문자·알림톡 비용 — <b>앱 푸시</b>로 휴강·결석·청구 알림</div></div>
+      <div class="stat reveal d2"><div class="n">30<small>곳</small></div><div class="d">셔틀 정류장을 <b>한 번에</b> 길안내 — 앱을 오갈 일 없이</div></div>
+      <div class="stat reveal d3"><div class="n">5<small>일</small></div><div class="d">법정 환불 기한 안에 <b>자동 계산</b> — 시행령 별표 4 기준</div></div>
+    </div>
+  </div>
+</section>
+
 <section class="pain">
   <div class="wrap">
-    <h2 class="reveal">혹시 아직도 이렇게 관리하고 계신가요?</h2>
+    <h2 class="reveal">혹시 아직도 이렇게 하고 계신가요?</h2>
     <div class="cards">
       <div class="card reveal d1">
-        <div class="q">"출석부는 종이에, 수강료는 엑셀에, 공지는 단체 문자방에…"</div>
-        <div class="a">→ 서당에서는 <b>한 앱에서</b> 반·출결·수강료·공지가 전부 연결됩니다.</div>
+        <div class="q">"셔틀 어디쯤이에요?" — 운전 중인 기사님한테 전화가 옵니다.</div>
+        <div class="a">→ 학부모 앱에 <b>지하철 노선도처럼</b> 버스 위치와 도착 시각이 뜹니다. 기사님은 운전만 하면 됩니다.</div>
       </div>
       <div class="card reveal d2">
-        <div class="q">"어머니, 오늘 민준이가 안 왔는데요… 전화 돌리는 게 일이에요."</div>
-        <div class="a">→ 무단결석이면 <b>학부모에게 자동 알림</b>. 미리 통보된 결석은 조용히 기록만.</div>
+        <div class="q">"이번 달 누가 안 냈지…" — 엑셀 열고 계좌 내역 대조하는 밤.</div>
+        <div class="a">→ 청구서가 <b>매월 자동 발행</b>되고, 학부모는 앱에서 카드로 냅니다. 미납은 한 화면에 모입니다.</div>
       </div>
       <div class="card reveal d3">
-        <div class="q">"이번 달 누가 수강료를 안 냈더라?"</div>
-        <div class="a">→ 월별 청구 내역과 납부 여부가 <b>한 화면에</b>. 체크만 하면 끝.</div>
+        <div class="q">"중간에 그만두는데 얼마 돌려드려야 하죠?" — 감으로 계산하다 분쟁.</div>
+        <div class="a">→ 학원법 시행령 별표 4를 <b>실제 수업 회차 기준</b>으로 자동 계산. 근거가 남아 다툼이 줄어듭니다.</div>
       </div>
     </div>
   </div>
@@ -342,24 +386,30 @@
 <section class="features" id="features">
   <div class="wrap" style="text-align:center;">
     <h2 class="title reveal">누구에게나 꼭 맞게</h2>
-    <p class="sub reveal">원장님과 학부모, 각자 필요한 것만 보입니다.</p>
+    <p class="sub reveal">원장님과 학부모, 각자 필요한 것만 보입니다. 원장님은 PC 웹, 기사님과 학부모는 앱.</p>
     <div class="tab-switch reveal">
       <button class="on" data-tab="t-owner">🏫 원장님</button>
       <button data-tab="t-parent">👨‍👩‍👧 학부모</button>
     </div>
 
     <div class="tab-panel on" id="t-owner">
-      <div class="fcard"><div class="ico">📚</div><h3>반 관리</h3><p>요일·시간만 정하면 수업 회차가 자동 생성. 정규반은 매주 자동 연장, 특강반은 기간만 설정.</p></div>
-      <div class="fcard"><div class="ico">✅</div><h3>출결 관리</h3><p>오늘 수업이 홈 화면에 바로. 탭 한 번으로 출석·결석 기록, 언제든 수정 가능.</p></div>
-      <div class="fcard"><div class="ico">💳</div><h3>수강료 관리</h3><p>학생별 수강료와 월별 청구·납부 현황을 한눈에. 미납 학생도 바로 보입니다.</p></div>
-      <div class="fcard"><div class="ico">📣</div><h3>공지·휴강 알림</h3><p>공지사항, 휴강·보강 안내가 학부모에게 푸시로 자동 전달. 문자비 0원.</p></div>
+      <div class="fcard"><div class="ico">✅</div><h3>출결·보강</h3><p>오늘 수업이 홈에 바로. 탭 한 번으로 출석·결석, 사전 통보 없는 결석만 학부모에게 알림. 보강은 학부모가 신청하고 원장이 승인.</p></div>
+      <div class="fcard"><div class="ico">💳</div><h3>청구·카드 결제<span class="new">NEW</span></h3><p>요금표 한 번 정하면 매월 자동 청구. 학부모는 앱에서 카드로 결제하고, 돈은 학원 계좌로 바로 들어옵니다. 단말기 없어도 됩니다.</p></div>
+      <div class="fcard"><div class="ico">🚌</div><h3>셔틀 실시간<span class="new">NEW</span></h3><p>기사님 앱에 티맵 길안내가 내장. 정류장 30곳을 한 번에 돌고, 학부모는 버스 위치와 도착 시각을 실시간으로 봅니다.</p></div>
+      <div class="fcard"><div class="ico">⚖️</div><h3>법정 환불 계산<span class="new">NEW</span></h3><p>중도 퇴원·요일 변경 시 환불액을 학원법 기준으로 자동 계산. 근거가 스냅샷으로 남습니다.</p></div>
+      <div class="fcard"><div class="ico">📅</div><h3>요일별 수강</h3><p>주 2회 반에서 토요일만 듣는 회원도 등록 하나로. 요금표가 주 N회에 맞춰 금액을 채웁니다.</p></div>
+      <div class="fcard"><div class="ico">👥</div><h3>직원·급여</h3><p>초대 코드로 직원 합류. 출근 체크 하나로 월급·일당·시급이 담당 수업 시간 기준으로 계산됩니다.</p></div>
+      <div class="fcard"><div class="ico">📣</div><h3>공지·문의·분실물</h3><p>공지는 푸시로, 문의는 스레드로, 분실물은 사진으로. 학부모 단체 문자방을 닫아도 됩니다.</p></div>
+      <div class="fcard"><div class="ico">📊</div><h3>통계·이탈 신호</h3><p>출석률과 유입·이탈을 매주 리포트로. 출석이 떨어지는 학생은 원장에게 먼저 알립니다.</p></div>
     </div>
 
     <div class="tab-panel" id="t-parent">
       <div class="fcard"><div class="ico">🔗</div><h3>코드로 간편 연결</h3><p>학원이 알려준 학생 코드만 입력하면 자녀와 연결 완료. 회원가입은 카카오로 3초.</p></div>
-      <div class="fcard"><div class="ico">🗓️</div><h3>일정 확인</h3><p>자녀의 이번 주 수업 일정을 언제든 확인. 휴강·보강도 실시간 알림으로.</p></div>
-      <div class="fcard"><div class="ico">📋</div><h3>출결 기록</h3><p>지난 출결 내역과 결석 사유까지 투명하게. 학원에 물어볼 필요가 없습니다.</p></div>
-      <div class="fcard"><div class="ico">✉️</div><h3>결석 사전 통보</h3><p>결석 예정이면 앱에서 미리 통보. 학원에 전화하지 않아도 자동으로 전달됩니다.</p></div>
+      <div class="fcard"><div class="ico">🚌</div><h3>셔틀 어디쯤?<span class="new">NEW</span></h3><p>「우리 아이 정류장 · 3번째 · 약 12분 후」. 지도를 뒤지지 않아도 한 줄로 답이 옵니다. 탑승·하차 알림도 자동.</p></div>
+      <div class="fcard"><div class="ico">💳</div><h3>카드로 결제<span class="new">NEW</span></h3><p>청구서가 오면 앱에서 카드로 바로. 카드 정보는 결제사 화면에서만 입력돼 서당은 보관하지 않습니다.</p></div>
+      <div class="fcard"><div class="ico">📋</div><h3>출결·수업 노트</h3><p>지난 출결과 결석 사유, 선생님이 공개한 수업 노트까지. 학원에 물어볼 필요가 없습니다.</p></div>
+      <div class="fcard"><div class="ico">✉️</div><h3>결석 통보·보강 신청</h3><p>결석 예정이면 앱에서 미리 통보. 결석 후엔 같은 레벨 반으로 보강을 신청할 수 있습니다.</p></div>
+      <div class="fcard"><div class="ico">💬</div><h3>문의하기</h3><p>전화 대신 앱에서 문의. 답변이 오면 알림으로, 이력은 스레드로 남습니다.</p></div>
     </div>
   </div>
 </section>
@@ -367,16 +417,17 @@
 <section class="demo" id="demo">
   <div class="wrap">
     <div class="demo-text reveal">
-      <h2 class="title">출석 체크,<br>직접 눌러보세요</h2>
-      <p class="sub">실제 앱과 같은 방식입니다. 오른쪽(모바일은 아래) 위젯에서 학생들의 출결을 바꿔보세요.</p>
+      <span class="eyebrow">직접 눌러보기</span>
+      <h2 class="title">출석 체크,<br>알림은 필요한 곳에만</h2>
+      <p class="sub">실제 앱과 같은 방식입니다. 학생들의 출결을 바꿔보세요.</p>
       <div class="step-list">
         <div class="step-item"><div class="n">1</div><p><b>탭 한 번</b>으로 출석/결석이 기록됩니다.</p></div>
         <div class="step-item"><div class="n">2</div><p>결석 처리하면 — <b>사전 통보가 없던 학생만</b> 학부모에게 알림이 갑니다.</p></div>
-        <div class="step-item"><div class="n">3</div><p>미리 통보된 결석(박서연)은 <b>조용히 기록만</b> 됩니다. 불필요한 알림이 없어요.</p></div>
+        <div class="step-item"><div class="n">3</div><p>미리 통보된 결석(박서연)은 <b>조용히 기록만</b>. 대신 보강을 신청할 수 있다고 학부모에게 알려줍니다.</p></div>
       </div>
     </div>
     <div class="demo-widget reveal d1">
-      <div class="head"><b>월수금 수학반 · 출석</b><small>오늘 16:00</small></div>
+      <div class="head"><b>토·일 초급반 · 출석</b><small>오늘 16:00</small></div>
       <div class="demo-row" data-name="김하늘" data-notice="none">
         <div class="nm">김하늘</div>
         <div class="btns"><button class="p on">출석</button><button class="a">결석</button></div>
@@ -394,14 +445,37 @@
   </div>
 </section>
 
+<section class="money" id="money">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">카드 결제</span>
+      <h2 class="title">수수료를 붙이지 않았습니다.<br>학원 가맹점 요율 그대로.</h2>
+      <p class="sub">서당은 결제 대금을 거치지 않습니다. 학부모가 낸 돈은 <b>학원 계좌로 직접</b> 들어가고, 서당은 그 사실만 기록합니다.</p>
+      <ul class="points">
+        <li><b>PG 마진이 없습니다.</b> 온라인 결제사를 끼면 1.1~2.4%가 되는 수수료가, 학원 자기 가맹점 요율(비대면 평균 0.8%)로 끝납니다.</li>
+        <li><b>단말기가 필요 없습니다.</b> 가맹점이 아직 없어도 결제선생이 신규 개설을 대행합니다. 앱에서 [카드 결제 신청] 한 번.</li>
+        <li><b>카드번호는 서당을 거치지 않습니다.</b> 결제창은 결제선생(카카오페이 계열)이 띄우고, 서당은 결과만 받습니다.</li>
+        <li><b>취소·환불도 앱 안에서.</b> 원장이 [결제 취소]를 누르면 장부와 카드 취소가 같이 처리됩니다.</li>
+      </ul>
+    </div>
+    <div class="compare reveal d1">
+      <div class="row"><div class="k">학원이 내는 결제 수수료<small>수강료 13만원 기준</small></div><div><div class="v bad">온라인 PG 약 1,430~3,120원</div><div class="v good">서당 약 1,040원</div></div></div>
+      <div class="row"><div class="k">문자·알림톡 비용<small>휴강·결석·청구 알림</small></div><div class="v good">0원</div></div>
+      <div class="row"><div class="k">서당 결제 수수료<small>학원·학부모 모두</small></div><div class="v good">0원</div></div>
+      <div class="row"><div class="k">카드 단말기<small>신규 개원 학원</small></div><div class="v good">불필요</div></div>
+      <div class="foot">* 가맹점 수수료율은 학원의 매출 규모에 따라 카드사가 정합니다. 0.8%는 결제선생 비대면 결제 평균이며, 서당이 추가로 받는 금액은 없습니다.</div>
+    </div>
+  </div>
+</section>
+
 <section class="parents" id="parents">
   <div class="wrap" style="text-align:center;">
     <h2 class="title reveal">학부모 연결은 코드 하나면 끝</h2>
     <p class="sub reveal">앱 설치를 강요하는 복잡한 절차 없이, 코드 한 줄로.</p>
     <div class="grid">
-      <div class="pcard reveal"><div class="num">1</div><h3>학원이 코드 전달</h3><p>학생마다 자동 발급되는 고유 코드를 학부모에게 알려주세요.</p><span class="code">STU-K3M7</span></div>
-      <div class="pcard reveal d1"><div class="num">2</div><h3>학부모가 입력</h3><p>카카오로 로그인하고 코드를 입력하면 자녀와 바로 연결됩니다.</p></div>
-      <div class="pcard reveal d2"><div class="num">3</div><h3>자동으로 소식 도착</h3><p>일정·출결·공지·휴강 알림이 학부모 앱으로 실시간 전달됩니다.</p></div>
+      <div class="pcard reveal"><div class="num">1</div><h3>학원이 코드 전달</h3><p>학생마다 자동 발급되는 고유 코드를 알려주세요. QR로 보여줘도 됩니다.</p><span class="code">STU-K3M7</span></div>
+      <div class="pcard reveal d1"><div class="num">2</div><h3>학부모가 입력</h3><p>카카오로 로그인하고 코드를 입력하면 자녀와 바로 연결됩니다. 프로필을 다시 쓸 필요가 없습니다.</p></div>
+      <div class="pcard reveal d2"><div class="num">3</div><h3>자동으로 소식 도착</h3><p>일정·출결·청구·휴강·셔틀 알림이 학부모 앱으로 실시간 전달됩니다.</p></div>
     </div>
   </div>
 </section>
@@ -412,23 +486,35 @@
     <div class="list reveal">
       <div class="faq-item">
         <button>이용 요금이 있나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>출시 시점에는 무료로 제공됩니다. 유료 플랜이 도입되더라도 기존 사용 학원에는 충분한 사전 안내를 드립니다.</p></div>
+        <div class="body"><p>파일럿 기간에는 무료로 제공됩니다. 유료 플랜이 도입되더라도 기존 사용 학원에는 충분한 사전 안내를 드립니다. 카드 결제 수수료에 서당 몫은 없습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button>어떤 학원에 맞나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>학생 20~150명 규모의 학원·교습소·스포츠 아카데미(수영·태권도·발레 등)에 맞춰 만들었습니다. 셔틀을 운행하거나, 요일별로 수강을 나누거나, 회당·횟수권 요금을 쓰는 곳에서 특히 잘 맞습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button>수강료 카드 결제는 어떻게 되나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>학원 설정에서 [카드 결제 신청]을 누르면 결제선생(주식회사 페이민트) 가맹 절차가 열립니다. 사업자등록증·통장 사본·대표자 신분증으로 심사(최대 5일)가 끝나면 학부모 앱에 [카드로 결제하기]가 나타납니다. 결제 대금은 학원 계좌로 직접 입금되고, 서당은 수수료를 받지 않습니다.</p></div>
+      </div>
+      <div class="faq-item">
+        <button>셔틀 실시간 위치는 어떻게 동작하나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>기사님이 앱에서 [운행 시작]을 누르면 위치 공유가 켜지고 정류장 순서가 자동 계산됩니다. 앱 안에 티맵 길안내가 내장돼 정류장 30곳을 한 번에 안내합니다. 학부모는 「우리 아이 정류장 · 몇 번째 · 몇 분 후」를 한 줄로 봅니다. 위치는 기사님 기기에서만, 운행 중에만 수집됩니다.</p></div>
       </div>
       <div class="faq-item">
         <button>학부모도 꼭 앱을 설치해야 하나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>학원 관리 기능(출결·수강료·반 관리)은 학부모 설치 없이도 전부 사용할 수 있습니다. 학부모가 앱을 설치하면 알림·일정 확인·결석 통보 기능이 추가로 연결됩니다.</p></div>
+        <div class="body"><p>학원 관리 기능(출결·수강료·반·직원·셔틀 운행)은 학부모 설치 없이도 전부 사용할 수 있습니다. 학부모가 앱을 설치하면 알림·일정·출결·카드 결제·셔틀 위치·보강 신청이 추가로 연결됩니다.</p></div>
       </div>
       <div class="faq-item">
-        <button>문자 발송 비용이 드나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>아니요. 서당의 알림은 앱 푸시로 전달되므로 건당 문자비가 들지 않습니다.</p></div>
+        <button>어떤 기기에서 쓸 수 있나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>원장님·직원은 PC 웹(크롬·엣지·사파리)과 Android 앱, 학부모는 Android 앱에서 사용합니다. iOS 앱은 준비 중입니다.</p></div>
       </div>
       <div class="faq-item">
-        <button>수강료 결제도 앱에서 되나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>서당은 수강료 청구 내역의 기록·안내를 도와드립니다. 결제(수납) 자체는 학원의 기존 방식(계좌이체 등)을 그대로 쓰시면 되고, 납부 여부를 앱에서 체크하는 방식입니다.</p></div>
+        <button>기존 엑셀 명단을 옮길 수 있나요?<span class="arrow">▾</span></button>
+        <div class="body"><p>네. 학생·반·수강 등록 3개 시트로 된 템플릿을 드리고, 채워 주시면 대신 입력해 드립니다. 요금 방식(월정액·회당·횟수권)도 그대로 옮겨집니다.</p></div>
       </div>
       <div class="faq-item">
         <button>학생 정보는 안전하게 관리되나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>모든 데이터는 암호화되어 전송·저장되며, 학부모는 본인 자녀의 정보만 볼 수 있도록 권한이 설계되어 있습니다. 자세한 내용은 개인정보처리방침을 확인해주세요.</p></div>
+        <div class="body"><p>데이터는 국내(AWS 서울)에 저장되고 전송·저장 시 암호화됩니다. 학부모는 본인 자녀의 정보만, 직원은 원장이 허용한 범위만 볼 수 있도록 데이터베이스 수준에서 권한이 나뉘어 있습니다. 카드번호는 서당이 보관하지 않습니다. 자세한 내용은 개인정보처리방침을 확인해 주세요.</p></div>
       </div>
     </div>
   </div>
@@ -437,10 +523,12 @@
 <section class="bottom-cta" id="download">
   <div class="wrap">
     <h2 class="reveal">작은 학원의 하루가 가벼워지도록,<br>서당이 함께합니다</h2>
-    <p class="reveal d1">2026년 여름, Google Play 정식 출시 예정</p>
+    <p class="reveal d1">파일럿 학원을 순서대로 모시고 있습니다. 먼저 PC 웹에서 학원을 만들어 보세요.</p>
     <div class="cta-row reveal d2" style="margin-top: 30px;">
-      <a class="btn btn-primary" href="#" aria-disabled="true">Google Play 출시 준비 중</a>
+      <a class="btn btn-primary" href="/app/">PC 웹에서 시작하기</a>
+      <a class="btn btn-ghost" href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의하기</a>
     </div>
+    <p class="cta-note reveal d3">Android 앱은 파일럿 학원에 먼저 제공 · Google Play 정식 출시 준비 중</p>
   </div>
 </section>
 
@@ -449,11 +537,12 @@
     <div class="links">
       <a href="terms.html">이용약관</a>
       <a href="privacy.html">개인정보처리방침</a>
+      <a href="delete.html">계정 삭제 요청</a>
     </div>
     <div class="biz">
-      서당 · 대표 임호균<br>
+      하이그 주식회사 · 대표이사 임호균 · 사업자등록번호 750-87-03608 · 세종특별자치시 연서면 성제길 9, 1층<br>
       문의: contact@seodang.app<br>
-      © 2026 Seodang. All rights reserved.
+      © 2026 HYGR Inc. All rights reserved.
     </div>
   </div>
 </footer>
@@ -468,6 +557,34 @@ const io = new IntersectionObserver((es) => {
   es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// ---------- shuttle mockup animation ----------
+// 지하철 노선도식 리스트 위를 버스가 정류장 단위로 내려간다. 지난 곳은 회색+취소선,
+// 다음 정류장은 브랜드색. 「우리 아이 정류장」 카드의 숫자가 같이 줄어든다.
+(function () {
+  const stops = Array.from(document.querySelectorAll('#line .stop'));
+  const bus = document.getElementById('bus');
+  const my = document.getElementById('mystop-v');
+  const mineIdx = stops.findIndex(s => s.classList.contains('mine'));
+  const etas = ['약 19분 후 · 16:24', '약 12분 후 · 16:24', '약 5분 후 · 16:24', '', ''];
+  let pos = 0;
+  function render() {
+    stops.forEach((s, i) => {
+      s.classList.toggle('passed', i < pos);
+      s.classList.toggle('next', i === pos);
+    });
+    const target = stops[pos];
+    const lineTop = document.getElementById('line').getBoundingClientRect().top;
+    const t = target.getBoundingClientRect().top - lineTop + (target.offsetHeight - 30) / 2;
+    bus.style.top = t + 'px';
+    if (pos < mineIdx) my.innerHTML = `${mineIdx - pos + 1}번째 <small>${etas[pos]}</small>`;
+    else if (pos === mineIdx) my.innerHTML = `지금 도착 <small>16:24</small>`;
+    else my.innerHTML = `탑승 완료 <small>16:24 · 학원으로 이동 중</small>`;
+  }
+  render();
+  setInterval(() => { pos = (pos + 1) % stops.length; render(); }, 2200);
+  addEventListener('resize', render);
+})();
 
 // ---------- feature tabs ----------
 document.querySelectorAll('.tab-switch button').forEach(btn => {
@@ -487,18 +604,18 @@ function showToast(msg, quiet) {
   toast.classList.toggle('quiet', !!quiet);
   toast.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3400);
 }
 document.querySelectorAll('.demo-row').forEach(row => {
   const pBtn = row.querySelector('.p'), aBtn = row.querySelector('.a');
   const name = row.dataset.name, told = row.dataset.notice === 'told';
   pBtn.addEventListener('click', () => {
     pBtn.classList.add('on'); aBtn.classList.remove('on');
-    showToast(`✅ ${name} 출석 처리 — 기록 완료`, true);
+    showToast(`✅ ${name} 출석 — 기록 완료`, true);
   });
   aBtn.addEventListener('click', () => {
     aBtn.classList.add('on'); pBtn.classList.remove('on');
-    if (told) showToast(`🤫 ${name} 결석 — 사전 통보된 결석이라 알림 없이 기록만 했어요`, true);
+    if (told) showToast(`🤫 ${name} 결석 — 사전 통보라 알림 없이 기록. 학부모에게 「보강 신청 가능」만 안내했어요`, true);
     else showToast(`🔔 ${name} 결석 — 학부모에게 무단결석 알림을 보냈어요`);
   });
 });
