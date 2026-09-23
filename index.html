@@ -9,299 +9,292 @@
 <meta property="og:description" content="출결·수강료·카드 결제·셔틀 실시간 위치·법정 환불 계산. 작은 학원과 스포츠 교습소를 위한 관리 앱.">
 <meta property="og:url" content="https://seodang.app">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#07080b">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0f1115;
-    --ink-2: #191c22;
-    --ink-soft: #4d525c;
-    --ink-faint: #8b919c;
-    --paper: #f5f6f8;
-    --white: #ffffff;
+    --bg: #07080b;
+    --bg-2: #0d0f14;
+    --panel: #12151c;
+    --line: rgba(255,255,255,0.08);
+    --line-2: rgba(255,255,255,0.14);
+    --fg: #f4f5f7;
+    --fg-2: #a9b0bd;
+    --fg-3: #6b7280;
     --brand: #3182f6;
-    --brand-deep: #1b64da;
-    --brand-soft: #e8f1fe;
-    --green: #1fb871;
-    --green-soft: #e7f8f0;
-    --red: #e5484d;
-    --red-soft: #fdeeee;
-    --amber: #f0a020;
-    --amber-soft: #fff5dc;
-    --line: #e6e8ed;
-    --radius: 22px;
-    --shadow: 0 10px 34px rgba(15, 17, 21, 0.09);
-    --shadow-lg: 0 30px 70px rgba(15, 17, 21, 0.28);
+    --brand-2: #79b0ff;
+    --glow: rgba(49,130,246,0.55);
+    --green: #3ddc97;
+    --amber: #ffb347;
+    --red: #ff5c5c;
+    --serif: 'Noto Serif KR', 'Apple SD Gothic Neo', serif;
+    --sans: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    --ease: cubic-bezier(.2,.7,.2,1);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-    color: var(--ink); background: var(--white); line-height: 1.55;
+    font-family: var(--sans); background: var(--bg); color: var(--fg); line-height: 1.5;
     -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-  h2.title { font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -1.2px; line-height: 1.22; }
-  p.sub { color: var(--ink-soft); margin-top: 12px; font-size: 1.05rem; }
-  .eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.8px; color: var(--brand); margin-bottom: 14px; text-transform: uppercase; }
-  .center { text-align: center; }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+  em.s { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--brand-2); }
+  .kicker { font-size: 0.78rem; font-weight: 800; letter-spacing: 3px; color: var(--fg-3); text-transform: uppercase; }
+  .kicker b { color: var(--brand-2); }
+  .h2 { font-size: clamp(2.4rem, 6vw, 4.6rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.02; margin-top: 18px; }
+  .sub { color: var(--fg-2); font-size: 1.1rem; margin-top: 18px; font-weight: 500; max-width: 520px; }
 
-  /* ---------- reveal ---------- */
-  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
-  .reveal.on { opacity: 1; transform: none; }
-  .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; } .d3 { transition-delay: 0.24s; } .d4 { transition-delay: 0.32s; } .d5 { transition-delay: 0.4s; }
+  /* ---------- motion ---------- */
+  .r { opacity: 0; transform: translateY(30px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  .r.on { opacity: 1; transform: none; }
+  .r.d1 { transition-delay: 0.1s; } .r.d2 { transition-delay: 0.2s; } .r.d3 { transition-delay: 0.3s; } .r.d4 { transition-delay: 0.4s; }
+  .words > span { display: inline-block; opacity: 0; transform: translateY(0.6em) rotate(2deg); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .words.on > span { opacity: 1; transform: none; }
 
   /* ---------- buttons ---------- */
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-    padding: 16px 30px; border-radius: 16px; text-decoration: none; font-weight: 800; font-size: 1.05rem;
-    border: none; cursor: pointer; white-space: nowrap;
-    transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; cursor: pointer;
+    font-weight: 800; border-radius: 999px; border: none; white-space: nowrap; font-family: inherit;
+    transition: transform 0.16s var(--ease), box-shadow 0.16s, background 0.16s;
   }
-  .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 10px 26px rgba(49, 130, 246, 0.38); }
-  .btn-primary:hover { transform: translateY(-2px); background: var(--brand-deep); box-shadow: 0 14px 32px rgba(49, 130, 246, 0.45); }
-  .btn-primary .arr { transition: transform 0.18s; }
+  .btn-primary { background: var(--brand); color: #fff; padding: 18px 34px; font-size: 1.1rem; box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 0 14px 40px var(--glow); }
+  .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 0 1px rgba(255,255,255,0.1) inset, 0 22px 56px var(--glow); }
+  .btn-primary .arr { display: inline-flex; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.18); align-items: center; justify-content: center; transition: transform 0.2s; }
   .btn-primary:hover .arr { transform: translateX(4px); }
-  .btn-ghost { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.18); }
-  .btn-ghost:hover { background: rgba(255,255,255,0.14); }
-  .btn-lg { padding: 20px 40px; font-size: 1.2rem; border-radius: 20px; }
-  .btn-xl { padding: 24px 52px; font-size: 1.35rem; border-radius: 22px; }
+  .btn-ghost { background: rgba(255,255,255,0.06); color: var(--fg); padding: 18px 28px; font-size: 1rem; border: 1px solid var(--line-2); backdrop-filter: blur(8px); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+  .btn-xl { padding: 24px 48px; font-size: 1.3rem; }
 
   /* ---------- header ---------- */
-  header {
-    position: sticky; top: 0; z-index: 60;
-    background: rgba(15, 17, 21, 0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    color: #fff; transition: background 0.3s, border-color 0.3s; border-bottom: 1px solid transparent;
-  }
-  header.light { background: rgba(255,255,255,0.85); color: var(--ink); border-bottom-color: var(--line); }
-  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-  .logo { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.6px; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 9px; }
-  .logo .mark { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #3182f6, #7cb3ff); display: inline-block; }
-  nav.gnb { display: flex; gap: 2px; align-items: center; }
-  nav.gnb a { color: inherit; opacity: 0.75; text-decoration: none; font-size: 0.93rem; font-weight: 600; padding: 8px 13px; border-radius: 10px; }
-  nav.gnb a:hover { opacity: 1; }
-  .nav-cta { background: var(--brand); color: #fff !important; opacity: 1 !important; border-radius: 12px; padding: 10px 20px !important; font-weight: 800 !important; margin-left: 8px; box-shadow: 0 6px 16px rgba(49,130,246,0.35); }
-  .nav-cta:hover { background: var(--brand-deep); }
-  @media (max-width: 760px) { nav.gnb a:not(.nav-cta) { display: none; } }
+  header { position: fixed; top: 0; left: 0; right: 0; z-index: 80; transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s; border-bottom: 1px solid transparent; }
+  header.glass { background: rgba(7,8,11,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom-color: var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { font-size: 1.45rem; font-weight: 900; letter-spacing: -0.04em; color: var(--fg); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  .logo .mark { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #3182f6, #9cc4ff); box-shadow: 0 0 24px var(--glow); }
+  nav.gnb { display: flex; align-items: center; gap: 4px; }
+  nav.gnb a { color: var(--fg-2); text-decoration: none; font-size: 0.92rem; font-weight: 600; padding: 8px 12px; border-radius: 10px; }
+  nav.gnb a:hover { color: var(--fg); }
+  .nav-cta { background: var(--fg); color: var(--bg) !important; border-radius: 999px; padding: 10px 20px !important; font-weight: 800 !important; margin-left: 8px; }
+  .nav-cta:hover { background: var(--brand); color: #fff !important; }
+  @media (max-width: 800px) { nav.gnb a:not(.nav-cta) { display: none; } }
 
-  /* ---------- mobile sticky CTA ---------- */
-  .m-cta {
-    display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-    background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-top: 1px solid var(--line);
-    transform: translateY(110%); transition: transform 0.3s;
+  /* ---------- floating CTA ---------- */
+  .float-cta {
+    position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 140%); z-index: 90;
+    display: flex; align-items: center; gap: 14px; padding: 8px 8px 8px 20px; border-radius: 999px;
+    background: rgba(18,21,28,0.8); border: 1px solid var(--line-2); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5); transition: transform 0.45s var(--ease);
+    font-size: 0.92rem; color: var(--fg-2); font-weight: 600; white-space: nowrap;
   }
-  .m-cta.show { transform: none; }
-  .m-cta .btn { width: 100%; }
-  @media (max-width: 760px) { .m-cta { display: block; } body { padding-bottom: 76px; } }
+  .float-cta.show { transform: translate(-50%, 0); }
+  .float-cta .btn-primary { padding: 12px 22px; font-size: 0.98rem; box-shadow: 0 8px 24px var(--glow); }
+  @media (max-width: 560px) { .float-cta { left: 16px; right: 16px; transform: translateY(140%); padding: 8px; } .float-cta.show { transform: none; } .float-cta span { display: none; } .float-cta .btn-primary { width: 100%; } }
 
   /* ---------- hero ---------- */
-  .hero {
-    background: radial-gradient(1200px 600px at 20% -10%, #1d3b6e 0%, transparent 60%),
-                radial-gradient(900px 500px at 100% 100%, #14305a 0%, transparent 55%), var(--ink);
-    color: #fff; padding: 72px 0 40px; position: relative; overflow: hidden;
-  }
-  .hero::after { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E"); pointer-events: none; }
-  .hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
-  @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; } .hero { padding: 48px 0 24px; } }
-  .pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); color: #cfe0ff; font-size: 0.84rem; font-weight: 700; padding: 7px 14px; border-radius: 999px; }
-  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #5fd39a; box-shadow: 0 0 0 0 rgba(95,211,154,0.6); animation: ping 1.8s infinite; }
-  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(95,211,154,0.6);} 100% { box-shadow: 0 0 0 10px rgba(95,211,154,0);} }
+  .hero { min-height: 100svh; position: relative; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; }
+  .hero .bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .hero .bg .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; animation: drift 14s ease-in-out infinite alternate; }
+  .hero .bg .o1 { width: 620px; height: 620px; left: -160px; top: -120px; background: radial-gradient(circle, #1e57c7 0%, transparent 65%); }
+  .hero .bg .o2 { width: 560px; height: 560px; right: -140px; bottom: -160px; background: radial-gradient(circle, #0d3f9c 0%, transparent 65%); animation-delay: -6s; }
+  .hero .bg .o3 { width: 300px; height: 300px; right: 30%; top: 8%; background: radial-gradient(circle, #6d9cff 0%, transparent 65%); opacity: 0.25; animation-delay: -3s; }
+  @keyframes drift { from { transform: translate(0,0) scale(1);} to { transform: translate(60px, 40px) scale(1.12);} }
+  .hero .bg .grid { position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 0%, transparent 70%); opacity: 0.6; }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+  @media (max-width: 960px) { .hero .wrap { grid-template-columns: 1fr; } .hero { padding: 110px 0 60px; } }
+  .hero .pill { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px 8px 10px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid var(--line-2); font-size: 0.85rem; font-weight: 700; color: var(--fg-2); }
+  .hero .pill i { width: 22px; height: 22px; border-radius: 50%; background: var(--green); display: inline-flex; align-items: center; justify-content: center; font-style: normal; font-size: 0.7rem; color: #05231a; box-shadow: 0 0 0 0 rgba(61,220,151,0.5); animation: ping 2s infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(61,220,151,0.5);} 100% { box-shadow: 0 0 0 12px rgba(61,220,151,0);} }
+  .hero h1 { margin-top: 26px; font-size: clamp(2.6rem, 6.6vw, 5.4rem); font-weight: 900; letter-spacing: -0.05em; line-height: 1; word-break: keep-all; }
+  .hero h1 em.s { font-weight: 700; }
+  .hero .lead { margin-top: 26px; font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--fg-2); font-weight: 500; max-width: 480px; }
+  .hero .cta-row { margin-top: 38px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .hero .meta { margin-top: 22px; display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.88rem; color: var(--fg-3); font-weight: 600; }
+  .hero .meta span::before { content: '✓'; color: var(--green); margin-right: 6px; font-weight: 900; }
 
-  /* rotating parent question */
-  .ask-line { margin-top: 26px; height: 2.2rem; display: flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 600; color: #b7c6e0; }
-  .ask-line .who { font-size: 1.4rem; }
-  .ask-line .q { position: relative; display: inline-block; min-width: 12ch; }
-  .ask-line .q span { position: absolute; left: 0; top: 0; white-space: nowrap; opacity: 0; transform: translateY(10px); transition: opacity 0.35s, transform 0.35s; }
-  .ask-line .q span.on { opacity: 1; transform: none; }
-  .hero h1 { margin-top: 12px; font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: -2.4px; line-height: 1.08; }
-  .hero h1 em { font-style: normal; color: #7cb3ff; }
-  .hero p.lead { margin-top: 18px; color: #b7c6e0; font-size: 1.15rem; max-width: 460px; font-weight: 500; }
-  .hero .cta-row { margin-top: 34px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .hero .cta-note { margin-top: 14px; font-size: 0.9rem; color: #8ea2c4; display: flex; gap: 14px; flex-wrap: wrap; }
-  .hero .cta-note span::before { content: '✓ '; color: #5fd39a; font-weight: 800; }
-
-  /* ---------- phone mockup ---------- */
-  .phone-zone { position: relative; display: flex; justify-content: center; padding: 24px 0 10px; }
-  .phone {
-    width: 300px; background: #0b0d11; border-radius: 42px; padding: 10px; position: relative; z-index: 2;
-    box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255,255,255,0.08);
-    animation: hover 5s ease-in-out infinite;
-  }
-  @keyframes hover { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
-  .screen { background: var(--paper); border-radius: 33px; overflow: hidden; color: var(--ink); }
-  .app-bar { background: var(--white); padding: 18px 18px 12px; display: flex; justify-content: space-between; align-items: center; }
-  .app-bar .t { font-weight: 800; font-size: 0.98rem; }
-  .app-bar .live { font-size: 0.68rem; font-weight: 800; color: var(--green); display: flex; align-items: center; gap: 5px; }
+  /* ---------- phone stage ---------- */
+  .stage { position: relative; height: 640px; display: flex; align-items: center; justify-content: center; perspective: 1400px; }
+  @media (max-width: 960px) { .stage { height: 600px; } }
+  @media (max-width: 480px) { .stage { height: 560px; transform: scale(0.88); } }
+  .phone { width: 320px; background: #0b0d12; border-radius: 48px; padding: 12px; position: relative; z-index: 2;
+    box-shadow: 0 60px 120px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.1) inset, 0 0 80px rgba(49,130,246,0.15);
+    transform: rotateY(var(--ry, -12deg)) rotateX(var(--rx, 6deg)); transform-style: preserve-3d; transition: transform 0.5s var(--ease); animation: floatY 6s ease-in-out infinite; }
+  @keyframes floatY { 0%,100% { translate: 0 0;} 50% { translate: 0 -12px;} }
+  .phone .notch { position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; border-radius: 20px; background: #000; z-index: 5; }
+  .screen { background: #0f1218; border-radius: 38px; overflow: hidden; height: 600px; color: var(--fg); position: relative; }
+  .app-bar { padding: 60px 20px 12px; display: flex; justify-content: space-between; align-items: center; }
+  .app-bar .t { font-weight: 800; font-size: 1.02rem; }
+  .app-bar .live { font-size: 0.7rem; font-weight: 800; color: var(--green); display: flex; align-items: center; gap: 6px; }
   .app-bar .live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 1.2s infinite; }
   @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.4; transform: scale(0.8);} }
-  .app-body { padding: 12px 14px 18px; }
-  .mystop { background: var(--brand); color: #fff; border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; }
-  .mystop .l { font-size: 0.7rem; opacity: 0.8; font-weight: 700; }
-  .mystop .v { font-size: 1.25rem; font-weight: 900; margin-top: 2px; letter-spacing: -0.5px; }
-  .mystop .v small { font-size: 0.78rem; font-weight: 600; opacity: 0.9; margin-left: 6px; letter-spacing: 0; }
-  .line-card { background: var(--white); border-radius: 16px; padding: 12px 14px 8px; box-shadow: 0 2px 8px rgba(25,28,34,0.05); position: relative; }
-  .stop { display: flex; align-items: center; gap: 12px; height: 38px; position: relative; }
+  .app-body { padding: 8px 16px 18px; }
+  .mystop { background: linear-gradient(135deg, #3182f6, #1b5fd1); color: #fff; border-radius: 20px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 10px 30px rgba(49,130,246,0.35); }
+  .mystop .l { font-size: 0.72rem; opacity: 0.8; font-weight: 700; }
+  .mystop .v { font-size: 1.5rem; font-weight: 900; margin-top: 2px; letter-spacing: -0.03em; }
+  .mystop .v small { font-size: 0.8rem; font-weight: 600; opacity: 0.9; margin-left: 8px; letter-spacing: 0; }
+  .line-card { background: rgba(255,255,255,0.04); border: 1px solid var(--line); border-radius: 20px; padding: 12px 14px 8px; position: relative; }
+  .stop { display: flex; align-items: center; gap: 12px; height: 42px; position: relative; }
   .stop .rail { width: 18px; display: flex; justify-content: center; position: relative; align-self: stretch; }
-  .stop .rail::before { content: ''; position: absolute; top: 0; bottom: 0; width: 3px; background: var(--line); }
+  .stop .rail::before { content: ''; position: absolute; top: 0; bottom: 0; width: 3px; background: rgba(255,255,255,0.1); }
   .stop:first-child .rail::before { top: 50%; } .stop:last-child .rail::before { bottom: 50%; }
-  .stop .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--white); border: 3px solid var(--ink-faint); position: relative; z-index: 1; transition: all 0.4s; }
-  .stop .nm { font-size: 0.85rem; font-weight: 700; flex: 1; transition: all 0.4s; }
-  .stop .eta { font-size: 0.75rem; color: var(--ink-faint); font-weight: 600; transition: all 0.4s; }
-  .stop.passed .dot { border-color: var(--line); background: var(--line); }
-  .stop.passed .nm { color: var(--ink-faint); text-decoration: line-through; font-weight: 500; }
-  .stop.next .dot { border-color: var(--brand); background: var(--brand); box-shadow: 0 0 0 5px var(--brand-soft); }
-  .stop.next .nm { color: var(--brand-deep); }
-  .stop.next .eta { color: var(--brand); font-weight: 800; }
-  .stop.mine .nm::after { content: '우리 아이'; font-size: 0.62rem; background: var(--amber-soft); color: #8a5a00; padding: 2px 7px; border-radius: 999px; margin-left: 6px; font-weight: 800; }
-  .bus {
-    position: absolute; left: 14px; width: 30px; height: 30px; border-radius: 10px; background: var(--ink); color: #fff;
-    display: flex; align-items: center; justify-content: center; font-size: 0.95rem; z-index: 3;
-    box-shadow: 0 4px 12px rgba(25,28,34,0.3); transition: top 0.9s cubic-bezier(.4,.1,.2,1); transform: translateX(-6px);
-  }
-  .float-card {
-    position: absolute; background: var(--white); color: var(--ink); border-radius: 16px; box-shadow: var(--shadow-lg);
-    padding: 12px 16px; font-size: 0.8rem; z-index: 3; display: flex; gap: 10px; align-items: center;
-    opacity: 0; animation: floatIn 0.8s forwards ease;
-  }
-  .float-card .ic { width: 36px; height: 36px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-  .float-card b { display: block; font-size: 0.84rem; }
-  .float-card small { color: var(--ink-faint); font-size: 0.72rem; }
-  .fc1 { top: 8%; left: -4%; animation-delay: 0.6s; } .fc1 .ic { background: var(--green-soft); }
-  .fc2 { bottom: 12%; right: -6%; animation-delay: 1.2s; } .fc2 .ic { background: var(--brand-soft); }
-  .fc3 { top: 46%; right: -10%; animation-delay: 1.8s; } .fc3 .ic { background: var(--amber-soft); }
-  @keyframes floatIn { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: none;} }
-  @media (max-width: 480px) { .fc1 { left: 0; } .fc2, .fc3 { right: 0; } }
+  .stop .dot { width: 12px; height: 12px; border-radius: 50%; background: #0f1218; border: 3px solid var(--fg-3); position: relative; z-index: 1; transition: all 0.4s; }
+  .stop .nm { font-size: 0.9rem; font-weight: 700; flex: 1; transition: all 0.4s; }
+  .stop .eta { font-size: 0.78rem; color: var(--fg-3); font-weight: 600; transition: all 0.4s; }
+  .stop.passed .dot { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.15); }
+  .stop.passed .nm { color: var(--fg-3); text-decoration: line-through; font-weight: 500; }
+  .stop.next .dot { border-color: var(--brand); background: var(--brand); box-shadow: 0 0 0 6px rgba(49,130,246,0.25); }
+  .stop.next .nm { color: var(--brand-2); }
+  .stop.next .eta { color: var(--brand-2); font-weight: 800; }
+  .stop.mine .nm::after { content: '우리 아이'; font-size: 0.62rem; background: rgba(255,179,71,0.18); color: var(--amber); padding: 2px 7px; border-radius: 999px; margin-left: 6px; font-weight: 800; }
+  .bus { position: absolute; left: 14px; width: 32px; height: 32px; border-radius: 11px; background: var(--fg); color: #000; display: flex; align-items: center; justify-content: center; font-size: 1rem; z-index: 3; box-shadow: 0 6px 16px rgba(0,0,0,0.5); transition: top 0.9s cubic-bezier(.4,.1,.2,1); transform: translateX(-7px); }
+  .toast { position: absolute; left: 50%; transform: translateX(-50%) translateY(-20px); bottom: 26px; width: 86%; background: rgba(255,255,255,0.96); color: #111; border-radius: 16px; padding: 12px 14px; display: flex; gap: 10px; align-items: center; opacity: 0; transition: opacity 0.4s, transform 0.4s var(--ease); box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+  .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast .ic { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; background: #eef3ff; flex: none; }
+  .toast b { display: block; font-size: 0.86rem; } .toast small { font-size: 0.72rem; color: #666; }
 
-  /* ---------- big numbers ---------- */
-  .nums { background: var(--ink); color: #fff; padding: 28px 0 72px; }
-  .nums .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  @media (max-width: 860px) { .nums .grid { grid-template-columns: repeat(2, 1fr); } }
-  .num { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px 22px; }
-  .num .ic { font-size: 1.5rem; }
-  .num .n { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-top: 8px; }
-  .num .n small { font-size: 1.1rem; font-weight: 800; margin-left: 3px; letter-spacing: 0; }
-  .num .d { margin-top: 6px; font-size: 0.9rem; color: #b7c6e0; font-weight: 600; }
+  .card3d { position: absolute; z-index: 3; background: rgba(18,21,28,0.85); border: 1px solid var(--line-2); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 18px; padding: 14px 16px; display: flex; gap: 12px; align-items: center; box-shadow: 0 30px 60px rgba(0,0,0,0.5); opacity: 0; animation: cardIn 0.9s var(--ease) forwards; }
+  .card3d .ic { width: 38px; height: 38px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; background: rgba(255,255,255,0.08); }
+  .card3d b { display: block; font-size: 0.9rem; } .card3d small { font-size: 0.76rem; color: var(--fg-2); }
+  .c1 { top: 8%; left: -6%; animation-delay: 0.7s; } .c2 { top: 44%; right: -12%; animation-delay: 1.3s; } .c3 { bottom: 6%; left: -2%; animation-delay: 1.9s; }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(30px) scale(0.96);} to { opacity: 1; transform: none;} }
+  @media (max-width: 480px) { .c1 { left: 0; } .c2 { right: 0; } .c3 { left: 0; } }
 
-  /* ---------- before / after ---------- */
-  .ba { padding: 96px 0; }
-  .ba .toggle { display: inline-flex; background: var(--paper); border-radius: 999px; padding: 5px; margin-top: 28px; gap: 4px; position: relative; }
-  .ba .toggle button { border: none; background: transparent; font-family: inherit; font-size: 1rem; font-weight: 800; padding: 12px 30px; border-radius: 999px; cursor: pointer; color: var(--ink-faint); transition: all 0.2s; }
-  .ba .toggle button.on { background: var(--ink); color: #fff; }
-  .ba .toggle button.on.after { background: var(--brand); }
-  .ba .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
-  @media (max-width: 860px) { .ba .cards { grid-template-columns: 1fr; } }
-  .bcard { border-radius: var(--radius); padding: 30px 26px; min-height: 230px; position: relative; overflow: hidden; transition: background 0.4s, color 0.4s; text-align: left; }
-  .bcard .ic { font-size: 2.4rem; line-height: 1; }
-  .bcard .big { font-size: 1.45rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.25; margin-top: 18px; transition: opacity 0.3s, transform 0.3s; }
-  .bcard .sm { margin-top: 10px; font-size: 0.95rem; font-weight: 600; opacity: 0.7; }
-  .bcard .tag { position: absolute; top: 18px; right: 18px; font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; padding: 5px 11px; border-radius: 999px; }
-  .ba[data-mode="before"] .bcard { background: var(--red-soft); color: #7a1f22; }
-  .ba[data-mode="before"] .bcard .tag { background: #fff; color: var(--red); }
-  .ba[data-mode="after"] .bcard { background: var(--ink); color: #fff; }
-  .ba[data-mode="after"] .bcard .tag { background: var(--brand); color: #fff; }
-  .bcard .v-before, .bcard .v-after { transition: opacity 0.35s, transform 0.35s; }
-  .ba[data-mode="before"] .v-after, .ba[data-mode="after"] .v-before { display: none; }
-  .ba .swap { animation: swapIn 0.4s ease; }
-  @keyframes swapIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: none;} }
+  /* ---------- ticker ---------- */
+  .ticker { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg-2); overflow: hidden; padding: 18px 0; position: relative; z-index: 1; }
+  .ticker .track { display: flex; gap: 14px; width: max-content; animation: marquee 38s linear infinite; }
+  .ticker:hover .track { animation-play-state: paused; }
+  .ticker .q { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line-2); font-size: 0.98rem; font-weight: 700; color: var(--fg-2); white-space: nowrap; }
+  .ticker .q s { color: var(--fg-3); }
+  .ticker .q .a { color: var(--brand-2); }
+  .ticker .q .a::before { content: '→ '; color: var(--fg-3); }
+  @keyframes marquee { from { transform: translateX(0);} to { transform: translateX(-50%);} }
 
-  /* ---------- bento features ---------- */
-  .bento { padding: 96px 0; background: var(--paper); }
-  .bento .grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 200px; gap: 14px; margin-top: 40px; }
-  .tile { background: var(--white); border-radius: var(--radius); padding: 26px; position: relative; overflow: hidden; text-align: left; box-shadow: 0 1px 2px rgba(15,17,21,0.04); transition: transform 0.18s, box-shadow 0.18s; }
-  .tile:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-  .tile .ic { width: 50px; height: 50px; border-radius: 15px; background: var(--paper); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-  .tile h3 { font-size: 1.3rem; font-weight: 900; letter-spacing: -0.6px; margin-top: 16px; }
-  .tile p { color: var(--ink-soft); font-size: 0.93rem; margin-top: 6px; font-weight: 500; }
-  .tile .new { display: inline-block; font-size: 0.64rem; font-weight: 900; color: var(--brand); background: var(--brand-soft); padding: 3px 8px; border-radius: 999px; margin-left: 8px; vertical-align: middle; letter-spacing: 0.5px; }
-  .tile.dark { background: var(--ink); color: #fff; }
-  .tile.dark p { color: #b7c6e0; }
-  .tile.dark .ic { background: rgba(255,255,255,0.1); }
-  .tile.blue { background: var(--brand); color: #fff; }
-  .tile.blue p { color: #dbe9ff; }
-  .tile.blue .ic { background: rgba(255,255,255,0.18); }
-  .tile.blue .new { background: #fff; }
-  .t-3 { grid-column: span 3; } .t-2 { grid-column: span 2; } .t-4 { grid-column: span 4; }
-  .tile .deco { position: absolute; right: -10px; bottom: -14px; font-size: 7rem; opacity: 0.1; line-height: 1; pointer-events: none; }
-  @media (max-width: 860px) { .bento .grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; } .t-3, .t-2, .t-4 { grid-column: span 1; } .tile { min-height: 180px; } }
+  /* ---------- chapters ---------- */
+  .chapter { min-height: 92svh; display: flex; align-items: center; padding: 100px 0; position: relative; overflow: hidden; }
+  .chapter .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .chapter.flip .wrap > .txt { order: 2; }
+  @media (max-width: 960px) { .chapter .wrap { grid-template-columns: 1fr; } .chapter.flip .wrap > .txt { order: 0; } .chapter { min-height: auto; padding: 80px 0; } }
+  .chapter .num { font-family: var(--serif); font-style: italic; color: var(--fg-3); font-size: 1rem; letter-spacing: 2px; }
+  .chapter .giant { font-size: clamp(3rem, 7vw, 6rem); font-weight: 900; letter-spacing: -0.06em; line-height: 0.98; margin-top: 14px; word-break: keep-all; }
+  .chapter .giant em.s { font-weight: 700; }
+  .chapter .one { margin-top: 22px; font-size: 1.15rem; color: var(--fg-2); font-weight: 500; max-width: 440px; }
+  .chapter .was { margin-top: 26px; display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 12px; background: rgba(255,92,92,0.08); border: 1px solid rgba(255,92,92,0.2); color: #ffb3b3; font-size: 0.9rem; font-weight: 600; }
+  .chapter .was s { color: #ff8686; }
+  .visual { position: relative; border-radius: 32px; background: linear-gradient(160deg, #12151c, #0b0d12); border: 1px solid var(--line); box-shadow: 0 40px 100px rgba(0,0,0,0.5); overflow: hidden; aspect-ratio: 1 / 0.86; }
+  .visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(500px 300px at 30% 20%, rgba(49,130,246,0.25), transparent 60%); }
+  .visual svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* chapter 1: route map */
+  .route path.road { fill: none; stroke: rgba(255,255,255,0.12); stroke-width: 14; stroke-linecap: round; }
+  .route path.done { fill: none; stroke: var(--brand); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 6s linear infinite; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .route circle.st { fill: #0f1218; stroke: rgba(255,255,255,0.4); stroke-width: 4; }
+  .route circle.me { fill: var(--amber); stroke: #0f1218; stroke-width: 4; }
+  .route text { fill: var(--fg-2); font-family: var(--sans); font-size: 15px; font-weight: 700; }
+  .route .busdot { offset-path: path('M 60 320 C 120 220, 220 200, 300 230 S 460 330, 560 240 S 660 110, 700 120'); animation: ride 6s linear infinite; }
+  @keyframes ride { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+  .eta-badge { position: absolute; right: 26px; top: 26px; background: rgba(255,255,255,0.96); color: #111; border-radius: 18px; padding: 14px 18px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+  .eta-badge .l { font-size: 0.72rem; color: #666; font-weight: 700; } .eta-badge .v { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.03em; color: #1b5fd1; }
+  .eta-badge .v small { font-size: 0.8rem; color: #444; margin-left: 6px; font-weight: 700; }
+
+  /* chapter 2: money flow */
+  .flowv { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 30px; }
+  .flowv .lane { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 480px; }
+  .flowv .node { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid var(--line-2); border-radius: 18px; padding: 18px 10px; text-align: center; }
+  .flowv .node .ic { font-size: 1.9rem; } .flowv .node b { display: block; margin-top: 6px; font-size: 0.86rem; white-space: nowrap; }
+  .flowv .pipe { flex: none; width: 46px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+  .flowv .pipe::after { content: ''; position: absolute; top: 0; bottom: 0; width: 40%; border-radius: 3px; background: var(--green); animation: flow 1.4s linear infinite; }
+  @keyframes flow { from { left: -40%; } to { left: 100%; } }
+  .flowv .zero { font-size: clamp(4rem, 9vw, 7rem); font-weight: 900; letter-spacing: -0.06em; line-height: 1; color: var(--fg); }
+  .flowv .zero small { font-size: 0.32em; margin-left: 4px; color: var(--fg-2); letter-spacing: -0.02em; }
+  .flowv .cap { color: var(--fg-2); font-weight: 600; font-size: 0.95rem; }
+  .flowv .no { display: flex; gap: 8px; }
+  .flowv .no span { padding: 6px 12px; border-radius: 999px; background: rgba(255,92,92,0.1); border: 1px solid rgba(255,92,92,0.25); color: #ffb3b3; font-size: 0.82rem; font-weight: 700; text-decoration: line-through; }
+
+  /* chapter 3: refund ledger */
+  .ledger { position: absolute; inset: 0; padding: 78px 34px 34px; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+  .ledger .row { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--line); font-weight: 700; font-size: 0.98rem; opacity: 0; transform: translateX(-16px); }
+  .ledger.on .row { animation: rowIn 0.6s var(--ease) forwards; }
+  .ledger .row:nth-child(2) { animation-delay: 0.15s; } .ledger .row:nth-child(3) { animation-delay: 0.3s; } .ledger .row:nth-child(4) { animation-delay: 0.45s; } .ledger .row:nth-child(5) { animation-delay: 0.6s; }
+  @keyframes rowIn { to { opacity: 1; transform: none; } }
+  .ledger .row .k { color: var(--fg-2); font-weight: 600; } .ledger .row .k small { display: block; color: var(--fg-3); font-size: 0.75rem; font-weight: 600; }
+  .ledger .row.total { background: rgba(49,130,246,0.14); border-color: rgba(49,130,246,0.4); font-size: 1.15rem; }
+  .ledger .row.total .v { color: var(--brand-2); font-weight: 900; font-size: 1.5rem; letter-spacing: -0.03em; }
+  .ledger .stamp { position: absolute; right: 30px; top: 26px; transform: rotate(8deg); border: 2px solid var(--green); color: var(--green); padding: 6px 12px; border-radius: 10px; font-weight: 900; font-size: 0.8rem; letter-spacing: 1px; opacity: 0; }
+  .ledger.on .stamp { animation: stampIn 0.5s 0.9s var(--ease) forwards; }
+  @keyframes stampIn { from { opacity: 0; transform: rotate(8deg) scale(1.6);} to { opacity: 1; transform: rotate(8deg) scale(1);} }
+
+  /* ---------- bento ---------- */
+  .bento { padding: 120px 0; position: relative; z-index: 1; }
+  .bento .grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 210px; gap: 14px; margin-top: 48px; }
+  .tile { position: relative; overflow: hidden; border-radius: 26px; padding: 26px; background: var(--panel); border: 1px solid var(--line); transition: transform 0.2s var(--ease), border-color 0.2s; }
+  .tile::after { content: ''; position: absolute; inset: 0; background: radial-gradient(360px 200px at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.08), transparent 60%); opacity: 0; transition: opacity 0.25s; pointer-events: none; }
+  .tile:hover { transform: translateY(-4px); border-color: var(--line-2); } .tile:hover::after { opacity: 1; }
+  .tile .ic { width: 50px; height: 50px; border-radius: 15px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .tile h3 { margin-top: 18px; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.03em; }
+  .tile p { margin-top: 6px; color: var(--fg-2); font-size: 0.93rem; font-weight: 500; }
+  .tile .new { display: inline-block; font-size: 0.62rem; font-weight: 900; color: var(--bg); background: var(--brand-2); padding: 3px 8px; border-radius: 999px; margin-left: 8px; vertical-align: middle; letter-spacing: 1px; }
+  .tile.hero-t { background: linear-gradient(140deg, #2a63d4, #143a86); border-color: rgba(121,176,255,0.4); }
+  .tile.hero-t p { color: #dbe8ff; }
+  .tile .deco { position: absolute; right: -14px; bottom: -22px; font-size: 8rem; opacity: 0.12; line-height: 1; pointer-events: none; }
+  .t3 { grid-column: span 3; } .t2 { grid-column: span 2; }
+  @media (max-width: 900px) { .bento .grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; } .t3, .t2 { grid-column: span 1; } .tile { min-height: 190px; } }
   @media (max-width: 520px) { .bento .grid { grid-template-columns: 1fr; } }
 
-  /* ---------- compare table ---------- */
-  .cmp { padding: 96px 0; }
-  .cmp .tbl { margin-top: 36px; background: var(--white); border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--line); }
+  /* ---------- compare ---------- */
+  .cmp { padding: 100px 0 120px; position: relative; z-index: 1; }
+  .cmp .tbl { margin-top: 44px; border-radius: 26px; border: 1px solid var(--line); background: var(--panel); overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.4); }
   .cmp table { width: 100%; border-collapse: collapse; }
   .cmp th, .cmp td { padding: 18px 16px; text-align: center; border-bottom: 1px solid var(--line); font-size: 1rem; }
-  .cmp th { font-size: 0.85rem; font-weight: 800; color: var(--ink-faint); background: var(--paper); letter-spacing: 0.5px; }
-  .cmp th.sd { color: #fff; background: var(--brand); font-size: 1rem; }
+  .cmp th { font-size: 0.82rem; font-weight: 800; color: var(--fg-3); letter-spacing: 1px; background: rgba(255,255,255,0.02); }
+  .cmp th.sd { color: #fff; background: var(--brand); font-size: 1rem; letter-spacing: 0; }
   .cmp td:first-child, .cmp th:first-child { text-align: left; font-weight: 800; }
-  .cmp td:first-child .ic { margin-right: 8px; }
-  .cmp td.sd { background: rgba(49,130,246,0.06); font-weight: 900; color: var(--brand-deep); }
+  .cmp td:first-child .ic { margin-right: 10px; }
+  .cmp td.sd { background: rgba(49,130,246,0.1); font-weight: 900; color: var(--brand-2); }
   .cmp tr:last-child td { border-bottom: none; }
-  .cmp .x { color: var(--ink-faint); font-size: 1.1rem; }
-  .cmp .tri { color: #d98a00; font-weight: 800; }
-  .cmp .ok { display: inline-flex; align-items: center; gap: 6px; }
-  .cmp .ok::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; background: var(--brand); color: #fff; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; }
-  .cmp .note { margin-top: 14px; font-size: 0.78rem; color: var(--ink-faint); text-align: center; }
+  .cmp .x { color: var(--fg-3); font-size: 1.15rem; } .cmp .tri { color: var(--amber); font-weight: 800; }
+  .cmp .ok::before { content: '✓ '; color: var(--green); font-weight: 900; }
+  .cmp .note { margin-top: 16px; font-size: 0.78rem; color: var(--fg-3); text-align: center; }
+  .cmp .note a { color: var(--fg-2); }
   @media (max-width: 720px) { .cmp th, .cmp td { padding: 13px 8px; font-size: 0.85rem; } .cmp td:first-child .ic { display: block; margin: 0 0 2px; } }
 
-  /* ---------- 3 steps ---------- */
-  .steps { padding: 96px 0; background: var(--ink); color: #fff; }
-  .steps .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; position: relative; }
-  @media (max-width: 860px) { .steps .row { grid-template-columns: 1fr; } }
-  .step { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius); padding: 30px 26px; text-align: left; position: relative; }
-  .step .n { width: 40px; height: 40px; border-radius: 12px; background: var(--brand); color: #fff; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-  .step .ic { position: absolute; top: 22px; right: 22px; font-size: 2rem; opacity: 0.9; }
-  .step h3 { font-size: 1.35rem; font-weight: 900; letter-spacing: -0.6px; margin-top: 20px; }
-  .step p { color: #b7c6e0; margin-top: 8px; font-size: 0.95rem; font-weight: 500; }
-  .step .time { display: inline-block; margin-top: 16px; font-size: 0.78rem; font-weight: 800; color: #5fd39a; background: rgba(95,211,154,0.12); padding: 4px 10px; border-radius: 999px; }
-  .steps .cta-row { margin-top: 40px; display: flex; justify-content: center; }
+  /* ---------- steps ---------- */
+  .steps { padding: 120px 0; position: relative; z-index: 1; background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .steps .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; position: relative; }
+  .steps .row::before { content: ''; position: absolute; left: 8%; right: 8%; top: 44px; height: 2px; background: linear-gradient(90deg, var(--brand), var(--brand-2)); opacity: 0; transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease) 0.3s, opacity 0.3s; }
+  .steps .row.on::before { opacity: 0.6; transform: scaleX(1); }
+  @media (max-width: 860px) { .steps .row { grid-template-columns: 1fr; } .steps .row::before { display: none; } }
+  .step { background: var(--panel); border: 1px solid var(--line); border-radius: 26px; padding: 30px 26px; position: relative; }
+  .step .n { width: 46px; height: 46px; border-radius: 14px; background: var(--brand); color: #fff; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 10px 24px var(--glow); position: relative; z-index: 1; }
+  .step .ic { position: absolute; top: 24px; right: 24px; font-size: 2rem; }
+  .step h3 { font-size: 1.45rem; font-weight: 800; letter-spacing: -0.03em; margin-top: 22px; }
+  .step p { color: var(--fg-2); margin-top: 8px; font-size: 0.97rem; font-weight: 500; }
+  .step .time { display: inline-block; margin-top: 16px; font-size: 0.78rem; font-weight: 800; color: var(--green); background: rgba(61,220,151,0.12); padding: 5px 11px; border-radius: 999px; }
 
-  /* ---------- money ---------- */
-  .money { padding: 96px 0; }
-  .money .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
-  @media (max-width: 860px) { .money .wrap { grid-template-columns: 1fr; } }
-  .money .zero { font-size: clamp(5rem, 14vw, 9rem); font-weight: 900; letter-spacing: -6px; line-height: 0.95; color: var(--brand); }
-  .money .zero small { font-size: 0.3em; letter-spacing: -1px; margin-left: 6px; color: var(--ink); }
-  .money ul { list-style: none; margin-top: 22px; }
-  .money li { display: flex; gap: 12px; padding: 10px 0; font-size: 1.02rem; font-weight: 600; color: var(--ink-soft); align-items: center; }
-  .money li::before { content: '✓'; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--green-soft); color: var(--green); font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
-  .money li b { color: var(--ink); }
-  .flow { background: var(--paper); border-radius: 24px; padding: 30px; }
-  .flow .lane { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .flow .node { flex: 1; background: var(--white); border-radius: 16px; padding: 16px 10px; text-align: center; box-shadow: 0 1px 3px rgba(15,17,21,0.06); }
-  .flow .node .ic { font-size: 1.8rem; }
-  .flow .node b { display: block; font-size: 0.88rem; margin-top: 6px; }
-  .flow .arrow { flex: none; color: var(--brand); font-weight: 900; font-size: 1.3rem; position: relative; }
-  .flow .arrow::after { content: '₩'; position: absolute; left: 50%; top: -20px; transform: translateX(-50%); font-size: 0.85rem; color: var(--green); font-weight: 900; animation: coin 1.6s infinite; }
-  @keyframes coin { 0% { opacity: 0; transform: translate(-50%, 4px);} 40% { opacity: 1;} 100% { opacity: 0; transform: translate(-50%, -8px);} }
-  .flow .skip { margin-top: 18px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.9rem; font-weight: 700; color: var(--ink-faint); }
-  .flow .skip .x { background: var(--red-soft); color: var(--red); padding: 4px 10px; border-radius: 999px; text-decoration: line-through; }
-  .flow .foot { margin-top: 14px; font-size: 0.76rem; color: var(--ink-faint); text-align: center; }
-
-  /* ---------- FAQ ---------- */
-  .faq { padding: 96px 0; background: var(--paper); }
-  .faq .list { margin-top: 32px; max-width: 760px; margin-left: auto; margin-right: auto; }
-  .faq-item { background: var(--white); border-radius: 16px; margin-bottom: 10px; overflow: hidden; border: 1px solid var(--line); }
-  .faq-item button { width: 100%; text-align: left; border: none; background: none; font-family: inherit; cursor: pointer; padding: 20px 22px; font-size: 1rem; font-weight: 800; color: var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-  .faq-item .arrow { transition: transform 0.25s ease; color: var(--ink-faint); flex: none; }
-  .faq-item.open .arrow { transform: rotate(180deg); }
-  .faq-item .body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-  .faq-item .body p { padding: 0 22px 20px; color: var(--ink-soft); font-size: 0.95rem; }
-
-  /* ---------- bottom CTA ---------- */
-  .bottom-cta { padding: 120px 0; text-align: center; background: radial-gradient(800px 400px at 50% 120%, #1d3b6e 0%, transparent 60%), var(--ink); color: #fff; }
-  .bottom-cta h2 { font-size: clamp(2rem, 5.5vw, 3.6rem); font-weight: 900; letter-spacing: -2px; line-height: 1.15; }
-  .bottom-cta h2 em { font-style: normal; color: #7cb3ff; }
-  .bottom-cta .cta-row { justify-content: center; margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .bottom-cta .note { color: #8ea2c4; margin-top: 18px; font-size: 0.92rem; }
+  /* ---------- final ---------- */
+  .final { padding: 160px 0; text-align: center; position: relative; overflow: hidden; z-index: 1; }
+  .final .orb { position: absolute; left: 50%; top: 50%; width: 900px; height: 900px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(49,130,246,0.35) 0%, transparent 60%); filter: blur(40px); pointer-events: none; }
+  .final h2 { position: relative; font-size: clamp(2.6rem, 8vw, 6rem); font-weight: 900; letter-spacing: -0.05em; line-height: 1; }
+  .final .cta-row { position: relative; margin-top: 44px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .final .note { position: relative; margin-top: 22px; color: var(--fg-3); font-size: 0.92rem; font-weight: 600; }
+  .final .note a { color: var(--fg-2); }
 
   /* ---------- footer ---------- */
-  footer { border-top: 1px solid var(--line); padding: 44px 0 60px; }
+  footer { border-top: 1px solid var(--line); padding: 44px 0 120px; position: relative; z-index: 1; }
   footer .links { margin-bottom: 16px; }
-  footer .links a { color: var(--ink-soft); text-decoration: none; font-size: 0.9rem; margin-right: 20px; font-weight: 600; }
-  footer .links a:hover { color: var(--brand); }
-  footer .biz { color: var(--ink-faint); font-size: 0.83rem; line-height: 1.8; }
+  footer .links a { color: var(--fg-2); text-decoration: none; font-size: 0.9rem; margin-right: 20px; font-weight: 600; }
+  footer .links a:hover { color: var(--fg); }
+  footer .biz { color: var(--fg-3); font-size: 0.83rem; line-height: 1.8; }
 
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+  @media (max-width: 960px) { .visual { aspect-ratio: auto; } .visual.map { aspect-ratio: 1 / 0.86; } .flowv, .ledger { position: relative; inset: auto; } .flowv { padding: 30px 14px; } .flowv .lane { gap: 6px; } .flowv .pipe { width: 22px; } .flowv .node { padding: 14px 4px; } .ledger { padding: 74px 18px 24px; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .r, .words > span, .ledger .row, .ledger .stamp, .card3d { opacity: 1 !important; transform: none !important; } }
 </style>
 </head>
 <body>
@@ -310,132 +303,170 @@
   <div class="wrap">
     <a class="logo" href="#"><span class="mark"></span>서당</a>
     <nav class="gnb">
-      <a href="#ba">전·후</a>
+      <a href="#c1">셔틀</a>
+      <a href="#c2">수강료</a>
+      <a href="#c3">환불</a>
       <a href="#features">기능</a>
       <a href="#compare">비교</a>
-      <a href="#steps">시작 3단계</a>
-      <a href="#faq">FAQ</a>
+      <a href="#steps">시작</a>
       <a class="nav-cta" href="/app/">시작하기</a>
     </nav>
   </div>
 </header>
 
-<div class="m-cta" id="m-cta"><a class="btn btn-primary" href="/app/">무료로 시작하기 <span class="arr">→</span></a></div>
+<div class="float-cta" id="float-cta"><span>파일럿 학원 무료 · 카카오 로그인 30초</span><a class="btn btn-primary" href="/app/">무료로 시작하기 <i class="arr">→</i></a></div>
 
 <!-- ===== HERO ===== -->
-<section class="hero">
+<section class="hero" id="top">
+  <div class="bg"><div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
   <div class="wrap">
     <div>
-      <span class="pill"><span class="dot"></span>2026년 9월 · 파일럿 학원 무료</span>
-      <div class="ask-line">
-        <span class="who">👩‍👧</span>
-        <span class="q" id="ask-q">
-          <span class="on">"셔틀 지금 어디예요?"</span>
-          <span>"오늘 잘 갔나요?"</span>
-          <span>"수강료 카드로 되나요?"</span>
-          <span>"그만두면 얼마 돌려받아요?"</span>
-        </span>
+      <span class="pill r on"><i>✓</i>2026년 9월 · 파일럿 학원 무료</span>
+      <h1 class="words" id="h1">
+        <span>원장님</span> <span>전화기가</span><br>
+        <span><em class="s">조용해집니다.</em></span>
+      </h1>
+      <p class="lead r d3">셔틀 어디예요? 오늘 갔어요? 얼마예요?<br>학부모가 매일 묻던 것, <b style="color:var(--fg)">앱이 먼저 답합니다.</b></p>
+      <div class="cta-row r d4">
+        <a class="btn btn-primary" href="/app/">무료로 시작하기 <i class="arr">→</i></a>
+        <a class="btn btn-ghost" href="#c1">30초 둘러보기</a>
       </div>
-      <h1>원장님 전화기가<br><em>조용해집니다.</em></h1>
-      <p class="lead">학부모가 매일 묻던 것,<br>앱이 먼저 답합니다.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="/app/">무료로 시작하기 <span class="arr">→</span></a>
-        <a class="btn btn-ghost" href="#ba">30초 둘러보기</a>
-      </div>
-      <div class="cta-note"><span>카카오 로그인 30초</span><span>설치비 0원</span><span>문자비 0원</span></div>
+      <div class="meta r d4"><span>카카오 로그인 30초</span><span>설치비 0원</span><span>문자비 0원</span></div>
     </div>
-    <div class="phone-zone">
-      <div class="float-card fc1"><div class="ic">🚌</div><div><b>셔틀에 탑승했어요</b><small>예림 · 래미안 3단지 · 16:12</small></div></div>
-      <div class="float-card fc3"><div class="ic">✅</div><div><b>출석 확인</b><small>수학 A반 · 17:00</small></div></div>
-      <div class="float-card fc2"><div class="ic">💳</div><div><b>9월 수강료 결제 완료</b><small>카드 · 130,000원</small></div></div>
-      <div class="phone">
+    <div class="stage" id="stage">
+      <div class="card3d c1"><div class="ic">🚌</div><div><b>셔틀에 탑승했어요</b><small>예림 · 래미안 3단지 · 16:12</small></div></div>
+      <div class="card3d c2"><div class="ic">💳</div><div><b>9월 수강료 결제 완료</b><small>카드 · 130,000원</small></div></div>
+      <div class="card3d c3"><div class="ic">✅</div><div><b>출석 확인</b><small>수학 A반 · 17:00</small></div></div>
+      <div class="phone" id="phone">
+        <div class="notch"></div>
         <div class="screen">
           <div class="app-bar"><span class="t">셔틀 · 1호차</span><span class="live">운행 중</span></div>
           <div class="app-body">
-            <div class="mystop">
-              <div class="l">우리 아이 정류장</div>
-              <div class="v" id="mystop-v">3번째 <small>약 12분 후 · 16:24</small></div>
-            </div>
+            <div class="mystop"><div class="l">우리 아이 정류장</div><div class="v" id="mystop-v">3번째 <small>약 12분 후 · 16:24</small></div></div>
             <div class="line-card" id="line">
               <div class="bus" id="bus">🚌</div>
-              <div class="stop" data-i="0"><div class="rail"><div class="dot"></div></div><div class="nm">학원 출발</div><div class="eta">16:05</div></div>
-              <div class="stop" data-i="1"><div class="rail"><div class="dot"></div></div><div class="nm">정문 앞</div><div class="eta">16:12</div></div>
-              <div class="stop mine" data-i="2"><div class="rail"><div class="dot"></div></div><div class="nm">래미안 3단지</div><div class="eta">16:24</div></div>
-              <div class="stop" data-i="3"><div class="rail"><div class="dot"></div></div><div class="nm">중앙공원</div><div class="eta">16:31</div></div>
-              <div class="stop" data-i="4"><div class="rail"><div class="dot"></div></div><div class="nm">학원 도착</div><div class="eta">16:40</div></div>
+              <div class="stop"><div class="rail"><div class="dot"></div></div><div class="nm">학원 출발</div><div class="eta">16:05</div></div>
+              <div class="stop"><div class="rail"><div class="dot"></div></div><div class="nm">정문 앞</div><div class="eta">16:12</div></div>
+              <div class="stop mine"><div class="rail"><div class="dot"></div></div><div class="nm">래미안 3단지</div><div class="eta">16:24</div></div>
+              <div class="stop"><div class="rail"><div class="dot"></div></div><div class="nm">중앙공원</div><div class="eta">16:31</div></div>
+              <div class="stop"><div class="rail"><div class="dot"></div></div><div class="nm">학원 도착</div><div class="eta">16:40</div></div>
             </div>
           </div>
+          <div class="toast" id="toast"><div class="ic">🔔</div><div><b id="toast-b">셔틀이 곧 도착해요</b><small id="toast-s">래미안 3단지 · 약 2분 후</small></div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== BIG NUMBERS ===== -->
-<section class="nums">
+<!-- ===== TICKER ===== -->
+<div class="ticker" aria-hidden="true">
+  <div class="track" id="track">
+    <span class="q"><s>"셔틀 지금 어디예요?"</s><span class="a">3번째 · 12분 후</span></span>
+    <span class="q"><s>"오늘 잘 갔나요?"</s><span class="a">출석 17:00</span></span>
+    <span class="q"><s>"수강료 카드로 되나요?"</s><span class="a">앱에서 결제</span></span>
+    <span class="q"><s>"그만두면 얼마 돌려받아요?"</s><span class="a">자동 계산 · 근거 저장</span></span>
+    <span class="q"><s>"이번 달 누가 안 냈지…"</s><span class="a">미납 한 화면</span></span>
+    <span class="q"><s>"휴강 문자 보내야 하는데"</s><span class="a">푸시 0원</span></span>
+    <span class="q"><s>"기사님, 다음 정류장 어디죠?"</s><span class="a">티맵 30곳 한 번에</span></span>
+  </div>
+</div>
+
+<!-- ===== CHAPTER 1 : 셔틀 ===== -->
+<section class="chapter" id="c1">
   <div class="wrap">
-    <div class="grid">
-      <div class="num reveal"><div class="ic">💳</div><div class="n"><span data-count="0">0</span><small>원</small></div><div class="d">서당 결제 수수료</div></div>
-      <div class="num reveal d1"><div class="ic">💬</div><div class="n"><span data-count="0">0</span><small>원</small></div><div class="d">문자·알림톡 비용</div></div>
-      <div class="num reveal d2"><div class="ic">🚌</div><div class="n"><span data-count="30">0</span><small>곳</small></div><div class="d">정류장 길안내 한 번에</div></div>
-      <div class="num reveal d3"><div class="ic">⚖️</div><div class="n"><span data-count="5">0</span><small>일</small></div><div class="d">법정 환불, 기한 안에 자동</div></div>
+    <div class="txt">
+      <div class="num r">01 — 셔틀</div>
+      <h2 class="giant r d1">지금<br><em class="s">12분 후.</em></h2>
+      <p class="one r d2">학부모 앱에 버스 위치와 도착 시각이 노선도처럼 뜹니다. 기사님은 운전만.</p>
+      <div class="was r d3">📞 <s>"셔틀 어디쯤이에요?"</s> 운전 중 전화, 이제 없음</div>
+    </div>
+    <div class="visual map r d2">
+      <svg class="route" viewBox="0 0 760 640" preserveAspectRatio="xMidYMid slice"><g transform="translate(0,110)">
+        <path class="road" d="M 60 320 C 120 220, 220 200, 300 230 S 460 330, 560 240 S 660 110, 700 120"/>
+        <path class="done" d="M 60 320 C 120 220, 220 200, 300 230 S 460 330, 560 240 S 660 110, 700 120"/>
+        <circle class="st" cx="60" cy="320" r="9"/><text x="40" y="358">학원</text>
+        <circle class="st" cx="230" cy="208" r="9"/><text x="200" y="190">정문 앞</text>
+        <circle class="me" cx="400" cy="290" r="11"/><text x="356" y="330">래미안 3단지</text>
+        <circle class="st" cx="580" cy="228" r="9"/><text x="556" y="268">중앙공원</text>
+        <circle class="st" cx="700" cy="120" r="9"/><text x="668" y="102">학원</text>
+        <g class="busdot"><circle r="16" fill="#f4f5f7"/><text x="-9" y="6" style="font-size:17px" fill="#000">🚌</text></g>
+      </g></svg>
+      <div class="eta-badge"><div class="l">우리 아이 정류장</div><div class="v">3번째<small>약 12분 후</small></div></div>
     </div>
   </div>
 </section>
 
-<!-- ===== BEFORE / AFTER ===== -->
-<section class="ba center" id="ba" data-mode="before">
+<!-- ===== CHAPTER 2 : 수강료 ===== -->
+<section class="chapter flip" id="c2">
   <div class="wrap">
-    <span class="eyebrow reveal">Before → After</span>
-    <h2 class="title reveal">원장님의 하루,<br>이렇게 바뀝니다</h2>
-    <div class="toggle reveal d1">
-      <button class="on" data-mode="before">😩 지금</button>
-      <button data-mode="after" class="after">😌 서당</button>
+    <div class="txt">
+      <div class="num r">02 — 수강료</div>
+      <h2 class="giant r d1">자동 청구,<br><em class="s">수수료 0원.</em></h2>
+      <p class="one r d2">수강료 표 한 번이면 매월 자동 청구. 학부모는 앱에서 카드로, 돈은 학원 계좌로 바로.</p>
+      <div class="was r d3">🧾 <s>"이번 달 누가 안 냈지…"</s> 엑셀 대조하는 밤, 이제 없음</div>
     </div>
-    <div class="cards">
-      <div class="bcard reveal d1">
-        <span class="tag">셔틀</span>
-        <div class="v-before"><div class="ic">📞</div><div class="big">"셔틀 어디쯤이에요?"</div><div class="sm">운전 중인 기사님에게 전화</div></div>
-        <div class="v-after"><div class="ic">📍</div><div class="big">3번째 · 12분 후</div><div class="sm">학부모 앱에 노선도처럼 실시간</div></div>
-      </div>
-      <div class="bcard reveal d2">
-        <span class="tag">수강료</span>
-        <div class="v-before"><div class="ic">🧾</div><div class="big">"이번 달 누가 안 냈지…"</div><div class="sm">엑셀 열고 계좌 내역 대조하는 밤</div></div>
-        <div class="v-after"><div class="ic">💳</div><div class="big">자동 청구 → 카드 결제</div><div class="sm">미납은 한 화면에, 돈은 학원 계좌로</div></div>
-      </div>
-      <div class="bcard reveal d3">
-        <span class="tag">환불</span>
-        <div class="v-before"><div class="ic">🤔</div><div class="big">"얼마 돌려드려야 하죠?"</div><div class="sm">감으로 계산하다 분쟁</div></div>
-        <div class="v-after"><div class="ic">⚖️</div><div class="big">법정 기준 자동 계산</div><div class="sm">실제 수업 회차 기준 · 근거 저장</div></div>
+    <div class="visual r d2">
+      <div class="flowv">
+        <div class="zero"><span data-count="0">0</span><small>원</small></div>
+        <div class="cap">서당이 받는 결제 수수료</div>
+        <div class="lane">
+          <div class="node"><div class="ic">👩‍👧</div><b>학부모</b></div><div class="pipe"></div>
+          <div class="node"><div class="ic">💳</div><b>카드사</b></div><div class="pipe"></div>
+          <div class="node"><div class="ic">🏫</div><b>학원 계좌</b></div>
+        </div>
+        <div class="no"><span>서당 몫</span><span>결제사 마진</span><span>카드 단말기</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== BENTO FEATURES ===== -->
-<section class="bento center" id="features">
+<!-- ===== CHAPTER 3 : 환불 ===== -->
+<section class="chapter" id="c3">
   <div class="wrap">
-    <span class="eyebrow reveal">All in one</span>
-    <h2 class="title reveal">학원 하루 전체를<br>한 앱에</h2>
+    <div class="txt">
+      <div class="num r">03 — 환불</div>
+      <h2 class="giant r d1">법대로,<br><em class="s">자동으로.</em></h2>
+      <p class="one r d2">중도 퇴원 환불액을 학원법 시행령 별표 4 기준·실제 수업 회차로 계산하고, 근거를 남깁니다.</p>
+      <div class="was r d3">🤔 <s>"얼마 돌려드려야 하죠?"</s> 감으로 계산하다 분쟁, 이제 없음</div>
+    </div>
+    <div class="visual r d2">
+      <div class="ledger" id="ledger">
+        <div class="stamp">별표 4 기준 · 근거 저장</div>
+        <div class="row"><span class="k">9월 수강료<small>월정액 · 주 2회</small></span><span class="v">130,000원</span></div>
+        <div class="row"><span class="k">실제 수업<small>9회 중 3회 들음</small></span><span class="v">3 / 9회</span></div>
+        <div class="row"><span class="k">들은 만큼 차감<small>단가 14,444원 × 3</small></span><span class="v">− 43,333원</span></div>
+        <div class="row"><span class="k">법정 최소 환불<small>1/3 경과 전 · 2/3</small></span><span class="v">≥ 86,667원</span></div>
+        <div class="row total"><span class="k" style="color:var(--fg)">환불액</span><span class="v">86,667원</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BENTO ===== -->
+<section class="bento" id="features">
+  <div class="wrap">
+    <div class="kicker r">All in one</div>
+    <h2 class="h2 r d1">학원 하루 전체를<br>한 앱에.</h2>
     <div class="grid">
-      <div class="tile blue t-3 reveal"><div class="ic">🚌</div><h3>셔틀 실시간<span class="new">NEW</span></h3><p>기사님 앱에 티맵 내장 · 학부모는 「몇 번째 · 몇 분 후」</p><div class="deco">🚌</div></div>
-      <div class="tile dark t-3 reveal d1"><div class="ic">💳</div><h3>자동 청구 · 카드 결제<span class="new">NEW</span></h3><p>수강료 표 한 번이면 매월 자동 · 단말기 없이 · 수수료 0원</p><div class="deco">💳</div></div>
-      <div class="tile t-2 reveal d1"><div class="ic">✅</div><h3>출결 · 보강</h3><p>탭 한 번 · 결석만 알림</p></div>
-      <div class="tile t-2 reveal d2"><div class="ic">⚖️</div><h3>법정 환불<span class="new">NEW</span></h3><p>회차 기준 자동 · 근거 저장</p></div>
-      <div class="tile t-2 reveal d3"><div class="ic">📅</div><h3>요일별 수강<span class="new">NEW</span></h3><p>주 2회 반에서 토요일만도 OK</p></div>
-      <div class="tile t-2 reveal d2"><div class="ic">👥</div><h3>직원 · 급여</h3><p>출근 체크 하나로 월급·일당·시급</p></div>
-      <div class="tile t-2 reveal d3"><div class="ic">📣</div><h3>공지 · 문의 · 분실물</h3><p>단체 문자방 닫아도 됩니다</p></div>
-      <div class="tile t-2 reveal d4"><div class="ic">📊</div><h3>이탈 신호</h3><p>출석 떨어지면 원장에게 먼저</p></div>
+      <div class="tile hero-t t3 r"><div class="ic">🚌</div><h3>셔틀 실시간<span class="new">NEW</span></h3><p>기사님 앱에 티맵 내장 · 정류장 30곳 한 번에 · 학부모는 「몇 번째 · 몇 분 후」</p><div class="deco">🚌</div></div>
+      <div class="tile t3 r d1"><div class="ic">💳</div><h3>자동 청구 · 카드 결제<span class="new">NEW</span></h3><p>수강료 표 한 번이면 매월 자동 · 단말기 없이 · 수수료 0원</p><div class="deco">💳</div></div>
+      <div class="tile t2 r d1"><div class="ic">✅</div><h3>출결 · 보강</h3><p>탭 한 번 · 결석만 알림</p></div>
+      <div class="tile t2 r d2"><div class="ic">⚖️</div><h3>법정 환불<span class="new">NEW</span></h3><p>회차 기준 자동 · 근거 저장</p></div>
+      <div class="tile t2 r d3"><div class="ic">📅</div><h3>요일별 수강<span class="new">NEW</span></h3><p>주 2회 반에서 토요일만도 OK</p></div>
+      <div class="tile t2 r d2"><div class="ic">👥</div><h3>직원 · 급여</h3><p>출근 체크 하나로 월급·일당·시급</p></div>
+      <div class="tile t2 r d3"><div class="ic">📣</div><h3>공지 · 문의 · 분실물</h3><p>단체 문자방 닫아도 됩니다</p></div>
+      <div class="tile t2 r d4"><div class="ic">📊</div><h3>이탈 신호</h3><p>출석 떨어지면 원장에게 먼저</p></div>
     </div>
   </div>
 </section>
 
 <!-- ===== COMPARE ===== -->
-<section class="cmp center" id="compare">
+<section class="cmp" id="compare">
   <div class="wrap">
-    <span class="eyebrow reveal">Why 서당</span>
-    <h2 class="title reveal">무엇이 다른가요</h2>
-    <div class="tbl reveal d1">
+    <div class="kicker r">Why 서당</div>
+    <h2 class="h2 r d1">무엇이 <em class="s">다른가요.</em></h2>
+    <div class="tbl r d2">
       <table>
         <thead><tr><th></th><th>엑셀·수기</th><th>흔한 방식</th><th class="sd">서당</th></tr></thead>
         <tbody>
@@ -449,75 +480,30 @@
         </tbody>
       </table>
     </div>
-    <p class="note reveal">* 「흔한 방식」은 학원 현장에서 널리 쓰이는 운영 방법을 일반화한 것으로, 특정 회사나 제품을 가리키지 않습니다. 개별 제품의 기능은 각 제품의 안내를 확인해 주세요. 사실과 다른 내용이 있으면 <a href="mailto:contact@seodang.app">contact@seodang.app</a> 으로 알려 주시면 바로잡겠습니다. (2026년 9월 기준)</p>
+    <p class="note r">* 「흔한 방식」은 학원 현장에서 널리 쓰이는 운영 방법을 일반화한 것으로, 특정 회사나 제품을 가리키지 않습니다. 개별 제품의 기능은 각 제품의 안내를 확인해 주세요. 사실과 다른 내용이 있으면 <a href="mailto:contact@seodang.app">contact@seodang.app</a> 으로 알려 주시면 바로잡겠습니다. (2026년 9월 기준)</p>
   </div>
 </section>
 
-<!-- ===== 3 STEPS ===== -->
-<section class="steps center" id="steps">
+<!-- ===== STEPS ===== -->
+<section class="steps" id="steps">
   <div class="wrap">
-    <span class="eyebrow reveal">Start</span>
-    <h2 class="title reveal">시작은 3단계,<br>오늘 끝납니다</h2>
-    <div class="row">
-      <div class="step reveal d1"><div class="n">1</div><span class="ic">💬</span><h3>카카오로 로그인</h3><p>회원가입 없이. PC 웹에서.</p><span class="time">⏱ 30초</span></div>
-      <div class="step reveal d2"><div class="n">2</div><span class="ic">🏫</span><h3>학원 만들기</h3><p>이름 · 반 · 수강료 표. 엑셀 명단은 대신 넣어 드립니다.</p><span class="time">⏱ 10분</span></div>
-      <div class="step reveal d3"><div class="n">3</div><span class="ic">📱</span><h3>학부모는 번호만</h3><p>앱에서 전화번호 확인 → 자녀와 자동 연결. 코드도, 초대장도 없습니다.</p><span class="time">⏱ 1분</span></div>
-    </div>
-    <div class="cta-row reveal d4"><a class="btn btn-primary btn-lg" href="/app/">지금 시작하기 <span class="arr">→</span></a></div>
-  </div>
-</section>
-
-<!-- ===== MONEY ===== -->
-<section class="money" id="money">
-  <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">카드 결제</span>
-      <div class="zero">0<small>원</small></div>
-      <h2 class="title" style="margin-top:10px;">서당이 받는<br>결제 수수료</h2>
-      <ul>
-        <li><b>학원 가맹점 요율 그대로.</b> 중간 결제사 마진 없음</li>
-        <li><b>단말기 불필요.</b> 앱에서 가맹 신청 한 번</li>
-        <li><b>돈은 학원 계좌로 직접.</b> 서당은 결과만 기록</li>
-        <li><b>카드번호는 서당을 거치지 않음.</b> 결제창은 결제선생</li>
-      </ul>
-    </div>
-    <div class="flow reveal d1">
-      <div class="lane">
-        <div class="node"><div class="ic">👩‍👧</div><b>학부모</b></div>
-        <div class="arrow">→</div>
-        <div class="node"><div class="ic">💳</div><b>카드사</b></div>
-        <div class="arrow">→</div>
-        <div class="node"><div class="ic">🏫</div><b>학원 계좌</b></div>
-      </div>
-      <div class="skip">중간에 <span class="x">서당 몫</span> <span class="x">결제사 마진</span> 없음</div>
-      <div class="foot">* 카드 가맹점 수수료율은 학원 매출 구간에 따라 카드사가 정하며 학원이 카드사에 직접 냅니다.</div>
+    <div class="kicker r">Start</div>
+    <h2 class="h2 r d1">시작은 3단계,<br><em class="s">오늘 끝납니다.</em></h2>
+    <div class="row r d2" id="steprow">
+      <div class="step"><div class="n">1</div><span class="ic">💬</span><h3>카카오로 로그인</h3><p>회원가입 없이. PC 웹에서.</p><span class="time">⏱ 30초</span></div>
+      <div class="step"><div class="n">2</div><span class="ic">🏫</span><h3>학원 만들기</h3><p>이름 · 반 · 수강료 표. 엑셀 명단은 대신 넣어 드립니다.</p><span class="time">⏱ 10분</span></div>
+      <div class="step"><div class="n">3</div><span class="ic">📱</span><h3>학부모는 번호만</h3><p>앱에서 전화번호 확인 → 자녀와 자동 연결. 코드도, 초대장도 없습니다.</p><span class="time">⏱ 1분</span></div>
     </div>
   </div>
 </section>
 
-<!-- ===== FAQ ===== -->
-<section class="faq center" id="faq">
+<!-- ===== FINAL ===== -->
+<section class="final" id="download">
+  <div class="orb"></div>
   <div class="wrap">
-    <h2 class="title reveal">자주 묻는 질문</h2>
-    <div class="list reveal">
-      <div class="faq-item"><button>이용 요금이 있나요?<span class="arrow">▾</span></button><div class="body"><p>파일럿 기간에는 무료입니다. 유료 플랜이 도입되더라도 기존 사용 학원에는 충분히 미리 안내합니다. 카드 결제 수수료에 서당 몫은 없습니다.</p></div></div>
-      <div class="faq-item"><button>어떤 학원에 맞나요?<span class="arrow">▾</span></button><div class="body"><p>학생 20~150명 규모의 학원·교습소·스포츠 아카데미(수영·태권도·발레 등). 셔틀을 운행하거나, 요일별 수강이나 회당·횟수권 요금을 쓰는 곳에서 특히 잘 맞습니다.</p></div></div>
-      <div class="faq-item"><button>학부모도 꼭 앱을 설치해야 하나요?<span class="arrow">▾</span></button><div class="body"><p>학원 관리 기능(출결·수강료·반·직원·셔틀 운행)은 학부모 설치 없이도 전부 됩니다. 학부모가 앱을 설치하면 알림·출결·카드 결제·셔틀 위치·보강 신청이 추가로 연결됩니다.</p></div></div>
-      <div class="faq-item"><button>학부모 연결은 어떻게 되나요?<span class="arrow">▾</span></button><div class="body"><p>학부모가 앱에서 카카오로 전화번호를 확인하면, 학원이 등록해 둔 번호와 맞춰 자녀와 자동으로 연결됩니다. 등록된 번호가 없으면 학원을 찾아 등록 신청을 보내고, 원장님이 승인하면 연결됩니다.</p></div></div>
-      <div class="faq-item"><button>기존 엑셀 명단을 옮길 수 있나요?<span class="arrow">▾</span></button><div class="body"><p>네. 명단·반·수강 등록을 사진이나 엑셀로 보내 주시면 대신 넣어 드립니다. 요금 방식(월정액·회당·횟수권)도 그대로 옮겨집니다.</p></div></div>
-      <div class="faq-item"><button>학생 정보는 안전한가요?<span class="arrow">▾</span></button><div class="body"><p>데이터는 국내(AWS 서울)에 저장되고 전송·저장 시 암호화됩니다. 학부모는 본인 자녀만, 직원은 원장이 허용한 범위만 보도록 데이터베이스 수준에서 권한이 나뉩니다. 카드번호는 서당이 보관하지 않습니다.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== BOTTOM CTA ===== -->
-<section class="bottom-cta" id="download">
-  <div class="wrap">
-    <h2 class="reveal">오늘 저녁,<br>전화기가 <em>조용해집니다.</em></h2>
-    <div class="cta-row reveal d1">
-      <a class="btn btn-primary btn-xl" href="/app/">무료로 시작하기 <span class="arr">→</span></a>
-    </div>
-    <p class="note reveal d2">PC 웹 · 카카오 로그인 · 파일럿 학원 무료 &nbsp;|&nbsp; <a href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98" style="color:#cfe0ff;">도입 문의</a></p>
+    <h2 class="r">오늘 저녁,<br>전화기가 <em class="s">조용해집니다.</em></h2>
+    <div class="cta-row r d1"><a class="btn btn-primary btn-xl" href="/app/">무료로 시작하기 <i class="arr">→</i></a></div>
+    <p class="note r d2">PC 웹 · 카카오 로그인 · 파일럿 학원 무료 &nbsp;·&nbsp; <a href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의</a></p>
   </div>
 </section>
 
@@ -537,97 +523,79 @@
 </footer>
 
 <script>
-// ---------- header: 어두운 히어로 위에선 어둡게, 지나면 밝게 ----------
-const hd = document.getElementById('hd');
-const hero = document.querySelector('.hero');
-const mcta = document.getElementById('m-cta');
+// ---------- header glass + floating CTA ----------
+const hd = document.getElementById('hd'), fc = document.getElementById('float-cta');
 addEventListener('scroll', () => {
-  const past = scrollY > hero.offsetHeight - 68;
-  hd.classList.toggle('light', past);
-  mcta.classList.toggle('show', scrollY > 320);
+  hd.classList.toggle('glass', scrollY > 20);
+  fc.classList.toggle('show', scrollY > innerHeight * 0.8 && scrollY < document.body.scrollHeight - innerHeight * 1.6);
 }, { passive: true });
 
-// ---------- scroll reveal ----------
+// ---------- reveal ----------
 const io = new IntersectionObserver((es) => {
   es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}, { threshold: 0.12 });
+document.querySelectorAll('.r, .words, #ledger, #steprow').forEach(el => io.observe(el));
+// 제목 단어를 하나씩
+document.querySelectorAll('.words > span').forEach((s, i) => s.style.transitionDelay = (0.08 + i * 0.12) + 's');
+setTimeout(() => document.getElementById('h1').classList.add('on'), 100);
+setTimeout(() => document.querySelectorAll('.hero .r').forEach(el => el.classList.add('on')), 500);
 
-// ---------- 큰 숫자 카운트업 ----------
+// ---------- 폰 3D: 마우스 따라 기울기 ----------
+(function () {
+  const stage = document.getElementById('stage'), phone = document.getElementById('phone');
+  if (!stage || matchMedia('(hover: none)').matches) return;
+  stage.addEventListener('mousemove', (e) => {
+    const r = stage.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    phone.style.setProperty('--ry', (-12 + x * 22) + 'deg');
+    phone.style.setProperty('--rx', (6 - y * 16) + 'deg');
+  });
+  stage.addEventListener('mouseleave', () => { phone.style.removeProperty('--ry'); phone.style.removeProperty('--rx'); });
+})();
+
+// ---------- 셔틀 목업 + 토스트 ----------
+(function () {
+  const stops = Array.from(document.querySelectorAll('#line .stop'));
+  const bus = document.getElementById('bus'), my = document.getElementById('mystop-v');
+  const toast = document.getElementById('toast'), tb = document.getElementById('toast-b'), ts = document.getElementById('toast-s');
+  const mineIdx = stops.findIndex(s => s.classList.contains('mine'));
+  const etas = ['약 19분 후 · 16:24', '약 12분 후 · 16:24', '약 5분 후 · 16:24', '', ''];
+  const toasts = [null, ['셔틀이 곧 도착해요', '래미안 3단지 · 약 5분 후'], ['예림이가 탑승했어요', '래미안 3단지 · 16:24'], null, ['학원에 도착했어요', '16:40 · 오늘도 안전하게']];
+  let pos = 0;
+  function render() {
+    stops.forEach((s, i) => { s.classList.toggle('passed', i < pos); s.classList.toggle('next', i === pos); });
+    const target = stops[pos], lineTop = document.getElementById('line').getBoundingClientRect().top;
+    bus.style.top = (target.getBoundingClientRect().top - lineTop + (target.offsetHeight - 32) / 2) + 'px';
+    if (pos < mineIdx) my.innerHTML = `${mineIdx - pos + 1}번째 <small>${etas[pos]}</small>`;
+    else if (pos === mineIdx) my.innerHTML = `지금 도착 <small>16:24</small>`;
+    else my.innerHTML = `탑승 완료 <small>학원으로 이동 중</small>`;
+    const t = toasts[pos];
+    if (t) { tb.textContent = t[0]; ts.textContent = t[1]; toast.classList.add('on'); setTimeout(() => toast.classList.remove('on'), 1800); }
+  }
+  render();
+  setInterval(() => { pos = (pos + 1) % stops.length; render(); }, 2400);
+  addEventListener('resize', render);
+})();
+
+// ---------- ticker: 두 벌 이어 붙여 무한 ----------
+(function () { const t = document.getElementById('track'); t.innerHTML += t.innerHTML; })();
+
+// ---------- 카운트업 ----------
 const cio = new IntersectionObserver((es) => {
   es.forEach(e => {
     if (!e.isIntersecting) return;
     const el = e.target, end = +el.dataset.count, t0 = performance.now();
-    (function tick(now) {
-      const p = Math.min(1, (now - t0) / 900);
-      el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) requestAnimationFrame(tick);
-    })(t0);
+    (function tick(now) { const p = Math.min(1, (now - t0) / 900); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); })(t0);
     cio.unobserve(el);
   });
 }, { threshold: 0.5 });
 document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
-// ---------- 히어로: 학부모 질문 순환 ----------
-(function () {
-  const qs = Array.from(document.querySelectorAll('#ask-q span'));
-  let i = 0;
-  setInterval(() => { qs[i].classList.remove('on'); i = (i + 1) % qs.length; qs[i].classList.add('on'); }, 2400);
-})();
-
-// ---------- 셔틀 목업 애니메이션 ----------
-(function () {
-  const stops = Array.from(document.querySelectorAll('#line .stop'));
-  const bus = document.getElementById('bus');
-  const my = document.getElementById('mystop-v');
-  const mineIdx = stops.findIndex(s => s.classList.contains('mine'));
-  const etas = ['약 19분 후 · 16:24', '약 12분 후 · 16:24', '약 5분 후 · 16:24', '', ''];
-  let pos = 0;
-  function render() {
-    stops.forEach((s, i) => { s.classList.toggle('passed', i < pos); s.classList.toggle('next', i === pos); });
-    const target = stops[pos];
-    const lineTop = document.getElementById('line').getBoundingClientRect().top;
-    bus.style.top = (target.getBoundingClientRect().top - lineTop + (target.offsetHeight - 30) / 2) + 'px';
-    if (pos < mineIdx) my.innerHTML = `${mineIdx - pos + 1}번째 <small>${etas[pos]}</small>`;
-    else if (pos === mineIdx) my.innerHTML = `지금 도착 <small>16:24</small>`;
-    else my.innerHTML = `탑승 완료 <small>16:24 · 학원으로 이동 중</small>`;
-  }
-  render();
-  setInterval(() => { pos = (pos + 1) % stops.length; render(); }, 2200);
-  addEventListener('resize', render);
-})();
-
-// ---------- Before / After 토글 (자동 순환 + 클릭) ----------
-(function () {
-  const sec = document.getElementById('ba');
-  const btns = sec.querySelectorAll('.toggle button');
-  let auto = null;
-  function set(mode) {
-    sec.dataset.mode = mode;
-    btns.forEach(b => b.classList.toggle('on', b.dataset.mode === mode));
-    sec.querySelectorAll('.bcard').forEach(c => { c.classList.remove('swap'); void c.offsetWidth; c.classList.add('swap'); });
-  }
-  btns.forEach(b => b.addEventListener('click', () => { clearInterval(auto); set(b.dataset.mode); }));
-  const bio = new IntersectionObserver((es) => {
-    es.forEach(e => {
-      if (!e.isIntersecting) return;
-      setTimeout(() => set('after'), 1800);
-      auto = setInterval(() => set(sec.dataset.mode === 'before' ? 'after' : 'before'), 3600);
-      bio.unobserve(sec);
-    });
-  }, { threshold: 0.4 });
-  bio.observe(sec);
-})();
-
-// ---------- FAQ ----------
-document.querySelectorAll('.faq-item button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement, body = item.querySelector('.body');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.body').style.maxHeight = null; });
-    if (!isOpen) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
-  });
-});
+// ---------- 타일 스포트라이트 ----------
+document.querySelectorAll('.tile').forEach(t => t.addEventListener('mousemove', (e) => {
+  const r = t.getBoundingClientRect();
+  t.style.setProperty('--mx', (e.clientX - r.left) + 'px'); t.style.setProperty('--my', (e.clientY - r.top) + 'px');
+}));
 </script>
 
 </body>
