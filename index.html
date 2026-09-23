@@ -9,12 +9,15 @@
 <meta property="og:description" content="출결·수강료·카드 결제·셔틀 실시간 위치·법정 환불 계산. 작은 학원과 스포츠 교습소를 위한 관리 앱.">
 <meta property="og:url" content="https://seodang.app">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
   :root {
-    --ink: #191c22;
+    --ink: #0f1115;
+    --ink-2: #191c22;
     --ink-soft: #4d525c;
-    --ink-faint: #9298a3;
-    --paper: #f7f8fa;
+    --ink-faint: #8b919c;
+    --paper: #f5f6f8;
     --white: #ffffff;
     --brand: #3182f6;
     --brand-deep: #1b64da;
@@ -23,100 +26,120 @@
     --green-soft: #e7f8f0;
     --red: #e5484d;
     --red-soft: #fdeeee;
-    --amber: #e8a317;
+    --amber: #f0a020;
     --amber-soft: #fff5dc;
-    --line: #e7e9ee;
-    --radius: 18px;
-    --shadow: 0 8px 30px rgba(25, 28, 34, 0.08);
+    --line: #e6e8ed;
+    --radius: 22px;
+    --shadow: 0 10px 34px rgba(15, 17, 21, 0.09);
+    --shadow-lg: 0 30px 70px rgba(15, 17, 21, 0.28);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: 'Apple SD Gothic Neo', 'Pretendard', 'Malgun Gothic', sans-serif;
-    color: var(--ink); background: var(--white); line-height: 1.65;
+    font-family: 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    color: var(--ink); background: var(--white); line-height: 1.55;
     -webkit-font-smoothing: antialiased; overflow-x: hidden;
   }
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
-  h2.title { font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 800; letter-spacing: -0.8px; line-height: 1.35; }
-  p.sub { color: var(--ink-soft); margin-top: 12px; font-size: 1.02rem; }
-  .eyebrow { display: inline-block; font-size: 0.8rem; font-weight: 800; letter-spacing: 1.5px; color: var(--brand); margin-bottom: 12px; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  h2.title { font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -1.2px; line-height: 1.22; }
+  p.sub { color: var(--ink-soft); margin-top: 12px; font-size: 1.05rem; }
+  .eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.8px; color: var(--brand); margin-bottom: 14px; text-transform: uppercase; }
+  .center { text-align: center; }
 
-  /* ---------- scroll reveal ---------- */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(.2,.7,.2,1), transform 0.7s cubic-bezier(.2,.7,.2,1); }
   .reveal.on { opacity: 1; transform: none; }
-  .reveal.d1 { transition-delay: 0.1s; } .reveal.d2 { transition-delay: 0.2s; } .reveal.d3 { transition-delay: 0.3s; }
+  .d1 { transition-delay: 0.08s; } .d2 { transition-delay: 0.16s; } .d3 { transition-delay: 0.24s; } .d4 { transition-delay: 0.32s; } .d5 { transition-delay: 0.4s; }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 16px 30px; border-radius: 16px; text-decoration: none; font-weight: 800; font-size: 1.05rem;
+    border: none; cursor: pointer; white-space: nowrap;
+    transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s;
+  }
+  .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 10px 26px rgba(49, 130, 246, 0.38); }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--brand-deep); box-shadow: 0 14px 32px rgba(49, 130, 246, 0.45); }
+  .btn-primary .arr { transition: transform 0.18s; }
+  .btn-primary:hover .arr { transform: translateX(4px); }
+  .btn-ghost { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.18); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+  .btn-lg { padding: 20px 40px; font-size: 1.2rem; border-radius: 20px; }
+  .btn-xl { padding: 24px 52px; font-size: 1.35rem; border-radius: 22px; }
 
   /* ---------- header ---------- */
   header {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(12px);
-    border-bottom: 1px solid transparent; transition: border-color 0.3s;
+    position: sticky; top: 0; z-index: 60;
+    background: rgba(15, 17, 21, 0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    color: #fff; transition: background 0.3s, border-color 0.3s; border-bottom: 1px solid transparent;
   }
-  header.scrolled { border-bottom-color: var(--line); }
-  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .logo { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.5px; text-decoration: none; color: var(--ink); display: flex; align-items: center; gap: 8px; }
-  .logo .mark { width: 26px; height: 26px; border-radius: 7px; background: #504E48; display: inline-block; }
-  nav.gnb { display: flex; gap: 4px; }
-  nav.gnb a {
-    color: var(--ink-soft); text-decoration: none; font-size: 0.93rem; font-weight: 600;
-    padding: 8px 14px; border-radius: 10px; transition: background 0.15s, color 0.15s;
+  header.light { background: rgba(255,255,255,0.85); color: var(--ink); border-bottom-color: var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.6px; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 9px; }
+  .logo .mark { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #3182f6, #7cb3ff); display: inline-block; }
+  nav.gnb { display: flex; gap: 2px; align-items: center; }
+  nav.gnb a { color: inherit; opacity: 0.75; text-decoration: none; font-size: 0.93rem; font-weight: 600; padding: 8px 13px; border-radius: 10px; }
+  nav.gnb a:hover { opacity: 1; }
+  .nav-cta { background: var(--brand); color: #fff !important; opacity: 1 !important; border-radius: 12px; padding: 10px 20px !important; font-weight: 800 !important; margin-left: 8px; box-shadow: 0 6px 16px rgba(49,130,246,0.35); }
+  .nav-cta:hover { background: var(--brand-deep); }
+  @media (max-width: 760px) { nav.gnb a:not(.nav-cta) { display: none; } }
+
+  /* ---------- mobile sticky CTA ---------- */
+  .m-cta {
+    display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); border-top: 1px solid var(--line);
+    transform: translateY(110%); transition: transform 0.3s;
   }
-  nav.gnb a:hover { background: var(--brand-soft); color: var(--brand-deep); }
-  .nav-cta { background: var(--ink); color: #fff !important; border-radius: 12px; padding: 9px 18px !important; }
-  .nav-cta:hover { background: var(--brand) !important; color: #fff !important; }
-  @media (max-width: 720px) { nav.gnb a:not(.nav-cta) { display: none; } }
+  .m-cta.show { transform: none; }
+  .m-cta .btn { width: 100%; }
+  @media (max-width: 760px) { .m-cta { display: block; } body { padding-bottom: 76px; } }
 
   /* ---------- hero ---------- */
-  .hero { padding: 64px 0 24px; }
-  .hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center; }
-  @media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
-  .hero .badge {
-    display: inline-flex; align-items: center; gap: 8px; background: var(--brand-soft); color: var(--brand-deep);
-    font-size: 0.85rem; font-weight: 700; padding: 7px 16px; border-radius: 999px; margin-bottom: 22px;
+  .hero {
+    background: radial-gradient(1200px 600px at 20% -10%, #1d3b6e 0%, transparent 60%),
+                radial-gradient(900px 500px at 100% 100%, #14305a 0%, transparent 55%), var(--ink);
+    color: #fff; padding: 72px 0 40px; position: relative; overflow: hidden;
   }
-  .hero .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); animation: pulse 1.8s infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.4; transform: scale(0.8);} }
-  .hero h1 { font-size: clamp(2.1rem, 5.2vw, 3.3rem); font-weight: 800; letter-spacing: -1.8px; line-height: 1.2; }
-  .hero h1 em { font-style: normal; color: var(--brand); }
-  .hero p.lead { margin-top: 20px; color: var(--ink-soft); font-size: 1.1rem; max-width: 480px; }
-  .hero p.lead b { color: var(--ink); font-weight: 700; }
-  .ask { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
-  .ask span {
-    background: var(--paper); border: 1px solid var(--line); border-radius: 999px;
-    padding: 6px 14px; font-size: 0.86rem; font-weight: 600; color: var(--ink-soft);
-  }
-  .ask span::before { content: '“'; color: var(--ink-faint); } .ask span::after { content: '”'; color: var(--ink-faint); }
-  .cta-row { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 14px;
-    text-decoration: none; font-weight: 700; font-size: 1rem; border: none; cursor: pointer;
-    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s;
-  }
-  .btn-primary { background: var(--brand); color: #fff; box-shadow: 0 6px 18px rgba(49, 130, 246, 0.3); }
-  .btn-primary:hover { transform: translateY(-2px); background: var(--brand-deep); }
-  .btn-ghost { background: var(--paper); color: var(--ink); border: 1px solid var(--line); }
-  .btn-ghost:hover { background: var(--brand-soft); }
-  .cta-note { margin-top: 12px; font-size: 0.85rem; color: var(--ink-faint); }
+  .hero::after { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.06)'/%3E%3C/svg%3E"); pointer-events: none; }
+  .hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+  @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; } .hero { padding: 48px 0 24px; } }
+  .pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); color: #cfe0ff; font-size: 0.84rem; font-weight: 700; padding: 7px 14px; border-radius: 999px; }
+  .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #5fd39a; box-shadow: 0 0 0 0 rgba(95,211,154,0.6); animation: ping 1.8s infinite; }
+  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(95,211,154,0.6);} 100% { box-shadow: 0 0 0 10px rgba(95,211,154,0);} }
 
-  /* ---------- shuttle mockup ---------- */
-  .phone-zone { position: relative; display: flex; justify-content: center; padding: 20px 0; }
+  /* rotating parent question */
+  .ask-line { margin-top: 26px; height: 2.2rem; display: flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 600; color: #b7c6e0; }
+  .ask-line .who { font-size: 1.4rem; }
+  .ask-line .q { position: relative; display: inline-block; min-width: 12ch; }
+  .ask-line .q span { position: absolute; left: 0; top: 0; white-space: nowrap; opacity: 0; transform: translateY(10px); transition: opacity 0.35s, transform 0.35s; }
+  .ask-line .q span.on { opacity: 1; transform: none; }
+  .hero h1 { margin-top: 12px; font-size: clamp(2.5rem, 6.4vw, 4.4rem); font-weight: 900; letter-spacing: -2.4px; line-height: 1.08; }
+  .hero h1 em { font-style: normal; color: #7cb3ff; }
+  .hero p.lead { margin-top: 18px; color: #b7c6e0; font-size: 1.15rem; max-width: 460px; font-weight: 500; }
+  .hero .cta-row { margin-top: 34px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .hero .cta-note { margin-top: 14px; font-size: 0.9rem; color: #8ea2c4; display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero .cta-note span::before { content: '✓ '; color: #5fd39a; font-weight: 800; }
+
+  /* ---------- phone mockup ---------- */
+  .phone-zone { position: relative; display: flex; justify-content: center; padding: 24px 0 10px; }
   .phone {
-    width: 300px; background: var(--ink); border-radius: 38px; padding: 10px;
-    box-shadow: 0 24px 60px rgba(25, 28, 34, 0.25); position: relative; z-index: 2;
+    width: 300px; background: #0b0d11; border-radius: 42px; padding: 10px; position: relative; z-index: 2;
+    box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255,255,255,0.08);
+    animation: hover 5s ease-in-out infinite;
   }
-  .screen { background: var(--paper); border-radius: 30px; overflow: hidden; }
-  .app-bar { background: var(--white); padding: 16px 18px 12px; display: flex; justify-content: space-between; align-items: center; }
+  @keyframes hover { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-8px);} }
+  .screen { background: var(--paper); border-radius: 33px; overflow: hidden; color: var(--ink); }
+  .app-bar { background: var(--white); padding: 18px 18px 12px; display: flex; justify-content: space-between; align-items: center; }
   .app-bar .t { font-weight: 800; font-size: 0.98rem; }
   .app-bar .live { font-size: 0.68rem; font-weight: 800; color: var(--green); display: flex; align-items: center; gap: 5px; }
   .app-bar .live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.4; transform: scale(0.8);} }
   .app-body { padding: 12px 14px 18px; }
-  .mystop {
-    background: var(--brand); color: #fff; border-radius: 14px; padding: 12px 14px; margin-bottom: 12px;
-  }
-  .mystop .l { font-size: 0.68rem; opacity: 0.8; font-weight: 700; }
-  .mystop .v { font-size: 1.05rem; font-weight: 800; margin-top: 2px; }
-  .mystop .v small { font-size: 0.78rem; font-weight: 600; opacity: 0.9; margin-left: 6px; }
-  .line-card { background: var(--white); border-radius: 14px; padding: 12px 14px 8px; box-shadow: 0 2px 8px rgba(25,28,34,0.05); position: relative; }
+  .mystop { background: var(--brand); color: #fff; border-radius: 16px; padding: 14px 16px; margin-bottom: 12px; }
+  .mystop .l { font-size: 0.7rem; opacity: 0.8; font-weight: 700; }
+  .mystop .v { font-size: 1.25rem; font-weight: 900; margin-top: 2px; letter-spacing: -0.5px; }
+  .mystop .v small { font-size: 0.78rem; font-weight: 600; opacity: 0.9; margin-left: 6px; letter-spacing: 0; }
+  .line-card { background: var(--white); border-radius: 16px; padding: 12px 14px 8px; box-shadow: 0 2px 8px rgba(25,28,34,0.05); position: relative; }
   .stop { display: flex; align-items: center; gap: 12px; height: 38px; position: relative; }
   .stop .rail { width: 18px; display: flex; justify-content: center; position: relative; align-self: stretch; }
   .stop .rail::before { content: ''; position: absolute; top: 0; bottom: 0; width: 3px; background: var(--line); }
@@ -126,7 +149,6 @@
   .stop .eta { font-size: 0.75rem; color: var(--ink-faint); font-weight: 600; transition: all 0.4s; }
   .stop.passed .dot { border-color: var(--line); background: var(--line); }
   .stop.passed .nm { color: var(--ink-faint); text-decoration: line-through; font-weight: 500; }
-  .stop.passed .eta { color: var(--ink-faint); }
   .stop.next .dot { border-color: var(--brand); background: var(--brand); box-shadow: 0 0 0 5px var(--brand-soft); }
   .stop.next .nm { color: var(--brand-deep); }
   .stop.next .eta { color: var(--brand); font-weight: 800; }
@@ -134,145 +156,143 @@
   .bus {
     position: absolute; left: 14px; width: 30px; height: 30px; border-radius: 10px; background: var(--ink); color: #fff;
     display: flex; align-items: center; justify-content: center; font-size: 0.95rem; z-index: 3;
-    box-shadow: 0 4px 12px rgba(25,28,34,0.3); transition: top 0.9s cubic-bezier(.4,.1,.2,1);
-    transform: translateX(-6px);
+    box-shadow: 0 4px 12px rgba(25,28,34,0.3); transition: top 0.9s cubic-bezier(.4,.1,.2,1); transform: translateX(-6px);
   }
   .float-card {
-    position: absolute; background: var(--white); border-radius: 14px; box-shadow: var(--shadow);
+    position: absolute; background: var(--white); color: var(--ink); border-radius: 16px; box-shadow: var(--shadow-lg);
     padding: 12px 16px; font-size: 0.8rem; z-index: 3; display: flex; gap: 10px; align-items: center;
     opacity: 0; animation: floatIn 0.8s forwards ease;
   }
-  .float-card .ic { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
-  .float-card b { display: block; font-size: 0.82rem; }
+  .float-card .ic { width: 36px; height: 36px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .float-card b { display: block; font-size: 0.84rem; }
   .float-card small { color: var(--ink-faint); font-size: 0.72rem; }
-  .fc1 { top: 6%; left: -6%; animation-delay: 0.5s; } .fc1 .ic { background: var(--green-soft); }
-  .fc2 { bottom: 10%; right: -8%; animation-delay: 1s; } .fc2 .ic { background: var(--brand-soft); }
+  .fc1 { top: 8%; left: -4%; animation-delay: 0.6s; } .fc1 .ic { background: var(--green-soft); }
+  .fc2 { bottom: 12%; right: -6%; animation-delay: 1.2s; } .fc2 .ic { background: var(--brand-soft); }
+  .fc3 { top: 46%; right: -10%; animation-delay: 1.8s; } .fc3 .ic { background: var(--amber-soft); }
   @keyframes floatIn { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: none;} }
-  @media (max-width: 480px) { .fc1 { left: 0; } .fc2 { right: 0; } }
+  @media (max-width: 480px) { .fc1 { left: 0; } .fc2, .fc3 { right: 0; } }
 
-  /* ---------- stat strip ---------- */
-  .stats { padding: 28px 0 56px; }
-  .stats .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-  .stat { background: var(--paper); border-radius: 16px; padding: 20px 22px; }
-  .stat .n { font-size: 1.9rem; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
-  .stat .n small { font-size: 1rem; font-weight: 700; margin-left: 2px; }
-  .stat .d { margin-top: 6px; font-size: 0.86rem; color: var(--ink-soft); }
-  .stat .d b { color: var(--ink); }
+  /* ---------- big numbers ---------- */
+  .nums { background: var(--ink); color: #fff; padding: 28px 0 72px; }
+  .nums .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 860px) { .nums .grid { grid-template-columns: repeat(2, 1fr); } }
+  .num { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px 22px; }
+  .num .ic { font-size: 1.5rem; }
+  .num .n { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-top: 8px; }
+  .num .n small { font-size: 1.1rem; font-weight: 800; margin-left: 3px; letter-spacing: 0; }
+  .num .d { margin-top: 6px; font-size: 0.9rem; color: #b7c6e0; font-weight: 600; }
 
-  /* ---------- pain strip ---------- */
-  .pain { background: var(--ink); color: #fff; padding: 68px 0; }
-  .pain h2 { text-align: center; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -0.5px; }
-  .pain .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 40px; }
-  .pain .card {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: var(--radius); padding: 26px 24px;
-  }
-  .pain .card .q { font-size: 1rem; font-weight: 700; line-height: 1.5; }
-  .pain .card .a { margin-top: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.65); }
-  .pain .card .a b { color: #8fb8ff; }
+  /* ---------- before / after ---------- */
+  .ba { padding: 96px 0; }
+  .ba .toggle { display: inline-flex; background: var(--paper); border-radius: 999px; padding: 5px; margin-top: 28px; gap: 4px; position: relative; }
+  .ba .toggle button { border: none; background: transparent; font-family: inherit; font-size: 1rem; font-weight: 800; padding: 12px 30px; border-radius: 999px; cursor: pointer; color: var(--ink-faint); transition: all 0.2s; }
+  .ba .toggle button.on { background: var(--ink); color: #fff; }
+  .ba .toggle button.on.after { background: var(--brand); }
+  .ba .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
+  @media (max-width: 860px) { .ba .cards { grid-template-columns: 1fr; } }
+  .bcard { border-radius: var(--radius); padding: 30px 26px; min-height: 230px; position: relative; overflow: hidden; transition: background 0.4s, color 0.4s; text-align: left; }
+  .bcard .ic { font-size: 2.4rem; line-height: 1; }
+  .bcard .big { font-size: 1.45rem; font-weight: 900; letter-spacing: -0.8px; line-height: 1.25; margin-top: 18px; transition: opacity 0.3s, transform 0.3s; }
+  .bcard .sm { margin-top: 10px; font-size: 0.95rem; font-weight: 600; opacity: 0.7; }
+  .bcard .tag { position: absolute; top: 18px; right: 18px; font-size: 0.7rem; font-weight: 900; letter-spacing: 1px; padding: 5px 11px; border-radius: 999px; }
+  .ba[data-mode="before"] .bcard { background: var(--red-soft); color: #7a1f22; }
+  .ba[data-mode="before"] .bcard .tag { background: #fff; color: var(--red); }
+  .ba[data-mode="after"] .bcard { background: var(--ink); color: #fff; }
+  .ba[data-mode="after"] .bcard .tag { background: var(--brand); color: #fff; }
+  .bcard .v-before, .bcard .v-after { transition: opacity 0.35s, transform 0.35s; }
+  .ba[data-mode="before"] .v-after, .ba[data-mode="after"] .v-before { display: none; }
+  .ba .swap { animation: swapIn 0.4s ease; }
+  @keyframes swapIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: none;} }
 
+  /* ---------- bento features ---------- */
+  .bento { padding: 96px 0; background: var(--paper); }
+  .bento .grid { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 200px; gap: 14px; margin-top: 40px; }
+  .tile { background: var(--white); border-radius: var(--radius); padding: 26px; position: relative; overflow: hidden; text-align: left; box-shadow: 0 1px 2px rgba(15,17,21,0.04); transition: transform 0.18s, box-shadow 0.18s; }
+  .tile:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .tile .ic { width: 50px; height: 50px; border-radius: 15px; background: var(--paper); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+  .tile h3 { font-size: 1.3rem; font-weight: 900; letter-spacing: -0.6px; margin-top: 16px; }
+  .tile p { color: var(--ink-soft); font-size: 0.93rem; margin-top: 6px; font-weight: 500; }
+  .tile .new { display: inline-block; font-size: 0.64rem; font-weight: 900; color: var(--brand); background: var(--brand-soft); padding: 3px 8px; border-radius: 999px; margin-left: 8px; vertical-align: middle; letter-spacing: 0.5px; }
+  .tile.dark { background: var(--ink); color: #fff; }
+  .tile.dark p { color: #b7c6e0; }
+  .tile.dark .ic { background: rgba(255,255,255,0.1); }
+  .tile.blue { background: var(--brand); color: #fff; }
+  .tile.blue p { color: #dbe9ff; }
+  .tile.blue .ic { background: rgba(255,255,255,0.18); }
+  .tile.blue .new { background: #fff; }
+  .t-3 { grid-column: span 3; } .t-2 { grid-column: span 2; } .t-4 { grid-column: span 4; }
+  .tile .deco { position: absolute; right: -10px; bottom: -14px; font-size: 7rem; opacity: 0.1; line-height: 1; pointer-events: none; }
+  @media (max-width: 860px) { .bento .grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; } .t-3, .t-2, .t-4 { grid-column: span 1; } .tile { min-height: 180px; } }
+  @media (max-width: 520px) { .bento .grid { grid-template-columns: 1fr; } }
 
   /* ---------- compare table ---------- */
-  .cmp { padding: 84px 0; background: var(--paper); }
-  .cmp .tbl { margin-top: 36px; background: var(--white); border-radius: 22px; box-shadow: var(--shadow); overflow: hidden; }
+  .cmp { padding: 96px 0; }
+  .cmp .tbl { margin-top: 36px; background: var(--white); border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; border: 1px solid var(--line); }
   .cmp table { width: 100%; border-collapse: collapse; }
-  .cmp th, .cmp td { padding: 16px 18px; text-align: center; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
-  .cmp th { font-size: 0.85rem; font-weight: 700; color: var(--ink-faint); background: var(--paper); letter-spacing: 0.3px; }
-  .cmp th.sd { color: var(--brand); background: var(--brand-soft); font-size: 1rem; }
-  .cmp td:first-child, .cmp th:first-child { text-align: left; font-weight: 700; }
-  .cmp td:first-child small { display: block; font-weight: 500; color: var(--ink-faint); font-size: 0.78rem; margin-top: 2px; }
-  .cmp td.sd { background: rgba(49,130,246,0.05); font-weight: 800; color: var(--brand-deep); }
+  .cmp th, .cmp td { padding: 18px 16px; text-align: center; border-bottom: 1px solid var(--line); font-size: 1rem; }
+  .cmp th { font-size: 0.85rem; font-weight: 800; color: var(--ink-faint); background: var(--paper); letter-spacing: 0.5px; }
+  .cmp th.sd { color: #fff; background: var(--brand); font-size: 1rem; }
+  .cmp td:first-child, .cmp th:first-child { text-align: left; font-weight: 800; }
+  .cmp td:first-child .ic { margin-right: 8px; }
+  .cmp td.sd { background: rgba(49,130,246,0.06); font-weight: 900; color: var(--brand-deep); }
   .cmp tr:last-child td { border-bottom: none; }
-  .cmp .y { color: var(--green); font-weight: 800; }
-  .cmp .n { color: var(--ink-faint); }
-  .cmp .m { color: #d98a00; font-weight: 700; }
-  .cmp .note { margin-top: 14px; font-size: 0.8rem; color: var(--ink-faint); text-align: center; }
-  @media (max-width: 720px) { .cmp th, .cmp td { padding: 12px 10px; font-size: 0.85rem; } }
+  .cmp .x { color: var(--ink-faint); font-size: 1.1rem; }
+  .cmp .tri { color: #d98a00; font-weight: 800; }
+  .cmp .ok { display: inline-flex; align-items: center; gap: 6px; }
+  .cmp .ok::before { content: '✓'; width: 22px; height: 22px; border-radius: 50%; background: var(--brand); color: #fff; font-size: 0.8rem; display: inline-flex; align-items: center; justify-content: center; }
+  .cmp .note { margin-top: 14px; font-size: 0.78rem; color: var(--ink-faint); text-align: center; }
+  @media (max-width: 720px) { .cmp th, .cmp td { padding: 13px 8px; font-size: 0.85rem; } .cmp td:first-child .ic { display: block; margin: 0 0 2px; } }
 
-  /* ---------- owner-only ---------- */
-  .owner { padding: 84px 0; }
-  .owner .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 36px; }
-  .ocard { border: 1.5px solid var(--line); border-radius: var(--radius); padding: 22px 22px; background: var(--white); text-align: left; position: relative; }
-  .ocard .lock { position: absolute; top: 16px; right: 16px; font-size: 0.66rem; font-weight: 800; color: var(--brand); background: var(--brand-soft); padding: 3px 9px; border-radius: 999px; }
-  .ocard h3 { font-size: 1rem; font-weight: 700; padding-right: 60px; }
-  .ocard p { margin-top: 8px; color: var(--ink-soft); font-size: 0.9rem; }
-  .owner .why { margin-top: 28px; background: var(--paper); border-radius: 16px; padding: 18px 22px; font-size: 0.92rem; color: var(--ink-soft); }
-  .owner .why b { color: var(--ink); }
+  /* ---------- 3 steps ---------- */
+  .steps { padding: 96px 0; background: var(--ink); color: #fff; }
+  .steps .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; position: relative; }
+  @media (max-width: 860px) { .steps .row { grid-template-columns: 1fr; } }
+  .step { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: var(--radius); padding: 30px 26px; text-align: left; position: relative; }
+  .step .n { width: 40px; height: 40px; border-radius: 12px; background: var(--brand); color: #fff; font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .step .ic { position: absolute; top: 22px; right: 22px; font-size: 2rem; opacity: 0.9; }
+  .step h3 { font-size: 1.35rem; font-weight: 900; letter-spacing: -0.6px; margin-top: 20px; }
+  .step p { color: #b7c6e0; margin-top: 8px; font-size: 0.95rem; font-weight: 500; }
+  .step .time { display: inline-block; margin-top: 16px; font-size: 0.78rem; font-weight: 800; color: #5fd39a; background: rgba(95,211,154,0.12); padding: 4px 10px; border-radius: 999px; }
+  .steps .cta-row { margin-top: 40px; display: flex; justify-content: center; }
 
-  /* ---------- feature tabs ---------- */
-  .features { padding: 84px 0; }
-  .tab-switch { display: inline-flex; background: var(--paper); border-radius: 14px; padding: 5px; margin-top: 28px; gap: 4px; }
-  .tab-switch button {
-    border: none; background: transparent; font-family: inherit; font-size: 0.95rem; font-weight: 700;
-    padding: 10px 26px; border-radius: 10px; cursor: pointer; color: var(--ink-faint); transition: all 0.15s;
-  }
-  .tab-switch button.on { background: var(--white); color: var(--ink); box-shadow: 0 2px 8px rgba(25,28,34,0.08); }
-  .tab-panel { display: none; margin-top: 36px; }
-  .tab-panel.on { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; animation: fadeUp 0.45s ease; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px);} to { opacity: 1; transform: none;} }
-  .fcard { background: var(--paper); border-radius: var(--radius); padding: 28px 24px; text-align: left; transition: transform 0.15s ease, box-shadow 0.15s ease; }
-  .fcard:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
-  .fcard .ico { width: 46px; height: 46px; border-radius: 13px; background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; box-shadow: 0 2px 8px rgba(25,28,34,0.06); }
-  .fcard h3 { margin: 16px 0 8px; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.3px; }
-  .fcard.hi { background: var(--ink); color: #fff; }
-  .fcard.hi p { color: rgba(255,255,255,0.72); }
-  .fcard.hi .ico { background: rgba(255,255,255,0.1); box-shadow: none; }
-  .fcard.hi .new { background: #fff; }
-  .fcard p { color: var(--ink-soft); font-size: 0.92rem; }
-  .fcard .new { display: inline-block; font-size: 0.66rem; font-weight: 800; color: var(--brand); background: var(--brand-soft); padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
-
-  /* ---------- money section ---------- */
-  .money { padding: 84px 0; }
+  /* ---------- money ---------- */
+  .money { padding: 96px 0; }
   .money .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
   @media (max-width: 860px) { .money .wrap { grid-template-columns: 1fr; } }
-  .money ul.points { margin-top: 22px; list-style: none; }
-  .money ul.points li { display: flex; gap: 12px; padding: 10px 0; font-size: 0.97rem; color: var(--ink-soft); }
-  .money ul.points li::before { content: '✓'; flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--green-soft); color: var(--green); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
-  .money ul.points li b { color: var(--ink); }
-  .compare { background: var(--paper); border-radius: 22px; padding: 26px; }
-  .compare .row { display: grid; grid-template-columns: 1.1fr 1fr; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
-  .compare .row:last-child { border-bottom: none; }
-  .compare .row .k { font-weight: 700; font-size: 0.95rem; }
-  .compare .row .k small { display: block; font-weight: 500; color: var(--ink-faint); font-size: 0.78rem; margin-top: 2px; }
-  .compare .row .v { text-align: right; font-weight: 800; font-size: 1.15rem; letter-spacing: -0.5px; }
-  .compare .row .v.good { color: var(--green); }
-  .compare .row .v.bad { color: var(--ink-faint); text-decoration: line-through; font-weight: 600; font-size: 1rem; }
-  .compare .foot { margin-top: 12px; font-size: 0.78rem; color: var(--ink-faint); }
-
-  /* ---------- parents ---------- */
-  .parents { padding: 84px 0; background: var(--paper); }
-  .parents .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 40px; }
-  .pcard { background: var(--white); border-radius: var(--radius); padding: 28px 24px; position: relative; overflow: hidden; text-align: left; }
-  .pcard .num { position: absolute; top: 14px; right: 20px; font-size: 3rem; font-weight: 800; color: var(--paper); z-index: 0; }
-  .pcard h3 { font-size: 1.05rem; font-weight: 700; position: relative; }
-  .pcard p { margin-top: 8px; color: var(--ink-soft); font-size: 0.92rem; position: relative; }
-  .pcard .code {
-    display: inline-block; margin-top: 14px; background: var(--ink); color: #9dff9d; font-family: 'SF Mono', 'Menlo', monospace;
-    font-size: 0.85rem; padding: 7px 14px; border-radius: 9px; letter-spacing: 1px;
-  }
+  .money .zero { font-size: clamp(5rem, 14vw, 9rem); font-weight: 900; letter-spacing: -6px; line-height: 0.95; color: var(--brand); }
+  .money .zero small { font-size: 0.3em; letter-spacing: -1px; margin-left: 6px; color: var(--ink); }
+  .money ul { list-style: none; margin-top: 22px; }
+  .money li { display: flex; gap: 12px; padding: 10px 0; font-size: 1.02rem; font-weight: 600; color: var(--ink-soft); align-items: center; }
+  .money li::before { content: '✓'; flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--green-soft); color: var(--green); font-weight: 900; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+  .money li b { color: var(--ink); }
+  .flow { background: var(--paper); border-radius: 24px; padding: 30px; }
+  .flow .lane { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .flow .node { flex: 1; background: var(--white); border-radius: 16px; padding: 16px 10px; text-align: center; box-shadow: 0 1px 3px rgba(15,17,21,0.06); }
+  .flow .node .ic { font-size: 1.8rem; }
+  .flow .node b { display: block; font-size: 0.88rem; margin-top: 6px; }
+  .flow .arrow { flex: none; color: var(--brand); font-weight: 900; font-size: 1.3rem; position: relative; }
+  .flow .arrow::after { content: '₩'; position: absolute; left: 50%; top: -20px; transform: translateX(-50%); font-size: 0.85rem; color: var(--green); font-weight: 900; animation: coin 1.6s infinite; }
+  @keyframes coin { 0% { opacity: 0; transform: translate(-50%, 4px);} 40% { opacity: 1;} 100% { opacity: 0; transform: translate(-50%, -8px);} }
+  .flow .skip { margin-top: 18px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.9rem; font-weight: 700; color: var(--ink-faint); }
+  .flow .skip .x { background: var(--red-soft); color: var(--red); padding: 4px 10px; border-radius: 999px; text-decoration: line-through; }
+  .flow .foot { margin-top: 14px; font-size: 0.76rem; color: var(--ink-faint); text-align: center; }
 
   /* ---------- FAQ ---------- */
-  .faq { padding: 84px 0; }
-  .faq .list { margin-top: 36px; max-width: 760px; }
-  .faq-item { background: var(--paper); border-radius: 14px; margin-bottom: 10px; overflow: hidden; }
-  .faq-item button {
-    width: 100%; text-align: left; border: none; background: none; font-family: inherit; cursor: pointer;
-    padding: 20px 22px; font-size: 0.98rem; font-weight: 700; color: var(--ink);
-    display: flex; justify-content: space-between; align-items: center; gap: 12px;
-  }
+  .faq { padding: 96px 0; background: var(--paper); }
+  .faq .list { margin-top: 32px; max-width: 760px; margin-left: auto; margin-right: auto; }
+  .faq-item { background: var(--white); border-radius: 16px; margin-bottom: 10px; overflow: hidden; border: 1px solid var(--line); }
+  .faq-item button { width: 100%; text-align: left; border: none; background: none; font-family: inherit; cursor: pointer; padding: 20px 22px; font-size: 1rem; font-weight: 800; color: var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
   .faq-item .arrow { transition: transform 0.25s ease; color: var(--ink-faint); flex: none; }
   .faq-item.open .arrow { transform: rotate(180deg); }
   .faq-item .body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-  .faq-item .body p { padding: 0 22px 20px; color: var(--ink-soft); font-size: 0.93rem; }
+  .faq-item .body p { padding: 0 22px 20px; color: var(--ink-soft); font-size: 0.95rem; }
 
   /* ---------- bottom CTA ---------- */
-  .bottom-cta { padding: 96px 0; text-align: center; background: var(--ink); color: #fff; }
-  .bottom-cta h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; letter-spacing: -1px; line-height: 1.35; }
-  .bottom-cta p { color: rgba(255,255,255,0.7); margin-top: 14px; }
-  .bottom-cta .cta-row { justify-content: center; }
-  .bottom-cta .btn-ghost { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.2); }
-  .bottom-cta .btn-ghost:hover { background: rgba(255,255,255,0.14); }
-  .bottom-cta .cta-note { color: rgba(255,255,255,0.5); }
+  .bottom-cta { padding: 120px 0; text-align: center; background: radial-gradient(800px 400px at 50% 120%, #1d3b6e 0%, transparent 60%), var(--ink); color: #fff; }
+  .bottom-cta h2 { font-size: clamp(2rem, 5.5vw, 3.6rem); font-weight: 900; letter-spacing: -2px; line-height: 1.15; }
+  .bottom-cta h2 em { font-style: normal; color: #7cb3ff; }
+  .bottom-cta .cta-row { justify-content: center; margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .bottom-cta .note { color: #8ea2c4; margin-top: 18px; font-size: 0.92rem; }
 
   /* ---------- footer ---------- */
   footer { border-top: 1px solid var(--line); padding: 44px 0 60px; }
@@ -280,6 +300,8 @@
   footer .links a { color: var(--ink-soft); text-decoration: none; font-size: 0.9rem; margin-right: 20px; font-weight: 600; }
   footer .links a:hover { color: var(--brand); }
   footer .biz { color: var(--ink-faint); font-size: 0.83rem; line-height: 1.8; }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
 </style>
 </head>
 <body>
@@ -288,45 +310,44 @@
   <div class="wrap">
     <a class="logo" href="#"><span class="mark"></span>서당</a>
     <nav class="gnb">
-      <a href="#compare">비교</a>
+      <a href="#ba">전·후</a>
       <a href="#features">기능</a>
-      <a href="#owner">원장 전용</a>
-      <a href="#money">카드 결제</a>
-      <a href="#parents">학부모</a>
+      <a href="#compare">비교</a>
+      <a href="#steps">시작 3단계</a>
       <a href="#faq">FAQ</a>
-      <a class="nav-cta" href="/app/">PC로 시작하기</a>
+      <a class="nav-cta" href="/app/">시작하기</a>
     </nav>
   </div>
 </header>
 
+<div class="m-cta" id="m-cta"><a class="btn btn-primary" href="/app/">무료로 시작하기 <span class="arr">→</span></a></div>
+
+<!-- ===== HERO ===== -->
 <section class="hero">
   <div class="wrap">
     <div>
-      <div class="badge"><span class="dot"></span>2026년 9월 · 파일럿 학원 운영 중</div>
+      <span class="pill"><span class="dot"></span>2026년 9월 · 파일럿 학원 무료</span>
+      <div class="ask-line">
+        <span class="who">👩‍👧</span>
+        <span class="q" id="ask-q">
+          <span class="on">"셔틀 지금 어디예요?"</span>
+          <span>"오늘 잘 갔나요?"</span>
+          <span>"수강료 카드로 되나요?"</span>
+          <span>"그만두면 얼마 돌려받아요?"</span>
+        </span>
+      </div>
       <h1>원장님 전화기가<br><em>조용해집니다.</em></h1>
-      <p class="lead">학부모가 매일 묻던 것을 <b>앱이 먼저 답합니다.</b>
-      셔틀 실시간 위치 · 수수료 없는 카드 결제 · 법정 환불 자동 계산 — 작은 학원에 맞춰 세 가지를 한 앱에 넣었습니다.</p>
-      <div class="ask">
-        <span>셔틀 지금 어디예요?</span>
-        <span>오늘 잘 갔나요?</span>
-        <span>수강료 카드로 되나요?</span>
-        <span>중간에 그만두면 얼마 돌려받아요?</span>
-      </div>
+      <p class="lead">학부모가 매일 묻던 것,<br>앱이 먼저 답합니다.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="/app/">PC 웹에서 시작하기</a>
-        <a class="btn btn-ghost" href="#compare">다른 프로그램과 비교</a>
+        <a class="btn btn-primary btn-lg" href="/app/">무료로 시작하기 <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="#ba">30초 둘러보기</a>
       </div>
-      <p class="cta-note">카카오 로그인 · 설치비 없음 · 문자비 0원 · 현재 파일럿 학원에 무료 제공</p>
+      <div class="cta-note"><span>카카오 로그인 30초</span><span>설치비 0원</span><span>문자비 0원</span></div>
     </div>
     <div class="phone-zone">
-      <div class="float-card fc1">
-        <div class="ic">🚌</div>
-        <div><b>셔틀에 탑승했어요</b><small>예림 · 래미안 3단지 · 16:12</small></div>
-      </div>
-      <div class="float-card fc2">
-        <div class="ic">💳</div>
-        <div><b>9월 수강료 결제 완료</b><small>카드 · 130,000원</small></div>
-      </div>
+      <div class="float-card fc1"><div class="ic">🚌</div><div><b>셔틀에 탑승했어요</b><small>예림 · 래미안 3단지 · 16:12</small></div></div>
+      <div class="float-card fc3"><div class="ic">✅</div><div><b>출석 확인</b><small>수학 A반 · 17:00</small></div></div>
+      <div class="float-card fc2"><div class="ic">💳</div><div><b>9월 수강료 결제 완료</b><small>카드 · 130,000원</small></div></div>
       <div class="phone">
         <div class="screen">
           <div class="app-bar"><span class="t">셔틀 · 1호차</span><span class="live">운행 중</span></div>
@@ -350,60 +371,81 @@
   </div>
 </section>
 
-<section class="stats">
+<!-- ===== BIG NUMBERS ===== -->
+<section class="nums">
   <div class="wrap">
     <div class="grid">
-      <div class="stat reveal"><div class="n">0<small>원</small></div><div class="d">서당이 받는 결제 수수료 — <b>중간 결제사 마진 없이</b> 학원 가맹점 요율 그대로</div></div>
-      <div class="stat reveal d1"><div class="n">0<small>원</small></div><div class="d">문자·알림톡 비용 — <b>앱 푸시</b>로 휴강·결석·청구 알림</div></div>
-      <div class="stat reveal d2"><div class="n">30<small>곳</small></div><div class="d">셔틀 정류장을 <b>한 번에</b> 길안내 — 앱을 오갈 일 없이</div></div>
-      <div class="stat reveal d3"><div class="n">5<small>일</small></div><div class="d">법정 환불 기한 안에 <b>자동 계산</b> — 시행령 별표 4 기준</div></div>
+      <div class="num reveal"><div class="ic">💳</div><div class="n"><span data-count="0">0</span><small>원</small></div><div class="d">서당 결제 수수료</div></div>
+      <div class="num reveal d1"><div class="ic">💬</div><div class="n"><span data-count="0">0</span><small>원</small></div><div class="d">문자·알림톡 비용</div></div>
+      <div class="num reveal d2"><div class="ic">🚌</div><div class="n"><span data-count="30">0</span><small>곳</small></div><div class="d">정류장 길안내 한 번에</div></div>
+      <div class="num reveal d3"><div class="ic">⚖️</div><div class="n"><span data-count="5">0</span><small>일</small></div><div class="d">법정 환불, 기한 안에 자동</div></div>
     </div>
   </div>
 </section>
 
-<section class="pain">
+<!-- ===== BEFORE / AFTER ===== -->
+<section class="ba center" id="ba" data-mode="before">
   <div class="wrap">
-    <h2 class="reveal">혹시 아직도 이렇게 하고 계신가요?</h2>
+    <span class="eyebrow reveal">Before → After</span>
+    <h2 class="title reveal">원장님의 하루,<br>이렇게 바뀝니다</h2>
+    <div class="toggle reveal d1">
+      <button class="on" data-mode="before">😩 지금</button>
+      <button data-mode="after" class="after">😌 서당</button>
+    </div>
     <div class="cards">
-      <div class="card reveal d1">
-        <div class="q">"셔틀 어디쯤이에요?" — 운전 중인 기사님한테 전화가 옵니다.</div>
-        <div class="a">→ 학부모 앱에 <b>지하철 노선도처럼</b> 버스 위치와 도착 시각이 뜹니다. 기사님은 운전만 하면 됩니다.</div>
+      <div class="bcard reveal d1">
+        <span class="tag">셔틀</span>
+        <div class="v-before"><div class="ic">📞</div><div class="big">"셔틀 어디쯤이에요?"</div><div class="sm">운전 중인 기사님에게 전화</div></div>
+        <div class="v-after"><div class="ic">📍</div><div class="big">3번째 · 12분 후</div><div class="sm">학부모 앱에 노선도처럼 실시간</div></div>
       </div>
-      <div class="card reveal d2">
-        <div class="q">"이번 달 누가 안 냈지…" — 엑셀 열고 계좌 내역 대조하는 밤.</div>
-        <div class="a">→ 청구서가 <b>매월 자동 발행</b>되고, 학부모는 앱에서 카드로 냅니다. 미납은 한 화면에 모입니다.</div>
+      <div class="bcard reveal d2">
+        <span class="tag">수강료</span>
+        <div class="v-before"><div class="ic">🧾</div><div class="big">"이번 달 누가 안 냈지…"</div><div class="sm">엑셀 열고 계좌 내역 대조하는 밤</div></div>
+        <div class="v-after"><div class="ic">💳</div><div class="big">자동 청구 → 카드 결제</div><div class="sm">미납은 한 화면에, 돈은 학원 계좌로</div></div>
       </div>
-      <div class="card reveal d3">
-        <div class="q">"중간에 그만두는데 얼마 돌려드려야 하죠?" — 감으로 계산하다 분쟁.</div>
-        <div class="a">→ 학원법 시행령 별표 4를 <b>실제 수업 회차 기준</b>으로 자동 계산. 근거가 남아 다툼이 줄어듭니다.</div>
+      <div class="bcard reveal d3">
+        <span class="tag">환불</span>
+        <div class="v-before"><div class="ic">🤔</div><div class="big">"얼마 돌려드려야 하죠?"</div><div class="sm">감으로 계산하다 분쟁</div></div>
+        <div class="v-after"><div class="ic">⚖️</div><div class="big">법정 기준 자동 계산</div><div class="sm">실제 수업 회차 기준 · 근거 저장</div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ===== BENTO FEATURES ===== -->
+<section class="bento center" id="features">
+  <div class="wrap">
+    <span class="eyebrow reveal">All in one</span>
+    <h2 class="title reveal">학원 하루 전체를<br>한 앱에</h2>
+    <div class="grid">
+      <div class="tile blue t-3 reveal"><div class="ic">🚌</div><h3>셔틀 실시간<span class="new">NEW</span></h3><p>기사님 앱에 티맵 내장 · 학부모는 「몇 번째 · 몇 분 후」</p><div class="deco">🚌</div></div>
+      <div class="tile dark t-3 reveal d1"><div class="ic">💳</div><h3>자동 청구 · 카드 결제<span class="new">NEW</span></h3><p>수강료 표 한 번이면 매월 자동 · 단말기 없이 · 수수료 0원</p><div class="deco">💳</div></div>
+      <div class="tile t-2 reveal d1"><div class="ic">✅</div><h3>출결 · 보강</h3><p>탭 한 번 · 결석만 알림</p></div>
+      <div class="tile t-2 reveal d2"><div class="ic">⚖️</div><h3>법정 환불<span class="new">NEW</span></h3><p>회차 기준 자동 · 근거 저장</p></div>
+      <div class="tile t-2 reveal d3"><div class="ic">📅</div><h3>요일별 수강<span class="new">NEW</span></h3><p>주 2회 반에서 토요일만도 OK</p></div>
+      <div class="tile t-2 reveal d2"><div class="ic">👥</div><h3>직원 · 급여</h3><p>출근 체크 하나로 월급·일당·시급</p></div>
+      <div class="tile t-2 reveal d3"><div class="ic">📣</div><h3>공지 · 문의 · 분실물</h3><p>단체 문자방 닫아도 됩니다</p></div>
+      <div class="tile t-2 reveal d4"><div class="ic">📊</div><h3>이탈 신호</h3><p>출석 떨어지면 원장에게 먼저</p></div>
+    </div>
+  </div>
+</section>
 
-<section class="cmp" id="compare">
-  <div class="wrap" style="text-align:center;">
-    <span class="eyebrow reveal">왜 서당인가</span>
-    <h2 class="title reveal">서당은 어떻게 다르게<br>하나요?</h2>
-    <p class="sub reveal">출석·청구는 기본입니다. 서당이 <b>다르게 푼 자리</b>만 골랐습니다.</p>
+<!-- ===== COMPARE ===== -->
+<section class="cmp center" id="compare">
+  <div class="wrap">
+    <span class="eyebrow reveal">Why 서당</span>
+    <h2 class="title reveal">무엇이 다른가요</h2>
     <div class="tbl reveal d1">
       <table>
-        <thead>
-          <tr><th></th><th>엑셀·수기</th><th>흔한 방식</th><th class="sd">서당</th></tr>
-        </thead>
+        <thead><tr><th></th><th>엑셀·수기</th><th>흔한 방식</th><th class="sd">서당</th></tr></thead>
         <tbody>
-          <tr><td>셔틀 실시간 위치<small>학부모 앱 · 정류장별 도착 시각</small></td><td class="n">기사님께 전화</td><td class="m">문자·별도 앱</td><td class="sd"><span class="y">✓</span> 노선도 + 「몇 번째 · 몇 분 후」</td></tr>
-          <tr><td>기사님 길안내<small>정류장 여러 곳을 한 번에</small></td><td class="n">외우거나 내비 앱</td><td class="m">내비 앱에 2~3곳씩</td><td class="sd"><span class="y">✓</span> 앱 내장 티맵 · 30곳 한 번에</td></tr>
-          <tr><td>카드 결제 수수료<small>서당·중간 결제사 몫</small></td><td class="n">—</td><td class="m">온라인 결제사 마진이 얹히기도</td><td class="sd"><span class="y">없음</span> 학원 가맹점 요율만</td></tr>
-          <tr><td>카드 단말기<small>신규 개원 학원</small></td><td class="n">필요</td><td class="m">필요한 경우 많음</td><td class="sd"><span class="y">불필요</span> 앱에서 가맹 신청</td></tr>
-          <tr><td>문자·알림톡 비용<small>휴강·결석·청구 알림</small></td><td class="m">건당 과금</td><td class="m">건당 과금이 일반적</td><td class="sd"><span class="y">0원</span> 앱 푸시</td></tr>
-          <tr><td>법정 환불액 계산<small>학원법 시행령 별표 4</small></td><td class="n">감으로</td><td class="m">날짜 기준 근사</td><td class="sd"><span class="y">✓</span> 실제 수업 회차 기준 · 근거 저장</td></tr>
-          <tr><td>요일별 수강<small>주 2회 반에서 토요일만</small></td><td class="n">따로 적어 둠</td><td class="m">반을 나누는 경우 많음</td><td class="sd"><span class="y">✓</span> 등록 하나로 · 요금 자동</td></tr>
-          <tr><td>회당·횟수권 요금<small>휴강하면 자동 감액</small></td><td class="n">손 계산</td><td class="m">제품마다 다름</td><td class="sd"><span class="y">✓</span> 월정액·회당·횟수권 3종</td></tr>
-          <tr><td>직원 급여 계산<small>출근 체크 하나로</small></td><td class="n">손 계산</td><td class="m">제품마다 다름</td><td class="sd"><span class="y">✓</span> 월급·일당·시급 · 대타 반영</td></tr>
-          <tr><td>이탈 신호<small>출석 떨어지는 학생</small></td><td class="n">눈치로</td><td class="m">제품마다 다름</td><td class="sd"><span class="y">✓</span> 매주 원장에게 먼저 알림</td></tr>
-          <tr><td>원장 PC + 기사·학부모 앱<small>같은 데이터</small></td><td class="n">—</td><td class="m">PC 위주인 경우 많음</td><td class="sd"><span class="y">✓</span> PC 웹 · Android · iOS</td></tr>
+          <tr><td><span class="ic">🚌</span>셔틀 실시간 위치</td><td class="x">✕</td><td class="tri">△ 문자·별도 앱</td><td class="sd"><span class="ok">노선도 · 몇 분 후</span></td></tr>
+          <tr><td><span class="ic">🗺️</span>정류장 길안내</td><td class="x">✕</td><td class="tri">△ 2~3곳씩</td><td class="sd"><span class="ok">30곳 한 번에</span></td></tr>
+          <tr><td><span class="ic">💳</span>카드 결제 수수료</td><td class="x">—</td><td class="tri">△ 결제사 마진</td><td class="sd"><span class="ok">0원</span></td></tr>
+          <tr><td><span class="ic">💬</span>문자·알림톡 비용</td><td class="tri">건당</td><td class="tri">건당</td><td class="sd"><span class="ok">0원 · 푸시</span></td></tr>
+          <tr><td><span class="ic">⚖️</span>법정 환불액 계산</td><td class="x">감으로</td><td class="tri">△ 날짜 근사</td><td class="sd"><span class="ok">회차 기준 · 근거</span></td></tr>
+          <tr><td><span class="ic">📅</span>요일별 수강</td><td class="x">✕</td><td class="tri">△ 반 나눔</td><td class="sd"><span class="ok">등록 하나로</span></td></tr>
+          <tr><td><span class="ic">👥</span>직원 급여 계산</td><td class="x">손 계산</td><td class="tri">△ 제품마다</td><td class="sd"><span class="ok">출근 체크 하나로</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -411,141 +453,71 @@
   </div>
 </section>
 
-<section class="features" id="features">
-  <div class="wrap" style="text-align:center;">
-    <h2 class="title reveal">학원 하루 전체를 한 앱에</h2>
-    <p class="sub reveal">아침 셔틀부터 월말 청구, 퇴원 환불까지. 원장님은 PC 웹, 기사님과 학부모는 앱 — 같은 데이터를 봅니다.</p>
-    <div class="tab-switch reveal">
-      <button class="on" data-tab="t-owner">🏫 원장님</button>
-      <button data-tab="t-parent">👨‍👩‍👧 학부모</button>
+<!-- ===== 3 STEPS ===== -->
+<section class="steps center" id="steps">
+  <div class="wrap">
+    <span class="eyebrow reveal">Start</span>
+    <h2 class="title reveal">시작은 3단계,<br>오늘 끝납니다</h2>
+    <div class="row">
+      <div class="step reveal d1"><div class="n">1</div><span class="ic">💬</span><h3>카카오로 로그인</h3><p>회원가입 없이. PC 웹에서.</p><span class="time">⏱ 30초</span></div>
+      <div class="step reveal d2"><div class="n">2</div><span class="ic">🏫</span><h3>학원 만들기</h3><p>이름 · 반 · 수강료 표. 엑셀 명단은 대신 넣어 드립니다.</p><span class="time">⏱ 10분</span></div>
+      <div class="step reveal d3"><div class="n">3</div><span class="ic">📱</span><h3>학부모는 번호만</h3><p>앱에서 전화번호 확인 → 자녀와 자동 연결. 코드도, 초대장도 없습니다.</p><span class="time">⏱ 1분</span></div>
     </div>
-
-    <div class="tab-panel on" id="t-owner">
-      <div class="fcard"><div class="ico">✅</div><h3>출결·보강</h3><p>오늘 수업이 홈에 바로. 탭 한 번으로 출석·결석, 사전 통보 없는 결석만 학부모에게 알림. 보강은 학부모가 신청하고 원장이 승인.</p></div>
-      <div class="fcard hi"><div class="ico">💳</div><h3>청구·카드 결제<span class="new">NEW</span></h3><p>요금표 한 번 정하면 매월 자동 청구. 학부모는 앱에서 카드로 결제하고, 돈은 학원 계좌로 바로 들어옵니다. 단말기 없어도 됩니다.</p></div>
-      <div class="fcard hi"><div class="ico">🚌</div><h3>셔틀 실시간<span class="new">NEW</span></h3><p>기사님 앱에 티맵 길안내가 내장. 정류장 30곳을 한 번에 돌고, 학부모는 버스 위치와 도착 시각을 실시간으로 봅니다.</p></div>
-      <div class="fcard hi"><div class="ico">⚖️</div><h3>법정 환불 계산<span class="new">NEW</span></h3><p>중도 퇴원·요일 변경 시 환불액을 학원법 기준으로 자동 계산. 근거가 스냅샷으로 남습니다.</p></div>
-      <div class="fcard hi"><div class="ico">📅</div><h3>요일별 수강<span class="new">NEW</span></h3><p>주 2회 반에서 토요일만 듣는 회원도 등록 하나로. 요금표가 주 N회에 맞춰 금액을 채웁니다.</p></div>
-      <div class="fcard"><div class="ico">👥</div><h3>직원·급여</h3><p>초대 코드로 직원 합류. 출근 체크 하나로 월급·일당·시급이 담당 수업 시간 기준으로 계산됩니다.</p></div>
-      <div class="fcard"><div class="ico">📣</div><h3>공지·문의·분실물</h3><p>공지는 푸시로, 문의는 스레드로, 분실물은 사진으로. 학부모 단체 문자방을 닫아도 됩니다.</p></div>
-      <div class="fcard"><div class="ico">📊</div><h3>통계·이탈 신호</h3><p>출석률과 유입·이탈을 매주 리포트로. 출석이 떨어지는 학생은 원장에게 먼저 알립니다.</p></div>
-    </div>
-
-    <div class="tab-panel" id="t-parent">
-      <div class="fcard"><div class="ico">🔗</div><h3>코드로 간편 연결</h3><p>학원이 알려준 학생 코드만 입력하면 자녀와 연결 완료. 회원가입은 카카오로 3초.</p></div>
-      <div class="fcard"><div class="ico">🚌</div><h3>셔틀 어디쯤?<span class="new">NEW</span></h3><p>「우리 아이 정류장 · 3번째 · 약 12분 후」. 지도를 뒤지지 않아도 한 줄로 답이 옵니다. 탑승·하차 알림도 자동.</p></div>
-      <div class="fcard"><div class="ico">💳</div><h3>카드로 결제<span class="new">NEW</span></h3><p>청구서가 오면 앱에서 카드로 바로. 카드 정보는 결제사 화면에서만 입력돼 서당은 보관하지 않습니다.</p></div>
-      <div class="fcard"><div class="ico">📋</div><h3>출결·수업 노트</h3><p>지난 출결과 결석 사유, 선생님이 공개한 수업 노트까지. 학원에 물어볼 필요가 없습니다.</p></div>
-      <div class="fcard"><div class="ico">✉️</div><h3>결석 통보·보강 신청</h3><p>결석 예정이면 앱에서 미리 통보. 결석 후엔 같은 레벨 반으로 보강을 신청할 수 있습니다.</p></div>
-      <div class="fcard"><div class="ico">💬</div><h3>문의하기</h3><p>전화 대신 앱에서 문의. 답변이 오면 알림으로, 이력은 스레드로 남습니다.</p></div>
-    </div>
+    <div class="cta-row reveal d4"><a class="btn btn-primary btn-lg" href="/app/">지금 시작하기 <span class="arr">→</span></a></div>
   </div>
 </section>
 
-
-<section class="owner" id="owner">
-  <div class="wrap" style="text-align:center;">
-    <span class="eyebrow reveal">원장 전용</span>
-    <h2 class="title reveal">돈과 사람에 관한 결정은<br>원장님만 할 수 있습니다</h2>
-    <p class="sub reveal">직원 계정으로는 출석·학생·반 관리까지. 아래는 <b>원장 계정에서만</b> 열리는 기능입니다.</p>
-    <div class="grid">
-      <div class="ocard reveal"><span class="lock">원장만</span><h3>요금표 · 할인 규칙</h3><p>주 N회 → 금액 표를 정하고 형제 할인 등 규칙을 만듭니다. 요금을 올리면 다음 달부터 전원 자동 반영, 보호자에게 고지.</p></div>
-      <div class="ocard reveal d1"><span class="lock">원장만</span><h3>환불 확정 · 수강 변경 정산</h3><p>법정 환불액 계산은 직원도 보지만, <b>확정과 지급 상태 변경</b>은 원장만. 요일을 줄일 때의 재정산·크레딧 처리도 같습니다.</p></div>
-      <div class="ocard reveal d2"><span class="lock">원장만</span><h3>카드 결제 신청 · 결제 취소 · 청구서 파기</h3><p>결제선생 가맹 신청, 결제된 건의 취소(환불), 미결제 청구서 파기. 돈이 나가는 조작은 원장 손에서만.</p></div>
-      <div class="ocard reveal d3"><span class="lock">원장만</span><h3>직원 급여 열람 · 월 정산</h3><p>직원 목록에서 급여 금액은 원장에게만 보입니다. 직원끼리는 서로의 급여를 볼 수 없고, 본인 것만 봅니다.</p></div>
-      <div class="ocard reveal"><span class="lock">원장만</span><h3>직원 초대 · 내보내기</h3><p>초대 코드 발급과 직원 비활성화. 나간 직원은 앱 접근이 즉시 막히고, 급여·출근 기록은 법정 기간 보관됩니다.</p></div>
-      <div class="ocard reveal d1"><span class="lock">원장만</span><h3>셔틀차 등록 · 운전 담당 배정</h3><p>차량을 등록하고 어느 직원이 운전하는지 정합니다. 배정된 직원의 앱에만 [운행] 버튼이 나타납니다.</p></div>
-      <div class="ocard reveal d2"><span class="lock">원장만</span><h3>공지 발송 · 보강 승인</h3><p>학부모 전체에게 가는 공지와, 학부모가 신청한 보강의 승인·반려. 학원 이름으로 나가는 말은 원장이 정합니다.</p></div>
-      <div class="ocard reveal d3"><span class="lock">원장만</span><h3>학원 설정 · 계좌 · 청구일</h3><p>학원 정보, 입금 계좌, 매월 자동 청구일, 학원 위치(셔틀 복귀 지점). 학원의 기본값은 한 사람이 관리합니다.</p></div>
-    </div>
-    <div class="why reveal"><b>왜 나누었나요.</b> 직원이 출석을 찍고 학생을 등록하는 건 매일 있는 일이라 막지 않습니다. 하지만 요금·환불·급여·직원 권한은 한 번 잘못 건드리면 되돌리기 어렵고, 학부모와의 분쟁으로 이어집니다. 그래서 이 여덟 가지는 화면에서도, 서버에서도 원장 계정만 통과시킵니다.</div>
-  </div>
-</section>
-
+<!-- ===== MONEY ===== -->
 <section class="money" id="money">
   <div class="wrap">
     <div class="reveal">
       <span class="eyebrow">카드 결제</span>
-      <h2 class="title">수수료를 붙이지 않았습니다.<br>학원 가맹점 요율 그대로.</h2>
-      <p class="sub">서당은 결제 대금을 거치지 않습니다. 학부모가 낸 돈은 <b>학원 계좌로 직접</b> 들어가고, 서당은 그 사실만 기록합니다.</p>
-      <ul class="points">
-        <li><b>중간 결제사 마진이 없습니다.</b> 온라인 결제사를 끼면 학원 요율 위에 그쪽 몫이 얹히는데, 서당은 학원 자기 가맹점 요율에서 끝납니다. 서당 몫은 0원.</li>
-        <li><b>단말기가 필요 없습니다.</b> 가맹점이 아직 없어도 결제선생이 신규 개설을 대행합니다. 앱에서 [카드 결제 신청] 한 번.</li>
-        <li><b>카드번호는 서당을 거치지 않습니다.</b> 결제창은 결제선생(카카오페이 계열)이 띄우고, 서당은 결과만 받습니다.</li>
-        <li><b>취소·환불도 앱 안에서.</b> 원장이 [결제 취소]를 누르면 장부와 카드 취소가 같이 처리됩니다.</li>
+      <div class="zero">0<small>원</small></div>
+      <h2 class="title" style="margin-top:10px;">서당이 받는<br>결제 수수료</h2>
+      <ul>
+        <li><b>학원 가맹점 요율 그대로.</b> 중간 결제사 마진 없음</li>
+        <li><b>단말기 불필요.</b> 앱에서 가맹 신청 한 번</li>
+        <li><b>돈은 학원 계좌로 직접.</b> 서당은 결과만 기록</li>
+        <li><b>카드번호는 서당을 거치지 않음.</b> 결제창은 결제선생</li>
       </ul>
     </div>
-    <div class="compare reveal d1">
-      <div class="row"><div class="k">중간 결제사 마진<small>학원 요율 위에 얹히는 몫</small></div><div><div class="v bad">온라인 결제사 있음</div><div class="v good">서당 없음</div></div></div>
-      <div class="row"><div class="k">문자·알림톡 비용<small>휴강·결석·청구 알림</small></div><div class="v good">0원</div></div>
-      <div class="row"><div class="k">서당 결제 수수료<small>학원·학부모 모두</small></div><div class="v good">0원</div></div>
-      <div class="row"><div class="k">카드 단말기<small>신규 개원 학원</small></div><div class="v good">불필요</div></div>
-      <div class="foot">* 카드 가맹점 수수료율은 학원의 매출 구간에 따라 카드사가 정하며 학원이 카드사에 직접 냅니다. 서당과 중간 결제사가 추가로 받는 금액은 없습니다.</div>
+    <div class="flow reveal d1">
+      <div class="lane">
+        <div class="node"><div class="ic">👩‍👧</div><b>학부모</b></div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="ic">💳</div><b>카드사</b></div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="ic">🏫</div><b>학원 계좌</b></div>
+      </div>
+      <div class="skip">중간에 <span class="x">서당 몫</span> <span class="x">결제사 마진</span> 없음</div>
+      <div class="foot">* 카드 가맹점 수수료율은 학원 매출 구간에 따라 카드사가 정하며 학원이 카드사에 직접 냅니다.</div>
     </div>
   </div>
 </section>
 
-<section class="parents" id="parents">
-  <div class="wrap" style="text-align:center;">
-    <h2 class="title reveal">학부모 연결은 코드 하나면 끝</h2>
-    <p class="sub reveal">앱 설치를 강요하는 복잡한 절차 없이, 코드 한 줄로.</p>
-    <div class="grid">
-      <div class="pcard reveal"><div class="num">1</div><h3>학원이 코드 전달</h3><p>학생마다 자동 발급되는 고유 코드를 알려주세요. QR로 보여줘도 됩니다.</p><span class="code">STU-K3M7</span></div>
-      <div class="pcard reveal d1"><div class="num">2</div><h3>학부모가 입력</h3><p>카카오로 로그인하고 코드를 입력하면 자녀와 바로 연결됩니다. 프로필을 다시 쓸 필요가 없습니다.</p></div>
-      <div class="pcard reveal d2"><div class="num">3</div><h3>자동으로 소식 도착</h3><p>일정·출결·청구·휴강·셔틀 알림이 학부모 앱으로 실시간 전달됩니다.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="faq" id="faq">
+<!-- ===== FAQ ===== -->
+<section class="faq center" id="faq">
   <div class="wrap">
     <h2 class="title reveal">자주 묻는 질문</h2>
     <div class="list reveal">
-      <div class="faq-item">
-        <button>이용 요금이 있나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>파일럿 기간에는 무료로 제공됩니다. 유료 플랜이 도입되더라도 기존 사용 학원에는 충분한 사전 안내를 드립니다. 카드 결제 수수료에 서당 몫은 없습니다.</p></div>
-      </div>
-      <div class="faq-item">
-        <button>어떤 학원에 맞나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>학생 20~150명 규모의 학원·교습소·스포츠 아카데미(수영·태권도·발레 등)에 맞춰 만들었습니다. 셔틀을 운행하거나, 요일별로 수강을 나누거나, 회당·횟수권 요금을 쓰는 곳에서 특히 잘 맞습니다.</p></div>
-      </div>
-      <div class="faq-item">
-        <button>수강료 카드 결제는 어떻게 되나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>학원 설정에서 [카드 결제 신청]을 누르면 결제선생(주식회사 페이민트) 가맹 절차가 열립니다. 사업자등록증·통장 사본·대표자 신분증으로 심사(최대 5일)가 끝나면 학부모 앱에 [카드로 결제하기]가 나타납니다. 결제 대금은 학원 계좌로 직접 입금되고, 서당은 수수료를 받지 않습니다.</p></div>
-      </div>
-      <div class="faq-item">
-        <button>셔틀 실시간 위치는 어떻게 동작하나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>기사님이 앱에서 [운행 시작]을 누르면 위치 공유가 켜지고 정류장 순서가 자동 계산됩니다. 앱 안에 티맵 길안내가 내장돼 정류장 30곳을 한 번에 안내합니다. 학부모는 「우리 아이 정류장 · 몇 번째 · 몇 분 후」를 한 줄로 봅니다. 위치는 기사님 기기에서만, 운행 중에만 수집됩니다.</p></div>
-      </div>
-      <div class="faq-item">
-        <button>학부모도 꼭 앱을 설치해야 하나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>학원 관리 기능(출결·수강료·반·직원·셔틀 운행)은 학부모 설치 없이도 전부 사용할 수 있습니다. 학부모가 앱을 설치하면 알림·일정·출결·카드 결제·셔틀 위치·보강 신청이 추가로 연결됩니다.</p></div>
-      </div>
-      <div class="faq-item">
-        <button>어떤 기기에서 쓸 수 있나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>원장님·직원은 PC 웹(크롬·엣지·사파리)과 Android·iOS 앱, 학부모는 Android·iOS 앱에서 사용합니다.</p></div>
-      </div>
-      <div class="faq-item">
-        <button>기존 엑셀 명단을 옮길 수 있나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>네. 학생·반·수강 등록 3개 시트로 된 템플릿을 드리고, 채워 주시면 대신 입력해 드립니다. 요금 방식(월정액·회당·횟수권)도 그대로 옮겨집니다.</p></div>
-      </div>
-      <div class="faq-item">
-        <button>학생 정보는 안전하게 관리되나요?<span class="arrow">▾</span></button>
-        <div class="body"><p>데이터는 국내(AWS 서울)에 저장되고 전송·저장 시 암호화됩니다. 학부모는 본인 자녀의 정보만, 직원은 원장이 허용한 범위만 볼 수 있도록 데이터베이스 수준에서 권한이 나뉘어 있습니다. 카드번호는 서당이 보관하지 않습니다. 자세한 내용은 개인정보처리방침을 확인해 주세요.</p></div>
-      </div>
+      <div class="faq-item"><button>이용 요금이 있나요?<span class="arrow">▾</span></button><div class="body"><p>파일럿 기간에는 무료입니다. 유료 플랜이 도입되더라도 기존 사용 학원에는 충분히 미리 안내합니다. 카드 결제 수수료에 서당 몫은 없습니다.</p></div></div>
+      <div class="faq-item"><button>어떤 학원에 맞나요?<span class="arrow">▾</span></button><div class="body"><p>학생 20~150명 규모의 학원·교습소·스포츠 아카데미(수영·태권도·발레 등). 셔틀을 운행하거나, 요일별 수강이나 회당·횟수권 요금을 쓰는 곳에서 특히 잘 맞습니다.</p></div></div>
+      <div class="faq-item"><button>학부모도 꼭 앱을 설치해야 하나요?<span class="arrow">▾</span></button><div class="body"><p>학원 관리 기능(출결·수강료·반·직원·셔틀 운행)은 학부모 설치 없이도 전부 됩니다. 학부모가 앱을 설치하면 알림·출결·카드 결제·셔틀 위치·보강 신청이 추가로 연결됩니다.</p></div></div>
+      <div class="faq-item"><button>학부모 연결은 어떻게 되나요?<span class="arrow">▾</span></button><div class="body"><p>학부모가 앱에서 카카오로 전화번호를 확인하면, 학원이 등록해 둔 번호와 맞춰 자녀와 자동으로 연결됩니다. 등록된 번호가 없으면 학원을 찾아 등록 신청을 보내고, 원장님이 승인하면 연결됩니다.</p></div></div>
+      <div class="faq-item"><button>기존 엑셀 명단을 옮길 수 있나요?<span class="arrow">▾</span></button><div class="body"><p>네. 명단·반·수강 등록을 사진이나 엑셀로 보내 주시면 대신 넣어 드립니다. 요금 방식(월정액·회당·횟수권)도 그대로 옮겨집니다.</p></div></div>
+      <div class="faq-item"><button>학생 정보는 안전한가요?<span class="arrow">▾</span></button><div class="body"><p>데이터는 국내(AWS 서울)에 저장되고 전송·저장 시 암호화됩니다. 학부모는 본인 자녀만, 직원은 원장이 허용한 범위만 보도록 데이터베이스 수준에서 권한이 나뉩니다. 카드번호는 서당이 보관하지 않습니다.</p></div></div>
     </div>
   </div>
 </section>
 
+<!-- ===== BOTTOM CTA ===== -->
 <section class="bottom-cta" id="download">
   <div class="wrap">
-    <h2 class="reveal">작은 학원의 하루가 가벼워지도록,<br>서당이 함께합니다</h2>
-    <p class="reveal d1">파일럿 학원을 순서대로 모시고 있습니다. 먼저 PC 웹에서 학원을 만들어 보세요.</p>
-    <div class="cta-row reveal d2" style="margin-top: 30px;">
-      <a class="btn btn-primary" href="/app/">PC 웹에서 시작하기</a>
-      <a class="btn btn-ghost" href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의하기</a>
+    <h2 class="reveal">오늘 저녁,<br>전화기가 <em>조용해집니다.</em></h2>
+    <div class="cta-row reveal d1">
+      <a class="btn btn-primary btn-xl" href="/app/">무료로 시작하기 <span class="arr">→</span></a>
     </div>
-    <p class="cta-note reveal d3">Android 앱은 파일럿 학원에 먼저 제공 · Google Play 정식 출시 준비 중</p>
+    <p class="note reveal d2">PC 웹 · 카카오 로그인 · 파일럿 학원 무료 &nbsp;|&nbsp; <a href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98" style="color:#cfe0ff;">도입 문의</a></p>
   </div>
 </section>
 
@@ -565,9 +537,15 @@
 </footer>
 
 <script>
-// ---------- header shadow ----------
+// ---------- header: 어두운 히어로 위에선 어둡게, 지나면 밝게 ----------
 const hd = document.getElementById('hd');
-addEventListener('scroll', () => hd.classList.toggle('scrolled', scrollY > 8), { passive: true });
+const hero = document.querySelector('.hero');
+const mcta = document.getElementById('m-cta');
+addEventListener('scroll', () => {
+  const past = scrollY > hero.offsetHeight - 68;
+  hd.classList.toggle('light', past);
+  mcta.classList.toggle('show', scrollY > 320);
+}, { passive: true });
 
 // ---------- scroll reveal ----------
 const io = new IntersectionObserver((es) => {
@@ -575,9 +553,29 @@ const io = new IntersectionObserver((es) => {
 }, { threshold: 0.15 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ---------- shuttle mockup animation ----------
-// 지하철 노선도식 리스트 위를 버스가 정류장 단위로 내려간다. 지난 곳은 회색+취소선,
-// 다음 정류장은 브랜드색. 「우리 아이 정류장」 카드의 숫자가 같이 줄어든다.
+// ---------- 큰 숫자 카운트업 ----------
+const cio = new IntersectionObserver((es) => {
+  es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, end = +el.dataset.count, t0 = performance.now();
+    (function tick(now) {
+      const p = Math.min(1, (now - t0) / 900);
+      el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+    cio.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+// ---------- 히어로: 학부모 질문 순환 ----------
+(function () {
+  const qs = Array.from(document.querySelectorAll('#ask-q span'));
+  let i = 0;
+  setInterval(() => { qs[i].classList.remove('on'); i = (i + 1) % qs.length; qs[i].classList.add('on'); }, 2400);
+})();
+
+// ---------- 셔틀 목업 애니메이션 ----------
 (function () {
   const stops = Array.from(document.querySelectorAll('#line .stop'));
   const bus = document.getElementById('bus');
@@ -586,14 +584,10 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   const etas = ['약 19분 후 · 16:24', '약 12분 후 · 16:24', '약 5분 후 · 16:24', '', ''];
   let pos = 0;
   function render() {
-    stops.forEach((s, i) => {
-      s.classList.toggle('passed', i < pos);
-      s.classList.toggle('next', i === pos);
-    });
+    stops.forEach((s, i) => { s.classList.toggle('passed', i < pos); s.classList.toggle('next', i === pos); });
     const target = stops[pos];
     const lineTop = document.getElementById('line').getBoundingClientRect().top;
-    const t = target.getBoundingClientRect().top - lineTop + (target.offsetHeight - 30) / 2;
-    bus.style.top = t + 'px';
+    bus.style.top = (target.getBoundingClientRect().top - lineTop + (target.offsetHeight - 30) / 2) + 'px';
     if (pos < mineIdx) my.innerHTML = `${mineIdx - pos + 1}번째 <small>${etas[pos]}</small>`;
     else if (pos === mineIdx) my.innerHTML = `지금 도착 <small>16:24</small>`;
     else my.innerHTML = `탑승 완료 <small>16:24 · 학원으로 이동 중</small>`;
@@ -603,24 +597,34 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   addEventListener('resize', render);
 })();
 
-// ---------- feature tabs ----------
-document.querySelectorAll('.tab-switch button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-switch button').forEach(b => b.classList.remove('on'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
-    btn.classList.add('on');
-    document.getElementById(btn.dataset.tab).classList.add('on');
-  });
-});
+// ---------- Before / After 토글 (자동 순환 + 클릭) ----------
+(function () {
+  const sec = document.getElementById('ba');
+  const btns = sec.querySelectorAll('.toggle button');
+  let auto = null;
+  function set(mode) {
+    sec.dataset.mode = mode;
+    btns.forEach(b => b.classList.toggle('on', b.dataset.mode === mode));
+    sec.querySelectorAll('.bcard').forEach(c => { c.classList.remove('swap'); void c.offsetWidth; c.classList.add('swap'); });
+  }
+  btns.forEach(b => b.addEventListener('click', () => { clearInterval(auto); set(b.dataset.mode); }));
+  const bio = new IntersectionObserver((es) => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      setTimeout(() => set('after'), 1800);
+      auto = setInterval(() => set(sec.dataset.mode === 'before' ? 'after' : 'before'), 3600);
+      bio.unobserve(sec);
+    });
+  }, { threshold: 0.4 });
+  bio.observe(sec);
+})();
 
-// ---------- FAQ accordion ----------
+// ---------- FAQ ----------
 document.querySelectorAll('.faq-item button').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.parentElement, body = item.querySelector('.body');
     const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open'); i.querySelector('.body').style.maxHeight = null;
-    });
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.body').style.maxHeight = null; });
     if (!isOpen) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
   });
 });
