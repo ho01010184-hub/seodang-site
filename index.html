@@ -338,8 +338,12 @@
 
 <div class="float-cta" id="float-cta"><span>파일럿 학원 무료 · 카카오 로그인 30초</span><a class="btn btn-primary" href="/app/">무료로 시작하기 <i class="arr">→</i></a></div>
 
-<!-- 카카오톡 채널 문의 — 채널 「서당」(pf.kakao.com/_hHeaX) -->
-<a class="kakao-fab" id="kakao-fab" href="https://pf.kakao.com/_hHeaX/chat" target="_blank" rel="noopener" aria-label="카카오톡으로 문의하기">
+<!-- 카카오톡 채널 문의 — 채널 「서당」(pf.kakao.com/_hHeaX)
+     referrerpolicy="no-referrer": 카카오는 Referer 가 보이면 채팅 첫 줄에
+     「- 이전 페이지: https://seodang.app/」를 자동으로 붙인다(카카오 공식 답변:
+     「referer 주소를 확인할 수 있는 경우 이전 페이지 주소가 자동으로 노출」).
+     Referer 를 안 보내면 그 줄이 안 생긴다(2026-09-29). 지우지 말 것. -->
+<a class="kakao-fab" id="kakao-fab" href="https://pf.kakao.com/_hHeaX/chat" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="카카오톡으로 문의하기">
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3C6.98 3 2.91 6.2 2.91 10.15c0 2.5 1.65 4.7 4.14 5.98-.18.64-.66 2.37-.75 2.74-.12.46.17.45.35.33.15-.1 2.32-1.58 3.26-2.22.68.1 1.38.15 2.09.15 5.02 0 9.09-3.2 9.09-7.15S17.02 3 12 3z"/></svg>
   <span class="label">카카오톡 문의</span>
 </a>
