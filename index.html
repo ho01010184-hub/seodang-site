@@ -98,6 +98,28 @@
   .float-cta .btn-primary { padding: 12px 22px; font-size: 0.98rem; box-shadow: 0 8px 24px var(--glow); }
   @media (max-width: 560px) { .float-cta { left: 16px; right: 16px; transform: translateY(140%); padding: 8px; } .float-cta.show { transform: none; } .float-cta span { display: none; } .float-cta .btn-primary { width: 100%; } }
 
+  /* ---------- 카카오톡 문의 (우하단 고정) ----------
+     원장이 결정 전에 물어볼 곳. 도입 신청 화면에는 두지 않는다 — 거기선
+     [도입 신청] 하나가 주 동작이라 옆에 다른 길을 두면 경쟁한다(2026-09-29). */
+  .kakao-fab {
+    position: fixed; right: 24px; bottom: 24px; z-index: 95;
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 20px 13px 16px; border-radius: 999px;
+    background: #FEE500; color: #191600; font-weight: 800; font-size: 0.95rem;
+    text-decoration: none; border: 0;
+    box-shadow: 0 14px 34px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.06) inset;
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+  .kakao-fab:hover { transform: translateY(-2px); box-shadow: 0 20px 44px rgba(0,0,0,0.5); }
+  .kakao-fab svg { width: 20px; height: 20px; flex: none; }
+  /* 아래 CTA 바가 뜨면 그 위로 비켜 준다 */
+  .kakao-fab.lifted { bottom: 96px; }
+  @media (max-width: 560px) {
+    .kakao-fab { right: 16px; bottom: 16px; padding: 14px; gap: 0; }
+    .kakao-fab .label { display: none; }
+    .kakao-fab.lifted { bottom: 92px; }
+  }
+
   /* ---------- hero ---------- */
   .hero { min-height: 100svh; position: relative; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; }
   .hero .bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
@@ -316,6 +338,12 @@
 
 <div class="float-cta" id="float-cta"><span>파일럿 학원 무료 · 카카오 로그인 30초</span><a class="btn btn-primary" href="/app/">무료로 시작하기 <i class="arr">→</i></a></div>
 
+<!-- 카카오톡 채널 문의 — 채널 「서당」(pf.kakao.com/_hHeaX) -->
+<a class="kakao-fab" id="kakao-fab" href="https://pf.kakao.com/_hHeaX/chat" target="_blank" rel="noopener" aria-label="카카오톡으로 문의하기">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3C6.98 3 2.91 6.2 2.91 10.15c0 2.5 1.65 4.7 4.14 5.98-.18.64-.66 2.37-.75 2.74-.12.46.17.45.35.33.15-.1 2.32-1.58 3.26-2.22.68.1 1.38.15 2.09.15 5.02 0 9.09-3.2 9.09-7.15S17.02 3 12 3z"/></svg>
+  <span class="label">카카오톡 문의</span>
+</a>
+
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
   <div class="bg"><div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
@@ -524,10 +552,13 @@
 
 <script>
 // ---------- header glass + floating CTA ----------
-const hd = document.getElementById('hd'), fc = document.getElementById('float-cta');
+const hd = document.getElementById('hd'), fc = document.getElementById('float-cta'), kf = document.getElementById('kakao-fab');
 addEventListener('scroll', () => {
   hd.classList.toggle('glass', scrollY > 20);
-  fc.classList.toggle('show', scrollY > innerHeight * 0.8 && scrollY < document.body.scrollHeight - innerHeight * 1.6);
+  const showCta = scrollY > innerHeight * 0.8 && scrollY < document.body.scrollHeight - innerHeight * 1.6;
+  fc.classList.toggle('show', showCta);
+  // 아래 CTA 바가 뜨면 카카오 버튼을 위로 비켜 준다(모바일에서 겹친다)
+  if (kf) kf.classList.toggle('lifted', showCta);
 }, { passive: true });
 
 // ---------- reveal ----------
