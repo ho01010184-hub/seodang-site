@@ -314,6 +314,8 @@
   footer .links a { color: var(--fg-2); text-decoration: none; font-size: 0.9rem; margin-right: 20px; font-weight: 600; }
   footer .links a:hover { color: var(--fg); }
   footer .biz { color: var(--fg-3); font-size: 0.83rem; line-height: 1.8; }
+  footer .escrow { display: flex; align-items: center; gap: 12px; margin-top: 18px; color: var(--fg-3); font-size: 0.8rem; }
+  footer .escrow img { display: block; width: 60px; height: 60px; }
 
   @media (max-width: 960px) { .visual { aspect-ratio: auto; } .visual.map { aspect-ratio: 1 / 0.86; } .flowv, .ledger { position: relative; inset: auto; } .flowv { padding: 30px 14px; } .flowv .lane { gap: 6px; } .flowv .pipe { width: 22px; } .flowv .node { padding: 14px 4px; } .ledger { padding: 74px 18px 24px; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .r, .words > span, .ledger .row, .ledger .stamp, .card3d { opacity: 1 !important; transform: none !important; } }
@@ -550,6 +552,17 @@
       하이그 주식회사 · 대표이사 임호균 · 사업자등록번호 750-87-03608 · 세종특별자치시 연서면 성제길 9, 1층<br>
       문의: contact@seodang.app<br>
       © 2026 HYGR Inc. All rights reserved.
+    </div>
+    <!-- KB국민은행 에스크로(구매안전서비스) 판매자 인증마크 — 2026-09-30.
+         통신판매업 신고에 쓰는 구매안전서비스 가입 사실 표시(전자상거래법 24조).
+         KB 가 준 소스는 form+팝업이지만, 같이 준 「에스크로 이체 바로가기 링크」가
+         더 단순하고 JS 없이도 열려서 그걸 쓴다. mHValue 는 공개 식별자(비밀 아님). -->
+    <div class="escrow">
+      <a href="https://okbfex.kbstar.com/quics?page=C016760&amp;mHValue=24c34260813b2fc3180aec485daec83e"
+         target="_blank" rel="noopener noreferrer" aria-label="KB국민은행 에스크로 판매자 인증 확인">
+        <img src="https://img1.kbstar.com/img/escrow/escrowcmark.gif" alt="KB에스크로이체 매매보호의 기준" width="60" height="60" loading="lazy">
+      </a>
+      <span>KB국민은행 구매안전(에스크로) 서비스 가입 — 마크를 누르면 판매자 정보를 확인할 수 있어요.</span>
     </div>
   </div>
 </footer>
