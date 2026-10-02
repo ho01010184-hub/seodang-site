@@ -78,7 +78,8 @@
   header.glass { background: rgba(7,8,11,0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom-color: var(--line); }
   header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
   .logo { font-size: 1.45rem; font-weight: 900; letter-spacing: -0.04em; color: var(--fg); text-decoration: none; display: flex; align-items: center; gap: 10px; }
-  .logo .mark { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #3182f6, #9cc4ff); box-shadow: 0 0 24px var(--glow); }
+  /* 서당 마크(흰 ㅅㄷ)를 파란 타일 안에 — 앱 아이콘과 같은 마크 (site/img/logo_mark.png, 2x) */
+  .logo .mark { width: 30px; height: 30px; border-radius: 9px; background: url("img/logo_mark.png") center / 30px 30px no-repeat; box-shadow: 0 0 24px var(--glow); }
   nav.gnb { display: flex; align-items: center; gap: 4px; }
   nav.gnb a { color: var(--fg-2); text-decoration: none; font-size: 0.92rem; font-weight: 600; padding: 8px 12px; border-radius: 10px; }
   nav.gnb a:hover { color: var(--fg); }
@@ -561,7 +562,8 @@
     <div class="escrow">
       <a href="https://okbfex.kbstar.com/quics?page=C016760&amp;mHValue=24c34260813b2fc3180aec485daec83e"
          target="_blank" rel="noopener noreferrer" aria-label="KB국민은행 에스크로 판매자 인증 확인">
-        <img src="https://img1.kbstar.com/img/escrow/escrowcmark.gif" alt="KB에스크로이체 매매보호의 기준" width="60" height="60" loading="lazy">
+        <!-- KB 원본 GIF 는 흰 바탕이라 어두운 푸터에서 흰 네모로 떴다 → 바깥 흰색만 투명으로 뺀 PNG (마크 자체는 그대로) -->
+        <img src="img/escrow_mark.png" alt="KB에스크로이체 매매보호의 기준" width="60" height="60" loading="lazy">
       </a>
       <span>KB국민은행 구매안전(에스크로) 서비스 가입 — 마크를 누르면 판매자 정보를 확인할 수 있어요.</span>
     </div>
