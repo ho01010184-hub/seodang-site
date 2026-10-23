@@ -123,17 +123,6 @@
   .grow-in { transform-origin: 50% 0; will-change: transform; }
   .hero .stagephone { padding-bottom: 120px; }
 
-  /* calls */
-  .calls { padding: 180px 0; text-align: center; }
-  .calls .lines { margin-top: 56px; }
-  .calls .lines li { font-size: clamp(26px, 6vw, 84px); font-weight: 800; letter-spacing: -0.05em; line-height: 1.15; padding: .14em 0; transition: color .45s ease; }
-  .js .calls .lines li { color: #333; }
-  .js .calls .lines li.lit { color: #fff; }
-  .calls .lines li.last { margin-top: .5em; color: var(--y); }
-  .js .calls .lines li.last { color: #333; }
-  .js .calls .lines li.last.lit { color: var(--y); }
-  @media (max-width: 600px) { .calls { padding: 120px 0; } }
-
   /* 기능 — 가운데 카드 하나. 다음 카드는 왼쪽에서 들어오고, 지금 카드는 오른쪽으로 빠진다(4초마다 자동) */
   .tiles { padding: 120px 0 104px; overflow: hidden; --tcw: min(1100px, 80vw); --tch: 560px; }
   @media (max-width: 720px) { .tiles { padding: 80px 0 72px; --tcw: calc(100vw - 80px); --tch: 520px; } }
@@ -176,49 +165,12 @@
     .snip .ph { transform: scale(.82); transform-origin: 50% 0; }
   }
 
-  /* 스크롤 장면: 휴대폰은 고정, 화면만 바뀐다 */
-  .story { position: relative; }
-  .stp { padding: 96px 0; }
-  .stp .num { display: flex; align-items: baseline; gap: 10px; font-size: 17px; font-weight: 800; color: var(--ink3); }
-  .stp .num b { color: var(--ink); background: var(--y); border-radius: 6px; padding: 0 7px; font-variant-numeric: tabular-nums; }
-  .stp h2 { margin-top: 16px; font-size: clamp(36px, 4.8vw, 72px); font-weight: 900; letter-spacing: -0.055em; line-height: 1.06; }
-  .stp .now { margin-top: 22px; font-size: clamp(18px, 1.6vw, 21px); font-weight: 600; line-height: 1.6; max-width: 560px; text-wrap: pretty; }
-  .stp .was { margin-top: 18px; font-size: 15px; font-weight: 500; color: var(--ink3); max-width: 560px; }
-  .stp .was span { font-weight: 800; margin-right: 8px; color: var(--ink2); }
-  .stp .more { margin-top: 18px; display: grid; gap: 8px; max-width: 560px; }
-  .stp .more li { font-size: 15px; color: var(--ink2); font-weight: 500; padding-left: 16px; position: relative; }
-  .stp .more li::before { content: ''; position: absolute; left: 0; top: .7em; width: 6px; height: 2px; background: currentColor; }
-  .stp .stat { margin-top: 26px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-  .stp .stat b { font-size: clamp(44px, 4.6vw, 64px); font-weight: 900; letter-spacing: -0.05em; line-height: 1; }
-  .stp .stat span { font-size: 15px; font-weight: 700; color: var(--ink2); }
-  .stp .mk { margin-top: 44px; display: flex; justify-content: center; }
-  .stage { display: none; }
-  @media (min-width: 1024px) {
-    .story .wrap { display: grid; grid-template-columns: minmax(0,1fr) 420px; column-gap: 64px; }
-    .stps { grid-column: 1; grid-row: 1; }
-    .story:not(.live) .stp { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 48px; align-items: center; grid-column: 1 / -1; }
-    .story:not(.live) .stps { grid-column: 1 / -1; }
-    .story:not(.live) .stp .mk { margin-top: 0; }
-    .story.live .stp { min-height: 100vh; display: flex; align-items: center; padding: 0; }
-    .story.live .stp .mk { display: none; }
-    .story.live .stp .txt { opacity: .18; transition: opacity .5s ease; }
-    .story.live .stp.cur .txt { opacity: 1; }
-    .story.live .stage { display: block; grid-column: 2; grid-row: 1; }
-  }
-  .stage-in { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; justify-content: center; }
-  .stage .ph { transform-origin: 50% 50%; flex: none; }
-  .stage .scr { height: 600px; min-height: 0; }
-  .stage .pg { position: absolute; inset: 0; opacity: 0; transform: translateY(24px) scale(.98); transition: opacity .5s ease, transform .6s var(--ease); pointer-events: none; }
-  .stage .pg.prev { transform: translateY(-24px) scale(.98); }
-  .stage .pg.act { opacity: 1; transform: none; pointer-events: auto; }
-
   /* phone mockup */
   .ph { width: 300px; max-width: 100%; background: #111; border-radius: 46px; padding: 10px; box-shadow: 0 40px 80px rgba(0,0,0,.16); position: relative; flex: none; }
   .dark .ph { background: #2a2a2a; box-shadow: none; }
   .ph::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 84px; height: 24px; border-radius: 20px; background: #111; z-index: 5; }
   .dark .ph::before { background: #2a2a2a; }
   .scr { background: #fff; border-radius: 36px; overflow: hidden; min-height: 560px; position: relative; color: var(--ink); display: flex; flex-direction: column; text-align: left; }
-  .pg { flex: 1; display: flex; flex-direction: column; position: relative; background: #fff; }
   .ab { padding: 58px 18px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .ab .t { font-size: 19px; font-weight: 800; letter-spacing: -0.03em; }
   .ab .s { font-size: 12px; color: var(--ink3); font-weight: 600; }
@@ -235,29 +187,12 @@
   .st.r { color: var(--red-t); } .st.r::before { background: var(--red); }
   .st.w { color: var(--warn-t); } .st.w::before { background: var(--warn); }
   .st.n { color: var(--ink3); } .st.n::before { background: #c9c9c9; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px; }
-  .chip { height: 36px; padding: 0 14px; border-radius: 12px; background: #f2f3f5; color: var(--ink); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
-  .chip.on { background: var(--ink); color: #fff; }
-  .chip.off { color: #b0b0b0; }
-  .chip.off small { font-size: 11px; color: var(--warn-t); font-weight: 800; }
-  .chip.day { width: 36px; padding: 0; justify-content: center; }
-  .abtn { margin: auto 18px 18px; height: 54px; border-radius: 14px; background: var(--y); color: var(--ink); font-weight: 800; font-size: 17px; display: flex; align-items: center; justify-content: center; }
-  .chk { display: flex; align-items: center; gap: 10px; padding: 14px 18px; font-size: 15px; font-weight: 600; }
-  .chk i { width: 22px; height: 22px; border-radius: 7px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; }
-  .chk i svg { width: 14px; height: 14px; stroke-width: 3; }
-  .toast { position: absolute; left: 12px; right: 12px; bottom: 14px; background: var(--ink); color: #fff; border-radius: 16px; padding: 12px 14px; display: flex; gap: 10px; align-items: center; font-size: 14px; font-weight: 700; opacity: 0; transform: translateY(12px); transition: opacity .35s, transform .35s var(--ease); z-index: 4; }
-  .toast.on { opacity: 1; transform: none; }
-  .toast small { display: block; font-size: 12px; color: #aaa; font-weight: 500; }
   .tabbar { margin-top: auto; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid #eee; padding: 10px 6px 22px; }
   .tabbar span { text-align: center; font-size: 11px; font-weight: 700; color: #a0a0a0; }
   .tabbar span.on { color: var(--ink); }
   .seg { display: flex; gap: 4px; margin: 0 18px; padding: 4px; border-radius: 12px; background: #f2f3f5; }
   .seg span { flex: 1; text-align: center; font-size: 13px; font-weight: 700; padding: 7px 0; border-radius: 9px; color: var(--ink2); }
   .seg span.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-  .ck { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d5d5d5; flex: none; display: grid; place-items: center; transition: background .3s, border-color .3s; }
-  .ck svg { width: 12px; height: 12px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(.4); transition: opacity .3s, transform .3s var(--ease); }
-  .done .ck { background: var(--green); border-color: var(--green); }
-  .done .ck svg { opacity: 1; transform: none; }
 
   /* attendance */
   .att { display: flex; gap: 4px; }
@@ -267,16 +202,6 @@
   .att > .on[data-v="지각"] { background: var(--warn-s); color: var(--warn-t); box-shadow: inset 0 0 0 1.5px var(--warn); }
   .av { width: 34px; height: 34px; border-radius: 50%; background: #f2f3f5; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex: none; }
 
-  /* shuttle */
-  .shuttle { padding: 180px 0 160px; overflow: hidden; }
-  .shuttle .was { margin-top: 18px; font-size: 15px; color: #8d8d8d; font-weight: 500; }
-  .shuttle .was span { font-weight: 800; margin-right: 8px; color: #bdbdbd; }
-  .shuttle .stagephone { margin-top: 80px; }
-  .shuttle .under { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-  .driver { width: 340px; max-width: 100%; display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 18px; background: #222; color: #fff; font-size: 14px; font-weight: 700; text-align: left; }
-  .driver small { display: block; font-size: 12px; color: #9a9a9a; font-weight: 500; }
-  .driver svg { color: var(--y); width: 22px; height: 22px; }
-  .fine { font-size: 12px; color: #8d8d8d; text-align: center; }
   .eta { margin: 4px 18px 12px; padding: 16px 18px; border-radius: 16px; background: var(--gray); }
   .eta .l { font-size: 12px; font-weight: 700; color: var(--ink3); }
   .eta .v { font-size: 26px; font-weight: 900; letter-spacing: -0.04em; margin-top: 2px; }
@@ -293,8 +218,6 @@
   .stop.passed .dot { background: #d9d9d9; border-color: #d9d9d9; }
   .stop.next .dot { background: var(--ink); border-color: var(--ink); }
   .stop.mine .nm::after { content: '우리 아이'; font-size: 11px; font-weight: 800; color: var(--ink); background: var(--y); padding: 2px 7px; border-radius: 6px; margin-left: 6px; vertical-align: 2px; }
-  .busm { position: absolute; left: 13px; width: 30px; height: 30px; border-radius: 10px; background: var(--ink); color: var(--y); display: flex; align-items: center; justify-content: center; z-index: 2; transition: top .9s cubic-bezier(.4,.1,.2,1); top: 12px; }
-  .busm svg { width: 18px; height: 18px; }
 
   /* 07 chart */
   .bars { display: flex; align-items: flex-end; gap: 10px; height: 120px; padding: 0 18px; }
@@ -306,11 +229,6 @@
   .money { display: flex; gap: 20px; padding: 14px 18px 6px; }
   .money b { display: block; font-size: 20px; font-weight: 900; letter-spacing: -0.03em; }
   .money span { font-size: 12px; font-weight: 700; color: var(--ink3); }
-  .ledger { margin: 6px 18px 0; display: grid; grid-template-columns: 56px repeat(6, 1fr); gap: 6px 4px; align-items: center; font-size: 12px; font-weight: 700; }
-  .ledger .h { color: var(--ink3); text-align: center; font-size: 11px; }
-  .ledger i { width: 9px; height: 9px; border-radius: 50%; justify-self: center; background: var(--green); }
-  .ledger i.w { background: var(--warn); }
-  .ledger i.n { background: #e3e3e3; }
 
   /* 숫자로 */
   .facts { padding: 180px 0; }
@@ -322,74 +240,18 @@
   @media (max-width: 900px) { .fgrid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
   @media (max-width: 600px) { .facts { padding: 120px 0; } .fgrid { grid-template-columns: minmax(0,1fr); margin-top: 48px; } .fact.wide { grid-column: auto; } .fact { min-height: 200px; padding: 32px 24px 28px; } }
 
-  /* 비교 */
-  .cmp { padding: 180px 0; }
-  .cmp .cols, .cmp .cr { display: grid; grid-template-columns: 170px minmax(0,1fr) minmax(0,1fr); gap: 10px 28px; }
-  .cmp .cols { margin-top: 80px; padding-bottom: 16px; font-size: 15px; font-weight: 800; color: var(--ink3); }
-  .cmp .cols .s span { background: var(--y); color: var(--ink); padding: 3px 9px; border-radius: 6px; }
-  .cmp ol { display: grid; gap: 0; }
-  .cmp .cr { align-items: center; border-top: 1px solid #dcdcdc; padding: 22px 0; }
-  .cmp .tp { display: flex; gap: 10px; align-items: baseline; font-size: 21px; font-weight: 800; letter-spacing: -0.03em; }
-  .cmp .tp b { font-size: 13px; color: var(--ink3); font-variant-numeric: tabular-nums; }
-  .cmp .bf { font-size: 17px; font-weight: 500; color: var(--ink2); line-height: 1.6; }
-  .cmp .af { background: #fff; border-radius: 20px; padding: 20px 24px; font-size: 18px; font-weight: 700; line-height: 1.55; color: var(--ink); }
-  .cmp .lb { display: none; font-size: 12px; font-weight: 800; color: var(--ink3); margin-bottom: 4px; }
-  .cmp .af .lb span { background: var(--y); color: var(--ink); padding: 2px 6px; border-radius: 6px; }
-  @media (max-width: 860px) {
-    .cmp { padding: 120px 0; }
-    .cmp .cols { display: none; }
-    .cmp ol { margin-top: 48px; }
-    .cmp .cr { grid-template-columns: minmax(0,1fr); gap: 10px; padding: 24px 0; }
-    .cmp .lb { display: block; }
-    .cmp .af { padding: 16px 18px; font-size: 17px; }
-  }
-
-  /* 00 시작 + 도입 3단계 */
-  .setup { padding: 180px 0 160px; }
-  .setup .was { margin-top: 16px; font-size: 15px; color: var(--ink3); font-weight: 500; }
-  .setup .was span { font-weight: 800; margin-right: 8px; color: var(--ink2); }
-  .pcw { margin-top: 72px; display: flex; justify-content: center; }
-  .pc { width: 100%; max-width: 720px; background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.12); text-align: left; }
-  .pc .bar { display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: var(--gray); border-bottom: 1px solid var(--line); }
-  .pc .bar i { width: 10px; height: 10px; border-radius: 50%; background: #d6d6d6; }
-  .pc .bar span { margin-left: 10px; flex: 1; min-width: 0; background: #fff; border-radius: 8px; padding: 4px 10px; font-size: 12px; color: var(--ink3); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .pc .body { padding: 36px 36px 28px; }
-  .pc h3 { font-size: 26px; font-weight: 800; letter-spacing: -0.03em; }
-  .pc .body > p { margin-top: 6px; font-size: 15px; color: var(--ink2); }
-  .pc .abtn { margin: 22px 0 0; }
-  .pc .files { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
-  .pc .files span { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 7px 10px; border-radius: 10px; background: var(--gray); }
-  .pc .files svg { width: 15px; height: 15px; }
-  .pc .rows { margin: 22px -36px 0; }
-  .pc .rows > li { padding: 13px 36px; }
-  @media (max-width: 600px) { .pc .body { padding: 26px 20px 20px; } .pc .rows { margin: 20px -20px 0; } .pc .rows > li { padding: 12px 20px; } }
-  .setup .one { margin-top: 18px; font-size: 15px; font-weight: 700; color: var(--ink2); }
-  .steps { margin-top: 140px; }
-  .steps h3.hl { font-size: clamp(32px, 4.6vw, 64px); }
+  /* 도입 3단계 */
+  .steps { padding: 160px 0; }
   .row3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 56px; text-align: left; }
   @media (max-width: 860px) { .row3 { grid-template-columns: minmax(0,1fr); } }
-  .step { background: var(--gray); border-radius: 28px; padding: 34px 30px 30px; display: flex; flex-direction: column; gap: 10px; min-height: 260px; }
+  .step { background: #fff; border-radius: 28px; padding: 34px 30px 30px; display: flex; flex-direction: column; gap: 10px; min-height: 260px; }
   .step .n { font-size: 56px; font-weight: 900; letter-spacing: -0.05em; line-height: 1; }
   .step h4 { margin-top: 18px; font-size: 22px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.3; }
   .step p { color: var(--ink2); font-size: 16px; font-weight: 500; }
   .step .time { margin-top: auto; padding-top: 10px; font-size: 14px; font-weight: 800; color: var(--ink2); display: inline-flex; align-items: center; gap: 6px; }
   .step .time svg { width: 15px; height: 15px; }
-  @media (max-width: 600px) { .setup { padding: 120px 0; } .steps { margin-top: 100px; } }
-
-  /* 하루 */
-  .tl { padding: 180px 0 170px; }
-  .tl ol { margin: 80px auto 0; position: relative; max-width: 820px; }
-  .tl ol::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: #2e2e2e; }
-  .tl .fill { position: absolute; left: 7px; top: 8px; width: 2px; height: 0; background: var(--y); }
-  .rm .tl .fill { display: none; }
-  .tl li { position: relative; display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 8px 24px; padding: 0 0 56px 44px; }
-  .tl li:last-child { padding-bottom: 0; }
-  .tl li::before { content: ''; position: absolute; left: 0; top: 8px; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); border: 2px solid #555; transition: border-color .3s, background .3s; }
-  .tl li.lit::before { border-color: var(--y); background: var(--y); }
-  .tl .when { font-size: 16px; font-weight: 800; color: #9a9a9a; padding-top: 4px; }
-  .tl h3 { font-size: clamp(26px, 3.4vw, 44px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.15; }
-  .tl p { margin-top: 8px; font-size: 17px; color: #bdbdbd; }
-  @media (max-width: 600px) { .tl { padding: 120px 0; } .tl li { grid-template-columns: minmax(0,1fr); padding-left: 36px; } }
+  .steps .links { margin-top: 48px; }
+  @media (max-width: 600px) { .steps { padding: 120px 0; } .step { min-height: 0; } }
 
   /* final */
   .final { padding: 200px 0 200px; text-align: center; }
@@ -415,8 +277,6 @@
     .js .bars i { transform: none !important; }
     .grow-in { transform: none !important; }
     .tiles .tile { transition: opacity .45s ease !important; }
-    .js .calls .lines li { color: #fff !important; } .js .calls .lines li.last { color: var(--y) !important; }
-    .tl li::before { background: var(--y) !important; border-color: var(--y) !important; }
   }
 </style>
 </head>
@@ -425,11 +285,8 @@
   <div class="wrap">
     <a class="logo" href="#top"><span class="mark"></span>서당</a>
     <nav class="gnb">
-      <a href="#c00">시작</a>
-      <a href="#c02">매일 아침</a>
-      <a href="#c04">셔틀</a>
-      <a href="#c05">수강료</a>
-      <a href="#day">원장님의 하루</a>
+      <a href="#tiles">기능</a>
+      <a href="#facts">숫자</a>
       <a href="#steps">도입 3단계</a>
       <a class="nav-cta" href="/app/">시작하기</a>
     </nav>
@@ -439,7 +296,7 @@
 <div class="lnav" id="lnav" aria-hidden="true">
   <div class="wrap">
     <a class="nm" href="#top" tabindex="-1">서당</a>
-    <nav><a href="#tiles" tabindex="-1">기능</a><a href="#c04" tabindex="-1">셔틀</a><a href="#compare" tabindex="-1">비교</a><a href="#steps" tabindex="-1">도입 3단계</a></nav>
+    <nav><a href="#tiles" tabindex="-1">기능</a><a href="#steps" tabindex="-1">도입 3단계</a></nav>
     <a class="pill-y" href="/app/" tabindex="-1">무료로 시작하기</a>
   </div>
 </div>
@@ -462,7 +319,7 @@
     <p class="sub r h-r d2">셔틀 어디예요? 오늘 갔어요? 얼마예요?<br>학부모가 매일 묻던 것, <b>앱이 먼저 답합니다.</b></p>
     <div class="links r h-r d3">
       <a class="pill-y lg" href="/app/">무료로 시작하기</a>
-      <a class="lnk" href="#calls">하루가 어떻게 바뀌는지 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a>
+      <a class="lnk" href="#tiles">하루가 어떻게 바뀌는지 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a>
     </div>
     <div class="meta r h-r d4"><span>카카오 로그인</span><span>세팅은 운영팀이</span><span>문자비 0원</span></div>
   </div>
@@ -485,22 +342,6 @@
   </div></div>
 </section>
 
-<!-- ===== 매일 받던 전화 ===== -->
-<section class="calls dark" id="calls">
-  <div class="wrap">
-    <p class="eb">원장님이 매일 받던 전화</p>
-    <p class="sub">수업 중에도, 운전 중에도, 저녁에도.</p>
-    <ol class="lines" id="lines">
-      <li>「셔틀 지금 어디예요?」</li>
-      <li>「오늘 잘 갔나요?」</li>
-      <li>「수강료 얼마예요?」</li>
-      <li>「내일 결석이에요.」</li>
-      <li>「보강 언제 돼요?」</li>
-      <li class="last">이제 앱이 먼저 답합니다.</li>
-    </ol>
-  </div>
-</section>
-
 <!-- ===== 기능 — 가운데 카드 하나, 4초마다 다음 카드가 왼쪽에서 들어온다 ===== -->
 <section class="tiles gray" id="tiles" aria-roledescription="carousel" aria-label="기능">
   <div class="tc-stage" id="tcStage" tabindex="0">
@@ -509,7 +350,7 @@
       <p class="t-eb">출석</p>
       <h3>출석부, 수업 끝나고<br>또 따로 정리하세요?</h3>
       <p class="t-d">누르는 즉시 저장되고 학부모에게 바로 알림이 갑니다.</p>
-      <div class="links"><a class="lnk" href="#c03">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+      <div class="links"><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
     </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">초등 A반</span><span class="s">17:00 · 4명</span></div>
@@ -525,7 +366,7 @@
       <p class="t-eb">셔틀</p>
       <h3>“버스 어디예요?” 전화,<br>오늘 몇 통 받으셨어요?</h3>
       <p class="t-d">학부모 앱엔 버스 위치와 「몇 번째 · 몇 분 후」, 탑승·하차 알림.</p>
-      <div class="links"><a class="lnk" href="#c04">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+      <div class="links"><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
     </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">셔틀 · 1호차</span><span class="st g">운행 중</span></div>
@@ -542,7 +383,7 @@
       <p class="t-eb">수강료</p>
       <h3>수강료 독촉 전화,<br>이번 달에도 하셨어요?</h3>
       <p class="t-d">청구일에 자동 청구. 안 냈으면 마감 +1·+3·+7일에 자동 알림이 갑니다.</p>
-      <div class="links"><a class="lnk" href="#c05">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+      <div class="links"><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
     </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">10월 청구서</span><span class="s">마감 10/10</span></div>
@@ -558,7 +399,7 @@
       <p class="t-eb">공지</p>
       <h3>단체 문자방 답장,<br>하나하나 세고 계세요?</h3>
       <p class="t-d">공지는 예약 발송하고, 참석/불참 답장을 앱으로 받습니다.</p>
-      <div class="links"><a class="lnk" href="#c06">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+      <div class="links"><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
     </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">소식</span></div>
@@ -574,7 +415,7 @@
       <p class="t-eb">보강</p>
       <h3>보강 날짜 맞추느라<br>전화 몇 번 오가세요?</h3>
       <p class="t-d">학부모가 앱에서 신청하고 원장님은 승인만. 자리 있는 같은 수준 수업만 후보로 뜹니다.</p>
-      <div class="links"><a class="lnk" href="#c03">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+      <div class="links"><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
     </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">보강 신청</span><span class="s">오늘</span></div>
@@ -589,7 +430,7 @@
       <p class="t-eb">통계</p>
       <h3>월말마다 장부,<br>따로 맞추고 계세요?</h3>
       <p class="t-d">달별 매출(받은 돈 · 미납)과 연간 수납표가 저절로 쌓입니다.</p>
-      <div class="links"><a class="lnk" href="#c07">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+      <div class="links"><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
     </div>
     <div class="snip on-view" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">매출</span><span class="s">2026년</span></div>
@@ -603,182 +444,6 @@
   <div class="tc-ctl">
     <button class="tc-pause" id="tcPause" type="button" aria-label="자동 넘김 멈추기"><svg viewBox="0 0 14 14" id="tcPauseIco"><rect x="2" y="1.5" width="3.5" height="11" rx="1"/><rect x="8.5" y="1.5" width="3.5" height="11" rx="1"/></svg></button>
     <div class="tc-dots" id="tcDots"></div>
-  </div>
-</section>
-
-<!-- ===== 스크롤 장면 1: 01~03 ===== -->
-<section class="story" id="storyA">
-  <div class="wrap">
-    <div class="stps">
-      <article class="stp" id="c01">
-        <div class="txt">
-          <p class="num r"><b>01</b>회원 받기</p>
-          <h2 class="r d1">명단을<br>치지 않습니다.</h2>
-          <p class="now r d2">학부모가 앱에서 자녀 정보를 적어 등록 신청을 보냅니다. 원장님은 반과 오는 요일을 고르고 [승인] 한 번. 체험권(1회)도 승인할 때 같이 줍니다.</p>
-          <p class="was r d2"><span>전에는</span>상담을 받고 이름·번호·반을 직접 입력했습니다.</p>
-          <ul class="more r d3">
-            <li>정원이 찬 반은 「정원 마감」. 대기 명단에 올리면 자리가 날 때 자동으로 올라갑니다.</li>
-            <li>주 2·3·5회 회원이 반 하나에 같이 다닙니다. 오는 요일은 회원마다 따로.</li>
-          </ul>
-        </div>
-        <div class="mk"><div class="ph"><div class="scr"><div class="pg">
-          <div class="ab"><span class="t">등록 신청</span><span class="s">오늘 10:12</span></div>
-          <ul class="rows">
-            <li><span class="av">하</span><span class="m">김하은<small>2017년생 · 학부모 010-••••-1234</small></span><span class="st w">대기</span></li>
-          </ul>
-          <p class="sec">반</p>
-          <div class="chips"><span class="chip on">초등 A반</span><span class="chip">초등 B반</span><span class="chip off">중급반 <small>정원 마감</small></span></div>
-          <p class="sec">오는 요일</p>
-          <div class="chips"><span class="chip day on">월</span><span class="chip day">화</span><span class="chip day on">수</span><span class="chip day">목</span><span class="chip day on">금</span><span class="chip day">토</span></div>
-          <div class="chk"><i><svg class="i" viewBox="0 0 20 20"><path d="M4 10l4 4 8-8"/></svg></i>체험권 1회 같이 주기</div>
-          <div class="abtn">승인</div>
-        </div></div></div></div>
-      </article>
-      <article class="stp" id="c02">
-        <div class="txt">
-          <p class="num r"><b>02</b>매일 아침</p>
-          <h2 class="r d1">오늘 할 일이<br>한 화면에.</h2>
-          <p class="now r d2">홈의 「오늘 할 일」에 등록 신청 · 출석 안 찍은 수업 · 보강 신청 · 답변 기다리는 문의 · 안 낸 청구서가 모입니다. 0건이면 안 보이고, 누르면 그 화면으로 갑니다.</p>
-          <p class="was r d2"><span>전에는</span>문자함, 출석부, 장부를 하나씩 열어 오늘 챙길 일을 찾았습니다.</p>
-        </div>
-        <div class="mk"><div class="ph"><div class="scr"><div class="pg" data-k="todo">
-          <div class="ab"><span class="t">오늘 할 일</span><span class="s">10월 22일 (목)</span></div>
-          <ul class="rows">
-            <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">등록 신청</span><span class="cnt">2</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-            <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">출석 안 찍은 수업<small>초등 B반 · 15:00</small></span><span class="cnt">1</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-            <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">보강 신청</span><span class="cnt">3</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-            <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">답변 기다리는 문의</span><span class="cnt">1</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-            <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">안 낸 청구서</span><span class="cnt">4</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-          </ul>
-          <div class="tabbar"><span class="on">홈</span><span>출석</span><span>셔틀</span><span>수강료</span><span>더보기</span></div>
-        </div></div></div></div>
-      </article>
-      <article class="stp" id="c03">
-        <div class="txt">
-          <p class="num r"><b>03</b>수업</p>
-          <h2 class="r d1">출석은 한 번<br>누르면 끝.</h2>
-          <p class="now r d2">출석·결석·지각을 누르는 즉시 저장되고 학부모에게 바로 알림이 갑니다. 결석 통보와 보강 신청은 학부모가 앱에서 하고, 원장님은 [승인]만.</p>
-          <p class="was r d2"><span>전에는</span>출석부에 적고, 결석한 아이 학부모에게 따로 연락했습니다.</p>
-          <ul class="more r d3">
-            <li>보강권은 월정액 반마다 한 달에 주 횟수만큼, 그 달 안에 씁니다.</li>
-            <li>자리 있는 같은 수준 수업만 보강 후보로 뜹니다.</li>
-          </ul>
-        </div>
-        <div class="mk"><div class="ph"><div class="scr"><div class="pg" data-k="att">
-          <div class="ab"><span class="t">초등 A반</span><span class="s">17:00 · 4명</span></div>
-          <ul class="rows" id="att">
-            <li><span class="av">하</span><span class="m">김하은<small>월 수 금</small></span><span class="att"><button data-v="출석" class="on">출석</button><button data-v="결석">결석</button><button data-v="지각">지각</button></span></li>
-            <li><span class="av">준</span><span class="m">박서준<small>화 목</small></span><span class="att"><button data-v="출석">출석</button><button data-v="결석">결석</button><button data-v="지각">지각</button></span></li>
-            <li><span class="av">윤</span><span class="m">이도윤<small>월 수 금</small></span><span class="att"><button data-v="출석">출석</button><button data-v="결석" class="on">결석</button><button data-v="지각">지각</button></span></li>
-            <li><span class="av">나</span><span class="m">최유나<small>월~금</small></span><span class="att"><button data-v="출석" data-auto>출석</button><button data-v="결석">결석</button><button data-v="지각">지각</button></span></li>
-          </ul>
-          <p class="sec">보강 신청</p>
-          <ul class="rows"><li><span class="m">이도윤 → 금 17:00<small>10월 보강권 1 / 3</small></span><span class="st w">승인 대기</span></li></ul>
-          <div class="toast" id="attToast"><svg class="i" viewBox="0 0 20 20"><path d="M10 3a5 5 0 015 5v3l2 3H3l2-3V8a5 5 0 015-5zM8 17a2 2 0 004 0"/></svg><div><span id="attToastB">저장했어요</span><small>학부모에게 알림을 보냈어요</small></div></div>
-        </div></div></div></div>
-      </article>
-    </div>
-    <div class="stage" aria-hidden="true"><div class="stage-in"><div class="ph"><div class="scr"></div></div></div></div>
-  </div>
-</section>
-
-<!-- ===== 04 셔틀 ===== -->
-<section class="shuttle dark center" id="c04">
-  <div class="wrap">
-    <p class="eb r">04 셔틀</p>
-    <h2 class="hl r d1">운전 중 전화가<br>없어집니다.</h2>
-    <p class="sub r d2">기사님 앱에 티맵 길안내 — 정류장 최대 30곳 순서를 한 번에. 학부모 앱엔 버스 위치와 「몇 번째 · 몇 분 후」, 탑승·하차 알림.</p>
-    <p class="was r d2"><span>전에는</span>운전하면서 「지금 어디쯤이에요?」 전화를 받았습니다.</p>
-    <div class="links r d3"><a class="pill-y" href="/app/">무료로 시작하기</a><a class="lnk" href="#compare">보통 학원과 비교해 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
-  </div>
-  <div class="stagephone grow"><div class="grow-in">
-    <div class="ph"><div class="scr">
-      <div class="ab"><span class="t">셔틀 · 1호차</span><span class="st g">운행 중</span></div>
-      <div class="eta"><div class="l">우리 아이 정류장</div><div class="v" id="etaV">3번째<small>약 12분 후</small></div></div>
-      <div class="route" id="route">
-        <div class="busm" id="busm"><svg class="i" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="11" rx="2"/><path d="M3 9h14M6 17v-3M14 17v-3"/></svg></div>
-        <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">학원 출발</span><span class="tm">16:05</span></div>
-        <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">정문 앞</span><span class="tm">16:12</span></div>
-        <div class="stop mine"><span class="rail"><span class="dot"></span></span><span class="nm">래미안 3단지</span><span class="tm">16:24</span></div>
-        <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">중앙공원</span><span class="tm">16:31</span></div>
-        <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">학원 도착</span><span class="tm">16:40</span></div>
-      </div>
-      <div class="toast" id="busToast"><svg class="i" viewBox="0 0 20 20"><path d="M10 3a5 5 0 015 5v3l2 3H3l2-3V8a5 5 0 015-5zM8 17a2 2 0 004 0"/></svg><div><span id="busToastB">하은이가 탑승했어요</span><small id="busToastS">래미안 3단지 · 16:24</small></div></div>
-    </div></div>
-  </div></div>
-  <div class="wrap under">
-    <div class="driver r"><svg class="i" viewBox="0 0 20 20"><path d="M10 2l6 16-6-4-6 4z"/></svg><div>기사님 앱 · 티맵 길안내<small>정류장 순서대로 한 번에 안내 중</small></div></div>
-    <p class="fine r d1">위치는 운행 중인 기사님 휴대폰 위치만 쓰고, 운행이 끝나면 지웁니다.</p>
-  </div>
-</section>
-
-<!-- ===== 스크롤 장면 2: 05~07 ===== -->
-<section class="story" id="storyB">
-  <div class="wrap">
-    <div class="stps">
-      <article class="stp" id="c05">
-        <div class="txt">
-          <p class="num r"><b>05</b>수강료</p>
-          <h2 class="r d1">독촉 전화를<br>하지 않습니다.</h2>
-          <p class="now r d2">청구일에 자동 청구. 월 중간에 들어온 회원은 남은 수업만큼 자동 계산하고, 형제는 청구서 한 장. 학부모는 앱에서 카드 결제(또는 학원 계좌 안내). 안 냈으면 마감 +1·+3·+7일에 자동 알림이 가고, 청구서를 열어 봤는지 「안 읽음」까지 보입니다.</p>
-          <p class="was r d2"><span>전에는</span>누가 안 냈는지 장부를 맞춰 보고, 전화로 알렸습니다.</p>
-        </div>
-        <div class="mk"><div class="ph"><div class="scr"><div class="pg" data-k="bill">
-          <div class="ab"><span class="t">10월 청구서</span><span class="s">마감 10/10</span></div>
-          <ul class="rows">
-            <li><span class="m">김하은 · 김하준<small>형제 · 청구서 1장 · 260,000원</small></span><span class="st g">납부</span></li>
-            <li><span class="m">최유나<small>카드 · 130,000원</small></span><span class="st g">납부</span></li>
-            <li><span class="m">박서준<small>130,000원 · +3일 알림 보냄</small></span><span class="st w">미납</span></li>
-            <li><span class="m">이도윤<small>10/14 시작 · 남은 6회 · 78,000원</small></span><span class="st n" data-bill>안 읽음</span></li>
-            <li><span class="m">정민재<small>130,000원 · +7일 알림 보냄</small></span><span class="st r">마감 지남</span></li>
-          </ul>
-          <div class="tabbar"><span>홈</span><span>출석</span><span>셔틀</span><span class="on">수강료</span><span>더보기</span></div>
-        </div></div></div></div>
-      </article>
-      <article class="stp" id="c06">
-        <div class="txt">
-          <p class="num r"><b>06</b>소식</p>
-          <h2 class="r d1">단체 문자방을<br>닫아도 됩니다.</h2>
-          <p class="now r d2">공지(예약 발송, 참석/불참 받기) · 1:1 문의 · 분실물 · 수업 노트(사진). 학원 전체 쉬는 날을 넣으면 그날 수업 정리와 공지까지 한 번에.</p>
-          <p class="was r d2"><span>전에는</span>공지마다 단체 문자를 보내고, 답장을 하나씩 셌습니다.</p>
-        </div>
-        <div class="mk"><div class="ph"><div class="scr"><div class="pg">
-          <div class="ab"><span class="t">소식</span></div>
-          <div class="seg"><span class="on">공지</span><span>문의</span><span>분실물</span><span>수업 노트</span></div>
-          <ul class="rows" style="margin-top:14px">
-            <li><span class="m">10/31(금) 핼러윈 행사<small>예약 발송 · 10/24 09:00</small></span><span class="st w">예약</span></li>
-            <li style="gap:14px;flex-wrap:wrap"><span class="st g">참석 18</span><span class="st r">불참 3</span><span class="st n">미응답 4</span></li>
-            <li><span class="m">11/3(월) 학원 쉬는 날<small>그날 수업 6개 정리됨 · 공지 발송</small></span><span class="st g">보냄</span></li>
-            <li><span class="m">초등 A반 수업 노트<small>사진 3장 · 오늘 17:50</small></span><span class="st g">보냄</span></li>
-          </ul>
-        </div></div></div></div>
-      </article>
-      <article class="stp" id="c07">
-        <div class="txt">
-          <p class="num r"><b>07</b>월말</p>
-          <h2 class="r d1">장부가<br>저절로.</h2>
-          <p class="now r d2">달별 매출(받은 돈 · 미납)과 연간 수납표(회원 × 달)가 저절로 쌓입니다. 직원 출근 체크로 급여(월급·시급·일당)도 계산됩니다.</p>
-          <p class="was r d2"><span>전에는</span>월말마다 받은 돈과 미납을 엑셀로 정리하고, 급여를 손으로 계산했습니다.</p>
-          <ul class="more r d3"><li>직원에게 「관리자 권한」을 주면 원장님과 같은 일을, 안 주면 출석·셔틀·수업 노트만 합니다.</li></ul>
-        </div>
-        <div class="mk"><div class="ph"><div class="scr"><div class="pg" data-k="bars">
-          <div class="ab"><span class="t">매출</span><span class="s">2026년</span></div>
-          <div class="money"><div><b>3,120,000원</b><span>10월 받은 돈</span></div><div><b>260,000원</b><span>미납</span></div></div>
-          <div class="bars" style="margin-top:12px">
-            <div><i style="height:62%"></i>5월</div><div><i style="height:70%"></i>6월</div><div><i style="height:66%"></i>7월</div><div><i style="height:78%"></i>8월</div><div><i style="height:84%"></i>9월</div><div class="on"><i style="height:92%"></i>10월</div>
-          </div>
-          <p class="sec" style="margin-top:12px">수납표</p>
-          <div class="ledger">
-            <span></span><span class="h">5</span><span class="h">6</span><span class="h">7</span><span class="h">8</span><span class="h">9</span><span class="h">10</span>
-            <span>김하은</span><i></i><i></i><i></i><i></i><i></i><i></i>
-            <span>박서준</span><i></i><i></i><i class="w"></i><i></i><i></i><i class="w"></i>
-            <span>이도윤</span><i class="n"></i><i class="n"></i><i class="n"></i><i class="n"></i><i class="n"></i><i class="w"></i>
-          </div>
-          <ul class="rows" style="margin-top:14px"><li><span class="m">강사 1명 · 시급<small>출근 체크 42시간</small></span><span class="cnt">10월 급여</span></li></ul>
-        </div></div></div></div>
-      </article>
-    </div>
-    <div class="stage" aria-hidden="true"><div class="stage-in"><div class="ph"><div class="scr"></div></div></div></div>
   </div>
 </section>
 
@@ -799,85 +464,17 @@
   </div>
 </section>
 
-<!-- ===== 보통 학원 / 서당 학원 ===== -->
-<section class="cmp gray" id="compare">
+<!-- ===== 도입 3단계 ===== -->
+<section class="steps gray center" id="steps">
   <div class="wrap">
-    <div class="center">
-      <p class="eb r">학원을 운영하며 겪는 불편</p>
-      <h2 class="hl r d1">보통 학원에서는,<br>서당 학원에서는.</h2>
+    <p class="eb r">도입 3단계</p>
+    <h2 class="hl r d1">시작은 3단계,<br>세팅은 저희가.</h2>
+    <div class="row3">
+      <div class="step r"><div class="n">1</div><h4>카카오 로그인 · 도입 신청</h4><p>버튼 하나, 회원가입 없음.</p><span class="time"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>1분</span></div>
+      <div class="step r d1"><div class="n">2</div><h4>자료만 보내 주세요</h4><p>사진·엑셀 그대로. 세팅은 운영팀이 합니다.</p><span class="time"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>1~2일</span></div>
+      <div class="step r d2"><div class="n">3</div><h4>학부모는 앱에서 등록 신청</h4><p>원장님은 승인 한 번.</p><span class="time"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>1분</span></div>
     </div>
-    <div class="cols r d2"><span></span><span>보통 학원에서는</span><span class="s"><span>서당 학원에서는</span></span></div>
-    <ol>
-      <li class="cr r"><span class="tp"><b>01</b>셔틀 위치</span><p class="bf"><span class="lb">보통 학원에서는</span>운전하면서 「버스 어디예요?」 전화를 받습니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>학부모 앱에 지금 위치와 「몇 번째 · 몇 분 후」가 먼저 뜹니다.</p></li>
-      <li class="cr r"><span class="tp"><b>02</b>출결</span><p class="bf"><span class="lb">보통 학원에서는</span>수업 중에 「잘 도착했나요?」 문자에 답합니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>출석을 누르면 학부모에게 바로 알림이 갑니다.</p></li>
-      <li class="cr r"><span class="tp"><b>03</b>수강료</span><p class="bf"><span class="lb">보통 학원에서는</span>안 낸 집에 독촉 전화와 문자를 합니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>청구서가 자동으로 나가고, 마감 뒤 1·3·7일에 자동 알림이 갑니다. 학부모는 앱에서 카드로 냅니다.</p></li>
-      <li class="cr r"><span class="tp"><b>04</b>장부</span><p class="bf"><span class="lb">보통 학원에서는</span>받은 돈과 미납을 엑셀이나 수기 장부에 적습니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>받은 돈·미납이 저절로 정리되고, 연간 수납표가 쌓입니다.</p></li>
-      <li class="cr r"><span class="tp"><b>05</b>공지</span><p class="bf"><span class="lb">보통 학원에서는</span>단체 문자방에 공지하고 답장을 하나씩 셉니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>앱 공지로 보내고, 예약 발송과 참석/불참 답장을 받습니다.</p></li>
-      <li class="cr r"><span class="tp"><b>06</b>보강</span><p class="bf"><span class="lb">보통 학원에서는</span>보강 날짜를 전화로 하나씩 맞춥니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>학부모가 앱에서 보강을 신청하고, 원장님은 승인만 합니다.</p></li>
-      <li class="cr r"><span class="tp"><b>07</b>회원 등록</span><p class="bf"><span class="lb">보통 학원에서는</span>새 회원 명단을 손으로 입력합니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>학부모가 앱에서 등록 신청을 보내고, 원장님은 승인 한 번.</p></li>
-      <li class="cr r"><span class="tp"><b>08</b>처음 세팅</span><p class="bf"><span class="lb">보통 학원에서는</span>새 프로그램을 처음 세팅하기가 막막합니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>명단 사진만 보내 주시면 운영팀이 대신 세팅합니다.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ===== 00 시작 + 도입 3단계 ===== -->
-<section class="setup center" id="c00">
-  <div class="wrap">
-    <p class="eb r">00 시작</p>
-    <h2 class="hl r d1">세팅은<br>저희가 합니다.</h2>
-    <p class="sub r d2">PC에서 카카오 로그인 → [도입 신청] 버튼 하나. 구글폼에 학원 이름·연락처를 적고, 명단·반·수강료는 사진이나 엑셀 그대로 보내 주세요. 운영팀이 세팅해 원장님 계정에 연결해 드립니다.</p>
-    <p class="was r d2"><span>전에는</span>회원 명단·반·수강료를 프로그램에 하나하나 입력했습니다.</p>
-    <div class="links r d3"><a class="pill-y" href="/app/">무료로 시작하기</a><a class="lnk" href="#steps">도입 3단계 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
-    <div class="pcw grow"><div class="grow-in" style="width:100%;display:flex;justify-content:center">
-      <div class="pc">
-        <div class="bar"><i></i><i></i><i></i><span>seodang.app/app/</span></div>
-        <div class="body">
-          <h3>도입 신청</h3>
-          <p>카카오 계정으로 로그인했어요.</p>
-          <div class="abtn">도입 신청</div>
-          <div class="files">
-            <span><svg class="i" viewBox="0 0 20 20"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M3 13l4-4 3 3 2-2 5 5"/></svg>회원 명단.jpg</span>
-            <span><svg class="i" viewBox="0 0 20 20"><path d="M5 2h7l4 4v12H5z"/><path d="M12 2v4h4"/></svg>수강료표.xlsx</span>
-          </div>
-          <ul class="rows">
-            <li><span class="m">신청 접수</span><span class="st g">완료</span></li>
-            <li><span class="m">자료 받음</span><span class="st g">완료</span></li>
-            <li><span class="m">운영팀 세팅</span><span class="st w">진행 중</span></li>
-            <li><span class="m">원장님 계정에 연결</span><span class="st n">—</span></li>
-          </ul>
-        </div>
-      </div>
-    </div></div>
-    <p class="one r">세팅까지 1~2일</p>
-
-    <div class="steps" id="steps">
-      <p class="eb r">도입 3단계</p>
-      <h3 class="hl r d1">시작은 3단계,<br>세팅은 저희가.</h3>
-      <div class="row3">
-        <div class="step r"><div class="n">1</div><h4>카카오 로그인 · 도입 신청</h4><p>버튼 하나, 회원가입 없음.</p><span class="time"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>1분</span></div>
-        <div class="step r d1"><div class="n">2</div><h4>자료만 보내 주세요</h4><p>사진·엑셀 그대로. 세팅은 운영팀이 합니다.</p><span class="time"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>1~2일</span></div>
-        <div class="step r d2"><div class="n">3</div><h4>학부모는 앱에서 등록 신청</h4><p>원장님은 승인 한 번.</p><span class="time"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>1분</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 원장님의 하루 ===== -->
-<section class="tl dark" id="day">
-  <div class="wrap">
-    <div class="center">
-      <p class="eb r">원장님의 하루</p>
-      <h2 class="hl r d1">전화 대신,<br>앱이 하는 하루.</h2>
-      <p class="sub r d2">아침부터 청구일까지, 이렇게 바뀝니다.</p>
-    </div>
-    <ol id="tl">
-      <span class="fill" id="tlFill"></span>
-      <li><span class="when">아침</span><div><h3>오늘 할 일 확인</h3><p>등록 신청 · 보강 신청 · 안 낸 청구서까지 홈 한 화면에서.</p></div></li>
-      <li><span class="when">오후</span><div><h3>출석 한 번씩</h3><p>누르면 저장되고, 학부모에게 바로 알림이 갑니다.</p></div></li>
-      <li><span class="when">오후</span><div><h3>셔틀 출발</h3><p>기사님은 티맵 길안내, 학부모는 「몇 번째 · 몇 분 후」.</p></div></li>
-      <li><span class="when">저녁</span><div><h3>전화 없음</h3><p>묻던 것은 앱에 이미 떠 있습니다.</p></div></li>
-      <li><span class="when">청구일</span><div><h3>아무것도 안 함</h3><p>청구도, 안 낸 집 알림도 자동입니다.</p></div></li>
-    </ol>
+    <div class="links r d3"><a class="pill-y lg" href="/app/">무료로 시작하기</a></div>
   </div>
 </section>
 
@@ -928,73 +525,6 @@
 
   // 첫 화면 글 — 인트로 없이 바로 올린다(대문 인트로 삭제, 사용자 결정 2026-10-23)
   document.querySelectorAll('.h-r').forEach(function (el) { el.classList.add('on'); });
-
-  // ---------- 스크롤 장면: 고정 휴대폰 ----------
-  var mqWide = matchMedia('(min-width: 1024px)');
-  var PLAY = {
-    todo: function (pg, T) { all('.rows li', pg).forEach(function (li, k) { T.push(setTimeout(function () { li.classList.add('done'); }, 500 + k * 380)); }); },
-    att: function (pg, T) {
-      var b = pg.querySelector('[data-auto]'), t = pg.querySelector('.toast');
-      T.push(setTimeout(function () { all('button', b.parentNode).forEach(function (o) { o.classList.toggle('on', o === b); }); $('attToastB').textContent = '최유나 · 출석 저장했어요'; t.classList.add('on'); }, 800));
-      T.push(setTimeout(function () { t.classList.remove('on'); }, 3200));
-    },
-    bill: function (pg, T) {
-      var s = pg.querySelector('[data-bill]');
-      T.push(setTimeout(function () { s.className = 'st n'; s.textContent = '읽음'; }, 900));
-      T.push(setTimeout(function () { s.className = 'st g'; s.textContent = '납부'; }, 2100));
-    },
-    bars: function (pg, T) { T.push(setTimeout(function () { pg.classList.add('on-view'); }, 60)); }
-  };
-  var RESET = {
-    todo: function (pg) { all('.rows li', pg).forEach(function (li) { li.classList.remove('done'); }); },
-    att: function (pg) { pg.querySelector('[data-auto]').classList.remove('on'); pg.querySelector('.toast').classList.remove('on'); },
-    bill: function (pg) { var s = pg.querySelector('[data-bill]'); s.className = 'st n'; s.textContent = '안 읽음'; },
-    bars: function (pg) { pg.classList.remove('on-view'); }
-  };
-  function stopP(pg) { if (!pg) return; (pg.__T || []).forEach(clearTimeout); pg.__T = []; var k = pg.dataset.k; if (k && RESET[k]) RESET[k](pg); }
-  function playP(pg) { stopP(pg); var k = pg.dataset.k; if (!RM && k && PLAY[k]) PLAY[k](pg, pg.__T); }
-  var stories = all('.story').map(function (st) {
-    var steps = all('.stp', st), pages = steps.map(function (s) { return s.querySelector('.pg'); });
-    return { el: st, steps: steps, pages: pages, homes: pages.map(function (p) { return p.parentNode; }), scr: st.querySelector('.stage .scr'), ph: st.querySelector('.stage .ph'), cur: -1, live: false };
-  });
-  if (RM) stories.forEach(function (s) { s.pages.forEach(function (p) { if (p.dataset.k === 'bars') p.classList.add('on-view'); }); });
-  function sizeStage(s) { var k = Math.min(1.12, (innerHeight - 64) / 620); s.ph.style.transform = 'scale(' + k.toFixed(3) + ')'; }
-  function setLive() {
-    var want = !RM && mqWide.matches;
-    stories.forEach(function (s) {
-      if (want === s.live) return;
-      s.live = want; s.el.classList.toggle('live', want);
-      s.pages.forEach(function (p, i) { stopP(p); p.classList.remove('act', 'prev'); (want ? s.scr : s.homes[i]).appendChild(p); });
-      s.steps.forEach(function (st) { st.classList.remove('cur'); });
-      s.cur = -1; if (want) sizeStage(s);
-      if (!want) s.pages.forEach(function (p) { if (p.__vis) playP(p); });
-    });
-  }
-  setLive();
-  if (mqWide.addEventListener) mqWide.addEventListener('change', function () { setLive(); onScroll(); });
-  if ('IntersectionObserver' in window && !RM) {
-    var ioP = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        e.target.__vis = e.isIntersecting;
-        var s = stories.filter(function (x) { return x.pages.indexOf(e.target) >= 0; })[0];
-        if (s && s.live) return;
-        if (e.isIntersecting) playP(e.target); else stopP(e.target);
-      });
-    }, { threshold: 0.45 });
-    stories.forEach(function (s) { s.pages.forEach(function (p) { ioP.observe(p); }); });
-  }
-  function paintStories(vh) {
-    stories.forEach(function (s) {
-      if (!s.live) return;
-      var r = s.el.getBoundingClientRect(); if (r.bottom < 0 || r.top > vh) return;
-      var best = 0, bd = 1e9;
-      s.steps.forEach(function (st, i) { var q = st.getBoundingClientRect(), d = Math.abs(q.top + q.height / 2 - vh / 2); if (d < bd) { bd = d; best = i; } });
-      if (best === s.cur) return;
-      s.steps.forEach(function (st, i) { st.classList.toggle('cur', i === best); });
-      s.pages.forEach(function (p, i) { p.classList.toggle('act', i === best); p.classList.toggle('prev', i < best); });
-      if (s.cur >= 0) stopP(s.pages[s.cur]); playP(s.pages[best]); s.cur = best;
-    });
-  }
 
   // ---------- 기능 카드: 가운데 하나. p 가 커지면 지금 카드는 오른쪽으로, 다음 카드는 왼쪽에서 ----------
   (function () {
@@ -1105,10 +635,7 @@
   })();
 
   // ---------- 공통 ----------
-  var hd = $('hd'), ln = $('lnav'), heroSec = $('top');
-  var lines = all('#lines li'), grows = all('.grow');
-  var tl = $('tl'), tlFill = $('tlFill'), tlItems = all('#tl li');
-  var lnLinks = all('a', ln);
+  var hd = $('hd'), ln = $('lnav'), heroSec = $('top'), grows = all('.grow'), lnLinks = all('a', ln);
   var ticking = false, lnOn = false;
   function update() {
     ticking = false;
@@ -1116,23 +643,15 @@
     hd.classList.toggle('glass', sy > 20);
     var show = sy > heroSec.offsetTop + heroSec.offsetHeight * 0.55;
     if (show !== lnOn) { lnOn = show; ln.classList.toggle('show', show); hd.classList.toggle('up', show); ln.setAttribute('aria-hidden', show ? 'false' : 'true'); lnLinks.forEach(function (a) { a.tabIndex = show ? 0 : -1; }); }
-    paintStories(vh);
-    if (!RM) {
-      grows.forEach(function (g) {
-        var r = g.getBoundingClientRect(); if (r.top > vh || r.bottom < 0) return;
-        var p = clamp((vh - r.top) / (vh * 0.8)), e = 1 - Math.pow(1 - p, 2);
-        g.firstElementChild.style.transform = 'scale(' + lerp(0.84, 1, e).toFixed(4) + ')';
-      });
-      var th = vh * 0.62;
-      lines.forEach(function (li) { var r = li.getBoundingClientRect(); li.classList.toggle('lit', r.top + r.height / 2 < th); });
-      var tr = tl.getBoundingClientRect();
-      tlFill.style.height = (clamp((th - tr.top) / tr.height) * (tr.height - 16)).toFixed(1) + 'px';
-      tlItems.forEach(function (li) { li.classList.toggle('lit', li.getBoundingClientRect().top + 14 < th); });
-    }
+    if (!RM) grows.forEach(function (g) {
+      var r = g.getBoundingClientRect(); if (r.top > vh || r.bottom < 0) return;
+      var p = clamp((vh - r.top) / (vh * 0.8)), e = 1 - Math.pow(1 - p, 2);
+      g.firstElementChild.style.transform = 'scale(' + lerp(0.84, 1, e).toFixed(4) + ')';
+    });
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
   addEventListener('scroll', onScroll, { passive: true });
-  var rzT; addEventListener('resize', function () { clearTimeout(rzT); rzT = setTimeout(function () { setLive(); stories.forEach(function (s) { if (s.live) sizeStage(s); }); placeBus(); onScroll(); }, 150); });
+  addEventListener('resize', onScroll);
   update();
 
   // ---------- reveal ----------
@@ -1143,43 +662,6 @@
     all('.r:not(.h-r)').forEach(function (el) { io.observe(el); });
   } else {
     all('.r').forEach(function (el) { el.classList.add('on'); });
-  }
-
-  // ---------- 03 출석 — 눌러 볼 수 있다 ----------
-  var tst = $('attToast'), tstB = $('attToastB'), tstT;
-  $('att').addEventListener('click', function (e) {
-    var b = e.target.closest('button'); if (!b) return;
-    var pg = b.closest('.pg'); (pg.__T || []).forEach(clearTimeout);
-    all('button', b.parentNode).forEach(function (o) { o.classList.toggle('on', o === b); });
-    var nm = b.closest('li').querySelector('.m').firstChild.textContent;
-    tstB.textContent = nm + ' · ' + b.dataset.v + ' 저장했어요';
-    tst.classList.add('on'); clearTimeout(tstT); tstT = setTimeout(function () { tst.classList.remove('on'); }, 1800);
-  });
-
-  // ---------- 04 셔틀 ----------
-  var stops = all('#route .stop'), busm = $('busm'), etaV = $('etaV');
-  var bt = $('busToast'), btB = $('busToastB'), btS = $('busToastS');
-  var mine = 2, pos = 1, etas = ['약 19분 후', '약 12분 후'];
-  function placeBus() {
-    stops.forEach(function (s, i) { s.classList.toggle('passed', i < pos); s.classList.toggle('next', i === pos); });
-    var s = stops[pos]; busm.style.top = (s.offsetTop + (s.offsetHeight - 30) / 2) + 'px';
-    if (pos < mine) etaV.innerHTML = (mine - pos + 1) + '번째<small>' + etas[pos] + '</small>';
-    else if (pos === mine) etaV.innerHTML = '지금 도착<small>16:24</small>';
-    else etaV.innerHTML = '탑승 완료<small>학원으로 가는 중</small>';
-  }
-  placeBus();
-  if (!RM && 'IntersectionObserver' in window) {
-    var busTimer = null;
-    new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting && !busTimer) busTimer = setInterval(function () {
-          pos = (pos + 1) % stops.length; placeBus();
-          var msg = pos === mine ? ['셔틀이 곧 도착해요', '래미안 3단지 · 약 1분 후'] : pos === mine + 1 ? ['하은이가 탑승했어요', '래미안 3단지 · 16:24'] : pos === stops.length - 1 ? ['학원에 도착했어요', '16:40 · 하차'] : null;
-          if (msg) { btB.textContent = msg[0]; btS.textContent = msg[1]; bt.classList.add('on'); setTimeout(function () { bt.classList.remove('on'); }, 1700); }
-        }, 2200);
-        else if (!e.isIntersecting && busTimer) { clearInterval(busTimer); busTimer = null; }
-      });
-    }, { threshold: 0.3 }).observe($('route'));
   }
 })();
 </script>
