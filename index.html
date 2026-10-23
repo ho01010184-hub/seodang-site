@@ -110,50 +110,6 @@
     .kakao-fab.lifted { bottom: 92px; }
   }
 
-  /* ---------- intro: 대문이 열린다 (CSS 3D, 2.75초) ----------
-     덮개와 문짝은 첫 그림 전에 body 맨 앞 스크립트가 만든다. .go 가 붙으면 재생. */
-  #intro { position: fixed; inset: 0; z-index: 1000; overflow: hidden; cursor: pointer; background: transparent; }
-  #intro.out { opacity: 0 !important; transition: opacity .28s ease; pointer-events: none; }
-  #intro .skip { position: absolute; right: 20px; bottom: 20px; z-index: 3; color: #9a9a9a; font-size: 13px; font-weight: 600; }
-  .dscene { position: absolute; inset: 0; perspective: 140vmax; perspective-origin: 50% 50%; }
-  .dlight { position: absolute; inset: 0; background: radial-gradient(ellipse 55% 75% at 50% 50%, #fff 0 45%, #FFF6CC 100%); }
-  .leaf { position: absolute; top: 0; bottom: 0; width: 50.2%; transform-style: preserve-3d; will-change: transform; }
-  .leaf.l { left: 0; transform-origin: left center; }
-  .leaf.r { right: 0; transform-origin: right center; }
-  .face { position: absolute; inset: 0; overflow: hidden;
-    background:
-      linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.32)),
-      repeating-linear-gradient(90deg, rgba(0,0,0,.6) 0 2px, rgba(255,255,255,.04) 2px 3px, transparent 3px 25%),
-      repeating-linear-gradient(90deg, transparent 0 9px, rgba(255,255,255,.025) 9px 10px, transparent 10px 23px),
-      #1f1f1f; }
-  .leaf.l .face { box-shadow: inset -2px 0 0 rgba(0,0,0,.7); }
-  .leaf.r .face { box-shadow: inset 2px 0 0 rgba(0,0,0,.7); }
-  .bt { position: absolute; left: 0; right: 0; height: 6.5%;
-    background: radial-gradient(circle, #8e8e8e 0 .45vmin, #3a3a3a .55vmin .95vmin, transparent 1.05vmin) center / 25% 100% repeat-x, linear-gradient(#2a2a2a, #121212);
-    box-shadow: 0 .8vmin 1.8vmin rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.09); }
-  .ring { position: absolute; top: 50%; width: max(34px, 7vmin); height: max(34px, 7vmin); border: max(4px, .9vmin) solid var(--y); border-radius: 50%; box-shadow: 0 .6vmin 1.2vmin rgba(0,0,0,.5); }
-  .ring::before { content: ''; position: absolute; left: 50%; top: calc(-1 * max(14px, 2.6vmin)); width: max(14px, 2.6vmin); height: max(14px, 2.6vmin); margin-left: calc(-.5 * max(14px, 2.6vmin)); border-radius: 50%; background: #2e2e2e; box-shadow: inset 0 0 0 max(3px, .5vmin) var(--y); }
-  .leaf.l .ring { right: 7%; } .leaf.r .ring { left: 7%; }
-  .shade { position: absolute; inset: 0; background: #000; opacity: 0; }
-  .edge { position: absolute; top: 0; bottom: 0; width: max(14px, 2.4vmin); background: linear-gradient(90deg, #303030, #151515); }
-  .leaf.l .edge { left: 100%; transform-origin: left center; transform: rotateY(90deg); }
-  .leaf.r .edge { right: 100%; transform-origin: right center; transform: rotateY(-90deg); }
-  .dspill { position: absolute; left: 50%; top: 0; bottom: 0; width: 36vw; margin-left: -18vw; background: radial-gradient(ellipse 50% 62% at 50% 50%, rgba(255,214,90,.4), transparent 70%); opacity: 0; pointer-events: none; }
-  @keyframes dOpenL { 0% { transform: rotateY(0); animation-timing-function: ease-out; } 16% { transform: rotateY(5deg); animation-timing-function: cubic-bezier(.55,0,.25,1); } 100% { transform: rotateY(106deg); } }
-  @keyframes dOpenR { 0% { transform: rotateY(0); animation-timing-function: ease-out; } 16% { transform: rotateY(-5deg); animation-timing-function: cubic-bezier(.55,0,.25,1); } 100% { transform: rotateY(-106deg); } }
-  @keyframes dShade { 0%, 16% { opacity: 0; } 100% { opacity: .78; } }
-  @keyframes dSpill { 0% { opacity: 0; } 14% { opacity: 1; } 40% { opacity: .5; } 70%, 100% { opacity: 0; } }
-  @keyframes dLight { to { opacity: 0; } }
-  @keyframes dZoom { from { transform: scale(1); } to { transform: scale(1.14); } }
-  @keyframes dFade { to { opacity: 0; } }
-  #intro.go .leaf.l { animation: dOpenL 2s .15s both; }
-  #intro.go .leaf.r { animation: dOpenR 2s .15s both; }
-  #intro.go .shade { animation: dShade 2s .15s both; }
-  #intro.go .dspill { animation: dSpill 2s .15s both; }
-  #intro.go .dlight { animation: dLight .9s 1s both ease; }
-  #intro.go .dscene { animation: dZoom 1.5s 1.05s both cubic-bezier(.4,0,.2,1); }
-  #intro.go { animation: dFade .45s 2.25s both; }
-
   /* hero */
   .hero { padding: 148px 0 0; text-align: center; overflow: hidden; }
   .hero .eb { color: var(--ink2); }
@@ -178,23 +134,47 @@
   .js .calls .lines li.last.lit { color: var(--y); }
   @media (max-width: 600px) { .calls { padding: 120px 0; } }
 
-  /* 기능 타일 */
-  .tiles { padding: 12px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-  @media (max-width: 860px) { .tiles { grid-template-columns: minmax(0,1fr); } }
-  .tile { background: #fff; border-radius: 28px; overflow: hidden; text-align: center; padding: 56px 24px 0; display: flex; flex-direction: column; align-items: center; min-height: 620px; }
+  /* 기능 — 가운데 카드 하나. 다음 카드는 왼쪽에서 들어오고, 지금 카드는 오른쪽으로 빠진다(4초마다 자동) */
+  .tiles { padding: 120px 0 104px; overflow: hidden; --tcw: min(1100px, 80vw); --tch: 560px; }
+  @media (max-width: 720px) { .tiles { padding: 80px 0 72px; --tcw: calc(100vw - 80px); --tch: 520px; } }
+  .tc-stage { position: relative; height: var(--tch); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+  .tc-stage:focus-visible { outline: 3px solid var(--ink); outline-offset: 6px; border-radius: 12px; }
+  .tile { position: absolute; left: 50%; top: 0; width: var(--tcw); height: var(--tch); margin-left: calc(var(--tcw) / -2); background: #fff; border-radius: 28px; overflow: hidden; display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); will-change: transform, opacity; backface-visibility: hidden; cursor: pointer; }
+  .tile.is-c { cursor: auto; }
   .tile.k { background: var(--ink); color: #fff; }
+  .tile .txt { padding: 56px 24px 56px 56px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
   .tile .t-eb { font-size: 17px; font-weight: 800; color: var(--ink3); }
   .tile.k .t-eb { color: #9a9a9a; }
-  .tile h3 { margin-top: 8px; font-size: clamp(32px, 3.6vw, 52px); font-weight: 900; letter-spacing: -0.05em; line-height: 1.08; }
-  .tile .t-d { margin-top: 12px; font-size: clamp(16px, 1.4vw, 19px); font-weight: 600; color: var(--ink2); max-width: 420px; line-height: 1.5; }
+  .tile h3 { margin-top: 10px; font-size: clamp(30px, 3.2vw, 44px); font-weight: 900; letter-spacing: -0.05em; line-height: 1.16; }
+  .tile .t-d { margin-top: 16px; font-size: clamp(16px, 1.4vw, 19px); font-weight: 600; color: var(--ink2); max-width: 420px; line-height: 1.5; text-wrap: pretty; }
   .tile.k .t-d { color: #c9c9c9; }
-  .tile .links { margin-top: 18px; gap: 12px 26px; justify-content: center; }
+  .tile .links { margin-top: 24px; gap: 10px 24px; }
   .tile .lnk { font-size: 17px; }
-  .snip { margin-top: auto; padding-top: 40px; height: 340px; overflow: hidden; width: 100%; display: flex; justify-content: center; }
+  .snip { align-self: end; height: 88%; overflow: hidden; display: flex; justify-content: center; }
+  .snip .ph { max-width: none; }
   .snip .scr { min-height: 520px; }
   .tile.k .ph { background: #2a2a2a; box-shadow: none; }
   .tile.k .ph::before { background: #2a2a2a; }
-  @media (max-width: 600px) { .tile { min-height: 560px; padding-top: 44px; } }
+  .tc-ctl { margin-top: 24px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+  .tc-dots { display: flex; align-items: center; }
+  .tc-dot { height: 36px; padding: 0 5px; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+  .tc-dot span { position: relative; display: block; width: 10px; height: 10px; border-radius: 999px; background: #cfcfcf; overflow: hidden; transition: width .35s var(--ease); }
+  .tc-dot i { position: absolute; inset: 0; background: var(--ink); transform-origin: left center; transform: scaleX(0); }
+  .tc-dot.on span { width: 44px; }
+  .tc-dot.on i { transform: scaleX(var(--f, 1)); }
+  .tc-pause { width: 36px; height: 36px; margin-right: 6px; border-radius: 50%; border: 0; background: #fff; display: grid; place-items: center; cursor: pointer; color: var(--ink); }
+  .tc-pause svg { width: 14px; height: 14px; fill: currentColor; }
+  @media (max-width: 720px) {
+    .tile { display: flex; flex-direction: column; border-radius: 24px; }
+    .tile .txt { padding: 28px 20px 0; justify-content: flex-start; }
+    .tile .t-eb { font-size: 15px; }
+    .tile h3 { font-size: 23px; }
+    .tile .t-d { margin-top: 10px; font-size: 15px; }
+    .tile .links { margin-top: 14px; gap: 6px 18px; }
+    .tile .lnk { font-size: 15px; }
+    .snip { margin-top: auto; height: auto; flex: 1; min-height: 0; padding-top: 16px; }
+    .snip .ph { transform: scale(.82); transform-origin: 50% 0; }
+  }
 
   /* 스크롤 장면: 휴대폰은 고정, 화면만 바뀐다 */
   .story { position: relative; }
@@ -434,27 +414,13 @@
     .js .r { opacity: 1 !important; transform: none !important; }
     .js .bars i { transform: none !important; }
     .grow-in { transform: none !important; }
+    .tiles .tile { transition: opacity .45s ease !important; }
     .js .calls .lines li { color: #fff !important; } .js .calls .lines li.last { color: var(--y) !important; }
     .tl li::before { background: var(--y) !important; border-color: var(--y) !important; }
   }
 </style>
 </head>
 <body>
-<script>
-// 인트로 덮개(대문) — 첫 그림 전에 만든다. 들어올 때마다(새로고침 포함, 사용자 결정 2026-10-22) — 누르면 건너뜀.
-// 움직임 줄이기·딥링크(#…)면 없음. 새로고침 때 브라우저가 중간 위치로 되돌리지 않게 맨 위에서 시작한다.
-(function () {
-  var h = document.documentElement;
-  if (h.classList.contains('rm') || location.hash) return;
-  try { history.scrollRestoration = 'manual'; } catch (e) {}
-  scrollTo(0, 0);
-  function leaf(s) { return '<div class="leaf ' + s + '"><div class="face"><i class="bt" style="top:12%"></i><i class="bt" style="top:46%"></i><i class="bt" style="top:80%"></i><i class="ring"></i><i class="shade"></i></div><div class="edge"></div></div>'; }
-  var d = document.createElement('div'); d.id = 'intro'; d.setAttribute('aria-hidden', 'true');
-  d.innerHTML = '<div class="dscene"><div class="dlight"></div>' + leaf('l') + leaf('r') + '<div class="dspill"></div></div><span class="skip">누르면 건너뜁니다</span>';
-  document.body.appendChild(d); window.__sdIntro = d;
-})();
-</script>
-
 <header id="hd">
   <div class="wrap">
     <a class="logo" href="#top"><span class="mark"></span>서당</a>
@@ -535,13 +501,16 @@
   </div>
 </section>
 
-<!-- ===== 기능 타일 ===== -->
-<section class="tiles gray" id="tiles">
-  <div class="tile r">
-    <p class="t-eb">출석</p>
-    <h3>출석은 한 번<br>누르면 끝.</h3>
-    <p class="t-d">누르는 즉시 저장되고 학부모에게 바로 알림이 갑니다.</p>
-    <div class="links"><a class="lnk" href="#c03">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+<!-- ===== 기능 — 가운데 카드 하나, 4초마다 다음 카드가 왼쪽에서 들어온다 ===== -->
+<section class="tiles gray" id="tiles" aria-roledescription="carousel" aria-label="기능">
+  <div class="tc-stage" id="tcStage" tabindex="0">
+  <article class="tile" data-name="출석" aria-roledescription="slide" aria-label="1 / 6 · 출석">
+    <div class="txt">
+      <p class="t-eb">출석</p>
+      <h3>출석부, 수업 끝나고<br>또 따로 정리하세요?</h3>
+      <p class="t-d">누르는 즉시 저장되고 학부모에게 바로 알림이 갑니다.</p>
+      <div class="links"><a class="lnk" href="#c03">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">초등 A반</span><span class="s">17:00 · 4명</span></div>
       <ul class="rows">
@@ -549,13 +518,15 @@
         <li><span class="av">준</span><span class="m">박서준<small>화 목</small></span><span class="att"><span data-v="출석">출석</span><span data-v="결석">결석</span><span data-v="지각">지각</span></span></li>
         <li><span class="av">윤</span><span class="m">이도윤<small>월 수 금</small></span><span class="att"><span data-v="출석">출석</span><span data-v="결석" class="on">결석</span><span data-v="지각">지각</span></span></li>
       </ul>
-    </div></div></div>
-  </div>
-  <div class="tile k r d1">
-    <p class="t-eb">셔틀</p>
-    <h3>운전 중 전화가<br>없어집니다.</h3>
-    <p class="t-d">학부모 앱엔 버스 위치와 「몇 번째 · 몇 분 후」, 탑승·하차 알림.</p>
-    <div class="links"><a class="lnk" href="#c04">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div></div>
+  </article>
+  <article class="tile k" data-name="셔틀" aria-roledescription="slide" aria-label="2 / 6 · 셔틀">
+    <div class="txt">
+      <p class="t-eb">셔틀</p>
+      <h3>“버스 어디예요?” 전화,<br>오늘 몇 통 받으셨어요?</h3>
+      <p class="t-d">학부모 앱엔 버스 위치와 「몇 번째 · 몇 분 후」, 탑승·하차 알림.</p>
+      <div class="links"><a class="lnk" href="#c04">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">셔틀 · 1호차</span><span class="st g">운행 중</span></div>
       <div class="eta"><div class="l">우리 아이 정류장</div><div class="v">3번째<small>약 12분 후</small></div></div>
@@ -564,13 +535,15 @@
         <div class="stop next"><span class="rail"><span class="dot"></span></span><span class="nm">정문 앞</span><span class="tm">16:12</span></div>
         <div class="stop mine"><span class="rail"><span class="dot"></span></span><span class="nm">래미안 3단지</span><span class="tm">16:24</span></div>
       </div>
-    </div></div></div>
-  </div>
-  <div class="tile k r">
-    <p class="t-eb">수강료</p>
-    <h3>독촉 전화를<br>하지 않습니다.</h3>
-    <p class="t-d">청구일에 자동 청구. 안 냈으면 마감 +1·+3·+7일에 자동 알림이 갑니다.</p>
-    <div class="links"><a class="lnk" href="#c05">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div></div>
+  </article>
+  <article class="tile" data-name="수강료" aria-roledescription="slide" aria-label="3 / 6 · 수강료">
+    <div class="txt">
+      <p class="t-eb">수강료</p>
+      <h3>수강료 독촉 전화,<br>이번 달에도 하셨어요?</h3>
+      <p class="t-d">청구일에 자동 청구. 안 냈으면 마감 +1·+3·+7일에 자동 알림이 갑니다.</p>
+      <div class="links"><a class="lnk" href="#c05">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">10월 청구서</span><span class="s">마감 10/10</span></div>
       <ul class="rows">
@@ -578,13 +551,15 @@
         <li><span class="m">박서준<small>130,000원 · +3일 알림 보냄</small></span><span class="st w">미납</span></li>
         <li><span class="m">정민재<small>130,000원 · +7일 알림 보냄</small></span><span class="st r">마감 지남</span></li>
       </ul>
-    </div></div></div>
-  </div>
-  <div class="tile r d1">
-    <p class="t-eb">공지</p>
-    <h3>단체 문자방을<br>닫아도 됩니다.</h3>
-    <p class="t-d">공지는 예약 발송하고, 참석/불참 답장을 앱으로 받습니다.</p>
-    <div class="links"><a class="lnk" href="#c06">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div></div>
+  </article>
+  <article class="tile k" data-name="공지" aria-roledescription="slide" aria-label="4 / 6 · 공지">
+    <div class="txt">
+      <p class="t-eb">공지</p>
+      <h3>단체 문자방 답장,<br>하나하나 세고 계세요?</h3>
+      <p class="t-d">공지는 예약 발송하고, 참석/불참 답장을 앱으로 받습니다.</p>
+      <div class="links"><a class="lnk" href="#c06">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">소식</span></div>
       <div class="seg"><span class="on">공지</span><span>문의</span><span>분실물</span><span>수업 노트</span></div>
@@ -592,33 +567,42 @@
         <li><span class="m">10/31(금) 핼러윈 행사<small>예약 발송 · 10/24 09:00</small></span><span class="st w">예약</span></li>
         <li style="gap:14px;flex-wrap:wrap"><span class="st g">참석 18</span><span class="st r">불참 3</span><span class="st n">미응답 4</span></li>
       </ul>
-    </div></div></div>
-  </div>
-  <div class="tile r">
-    <p class="t-eb">보강</p>
-    <h3>보강은<br>승인만.</h3>
-    <p class="t-d">학부모가 앱에서 보강을 신청하고, 원장님은 승인만 합니다. 자리 있는 같은 수준 수업만 후보로 뜹니다.</p>
-    <div class="links"><a class="lnk" href="#c03">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div></div>
+  </article>
+  <article class="tile" data-name="보강" aria-roledescription="slide" aria-label="5 / 6 · 보강">
+    <div class="txt">
+      <p class="t-eb">보강</p>
+      <h3>보강 날짜 맞추느라<br>전화 몇 번 오가세요?</h3>
+      <p class="t-d">학부모가 앱에서 신청하고 원장님은 승인만. 자리 있는 같은 수준 수업만 후보로 뜹니다.</p>
+      <div class="links"><a class="lnk" href="#c03">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div>
     <div class="snip" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">보강 신청</span><span class="s">오늘</span></div>
       <ul class="rows">
         <li><span class="m">이도윤 → 금 17:00<small>10월 보강권 1 / 3</small></span><span class="st w">승인 대기</span></li>
       </ul>
       <div class="abtn" style="margin-top:20px">승인</div>
-    </div></div></div>
-  </div>
-  <div class="tile k r d1">
-    <p class="t-eb">통계</p>
-    <h3>장부가<br>저절로.</h3>
-    <p class="t-d">달별 매출(받은 돈 · 미납)과 연간 수납표가 저절로 쌓입니다.</p>
-    <div class="links"><a class="lnk" href="#c07">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div></div>
+  </article>
+  <article class="tile k" data-name="통계" aria-roledescription="slide" aria-label="6 / 6 · 통계">
+    <div class="txt">
+      <p class="t-eb">통계</p>
+      <h3>월말마다 장부,<br>따로 맞추고 계세요?</h3>
+      <p class="t-d">달별 매출(받은 돈 · 미납)과 연간 수납표가 저절로 쌓입니다.</p>
+      <div class="links"><a class="lnk" href="#c07">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a><a class="lnk" href="/app/">무료로 시작하기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div>
     <div class="snip on-view" aria-hidden="true"><div class="ph"><div class="scr">
       <div class="ab"><span class="t">매출</span><span class="s">2026년</span></div>
       <div class="money"><div><b>3,120,000원</b><span>10월 받은 돈</span></div><div><b>260,000원</b><span>미납</span></div></div>
       <div class="bars" style="margin-top:12px">
         <div><i style="height:62%"></i>5월</div><div><i style="height:70%"></i>6월</div><div><i style="height:66%"></i>7월</div><div><i style="height:78%"></i>8월</div><div><i style="height:84%"></i>9월</div><div class="on"><i style="height:92%"></i>10월</div>
       </div>
-    </div></div></div>
+    </div></div>
+  </article>
+  </div>
+  <div class="tc-ctl">
+    <button class="tc-pause" id="tcPause" type="button" aria-label="자동 넘김 멈추기"><svg viewBox="0 0 14 14" id="tcPauseIco"><rect x="2" y="1.5" width="3.5" height="11" rx="1"/><rect x="8.5" y="1.5" width="3.5" height="11" rx="1"/></svg></button>
+    <div class="tc-dots" id="tcDots"></div>
   </div>
 </section>
 
@@ -942,23 +926,8 @@
   function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function lerp(a, b, t) { return a + (b - a) * t; }
 
-  // ---------- 인트로: 대문이 열린다 (CSS 3D, 2.75초) ----------
-  var heroRs = document.querySelectorAll('.h-r');
-  function showHero() { heroRs.forEach(function (el) { el.classList.add('on'); }); }
-  var ov = window.__sdIntro;
-  if (!ov || RM) { if (ov) ov.remove(); showHero(); }
-  else (function () {
-    var done = false, EV = ['pointerdown', 'wheel', 'touchstart', 'keydown'];
-    // 문 너머 빛이 걷힐 때(1초) 첫 화면 글이 올라오고, 2.75초에 덮개를 걷는다
-    var tHero = setTimeout(showHero, 950), tEnd = setTimeout(finish, 2750);
-    function finish() {
-      if (done) return; done = true; clearTimeout(tHero); clearTimeout(tEnd);
-      EV.forEach(function (e) { removeEventListener(e, finish, true); });
-      showHero(); ov.classList.add('out'); setTimeout(function () { ov.remove(); }, 300);
-    }
-    EV.forEach(function (e) { addEventListener(e, finish, { capture: true, passive: true }); });
-    requestAnimationFrame(function () { ov.classList.add('go'); });
-  })();
+  // 첫 화면 글 — 인트로 없이 바로 올린다(대문 인트로 삭제, 사용자 결정 2026-10-23)
+  document.querySelectorAll('.h-r').forEach(function (el) { el.classList.add('on'); });
 
   // ---------- 스크롤 장면: 고정 휴대폰 ----------
   var mqWide = matchMedia('(min-width: 1024px)');
@@ -1026,6 +995,114 @@
       if (s.cur >= 0) stopP(s.pages[s.cur]); playP(s.pages[best]); s.cur = best;
     });
   }
+
+  // ---------- 기능 카드: 가운데 하나. p 가 커지면 지금 카드는 오른쪽으로, 다음 카드는 왼쪽에서 ----------
+  (function () {
+    var sec = $('tiles'), stage = $('tcStage'), dotsEl = $('tcDots'), pauseBtn = $('tcPause'), ico = $('tcPauseIco');
+    var cards = all('.tile', stage), n = cards.length, DWELL = 4000;
+    var S = { p: 0, cur: 0, anim: null, el: 0, hover: false, touch: false, user: false, vis: false, last: 0, drag: null, step: 0, lastP: null, active: -1, suppress: false };
+    function mod(a) { return ((a % n) + n) % n; }
+    function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    var dots = cards.map(function (c, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'tc-dot';
+      b.setAttribute('aria-label', (i + 1) + '번째 기능 · ' + c.dataset.name); b.innerHTML = '<span><i></i></span>';
+      b.addEventListener('click', function () { go(mod(i - mod(S.cur))); }); // 늘 앞으로 — 왼→오 흐름 유지
+      dotsEl.appendChild(b); return b;
+    });
+    function measure() { S.step = cards[0].offsetWidth * 0.92 + (innerWidth < 720 ? 14 : 28); S.lastP = null; }
+    function dist(i, p) { var d = mod(i - p); if (d > n / 2) d -= n; return d; }
+    function render(p) {
+      if (p === S.lastP) return; S.lastP = p;
+      var near = mod(Math.round(p));
+      cards.forEach(function (c, i) {
+        var d = dist(i, p), a = Math.abs(d), center = i === near;
+        if (RM) { c.style.transform = 'none'; c.style.opacity = center ? 1 : 0; c.style.zIndex = center ? 2 : 1; }
+        else {
+          var o = a <= 1 ? 1 - 0.55 * a : Math.max(0, 0.45 - (a - 1) * 0.9);
+          c.style.transform = 'translate3d(' + (-d * S.step).toFixed(2) + 'px,0,0) scale(' + (1 - 0.16 * Math.min(a, 1.5)).toFixed(4) + ')';
+          c.style.opacity = o.toFixed(3);
+          c.style.zIndex = String(20 - Math.round(a * 4));
+          c.style.visibility = o < 0.01 ? 'hidden' : '';
+        }
+        if (c.classList.contains('is-c') !== center) {
+          c.classList.toggle('is-c', center);
+          c.setAttribute('aria-hidden', center ? 'false' : 'true');
+          all('a', c).forEach(function (l) { l.tabIndex = center ? 0 : -1; });
+        }
+      });
+      if (near !== S.active) { dots.forEach(function (b, i) { b.classList.toggle('on', i === near); b.setAttribute('aria-current', i === near ? 'true' : 'false'); }); S.active = near; }
+    }
+    function go(k) {
+      if (!k) return;
+      S.cur += k; S.el = 0;
+      if (RM) { S.p = S.cur; S.anim = null; return; }
+      S.anim = { from: S.p, to: S.cur, t0: performance.now(), dur: 720 + 200 * (Math.abs(S.cur - S.p) - 1) };
+    }
+    function paused() { return S.hover || S.touch || S.user || !S.vis || document.hidden; }
+    function loop(now) {
+      var dt = S.last ? Math.min(now - S.last, 100) : 0; S.last = now;
+      if (S.anim) {
+        var t = clamp((now - S.anim.t0) / S.anim.dur);
+        S.p = lerp(S.anim.from, S.anim.to, ease(t));
+        if (t >= 1) { S.p = S.anim.to; S.anim = null; }
+      } else if (!S.drag && !paused()) { S.el += dt; if (S.el >= DWELL) go(1); }
+      if (S.vis || S.anim) render(S.p);
+      sec.style.setProperty('--f', (S.anim ? 0 : S.el / DWELL).toFixed(4));
+      requestAnimationFrame(loop);
+    }
+    cards.forEach(function (c, i) {
+      c.addEventListener('click', function (e) {
+        if (S.suppress) { e.preventDefault(); S.suppress = false; return; }
+        if (c.classList.contains('is-c')) return;
+        e.preventDefault(); go(Math.round(dist(i, S.p)));
+      });
+    });
+    pauseBtn.addEventListener('click', function () {
+      S.user = !S.user;
+      pauseBtn.setAttribute('aria-label', S.user ? '자동 넘김 다시 시작' : '자동 넘김 멈추기');
+      ico.innerHTML = S.user ? '<path d="M3 1.5v11l9.5-5.5z"/>' : '<rect x="2" y="1.5" width="3.5" height="11" rx="1"/><rect x="8.5" y="1.5" width="3.5" height="11" rx="1"/>';
+    });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    });
+    stage.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') S.hover = true; });
+    stage.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') S.hover = false; });
+    // 손가락으로 밀기: 왼쪽 → 오른쪽으로 밀면 다음(흐름과 같은 방향)
+    stage.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') S.touch = true;
+      if (e.button) return;
+      S.drag = { x0: e.clientX, y0: e.clientY, base: S.anim ? S.anim.to : S.p, start: S.p, on: false, id: e.pointerId };
+    });
+    stage.addEventListener('pointermove', function (e) {
+      var d = S.drag; if (!d || e.pointerId !== d.id) return;
+      var dx = e.clientX - d.x0, dy = e.clientY - d.y0;
+      if (!d.on) {
+        if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy) * 1.2) { d.on = true; S.anim = null; S.cur = Math.round(d.base); d.start = S.p; try { stage.setPointerCapture(e.pointerId); } catch (x) {} }
+        else if (Math.abs(dy) > 12) { S.drag = null; return; }
+        else return;
+      }
+      if (!RM) S.p = d.start + Math.max(-1, Math.min(1, dx / S.step));
+    });
+    function endDrag(e) {
+      var d = S.drag; S.drag = null;
+      if (e.pointerType !== 'mouse') S.touch = false;
+      if (!d || !d.on) return;
+      S.suppress = true; setTimeout(function () { S.suppress = false; }, 50);
+      var dx = e.clientX - d.x0, target = S.cur + (dx > 50 ? 1 : dx < -50 ? -1 : 0);
+      S.cur = target; S.el = 0;
+      if (RM) { S.p = target; return; }
+      S.anim = { from: S.p, to: target, t0: performance.now(), dur: 520 };
+    }
+    stage.addEventListener('pointerup', endDrag);
+    stage.addEventListener('pointercancel', endDrag);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { S.vis = es[0].isIntersecting; }, { threshold: 0.5 }).observe(stage);
+    else S.vis = true;
+    var rz; addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { measure(); render(S.p); }, 120); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); render(S.p); });
+    measure(); render(0);
+    requestAnimationFrame(loop);
+  })();
 
   // ---------- 공통 ----------
   var hd = $('hd'), ln = $('lnav'), heroSec = $('top');
