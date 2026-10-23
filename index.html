@@ -99,11 +99,49 @@
     .kakao-fab.lifted { bottom: 92px; }
   }
 
-  /* intro 덮개 (JS 가 만든다) */
-  #intro { position: fixed; inset: 0; z-index: 1000; background: #000; transition: opacity .35s ease; cursor: pointer; }
-  #intro.out { opacity: 0; pointer-events: none; }
-  #intro canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-  #intro .skip { position: absolute; right: 20px; bottom: 20px; color: #888; font-size: 13px; font-weight: 600; }
+  /* ---------- intro: 대문이 열린다 (CSS 3D, 2.75초) ----------
+     덮개와 문짝은 첫 그림 전에 body 맨 앞 스크립트가 만든다. .go 가 붙으면 재생. */
+  #intro { position: fixed; inset: 0; z-index: 1000; overflow: hidden; cursor: pointer; background: transparent; }
+  #intro.out { opacity: 0 !important; transition: opacity .28s ease; pointer-events: none; }
+  #intro .skip { position: absolute; right: 20px; bottom: 20px; z-index: 3; color: #9a9a9a; font-size: 13px; font-weight: 600; }
+  .dscene { position: absolute; inset: 0; perspective: 140vmax; perspective-origin: 50% 50%; }
+  .dlight { position: absolute; inset: 0; background: radial-gradient(ellipse 55% 75% at 50% 50%, #fff 0 45%, #FFF6CC 100%); }
+  .leaf { position: absolute; top: 0; bottom: 0; width: 50.2%; transform-style: preserve-3d; will-change: transform; }
+  .leaf.l { left: 0; transform-origin: left center; }
+  .leaf.r { right: 0; transform-origin: right center; }
+  .face { position: absolute; inset: 0; overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.32)),
+      repeating-linear-gradient(90deg, rgba(0,0,0,.6) 0 2px, rgba(255,255,255,.04) 2px 3px, transparent 3px 25%),
+      repeating-linear-gradient(90deg, transparent 0 9px, rgba(255,255,255,.025) 9px 10px, transparent 10px 23px),
+      #1f1f1f; }
+  .leaf.l .face { box-shadow: inset -2px 0 0 rgba(0,0,0,.7); }
+  .leaf.r .face { box-shadow: inset 2px 0 0 rgba(0,0,0,.7); }
+  .bt { position: absolute; left: 0; right: 0; height: 6.5%;
+    background: radial-gradient(circle, #8e8e8e 0 .45vmin, #3a3a3a .55vmin .95vmin, transparent 1.05vmin) center / 25% 100% repeat-x, linear-gradient(#2a2a2a, #121212);
+    box-shadow: 0 .8vmin 1.8vmin rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.09); }
+  .ring { position: absolute; top: 50%; width: max(34px, 7vmin); height: max(34px, 7vmin); border: max(4px, .9vmin) solid var(--y); border-radius: 50%; box-shadow: 0 .6vmin 1.2vmin rgba(0,0,0,.5); }
+  .ring::before { content: ''; position: absolute; left: 50%; top: calc(-1 * max(14px, 2.6vmin)); width: max(14px, 2.6vmin); height: max(14px, 2.6vmin); margin-left: calc(-.5 * max(14px, 2.6vmin)); border-radius: 50%; background: #2e2e2e; box-shadow: inset 0 0 0 max(3px, .5vmin) var(--y); }
+  .leaf.l .ring { right: 7%; } .leaf.r .ring { left: 7%; }
+  .shade { position: absolute; inset: 0; background: #000; opacity: 0; }
+  .edge { position: absolute; top: 0; bottom: 0; width: max(14px, 2.4vmin); background: linear-gradient(90deg, #303030, #151515); }
+  .leaf.l .edge { left: 100%; transform-origin: left center; transform: rotateY(90deg); }
+  .leaf.r .edge { right: 100%; transform-origin: right center; transform: rotateY(-90deg); }
+  .dspill { position: absolute; left: 50%; top: 0; bottom: 0; width: 36vw; margin-left: -18vw; background: radial-gradient(ellipse 50% 62% at 50% 50%, rgba(255,214,90,.4), transparent 70%); opacity: 0; pointer-events: none; }
+  @keyframes dOpenL { 0% { transform: rotateY(0); animation-timing-function: ease-out; } 16% { transform: rotateY(5deg); animation-timing-function: cubic-bezier(.55,0,.25,1); } 100% { transform: rotateY(106deg); } }
+  @keyframes dOpenR { 0% { transform: rotateY(0); animation-timing-function: ease-out; } 16% { transform: rotateY(-5deg); animation-timing-function: cubic-bezier(.55,0,.25,1); } 100% { transform: rotateY(-106deg); } }
+  @keyframes dShade { 0%, 16% { opacity: 0; } 100% { opacity: .78; } }
+  @keyframes dSpill { 0% { opacity: 0; } 14% { opacity: 1; } 40% { opacity: .5; } 70%, 100% { opacity: 0; } }
+  @keyframes dLight { to { opacity: 0; } }
+  @keyframes dZoom { from { transform: scale(1); } to { transform: scale(1.14); } }
+  @keyframes dFade { to { opacity: 0; } }
+  #intro.go .leaf.l { animation: dOpenL 2s .15s both; }
+  #intro.go .leaf.r { animation: dOpenR 2s .15s both; }
+  #intro.go .shade { animation: dShade 2s .15s both; }
+  #intro.go .dspill { animation: dSpill 2s .15s both; }
+  #intro.go .dlight { animation: dLight .9s 1s both ease; }
+  #intro.go .dscene { animation: dZoom 1.5s 1.05s both cubic-bezier(.4,0,.2,1); }
+  #intro.go { animation: dFade .45s 2.25s both; }
 
   /* hero */
   .hero { min-height: 100svh; display: flex; align-items: center; padding: 120px 0 80px; }
@@ -135,6 +173,29 @@
   .calls-art { position: sticky; top: 22vh; display: flex; justify-content: center; }
   .calls-art canvas { width: 100%; max-width: 260px; aspect-ratio: 100 / 180; }
   @media (max-width: 800px) { .calls .grid { grid-template-columns: minmax(0,1fr); } .calls-art { display: none; } .calls { padding: 120px 0 140px; } }
+
+  /* compare — 보통 학원 / 서당 학원 */
+  .cmp { padding: 140px 0; }
+  .cmp h2 { margin-top: 14px; font-size: clamp(34px, 4.6vw, 60px); font-weight: 900; letter-spacing: -0.05em; line-height: 1.1; }
+  .cmp .cols, .cmp .cr { display: grid; grid-template-columns: 150px minmax(0,1fr) minmax(0,1fr); gap: 10px 24px; }
+  .cmp .cols { margin-top: 56px; padding-bottom: 14px; font-size: 14px; font-weight: 800; color: var(--ink3); }
+  .cmp .cols .s span { background: var(--y); color: var(--ink); padding: 3px 8px; border-radius: 6px; }
+  .cmp ol { display: grid; gap: 12px; }
+  .cmp .cr { align-items: center; border-top: 1px solid #e2e2e2; padding-top: 12px; }
+  .cmp .tp { display: flex; gap: 10px; align-items: baseline; font-size: 17px; font-weight: 800; letter-spacing: -0.02em; }
+  .cmp .tp b { font-size: 13px; color: var(--ink3); font-variant-numeric: tabular-nums; }
+  .cmp .bf { font-size: 16px; font-weight: 500; color: var(--ink2); line-height: 1.6; }
+  .cmp .af { background: #fff; border-radius: 18px; padding: 18px 22px; font-size: 17px; font-weight: 700; line-height: 1.55; color: var(--ink); }
+  .cmp .lb { display: none; font-size: 12px; font-weight: 800; color: var(--ink3); margin-bottom: 4px; }
+  .cmp .af .lb span { background: var(--y); color: var(--ink); padding: 2px 6px; border-radius: 6px; }
+  @media (max-width: 860px) {
+    .cmp { padding: 96px 0; }
+    .cmp .cols { display: none; }
+    .cmp ol { margin-top: 40px; gap: 20px; }
+    .cmp .cr { grid-template-columns: minmax(0,1fr); gap: 10px; padding-top: 20px; }
+    .cmp .lb { display: block; }
+    .cmp .af { padding: 16px 18px; }
+  }
 
   /* chapters */
   .ch { padding: 140px 0; }
@@ -344,14 +405,16 @@
 </head>
 <body>
 <script>
-// 인트로 덮개 — 첫 그림 전에 만든다. 들어올 때마다(새로고침 포함, 사용자 결정 2026-10-22) — 누르면 건너뜀.
+// 인트로 덮개(대문) — 첫 그림 전에 만든다. 들어올 때마다(새로고침 포함, 사용자 결정 2026-10-22) — 누르면 건너뜀.
 // 움직임 줄이기·딥링크(#…)면 없음. 새로고침 때 브라우저가 중간 위치로 되돌리지 않게 맨 위에서 시작한다.
 (function () {
   var h = document.documentElement;
   if (h.classList.contains('rm') || location.hash) return;
   try { history.scrollRestoration = 'manual'; } catch (e) {}
   scrollTo(0, 0);
+  function leaf(s) { return '<div class="leaf ' + s + '"><div class="face"><i class="bt" style="top:12%"></i><i class="bt" style="top:46%"></i><i class="bt" style="top:80%"></i><i class="ring"></i><i class="shade"></i></div><div class="edge"></div></div>'; }
   var d = document.createElement('div'); d.id = 'intro'; d.setAttribute('aria-hidden', 'true');
+  d.innerHTML = '<div class="dscene"><div class="dlight"></div>' + leaf('l') + leaf('r') + '<div class="dspill"></div></div><span class="skip">누르면 건너뜁니다</span>';
   document.body.appendChild(d); window.__sdIntro = d;
 })();
 </script>
@@ -419,6 +482,25 @@
       </ol>
     </div>
     <div class="calls-art" aria-hidden="true"><canvas id="phoneDots"></canvas></div>
+  </div>
+</section>
+
+<!-- ===== 불편한 점 → 서당은 이렇게 ===== -->
+<section class="cmp gray" id="compare">
+  <div class="wrap">
+    <p class="eyebrow r">학원을 운영하며 겪는 불편</p>
+    <h2 class="r d1">보통 학원에서는,<br>서당 학원에서는.</h2>
+    <div class="cols r d2"><span></span><span>보통 학원에서는</span><span class="s"><span>서당 학원에서는</span></span></div>
+    <ol>
+      <li class="cr r"><span class="tp"><b>01</b>셔틀 위치</span><p class="bf"><span class="lb">보통 학원에서는</span>운전하면서 「버스 어디예요?」 전화를 받습니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>학부모 앱에 지금 위치와 「몇 번째 · 몇 분 후」가 먼저 뜹니다.</p></li>
+      <li class="cr r"><span class="tp"><b>02</b>출결</span><p class="bf"><span class="lb">보통 학원에서는</span>수업 중에 「잘 도착했나요?」 문자에 답합니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>출석을 누르면 학부모에게 바로 알림이 갑니다.</p></li>
+      <li class="cr r"><span class="tp"><b>03</b>수강료</span><p class="bf"><span class="lb">보통 학원에서는</span>안 낸 집에 독촉 전화와 문자를 합니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>청구서가 자동으로 나가고, 마감 뒤 1·3·7일에 자동 알림이 갑니다. 학부모는 앱에서 카드로 냅니다.</p></li>
+      <li class="cr r"><span class="tp"><b>04</b>장부</span><p class="bf"><span class="lb">보통 학원에서는</span>받은 돈과 미납을 엑셀이나 수기 장부에 적습니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>받은 돈·미납이 저절로 정리되고, 연간 수납표가 쌓입니다.</p></li>
+      <li class="cr r"><span class="tp"><b>05</b>공지</span><p class="bf"><span class="lb">보통 학원에서는</span>단체 문자방에 공지하고 답장을 하나씩 셉니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>앱 공지로 보내고, 예약 발송과 참석/불참 답장을 받습니다.</p></li>
+      <li class="cr r"><span class="tp"><b>06</b>보강</span><p class="bf"><span class="lb">보통 학원에서는</span>보강 날짜를 전화로 하나씩 맞춥니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>학부모가 앱에서 보강을 신청하고, 원장님은 승인만 합니다.</p></li>
+      <li class="cr r"><span class="tp"><b>07</b>회원 등록</span><p class="bf"><span class="lb">보통 학원에서는</span>새 회원 명단을 손으로 입력합니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>학부모가 앱에서 등록 신청을 보내고, 원장님은 승인 한 번.</p></li>
+      <li class="cr r"><span class="tp"><b>08</b>처음 세팅</span><p class="bf"><span class="lb">보통 학원에서는</span>새 프로그램을 처음 세팅하기가 막막합니다.</p><p class="af"><span class="lb"><span>서당 학원에서는</span></span>명단 사진만 보내 주시면 운영팀이 대신 세팅합니다.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -801,49 +883,22 @@
   }
   drawHero();
 
-  // ---------- 인트로 ----------
+  // ---------- 인트로: 대문이 열린다 (CSS 3D, 2.75초) ----------
   var heroRs = document.querySelectorAll('.h-r');
   function showHero() { heroRs.forEach(function (el) { el.classList.add('on'); }); }
   var ov = window.__sdIntro;
   if (!ov || RM) { if (ov) ov.remove(); showHero(); }
   else (function () {
-    var cv = document.createElement('canvas'); ov.appendChild(cv);
-    var sk = document.createElement('span'); sk.className = 'skip'; sk.textContent = '누르면 건너뜁니다'; ov.appendChild(sk);
-    var vw = innerWidth, vh = innerHeight, x = sizeCanvas(cv, vw, vh);
-    var r = hero.getBoundingClientRect(), bw, ox, oy;
-    if (r.width && r.top < vh && r.bottom > 0) { bw = Math.round(r.width); ox = r.left; oy = r.top; }
-    else { bw = Math.round(Math.min(vw * 0.84, 560)); ox = (vw - bw) / 2; oy = (vh - bw / 2) / 2; }
-    var b = busPoints(bw), rad = b.step * 0.38, fs = b.step * 1.5;
-    // 작은 「ㅅ」「ㄷ」 글자 스프라이트
-    function sprite(ch) { var s = document.createElement('canvas'), n = Math.ceil(fs * 1.4 * DPR); s.width = s.height = n; var c = s.getContext('2d'); c.fillStyle = '#8a8a8a'; c.font = '700 ' + (fs * DPR) + 'px ' + getComputedStyle(document.body).fontFamily; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(ch, n / 2, n / 2); return s; }
-    var sp = [sprite('ㅅ'), sprite('ㄷ')], ss = fs * 1.4;
-    var P = b.pts.map(function (p, i) {
-      return { tx: ox + p.x, ty: oy + p.y, c: p.c, sx: Math.random() * vw, sy: Math.random() * vh, d: Math.random() * 550, s: sp[i % 2] };
-    });
-    var T0 = performance.now(), raf, done = false;
-    function ease(t) { return t < 0 ? 0 : t > 1 ? 1 : 1 - Math.pow(1 - t, 3); }
-    function mix(a, b2, t) { return Math.round(a + (b2 - a) * t); }
-    function frame(now) {
-      var t = now - T0;
-      var bg = ease((t - 1500) / 450), v = mix(0, 255, bg);
-      x.fillStyle = 'rgb(' + v + ',' + v + ',' + v + ')'; x.fillRect(0, 0, vw, vh);
-      for (var i = 0; i < P.length; i++) {
-        var p = P[i], a = ease((t - p.d) / 160); if (a <= 0) continue;
-        var m = ease((t - 650 - p.d * 0.5) / 750), px = p.sx + (p.tx - p.sx) * m, py = p.sy + (p.ty - p.sy) * m;
-        if (m < 1) { x.globalAlpha = a * (1 - m); x.drawImage(p.s, px - ss / 2, py - ss / 2, ss, ss); }
-        if (m > 0) { x.globalAlpha = m; circ(x, px, py, rad, p.c); }
-      }
-      x.globalAlpha = 1;
-      if (t > 2050) return finish();
-      raf = requestAnimationFrame(frame);
-    }
+    var done = false, EV = ['pointerdown', 'wheel', 'touchstart', 'keydown'];
+    // 문 너머 빛이 걷힐 때(1초) 첫 화면 글이 올라오고, 2.75초에 덮개를 걷는다
+    var tHero = setTimeout(showHero, 950), tEnd = setTimeout(finish, 2750);
     function finish() {
-      if (done) return; done = true; cancelAnimationFrame(raf);
-      ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (e) { removeEventListener(e, finish, true); });
-      showHero(); ov.classList.add('out'); setTimeout(function () { ov.remove(); }, 400);
+      if (done) return; done = true; clearTimeout(tHero); clearTimeout(tEnd);
+      EV.forEach(function (e) { removeEventListener(e, finish, true); });
+      showHero(); ov.classList.add('out'); setTimeout(function () { ov.remove(); }, 300);
     }
-    ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (e) { addEventListener(e, finish, { capture: true, passive: true }); });
-    raf = requestAnimationFrame(frame);
+    EV.forEach(function (e) { addEventListener(e, finish, { capture: true, passive: true }); });
+    requestAnimationFrame(function () { ov.classList.add('go'); });
   })();
 
   // ---------- 검은 섹션: 도트 휴대폰 ----------
