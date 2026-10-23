@@ -10,7 +10,6 @@
 <meta property="og:url" content="https://seodang.app">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#ffffff">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23FFCD00'/%3E%3Cg transform='translate(18 18) scale(.64)' fill='%23111111'%3E%3Cpath d='M50 6L86 42L77 51L50 24L23 51L14 42Z'/%3E%3Cpath d='M22 58H80V70H34V82H80V94H22Z'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script>
@@ -22,7 +21,6 @@
 <style>
   :root {
     --y: #FFCD00; --ink: #111; --ink2: #4d525c; --ink3: #767d8a; --gray: #F5F5F5; --line: #e8e8e8;
-    --brand: #2b5cd9; --brand-s: #eef2fd;
     --green: #1fb871; --green-t: #0d8a52; --green-s: #e7f8f0;
     --red: #e5484d; --red-t: #c3363b; --red-s: #fdeeee;
     --warn: #e07b00; --warn-t: #b35f00; --warn-s: #fff3e0;
@@ -43,11 +41,9 @@
   .dark .eyebrow { color: #9a9a9a; }
   .gray { background: var(--gray); }
   svg.i { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
-  .a1 { fill: currentColor; flex: none; }
 
   /* reveal — JS 가 있을 때만 숨긴다 */
   .js .r { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
-  .js .r.drive { transform: translateX(-72px); transition-duration: 1s; }
   .js .r.on { opacity: 1; transform: none; }
   .r.d1 { transition-delay: .08s; } .r.d2 { transition-delay: .16s; } .r.d3 { transition-delay: .24s; } .r.d4 { transition-delay: .32s; }
 
@@ -59,18 +55,17 @@
 
   /* header */
   header { position: fixed; top: 0; left: 0; right: 0; z-index: 80; border-bottom: 1px solid transparent; transition: background .3s, border-color .3s; }
-  header.glass { background: rgba(255,255,255,.92); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom-color: var(--line); }
-  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
-  .logo { font-size: 22px; font-weight: 900; letter-spacing: -0.04em; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 9px; min-width: 0; }
-  .logo .a1 { width: 23px; height: 28px; }
-  .logo .slogan { margin-left: 6px; padding-left: 14px; border-left: 1px solid var(--line); font-size: 13px; font-weight: 700; letter-spacing: 0; color: var(--ink2); white-space: nowrap; }
-  @media (max-width: 560px) { .logo .slogan { display: none; } }
+  header.glass { background: rgba(255,255,255,.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom-color: var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { font-size: 22px; font-weight: 900; letter-spacing: -0.04em; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  /* 서당 마크(흰 ㅅㄷ)를 검정 타일 안에 — 노랑 위 흰색은 안 읽혀서 검정 (site/img/logo_mark_white.png — 옛 파란 타일 마크에서 흰 글자만 뽑은 것) */
+  .logo .mark { width: 32px; height: 32px; border-radius: 9px; background: var(--ink) url("img/logo_mark_white.png") center / 32px 32px no-repeat; }
   nav.gnb { display: flex; align-items: center; gap: 2px; }
-  nav.gnb a { color: var(--ink2); text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 12px; border-radius: 10px; white-space: nowrap; }
+  nav.gnb a { color: var(--ink2); text-decoration: none; font-size: 15px; font-weight: 600; padding: 8px 12px; border-radius: 10px; }
   nav.gnb a:hover { color: var(--ink); background: var(--gray); }
   nav.gnb a.nav-cta { background: var(--ink); color: #fff; border-radius: 999px; padding: 10px 20px; font-weight: 800; margin-left: 8px; }
   nav.gnb a.nav-cta:hover { background: #333; color: #fff; }
-  @media (max-width: 1100px) { nav.gnb a:not(.nav-cta) { display: none; } }
+  @media (max-width: 900px) { nav.gnb a:not(.nav-cta) { display: none; } }
 
   /* floating CTA — 해시태그 칩 + 알약 바 */
   .float-cta { position: fixed; left: 50%; bottom: 22px; transform: translate(-50%, 160%); z-index: 90; display: flex; flex-direction: column; align-items: center; gap: 10px; transition: transform .45s var(--ease); }
@@ -105,25 +100,26 @@
   }
 
   /* intro 덮개 (JS 가 만든다) */
-  #intro { position: fixed; inset: 0; z-index: 1000; background: #000; transition: opacity .25s ease; cursor: pointer; }
+  #intro { position: fixed; inset: 0; z-index: 1000; background: #000; transition: opacity .35s ease; cursor: pointer; }
   #intro.out { opacity: 0; pointer-events: none; }
   #intro canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   #intro .skip { position: absolute; right: 20px; bottom: 20px; color: #888; font-size: 13px; font-weight: 600; }
 
   /* hero */
-  .hero { position: relative; min-height: 100svh; display: flex; align-items: center; padding: 120px 0 80px; }
-  .hero .wrap { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: 48px; align-items: center; width: 100%; }
-  @media (max-width: 960px) { .hero .wrap { grid-template-columns: minmax(0,1fr); gap: 36px; } .hero { padding: 108px 0 64px; min-height: auto; } }
-  .hero h1 { margin-top: 20px; font-size: clamp(34px, 4.6vw, 62px); font-weight: 900; letter-spacing: -0.05em; line-height: 1.16; text-wrap: pretty; }
-  .hero .ans { margin-top: 28px; display: flex; gap: 14px; font-size: clamp(18px, 1.7vw, 22px); font-weight: 700; line-height: 1.5; max-width: 520px; }
-  .hero .ans::before { content: ''; flex: none; width: 6px; border-radius: 3px; background: var(--y); }
+  .hero { min-height: 100svh; display: flex; align-items: center; padding: 120px 0 80px; }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 48px; align-items: center; width: 100%; }
+  @media (max-width: 960px) { .hero .wrap { grid-template-columns: minmax(0,1fr); gap: 36px; } .hero { padding: 108px 0 56px; min-height: auto; } }
+  .hero h1 { margin-top: 20px; font-size: clamp(44px, 7vw, 92px); font-weight: 900; letter-spacing: -0.055em; line-height: 1.04; }
+  .hero h1 mark { background: linear-gradient(transparent 62%, var(--y) 62%); color: inherit; padding: 0 .04em; }
+  .hero .lead { margin-top: 24px; font-size: clamp(17px, 1.6vw, 21px); color: var(--ink2); font-weight: 500; max-width: 500px; }
+  .hero .lead b { color: var(--ink); }
   .hero .cta-row { margin-top: 36px; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
   .hero .meta { margin-top: 22px; display: flex; gap: 8px 18px; flex-wrap: wrap; font-size: 14px; color: var(--ink2); font-weight: 600; }
   .hero .meta span { display: inline-flex; align-items: center; gap: 6px; }
   .hero .meta span::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
-  .hero-art { position: relative; width: 100%; max-width: 620px; justify-self: center; z-index: 1; }
+  .hero-art { position: relative; width: 100%; max-width: 620px; justify-self: center; }
   .hero-art canvas { display: block; width: 100%; aspect-ratio: 2 / 1; }
-  .hero-road { position: absolute; left: 0; right: 0; top: 70%; height: 3px; background: var(--ink); pointer-events: none; }
+  .hero-art figcaption { margin-top: 14px; font-size: 13px; color: var(--ink3); font-weight: 600; text-align: center; }
 
   /* calls — 줄별로 켜짐 */
   .calls { padding: 22vh 0 24vh; }
@@ -140,84 +136,43 @@
   .calls-art canvas { width: 100%; max-width: 260px; aspect-ratio: 100 / 180; }
   @media (max-width: 800px) { .calls .grid { grid-template-columns: minmax(0,1fr); } .calls-art { display: none; } .calls { padding: 120px 0 140px; } }
 
-  /* ---------- 노선: 진행 표시 + 장 + 고정 휴대폰 ---------- */
-  .route { max-width: 1200px; margin: 0 auto; padding: 0 32px; position: relative; }
-  @media (max-width: 600px) { .route { padding: 0 16px; } }
-  .rt { position: sticky; top: 68px; z-index: 60; height: 56px; margin: 0 -32px; padding: 0 32px; display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,.96); border-bottom: 1px solid var(--line); }
-  @media (max-width: 600px) { .rt { margin: 0 -16px; padding: 0 16px; } }
-  .rt-track { position: relative; flex: 1; min-width: 0; height: 44px; margin: 0 14px; }
-  .rt-line, .rt-fill { position: absolute; left: 0; right: 0; top: 50%; height: 3px; margin-top: -1.5px; border-radius: 2px; background: #e3e3e3; }
-  .rt-fill { background: var(--ink); transform-origin: left center; transform: scaleX(0); }
-  .rs { position: absolute; top: 0; left: calc(var(--k) * 100% / 7); width: 30px; height: 44px; margin-left: -15px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--ink3); font-size: 15px; font-weight: 600; white-space: nowrap; }
-  .rs:hover { color: var(--ink); }
-  .rs i { width: 13px; height: 13px; border-radius: 50%; background: #fff; border: 3px solid #cfcfcf; flex: none; position: relative; z-index: 1; transition: background .25s, border-color .25s; }
-  .rs span { display: none; }
-  .rs b { font-weight: 800; font-variant-numeric: tabular-nums; margin-right: 6px; }
-  .rs.lit i { background: var(--ink); border-color: var(--ink); }
-  .rs.now { color: var(--ink); font-weight: 800; }
-  .rt-bus { position: absolute; left: -14px; top: 8px; width: 28px; height: 28px; border-radius: 9px; background: var(--y); color: var(--ink); display: grid; place-items: center; z-index: 2; box-shadow: 0 0 0 2px #fff, 0 4px 10px rgba(0,0,0,.16); will-change: transform; pointer-events: none; }
-  .rt-bus svg { width: 16px; height: 16px; }
-  .rt-now { flex: none; min-width: 84px; text-align: right; font-size: 14px; font-weight: 800; white-space: nowrap; }
-  .rt-now b { font-variant-numeric: tabular-nums; margin-right: 4px; }
-  .rm .rt-bus { display: none; }
-
-  .ch { padding: 72px 0; }
-  .ch + .ch { border-top: 1px solid var(--line); }
+  /* chapters */
+  .ch { padding: 140px 0; }
+  .ch .wrap { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; align-items: center; }
+  .ch.flip .txt { order: 2; }
+  @media (max-width: 960px) { .ch .wrap { grid-template-columns: minmax(0,1fr); gap: 44px; } .ch.flip .txt { order: 0; } .ch { padding: 96px 0; } }
   .ch .num { display: flex; align-items: baseline; gap: 12px; font-weight: 800; color: var(--ink3); font-size: 15px; }
-  .ch .num b { font-size: 15px; color: var(--ink); background: var(--y); border-radius: 6px; padding: 1px 7px; font-variant-numeric: tabular-nums; }
-  .ch h2 { margin-top: 18px; font-size: clamp(28px, 3.2vw, 44px); font-weight: 800; letter-spacing: -0.045em; line-height: 1.28; text-wrap: pretty; }
-  .ba { margin-top: 32px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .ch .num b { font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .dark.ch .num b { color: var(--y); }
+  .ch h2 { margin-top: 18px; font-size: clamp(38px, 5.4vw, 72px); font-weight: 900; letter-spacing: -0.055em; line-height: 1.08; }
+  .ba { margin-top: 36px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .dark .ba { border-color: #2c2c2c; }
   .ba > div { display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .dark .ba > div { border-color: #2c2c2c; }
   .ba .k { font-size: 13px; font-weight: 800; padding-top: 3px; color: var(--ink3); }
   .ba .before p { color: var(--ink3); font-size: 16px; font-weight: 500; }
   .ba .after .k { color: var(--ink); }
   .ba .after .k span { background: var(--y); padding: 2px 6px; border-radius: 6px; }
+  .dark .ba .before p { color: #8d8d8d; }
   .ba .after p { font-size: 18px; font-weight: 600; color: var(--ink); line-height: 1.6; }
+  .dark .ba .after p { color: #fff; }
+  .dark .ba .after .k span { color: var(--ink); }
   .ch .more { margin-top: 20px; display: grid; gap: 10px; }
   .ch .more li { font-size: 15px; color: var(--ink2); font-weight: 500; padding-left: 16px; position: relative; }
   .ch .more li::before { content: ''; position: absolute; left: 0; top: .7em; width: 6px; height: 2px; background: currentColor; }
-  .ch .fine { margin-top: 16px; font-size: 12px; color: var(--ink3); }
+  .dark .ch .more li, .dark.ch .more li { color: #bdbdbd; }
+  .ch .fine { margin-top: 16px; font-size: 12px; color: #8d8d8d; }
   .ch .stat { margin-top: 28px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
   .ch .stat b { font-size: clamp(44px, 5vw, 64px); font-weight: 900; letter-spacing: -0.05em; line-height: 1; }
   .ch .stat span { font-size: 15px; font-weight: 700; color: var(--ink2); }
-  .mk { display: flex; flex-direction: column; align-items: center; gap: 16px; min-width: 0; margin-top: 44px; }
-  .driver { margin-top: 20px; max-width: 360px; display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 18px; background: var(--ink); color: #fff; font-size: 14px; font-weight: 700; }
-  .driver small { display: block; font-size: 12px; color: #a8a8a8; font-weight: 500; }
-  .driver svg { color: var(--y); width: 22px; height: 22px; }
-  .stage { display: none; }
-
-  @media (min-width: 1024px) {
-    .route { display: grid; grid-template-columns: 150px minmax(0,1fr); column-gap: 56px; }
-    .route.live { grid-template-columns: 150px minmax(0,1fr) 300px; }
-    .rt { grid-column: 1; grid-row: 1; align-self: start; top: 15vh; height: 70vh; margin: 0; padding: 0; background: none; border: 0; display: block; }
-    .rt-track { position: absolute; inset: 0; margin: 0; height: auto; }
-    .rt-line, .rt-fill { left: 10px; right: auto; top: 0; bottom: 0; width: 3px; height: auto; margin: 0; }
-    .rt-fill { transform-origin: center top; transform: scaleY(0); }
-    .rs { left: 0; top: calc(var(--k) * 100% / 7); width: auto; margin: -22px 0 0; padding-left: 5px; gap: 14px; justify-content: flex-start; }
-    .rs span { display: inline; }
-    .rt-bus { left: -2.5px; top: -14px; }
-    .rt-now { display: none; }
-    .chs { grid-column: 2; grid-row: 1; }
-    .ch { min-height: 100vh; padding: 96px 0; display: flex; align-items: center; }
-    .ch + .ch { border-top: 0; }
-    .route:not(.live) .ch { display: grid; grid-template-columns: minmax(0,1fr) 300px; gap: 48px; align-items: center; }
-    .route:not(.live) .mk { margin-top: 0; }
-    .route.live .ch .mk { display: none; }
-    .route.live .stage { display: block; grid-column: 3; grid-row: 1; }
-    .ch .txt { max-width: 600px; }
-  }
-  .stage-in { position: sticky; top: 100px; }
-  .stage .ph { transform-origin: 50% 0; }
-  .stage .scr { height: 600px; min-height: 0; }
-  .stage .pg { position: absolute; inset: 0; opacity: 0; transform: translateX(36px); transition: opacity .45s ease, transform .6s var(--ease); pointer-events: none; }
-  .stage .pg.prev { transform: translateX(-36px); }
-  .stage .pg.act { opacity: 1; transform: none; pointer-events: auto; }
+  .mk { display: flex; flex-direction: column; align-items: center; gap: 16px; min-width: 0; }
 
   /* phone mockup — 앱 개편 모양 */
   .ph { width: 300px; max-width: 100%; background: #111; border-radius: 46px; padding: 10px; box-shadow: 0 30px 70px rgba(0,0,0,.16); position: relative; }
-  .ph::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 84px; height: 24px; border-radius: 20px; background: #111; z-index: 5; }
+  .dark .ph { background: #2a2a2a; box-shadow: none; }
+  .ph::before { content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 84px; height: 24px; border-radius: 20px; background: #111; z-index: 3; }
+  .dark .ph::before { background: #2a2a2a; }
   .scr { background: #fff; border-radius: 36px; overflow: hidden; min-height: 560px; position: relative; color: var(--ink); display: flex; flex-direction: column; }
-  .pg { flex: 1; display: flex; flex-direction: column; position: relative; background: #fff; }
   .ab { padding: 58px 18px 12px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .ab .t { font-size: 19px; font-weight: 800; letter-spacing: -0.03em; }
   .ab .s { font-size: 12px; color: var(--ink3); font-weight: 600; }
@@ -229,11 +184,10 @@
   .cnt { font-weight: 800; font-size: 16px; font-variant-numeric: tabular-nums; }
   .chev { color: #b5b5b5; width: 16px; height: 16px; }
   .st { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; white-space: nowrap; }
-  .st::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; transition: background .3s; }
+  .st::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
   .st.g { color: var(--green-t); } .st.g::before { background: var(--green); }
   .st.r { color: var(--red-t); } .st.r::before { background: var(--red); }
   .st.w { color: var(--warn-t); } .st.w::before { background: var(--warn); }
-  .st.b { color: var(--brand); } .st.b::before { background: var(--brand); }
   .st.n { color: var(--ink3); } .st.n::before { background: #c9c9c9; }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 18px; }
   .chip { height: 36px; padding: 0 14px; border-radius: 12px; background: #f2f3f5; color: var(--ink); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; border: 0; font-family: inherit; }
@@ -247,53 +201,59 @@
   .chk i svg { width: 14px; height: 14px; stroke-width: 3; }
   .toast { position: absolute; left: 12px; right: 12px; bottom: 14px; background: var(--ink); color: #fff; border-radius: 16px; padding: 12px 14px; display: flex; gap: 10px; align-items: center; font-size: 14px; font-weight: 700; opacity: 0; transform: translateY(12px); transition: opacity .35s, transform .35s var(--ease); z-index: 4; }
   .toast.on { opacity: 1; transform: none; }
-  .toast small { display: block; font-size: 12px; color: #bbb; font-weight: 500; }
+  .toast small { display: block; font-size: 12px; color: #aaa; font-weight: 500; }
   .tabbar { margin-top: auto; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid #eee; padding: 10px 6px 22px; }
   .tabbar span { text-align: center; font-size: 11px; font-weight: 700; color: #a0a0a0; }
   .tabbar span.on { color: var(--ink); }
   .seg { display: flex; gap: 4px; margin: 0 18px; padding: 4px; border-radius: 12px; background: #f2f3f5; }
   .seg span { flex: 1; text-align: center; font-size: 13px; font-weight: 700; padding: 7px 0; border-radius: 9px; color: var(--ink2); }
   .seg span.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
-  .files { display: flex; gap: 6px; flex-wrap: wrap; padding: 0 18px 14px; }
-  .files span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 7px 10px; border-radius: 10px; background: var(--gray); }
-  .files svg { width: 15px; height: 15px; }
-  .note-s { padding: 12px 18px 0; font-size: 12px; font-weight: 600; color: var(--ink3); }
 
-  /* 02 오늘 할 일 체크 */
-  .ck { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #d5d5d5; flex: none; display: grid; place-items: center; transition: background .3s, border-color .3s; }
-  .ck svg { width: 12px; height: 12px; fill: none; stroke: #fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(.4); transition: opacity .3s, transform .3s var(--ease); }
-  .done .ck { background: var(--green); border-color: var(--green); }
-  .done .ck svg { opacity: 1; transform: none; }
-
-  /* 03 attendance */
-  .att { display: flex; gap: 4px; }
-  .att button { border: 0; font-family: inherit; font-size: 12px; font-weight: 800; height: 32px; padding: 0 9px; border-radius: 10px; background: #f2f3f5; color: #8a8a8a; cursor: pointer; transition: transform .15s var(--ease); }
-  .att button.press { transform: scale(.86); }
-  .att button.on[data-v="출석"] { background: var(--green-s); color: var(--green-t); box-shadow: inset 0 0 0 1.5px var(--green); }
-  .att button.on[data-v="결석"] { background: var(--red-s); color: var(--red-t); box-shadow: inset 0 0 0 1.5px var(--red); }
-  .att button.on[data-v="지각"] { background: var(--warn-s); color: var(--warn-t); box-shadow: inset 0 0 0 1.5px var(--warn); }
-  .av { width: 34px; height: 34px; border-radius: 50%; background: #f2f3f5; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex: none; }
+  /* 00 PC mockup */
+  .pc { width: 100%; max-width: 520px; background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.1); }
+  .pc .bar { display: flex; align-items: center; gap: 6px; padding: 12px 14px; background: var(--gray); border-bottom: 1px solid var(--line); }
+  .pc .bar i { width: 10px; height: 10px; border-radius: 50%; background: #d6d6d6; }
+  .pc .bar span { margin-left: 10px; flex: 1; min-width: 0; background: #fff; border-radius: 8px; padding: 4px 10px; font-size: 12px; color: var(--ink3); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pc .body { padding: 28px 24px 24px; }
+  .pc h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
+  .pc .body > p { margin-top: 6px; font-size: 14px; color: var(--ink2); }
+  .pc .abtn { margin: 20px 0 0; }
+  .pc .files { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+  .pc .files span { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 7px 10px; border-radius: 10px; background: var(--gray); }
+  .pc .files svg { width: 15px; height: 15px; }
+  .pc .rows { margin: 20px -24px 0; }
+  .pc .rows > li { padding: 12px 24px; }
 
   /* 04 shuttle */
-  .eta { margin: 0 18px 12px; padding: 14px 16px; border-radius: 16px; background: var(--gray); }
+  .eta { margin: 4px 18px 12px; padding: 16px 18px; border-radius: 16px; background: var(--gray); }
   .eta .l { font-size: 12px; font-weight: 700; color: var(--ink3); }
-  .eta .v { font-size: 19px; font-weight: 900; letter-spacing: -0.03em; margin-top: 2px; }
-  .map { position: relative; margin: 0 18px; border-radius: 16px; background: #eceef1; overflow: hidden; aspect-ratio: 264 / 150; }
-  .map > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .mbus { position: absolute; left: 9.0909%; top: 73.3333%; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 8px; background: var(--y); color: var(--ink); box-shadow: 0 0 0 2px var(--ink); display: grid; place-items: center; will-change: transform; z-index: 2; }
-  .mbus svg { width: 14px; height: 14px; }
-  .route4 { padding: 8px 18px 0; }
-  .stop { display: flex; align-items: center; gap: 12px; height: 44px; position: relative; font-size: 15px; font-weight: 700; }
+  .eta .v { font-size: 26px; font-weight: 900; letter-spacing: -0.04em; margin-top: 2px; }
+  .eta .v small { font-size: 14px; font-weight: 700; color: var(--ink2); margin-left: 6px; letter-spacing: 0; }
+  .route { position: relative; padding: 4px 18px 0; }
+  .stop { display: flex; align-items: center; gap: 12px; height: 46px; position: relative; font-size: 15px; font-weight: 700; }
   .stop .rail { width: 18px; align-self: stretch; display: flex; justify-content: center; align-items: center; position: relative; }
   .stop .rail::before { content: ''; position: absolute; top: 0; bottom: 0; width: 3px; background: #e6e6e6; }
   .stop:first-child .rail::before { top: 50%; } .stop:last-child .rail::before { bottom: 50%; }
   .stop .dot { width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 3px solid #bdbdbd; position: relative; z-index: 1; }
   .stop .nm { flex: 1; min-width: 0; }
   .stop .tm { font-size: 13px; color: var(--ink3); font-weight: 600; font-variant-numeric: tabular-nums; }
-  .stop.passed .nm { color: #a8a8a8; font-weight: 500; }
+  .stop.passed .nm { color: #b0b0b0; font-weight: 500; }
   .stop.passed .dot { background: #d9d9d9; border-color: #d9d9d9; }
   .stop.next .dot { background: var(--ink); border-color: var(--ink); }
   .stop.mine .nm::after { content: '우리 아이'; font-size: 11px; font-weight: 800; color: var(--ink); background: var(--y); padding: 2px 7px; border-radius: 6px; margin-left: 6px; vertical-align: 2px; }
+  .busm { position: absolute; left: 13px; width: 30px; height: 30px; border-radius: 10px; background: var(--ink); color: var(--y); display: flex; align-items: center; justify-content: center; z-index: 2; transition: top .9s cubic-bezier(.4,.1,.2,1); top: 12px; }
+  .busm svg { width: 18px; height: 18px; }
+  .driver { width: 300px; max-width: 100%; display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 18px; background: #222; color: #fff; font-size: 14px; font-weight: 700; }
+  .driver small { display: block; font-size: 12px; color: #9a9a9a; font-weight: 500; }
+  .driver svg { color: var(--y); width: 22px; height: 22px; }
+
+  /* 03 attendance */
+  .att { display: flex; gap: 4px; }
+  .att button { border: 0; font-family: inherit; font-size: 12px; font-weight: 800; height: 32px; padding: 0 9px; border-radius: 10px; background: #f2f3f5; color: #9a9a9a; cursor: pointer; }
+  .att button.on[data-v="출석"] { background: var(--green-s); color: var(--green-t); box-shadow: inset 0 0 0 1.5px var(--green); }
+  .att button.on[data-v="결석"] { background: var(--red-s); color: var(--red-t); box-shadow: inset 0 0 0 1.5px var(--red); }
+  .att button.on[data-v="지각"] { background: var(--warn-s); color: var(--warn-t); box-shadow: inset 0 0 0 1.5px var(--warn); }
+  .av { width: 34px; height: 34px; border-radius: 50%; background: #f2f3f5; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex: none; }
 
   /* 07 chart */
   .bars { display: flex; align-items: flex-end; gap: 10px; height: 120px; padding: 0 18px; }
@@ -326,19 +286,18 @@
   .js:not(.rm) .zoom.live .zoom-title { position: absolute; z-index: 2; opacity: 0; text-align: left; }
   .js:not(.rm) .zoom.live .zp { position: absolute; left: 50%; top: 50%; margin: -310px 0 0 -150px; transform-origin: 50% 50%; will-change: transform; }
 
-  /* timeline — 노선처럼 버스가 내려간다 */
+  /* timeline */
   .tl { padding: 140px 0 150px; }
   .tl h2 { margin-top: 14px; font-size: clamp(34px, 4.6vw, 60px); font-weight: 900; letter-spacing: -0.05em; line-height: 1.1; }
   .tl ol { margin-top: 64px; position: relative; max-width: 820px; }
   .tl ol::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: #2e2e2e; }
-  .tl .fill { position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--y); transform-origin: 50% 0; transform: scaleY(0); }
-  .tl .tbus { position: absolute; left: -6px; top: -5px; width: 28px; height: 28px; border-radius: 9px; background: var(--y); color: var(--ink); display: grid; place-items: center; z-index: 2; will-change: transform; }
-  .tl .tbus svg { width: 16px; height: 16px; }
-  .no-js-lit .tl li::before, .rm .tl .fill, .rm .tl .tbus, html:not(.js) .tl .tbus { display: none; }
+  .tl .fill { position: absolute; left: 7px; top: 8px; width: 2px; height: 0; background: var(--y); }
+  .rm .tl .fill { display: none; }
   .tl li { position: relative; display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 8px 24px; padding: 0 0 52px 44px; }
   .tl li:last-child { padding-bottom: 0; }
   .tl li::before { content: ''; position: absolute; left: 0; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); border: 2px solid #555; box-sizing: border-box; transition: border-color .3s, background .3s; }
   .tl li.lit::before { border-color: var(--y); background: var(--y); }
+  .no-js-lit .tl li::before { background: var(--y); }
   .tl .when { font-size: 15px; font-weight: 800; color: #9a9a9a; padding-top: 2px; }
   .tl h3 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.2; }
   .tl p { margin-top: 6px; font-size: 16px; color: #bdbdbd; }
@@ -357,14 +316,10 @@
   .step .time svg { width: 15px; height: 15px; }
 
   /* final */
-  .final { padding: 170px 0 140px; text-align: center; }
+  .final { padding: 170px 0 180px; text-align: center; }
   .final h2 { font-size: clamp(40px, 7.4vw, 100px); font-weight: 900; letter-spacing: -0.06em; line-height: 1.04; }
   .final .cta-row { margin-top: 48px; display: flex; justify-content: center; }
-  .final .sign { margin-top: 72px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
-  .final .sign .lk { display: flex; align-items: center; gap: 12px; font-size: 32px; font-weight: 900; letter-spacing: -0.04em; }
-  .final .sign .a1 { width: 33px; height: 40px; }
-  .final .sign p { font-size: 17px; font-weight: 700; color: var(--ink2); }
-  .final .note { margin-top: 40px; color: var(--ink3); font-size: 14px; font-weight: 600; }
+  .final .note { margin-top: 22px; color: var(--ink3); font-size: 14px; font-weight: 600; }
   .final .note a { color: var(--ink2); }
   @media (max-width: 400px) { .btn-y.xl { height: 60px; padding: 0 30px; font-size: 18px; } }
 
@@ -401,12 +356,9 @@
 })();
 </script>
 
-<!-- 서당 A1 마크(brand/logo_A1.svg 와 같은 모양) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="a1" viewBox="14 6 72 88"><path d="M50 6L86 42L77 51L50 24L23 51L14 42Z"/><path d="M22 58H80V70H34V82H80V94H22Z"/></symbol><symbol id="bus" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 9h14M6 17v-3M14 17v-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol></svg>
-
 <header id="hd">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="서당 — Learn Better. Grow Together."><svg class="a1" viewBox="14 6 72 88" aria-hidden="true"><use href="#a1"/></svg>서당<span class="slogan">Learn Better. Grow Together.</span></a>
+    <a class="logo" href="#top"><span class="mark"></span>서당</a>
     <nav class="gnb">
       <a href="#c00">시작</a>
       <a href="#c02">매일 아침</a>
@@ -436,19 +388,18 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
-  <div class="hero-road" id="heroRoad" aria-hidden="true"></div>
   <div class="wrap">
     <div>
       <p class="eyebrow r h-r">작은 학원과 교습소를 위한 관리 앱</p>
-      <h1 class="r h-r d1">수업 중에 “버스 어디예요?” 전화, 오늘 몇 통 받으셨어요?</h1>
-      <p class="ans r h-r d2"><span>이제 학부모님 앱에 ‘두 번째 정류장 · 4분 후’가 먼저 떠요.</span></p>
+      <h1 class="r h-r d1">원장님 전화기가<br><mark>조용해집니다.</mark></h1>
+      <p class="lead r h-r d2">셔틀 어디예요? 오늘 갔어요? 얼마예요?<br>학부모가 매일 묻던 것, <b>앱이 먼저 답합니다.</b></p>
       <div class="cta-row r h-r d3">
         <a class="btn-y" href="/app/">무료로 시작하기 <svg class="i" viewBox="0 0 20 20"><path d="M4 10h12M11 5l5 5-5 5"/></svg></a>
         <a class="btn-text" href="#calls">하루가 어떻게 바뀌는지 보기</a>
       </div>
       <div class="meta r h-r d4"><span>카카오 로그인</span><span>세팅은 운영팀이</span><span>문자비 0원</span></div>
     </div>
-    <figure class="hero-art r h-r drive d2" aria-hidden="true"><canvas id="heroDots"></canvas></figure>
+    <figure class="hero-art" aria-hidden="true"><canvas id="heroDots"></canvas></figure>
   </div>
 </section>
 
@@ -471,67 +422,58 @@
   </div>
 </section>
 
-<!-- ===== 노선: 00~07 ===== -->
-<div class="route" id="route">
-  <nav class="rt" id="rt" aria-label="원장님의 노선">
-    <div class="rt-track" id="rtTrack">
-      <span class="rt-line"></span><span class="rt-fill" id="rtFill"></span>
-      <a class="rs" href="#c00" style="--k:0"><i></i><span><b>00</b>시작</span></a>
-      <a class="rs" href="#c01" style="--k:1"><i></i><span><b>01</b>회원 받기</span></a>
-      <a class="rs" href="#c02" style="--k:2"><i></i><span><b>02</b>매일 아침</span></a>
-      <a class="rs" href="#c03" style="--k:3"><i></i><span><b>03</b>수업</span></a>
-      <a class="rs" href="#c04" style="--k:4"><i></i><span><b>04</b>셔틀</span></a>
-      <a class="rs" href="#c05" style="--k:5"><i></i><span><b>05</b>수강료</span></a>
-      <a class="rs" href="#c06" style="--k:6"><i></i><span><b>06</b>소식</span></a>
-      <a class="rs" href="#c07" style="--k:7"><i></i><span><b>07</b>월말</span></a>
-      <span class="rt-bus" id="rtBus" aria-hidden="true"><svg viewBox="0 0 20 20"><use href="#bus"/></svg></span>
+<!-- ===== 00 시작 ===== -->
+<section class="ch" id="c00">
+  <div class="wrap">
+    <div class="txt">
+      <p class="num r"><b>00</b>시작</p>
+      <h2 class="r d1">세팅은<br>저희가 합니다.</h2>
+      <div class="ba r d2">
+        <div class="before"><span class="k">전에는</span><p>회원 명단·반·수강료를 프로그램에 하나하나 입력했습니다.</p></div>
+        <div class="after"><span class="k"><span>이제는</span></span><p>PC에서 카카오 로그인 → [도입 신청] 버튼 하나. 구글폼에 학원 이름·연락처를 적고, 명단·반·수강료는 사진이나 엑셀 그대로 보내 주세요. 운영팀이 세팅해 원장님 계정에 연결해 드립니다.</p></div>
+      </div>
+      <ul class="more r d3"><li>세팅까지 1~2일</li></ul>
     </div>
-    <span class="rt-now" id="rtNow" aria-hidden="true"><b>00</b>시작</span>
-  </nav>
-
-  <div class="chs">
-    <!-- 00 시작 -->
-    <article class="ch" id="c00">
-      <div class="txt">
-        <p class="num r"><b>00</b>시작</p>
-        <h2 class="r d1">새 학기 반 편성, 아직 종이에 그리고 계세요?</h2>
-        <div class="ba r d2">
-          <div class="before"><span class="k">전에는</span><p>회원 명단·반·수강료를 프로그램에 하나하나 입력했습니다.</p></div>
-          <div class="after"><span class="k"><span>이제는</span></span><p>PC에서 카카오 로그인 → [도입 신청] 버튼 하나. 구글폼에 학원 이름·연락처를 적고, 명단·반·수강료는 사진이나 엑셀 그대로 보내 주세요. 운영팀이 세팅해 원장님 계정에 연결해 드립니다.</p></div>
+    <div class="mk r d2">
+      <div class="pc">
+        <div class="bar"><i></i><i></i><i></i><span>seodang.app/app/</span></div>
+        <div class="body">
+          <h3>도입 신청</h3>
+          <p>카카오 계정으로 로그인했어요.</p>
+          <div class="abtn">도입 신청</div>
+          <div class="files">
+            <span><svg class="i" viewBox="0 0 20 20"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M3 13l4-4 3 3 2-2 5 5"/></svg>회원 명단.jpg</span>
+            <span><svg class="i" viewBox="0 0 20 20"><path d="M5 2h7l4 4v12H5z"/><path d="M12 2v4h4"/></svg>수강료표.xlsx</span>
+          </div>
+          <ul class="rows">
+            <li><span class="m">신청 접수</span><span class="st g">완료</span></li>
+            <li><span class="m">자료 받음</span><span class="st g">완료</span></li>
+            <li><span class="m">운영팀 세팅</span><span class="st w">진행 중</span></li>
+            <li><span class="m">원장님 계정에 연결</span><span class="st n">—</span></li>
+          </ul>
         </div>
-        <ul class="more r d3"><li>세팅까지 1~2일</li></ul>
       </div>
-      <div class="mk r d2"><div class="ph"><div class="scr"><div class="pg" data-i="0">
-        <div class="ab"><span class="t">도입 신청</span><span class="s">PC에서 신청</span></div>
-        <div class="files">
-          <span><svg class="i" viewBox="0 0 20 20"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M3 13l4-4 3 3 2-2 5 5"/></svg>회원 명단.jpg</span>
-          <span><svg class="i" viewBox="0 0 20 20"><path d="M5 2h7l4 4v12H5z"/><path d="M12 2v4h4"/></svg>수강료표.xlsx</span>
-        </div>
-        <ul class="rows">
-          <li><span class="m">신청 접수</span><span class="st g">완료</span></li>
-          <li><span class="m">자료 받음</span><span class="st g">완료</span></li>
-          <li><span class="m">운영팀 세팅</span><span class="st w">진행 중</span></li>
-          <li><span class="m">원장님 계정에 연결</span><span class="st n">—</span></li>
-        </ul>
-        <p class="note-s">세팅까지 1~2일</p>
-      </div></div></div></div>
-    </article>
+    </div>
+  </div>
+</section>
 
-    <!-- 01 회원 받기 -->
-    <article class="ch" id="c01">
-      <div class="txt">
-        <p class="num r"><b>01</b>회원 받기</p>
-        <h2 class="r d1">상담하면서 연락처 받아 적느라 말이 끊기셨죠?</h2>
-        <div class="ba r d2">
-          <div class="before"><span class="k">전에는</span><p>상담을 받고 이름·번호·반을 직접 입력했습니다.</p></div>
-          <div class="after"><span class="k"><span>이제는</span></span><p>학부모가 앱에서 자녀 정보를 적어 등록 신청을 보냅니다. 원장님은 반과 오는 요일을 고르고 [승인] 한 번. 체험권(1회)도 승인할 때 같이 줍니다.</p></div>
-        </div>
-        <ul class="more r d3">
-          <li>정원이 찬 반은 「정원 마감」. 대기 명단에 올리면 자리가 날 때 자동으로 올라갑니다.</li>
-          <li>주 2·3·5회 회원이 반 하나에 같이 다닙니다. 오는 요일은 회원마다 따로.</li>
-        </ul>
+<!-- ===== 01 회원 받기 ===== -->
+<section class="ch gray flip" id="c01">
+  <div class="wrap">
+    <div class="txt">
+      <p class="num r"><b>01</b>회원 받기</p>
+      <h2 class="r d1">명단을<br>치지 않습니다.</h2>
+      <div class="ba r d2">
+        <div class="before"><span class="k">전에는</span><p>상담을 받고 이름·번호·반을 직접 입력했습니다.</p></div>
+        <div class="after"><span class="k"><span>이제는</span></span><p>학부모가 앱에서 자녀 정보를 적어 등록 신청을 보냅니다. 원장님은 반과 오는 요일을 고르고 [승인] 한 번. 체험권(1회)도 승인할 때 같이 줍니다.</p></div>
       </div>
-      <div class="mk r d2"><div class="ph"><div class="scr"><div class="pg" data-i="1">
+      <ul class="more r d3">
+        <li>정원이 찬 반은 「정원 마감」. 대기 명단에 올리면 자리가 날 때 자동으로 올라갑니다.</li>
+        <li>주 2·3·5회 회원이 반 하나에 같이 다닙니다. 오는 요일은 회원마다 따로.</li>
+      </ul>
+    </div>
+    <div class="mk r d2">
+      <div class="ph"><div class="scr">
         <div class="ab"><span class="t">등록 신청</span><span class="s">오늘 10:12</span></div>
         <ul class="rows">
           <li><span class="av">하</span><span class="m">김하은<small>2017년생 · 학부모 010-••••-1234</small></span><span class="st w">대기</span></li>
@@ -542,123 +484,143 @@
         <div class="chips"><span class="chip day on">월</span><span class="chip day">화</span><span class="chip day on">수</span><span class="chip day">목</span><span class="chip day on">금</span><span class="chip day">토</span></div>
         <div class="chk"><i><svg class="i" viewBox="0 0 20 20"><path d="M4 10l4 4 8-8"/></svg></i>체험권 1회 같이 주기</div>
         <div class="abtn">승인</div>
-      </div></div></div></div>
-    </article>
+      </div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- 02 매일 아침 -->
-    <article class="ch" id="c02">
-      <div class="txt">
-        <p class="num r"><b>02</b>매일 아침</p>
-        <h2 class="r d1">오늘 올 아이들, 아침마다 손으로 세고 계세요?</h2>
-        <div class="ba r d2">
-          <div class="before"><span class="k">전에는</span><p>문자함, 출석부, 장부를 하나씩 열어 오늘 챙길 일을 찾았습니다.</p></div>
-          <div class="after"><span class="k"><span>이제는</span></span><p>홈의 「오늘 할 일」에 등록 신청 · 출석 안 찍은 수업 · 보강 신청 · 답변 기다리는 문의 · 안 낸 청구서가 모입니다. 0건이면 안 보이고, 누르면 그 화면으로 갑니다.</p></div>
-        </div>
+<!-- ===== 02 매일 아침 ===== -->
+<section class="ch" id="c02">
+  <div class="wrap">
+    <div class="txt">
+      <p class="num r"><b>02</b>매일 아침</p>
+      <h2 class="r d1">오늘 할 일이<br>한 화면에.</h2>
+      <div class="ba r d2">
+        <div class="before"><span class="k">전에는</span><p>문자함, 출석부, 장부를 하나씩 열어 오늘 챙길 일을 찾았습니다.</p></div>
+        <div class="after"><span class="k"><span>이제는</span></span><p>홈의 「오늘 할 일」에 등록 신청 · 출석 안 찍은 수업 · 보강 신청 · 답변 기다리는 문의 · 안 낸 청구서가 모입니다. 0건이면 안 보이고, 누르면 그 화면으로 갑니다.</p></div>
       </div>
-      <div class="mk r d2"><div class="ph"><div class="scr"><div class="pg" data-i="2">
+    </div>
+    <div class="mk r d2">
+      <div class="ph"><div class="scr">
         <div class="ab"><span class="t">오늘 할 일</span><span class="s">10월 22일 (목)</span></div>
-        <ul class="rows" id="todo">
-          <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">등록 신청</span><span class="cnt">2</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-          <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">출석 안 찍은 수업<small>초등 B반 · 15:00</small></span><span class="cnt">1</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-          <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">보강 신청</span><span class="cnt">3</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-          <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">답변 기다리는 문의</span><span class="cnt">1</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-          <li><span class="ck"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-4.8"/></svg></span><span class="m">안 낸 청구서</span><span class="cnt">4</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
+        <ul class="rows">
+          <li><span class="m">등록 신청</span><span class="cnt">2</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
+          <li><span class="m">출석 안 찍은 수업<small>초등 B반 · 15:00</small></span><span class="cnt">1</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
+          <li><span class="m">보강 신청</span><span class="cnt">3</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
+          <li><span class="m">답변 기다리는 문의</span><span class="cnt">1</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
+          <li><span class="m">안 낸 청구서</span><span class="cnt">4</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
         </ul>
         <div class="tabbar"><span class="on">홈</span><span>출석</span><span>셔틀</span><span>수강료</span><span>더보기</span></div>
-      </div></div></div></div>
-    </article>
+      </div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- 03 수업 -->
-    <article class="ch" id="c03">
-      <div class="txt">
-        <p class="num r"><b>03</b>수업</p>
-        <h2 class="r d1">“아이 도착했나요?” 문자, 수업 중에 답하고 계세요?</h2>
-        <div class="ba r d2">
-          <div class="before"><span class="k">전에는</span><p>출석부에 적고, 결석한 아이 학부모에게 따로 연락했습니다.</p></div>
-          <div class="after"><span class="k"><span>이제는</span></span><p>출석·결석·지각을 누르는 즉시 저장되고 학부모에게 바로 알림이 갑니다. 결석 통보와 보강 신청은 학부모가 앱에서 하고, 원장님은 [승인]만.</p></div>
-        </div>
-        <ul class="more r d3">
-          <li>보강권은 월정액 반마다 한 달에 주 횟수만큼, 그 달 안에 씁니다.</li>
-          <li>자리 있는 같은 수준 수업만 보강 후보로 뜹니다.</li>
-        </ul>
+<!-- ===== 03 수업 ===== -->
+<section class="ch gray flip" id="c03">
+  <div class="wrap">
+    <div class="txt">
+      <p class="num r"><b>03</b>수업</p>
+      <h2 class="r d1">출석은 한 번<br>누르면 끝.</h2>
+      <div class="ba r d2">
+        <div class="before"><span class="k">전에는</span><p>출석부에 적고, 결석한 아이 학부모에게 따로 연락했습니다.</p></div>
+        <div class="after"><span class="k"><span>이제는</span></span><p>출석·결석·지각을 누르는 즉시 저장되고 학부모에게 바로 알림이 갑니다. 결석 통보와 보강 신청은 학부모가 앱에서 하고, 원장님은 [승인]만.</p></div>
       </div>
-      <div class="mk r d2"><div class="ph"><div class="scr"><div class="pg" data-i="3">
+      <ul class="more r d3">
+        <li>보강권은 월정액 반마다 한 달에 주 횟수만큼, 그 달 안에 씁니다.</li>
+        <li>자리 있는 같은 수준 수업만 보강 후보로 뜹니다.</li>
+      </ul>
+    </div>
+    <div class="mk r d2">
+      <div class="ph"><div class="scr" id="attScr">
         <div class="ab"><span class="t">초등 A반</span><span class="s">17:00 · 4명</span></div>
         <ul class="rows" id="att">
           <li><span class="av">하</span><span class="m">김하은<small>월 수 금</small></span><span class="att"><button data-v="출석" class="on">출석</button><button data-v="결석">결석</button><button data-v="지각">지각</button></span></li>
           <li><span class="av">준</span><span class="m">박서준<small>화 목</small></span><span class="att"><button data-v="출석">출석</button><button data-v="결석">결석</button><button data-v="지각">지각</button></span></li>
           <li><span class="av">윤</span><span class="m">이도윤<small>월 수 금</small></span><span class="att"><button data-v="출석">출석</button><button data-v="결석" class="on">결석</button><button data-v="지각">지각</button></span></li>
-          <li><span class="av">나</span><span class="m">최유나<small>월~금</small></span><span class="att"><button data-v="출석" id="attAuto">출석</button><button data-v="결석">결석</button><button data-v="지각">지각</button></span></li>
+          <li><span class="av">나</span><span class="m">최유나<small>월~금</small></span><span class="att"><button data-v="출석">출석</button><button data-v="결석">결석</button><button data-v="지각">지각</button></span></li>
         </ul>
         <p class="sec">보강 신청</p>
         <ul class="rows"><li><span class="m">이도윤 → 금 17:00<small>10월 보강권 1 / 3</small></span><span class="st w">승인 대기</span></li></ul>
-        <div class="toast" id="attToast"><svg class="i" viewBox="0 0 20 20"><path d="M10 3a5 5 0 015 5v3l2 3H3l2-3V8a5 5 0 015-5zM8 17a2 2 0 004 0"/></svg><div><span id="attToastB">최유나 · 출석 저장했어요</span><small>학부모님께 알림 보냄</small></div></div>
-      </div></div></div></div>
-    </article>
+        <div class="toast" id="attToast"><svg class="i" viewBox="0 0 20 20"><path d="M10 3a5 5 0 015 5v3l2 3H3l2-3V8a5 5 0 015-5zM8 17a2 2 0 004 0"/></svg><div><span id="attToastB">저장했어요</span><small>학부모에게 알림을 보냈어요</small></div></div>
+      </div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- 04 셔틀 -->
-    <article class="ch" id="c04">
-      <div class="txt">
-        <p class="num r"><b>04</b>셔틀</p>
-        <h2 class="r d1">운전 중에 울리는 “어디쯤이에요?” 전화, 받지도 못하고 마음 쓰이시죠?</h2>
-        <div class="ba r d2">
-          <div class="before"><span class="k">전에는</span><p>운전하면서 「지금 어디쯤이에요?」 전화를 받았습니다.</p></div>
-          <div class="after"><span class="k"><span>이제는</span></span><p>기사님 앱에 티맵 길안내 — 정류장 최대 30곳 순서를 한 번에. 학부모 앱엔 버스 위치와 「몇 번째 · 몇 분 후」, 탑승·하차 알림.</p></div>
-        </div>
-        <div class="driver r d3"><svg class="i" viewBox="0 0 20 20"><path d="M10 2l6 16-6-4-6 4z"/></svg><div>기사님 앱 · 티맵 길안내<small>정류장 순서대로 한 번에 안내 중</small></div></div>
-        <p class="fine r d3">위치는 운행 중인 기사님 폰 위치만, 운행이 끝나면 지워요</p>
+<!-- ===== 04 셔틀 ===== -->
+<section class="ch dark" id="c04">
+  <div class="wrap">
+    <div class="txt">
+      <p class="num r"><b>04</b>셔틀</p>
+      <h2 class="r d1">운전 중 전화가<br>없어집니다.</h2>
+      <div class="ba r d2">
+        <div class="before"><span class="k">전에는</span><p>운전하면서 「지금 어디쯤이에요?」 전화를 받았습니다.</p></div>
+        <div class="after"><span class="k"><span>이제는</span></span><p>기사님 앱에 티맵 길안내 — 정류장 최대 30곳 순서를 한 번에. 학부모 앱엔 버스 위치와 「몇 번째 · 몇 분 후」, 탑승·하차 알림.</p></div>
       </div>
-      <div class="mk r d2"><div class="ph"><div class="scr"><div class="pg" data-i="4">
+      <p class="fine r d3">위치는 운행 중인 기사님 휴대폰 위치만 쓰고, 운행이 끝나면 지웁니다.</p>
+    </div>
+    <div class="mk r d2">
+      <div class="ph"><div class="scr">
         <div class="ab"><span class="t">셔틀 · 1호차</span><span class="st g">운행 중</span></div>
-        <div class="eta"><div class="l">우리 아이 정류장</div><div class="v" id="etaV">세 번째 정류장 · 9분 후</div></div>
-        <div class="map" id="map4" aria-hidden="true">
-          <svg viewBox="0 0 264 150"><path d="M0 40H264M0 75H264M0 110H264M60 0V150M125 0V150M190 0V150" stroke="#fff" stroke-width="9" fill="none"/><polyline points="24,110 60,110 60,40 190,40 190,75" fill="none" stroke="#111" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="24" cy="110" r="4" fill="#111"/><circle cx="60" cy="75" r="5" fill="#fff" stroke="#111" stroke-width="3"/><circle cx="125" cy="40" r="5" fill="#fff" stroke="#111" stroke-width="3"/><circle cx="190" cy="75" r="7" fill="#FFCD00" stroke="#111" stroke-width="3"/><text x="190" y="100" text-anchor="middle" font-size="12" font-weight="800" fill="#111" font-family="Pretendard Variable, Pretendard, sans-serif">우리 아이</text></svg>
-          <span class="mbus" id="mbus"><svg viewBox="0 0 20 20"><use href="#bus"/></svg></span>
+        <div class="eta"><div class="l">우리 아이 정류장</div><div class="v" id="etaV">3번째<small>약 12분 후</small></div></div>
+        <div class="route" id="route">
+          <div class="busm" id="busm"><svg class="i" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="11" rx="2"/><path d="M3 9h14M6 17v-3M14 17v-3"/></svg></div>
+          <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">학원 출발</span><span class="tm">16:05</span></div>
+          <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">정문 앞</span><span class="tm">16:12</span></div>
+          <div class="stop mine"><span class="rail"><span class="dot"></span></span><span class="nm">래미안 3단지</span><span class="tm">16:24</span></div>
+          <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">중앙공원</span><span class="tm">16:31</span></div>
+          <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">학원 도착</span><span class="tm">16:40</span></div>
         </div>
-        <div class="route4" id="route4">
-          <div class="stop next"><span class="rail"><span class="dot"></span></span><span class="nm">정문 앞</span></div>
-          <div class="stop"><span class="rail"><span class="dot"></span></span><span class="nm">중앙공원</span></div>
-          <div class="stop mine"><span class="rail"><span class="dot"></span></span><span class="nm">래미안 3단지</span></div>
-        </div>
-      </div></div></div></div>
-    </article>
+        <div class="toast" id="busToast"><svg class="i" viewBox="0 0 20 20"><path d="M10 3a5 5 0 015 5v3l2 3H3l2-3V8a5 5 0 015-5zM8 17a2 2 0 004 0"/></svg><div><span id="busToastB">하은이가 탑승했어요</span><small id="busToastS">래미안 3단지 · 16:24</small></div></div>
+      </div></div>
+      <div class="driver"><svg class="i" viewBox="0 0 20 20"><path d="M10 2l6 16-6-4-6 4z"/></svg><div>기사님 앱 · 티맵 길안내<small>정류장 순서대로 한 번에 안내 중</small></div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- 05 수강료 -->
-    <article class="ch" id="c05">
-      <div class="txt">
-        <p class="num r"><b>05</b>수강료</p>
-        <h2 class="r d1">“원비 아직이세요” 그 말, 매달 꺼내기 어렵지 않으세요?</h2>
-        <div class="ba r d2">
-          <div class="before"><span class="k">전에는</span><p>누가 안 냈는지 장부를 맞춰 보고, 전화로 알렸습니다.</p></div>
-          <div class="after"><span class="k"><span>이제는</span></span><p>청구일에 자동 청구. 월 중간에 들어온 회원은 남은 수업만큼 자동 계산하고, 형제는 청구서 한 장. 학부모는 앱에서 카드 결제(또는 학원 계좌 안내). 안 냈으면 마감 +1·+3·+7일에 자동 알림이 가고, 청구서를 열어 봤는지 「안 읽음」까지 보입니다.</p></div>
-        </div>
-        <p class="stat r d3"><b>0원</b><span>서당이 받는 결제 수수료</span></p>
+<!-- ===== 05 수강료 ===== -->
+<section class="ch" id="c05">
+  <div class="wrap">
+    <div class="txt">
+      <p class="num r"><b>05</b>수강료</p>
+      <h2 class="r d1">독촉 전화를<br>하지 않습니다.</h2>
+      <div class="ba r d2">
+        <div class="before"><span class="k">전에는</span><p>누가 안 냈는지 장부를 맞춰 보고, 전화로 알렸습니다.</p></div>
+        <div class="after"><span class="k"><span>이제는</span></span><p>청구일에 자동 청구. 월 중간에 들어온 회원은 남은 수업만큼 자동 계산하고, 형제는 청구서 한 장. 학부모는 앱에서 카드 결제(또는 학원 계좌 안내). 안 냈으면 마감 +1·+3·+7일에 자동 알림이 가고, 청구서를 열어 봤는지 「안 읽음」까지 보입니다.</p></div>
       </div>
-      <div class="mk r d2"><div class="ph"><div class="scr"><div class="pg" data-i="5">
+      <p class="stat r d3"><b>0원</b><span>서당이 받는 결제 수수료</span></p>
+    </div>
+    <div class="mk r d2">
+      <div class="ph"><div class="scr">
         <div class="ab"><span class="t">10월 청구서</span><span class="s">마감 10/10</span></div>
         <ul class="rows">
           <li><span class="m">김하은 · 김하준<small>형제 · 청구서 1장 · 260,000원</small></span><span class="st g">납부</span></li>
           <li><span class="m">최유나<small>카드 · 130,000원</small></span><span class="st g">납부</span></li>
           <li><span class="m">박서준<small>130,000원 · +3일 알림 보냄</small></span><span class="st w">미납</span></li>
-          <li><span class="m">이도윤<small>10/14 시작 · 남은 6회 · 78,000원</small></span><span class="st n" id="billSt">안 읽음</span></li>
+          <li><span class="m">이도윤<small>10/14 시작 · 남은 6회 · 78,000원</small></span><span class="st n">안 읽음</span></li>
           <li><span class="m">정민재<small>130,000원 · +7일 알림 보냄</small></span><span class="st r">마감 지남</span></li>
         </ul>
         <div class="tabbar"><span>홈</span><span>출석</span><span>셔틀</span><span class="on">수강료</span><span>더보기</span></div>
-      </div></div></div></div>
-    </article>
+      </div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- 06 소식 -->
-    <article class="ch" id="c06">
-      <div class="txt">
-        <p class="num r"><b>06</b>소식</p>
-        <h2 class="r d1">휴원 안내 문자, 한 분씩 보내고 답장 확인하고 계세요?</h2>
-        <div class="ba r d2">
-          <div class="before"><span class="k">전에는</span><p>공지마다 단체 문자를 보내고, 답장을 하나씩 셌습니다.</p></div>
-          <div class="after"><span class="k"><span>이제는</span></span><p>공지(예약 발송, 참석/불참 받기) · 1:1 문의 · 분실물 · 수업 노트(사진). 학원 전체 쉬는 날을 넣으면 그날 수업 정리와 공지까지 한 번에.</p></div>
-        </div>
-        <p class="stat r d3"><b>0원</b><span>문자비 — 문자가 아니라 앱 알림이라서</span></p>
+<!-- ===== 06 소식 ===== -->
+<section class="ch gray flip" id="c06">
+  <div class="wrap">
+    <div class="txt">
+      <p class="num r"><b>06</b>소식</p>
+      <h2 class="r d1">단체 문자방을<br>닫아도 됩니다.</h2>
+      <div class="ba r d2">
+        <div class="before"><span class="k">전에는</span><p>공지마다 단체 문자를 보내고, 답장을 하나씩 셌습니다.</p></div>
+        <div class="after"><span class="k"><span>이제는</span></span><p>공지(예약 발송, 참석/불참 받기) · 1:1 문의 · 분실물 · 수업 노트(사진). 학원 전체 쉬는 날을 넣으면 그날 수업 정리와 공지까지 한 번에.</p></div>
       </div>
-      <div class="mk r d2"><div class="ph"><div class="scr"><div class="pg" data-i="6">
+      <p class="stat r d3"><b>0원</b><span>문자비 — 문자가 아니라 앱 알림이라서</span></p>
+    </div>
+    <div class="mk r d2">
+      <div class="ph"><div class="scr">
         <div class="ab"><span class="t">소식</span></div>
         <div class="seg"><span class="on">공지</span><span>문의</span><span>분실물</span><span>수업 노트</span></div>
         <ul class="rows" style="margin-top:14px">
@@ -667,21 +629,25 @@
           <li><span class="m">11/3(월) 학원 쉬는 날<small>그날 수업 6개 정리됨 · 공지 발송</small></span><span class="st g">보냄</span></li>
           <li><span class="m">초등 A반 수업 노트<small>사진 3장 · 오늘 17:50</small></span><span class="st g">보냄</span></li>
         </ul>
-      </div></div></div></div>
-    </article>
+      </div></div>
+    </div>
+  </div>
+</section>
 
-    <!-- 07 월말 -->
-    <article class="ch" id="c07">
-      <div class="txt">
-        <p class="num r"><b>07</b>월말</p>
-        <h2 class="r d1">월말 정산, 통장 내역과 장부를 번갈아 보며 맞추고 계세요?</h2>
-        <div class="ba r d2">
-          <div class="before"><span class="k">전에는</span><p>월말마다 받은 돈과 미납을 엑셀로 정리하고, 급여를 손으로 계산했습니다.</p></div>
-          <div class="after"><span class="k"><span>이제는</span></span><p>달별 매출(받은 돈 · 미납)과 연간 수납표(회원 × 달)가 저절로 쌓입니다. 직원 출근 체크로 급여(월급·시급·일당)도 계산됩니다.</p></div>
-        </div>
-        <ul class="more r d3"><li>직원에게 「관리자 권한」을 주면 원장님과 같은 일을, 안 주면 출석·셔틀·수업 노트만 합니다.</li></ul>
+<!-- ===== 07 월말 ===== -->
+<section class="ch" id="c07">
+  <div class="wrap">
+    <div class="txt">
+      <p class="num r"><b>07</b>월말</p>
+      <h2 class="r d1">장부가<br>저절로.</h2>
+      <div class="ba r d2">
+        <div class="before"><span class="k">전에는</span><p>월말마다 받은 돈과 미납을 엑셀로 정리하고, 급여를 손으로 계산했습니다.</p></div>
+        <div class="after"><span class="k"><span>이제는</span></span><p>달별 매출(받은 돈 · 미납)과 연간 수납표(회원 × 달)가 저절로 쌓입니다. 직원 출근 체크로 급여(월급·시급·일당)도 계산됩니다.</p></div>
       </div>
-      <div class="mk r d2"><div class="ph"><div class="scr"><div class="pg" data-i="7">
+      <ul class="more r d3"><li>직원에게 「관리자 권한」을 주면 원장님과 같은 일을, 안 주면 출석·셔틀·수업 노트만 합니다.</li></ul>
+    </div>
+    <div class="mk r d2" id="mk07">
+      <div class="ph"><div class="scr">
         <div class="ab"><span class="t">매출</span><span class="s">2026년</span></div>
         <div class="money"><div><b>3,120,000원</b><span>10월 받은 돈</span></div><div><b>260,000원</b><span>미납</span></div></div>
         <div class="bars" style="margin-top:12px">
@@ -695,12 +661,10 @@
           <span>이도윤</span><i class="n"></i><i class="n"></i><i class="n"></i><i class="n"></i><i class="n"></i><i class="w"></i>
         </div>
         <ul class="rows" style="margin-top:14px"><li><span class="m">강사 1명 · 시급<small>출근 체크 42시간</small></span><span class="cnt">10월 급여</span></li></ul>
-      </div></div></div></div>
-    </article>
+      </div></div>
+    </div>
   </div>
-
-  <div class="stage" aria-hidden="true"><div class="stage-in" id="stageIn"><div class="ph" id="stagePh"><div class="scr" id="stageScr"></div></div></div></div>
-</div>
+</section>
 
 <!-- ===== 원장님의 하루 (sticky + scale) ===== -->
 <section class="zoom" id="day">
@@ -733,7 +697,6 @@
     <h2 class="r d1">전화 대신,<br>앱이 하는 하루.</h2>
     <ol id="tl">
       <span class="fill" id="tlFill"></span>
-      <span class="tbus" id="tlBus" aria-hidden="true"><svg viewBox="0 0 20 20"><use href="#bus"/></svg></span>
       <li><span class="when">아침</span><div><h3>오늘 할 일 확인</h3><p>등록 신청 · 보강 신청 · 안 낸 청구서까지 홈 한 화면에서.</p></div></li>
       <li><span class="when">오후</span><div><h3>출석 한 번씩</h3><p>누르면 저장되고, 학부모에게 바로 알림이 갑니다.</p></div></li>
       <li><span class="when">오후</span><div><h3>셔틀 출발</h3><p>기사님은 티맵 길안내, 학부모는 「몇 번째 · 몇 분 후」.</p></div></li>
@@ -761,8 +724,7 @@
   <div class="wrap">
     <h2 class="r">오늘 저녁,<br>전화기가 조용해집니다.</h2>
     <div class="cta-row r d1"><a class="btn-y xl" href="/app/">무료로 시작하기 <svg class="i" viewBox="0 0 20 20"><path d="M4 10h12M11 5l5 5-5 5"/></svg></a></div>
-    <div class="sign r d2"><div class="lk"><svg class="a1" viewBox="14 6 72 88" aria-hidden="true"><use href="#a1"/></svg>서당</div><p>Learn Better. Grow Together.</p></div>
-    <p class="note r d3">PC 웹 · 카카오 로그인 · 도입 문의 학원 무료 체험 &nbsp;·&nbsp; <a href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의</a></p>
+    <p class="note r d2">PC 웹 · 카카오 로그인 · 도입 문의 학원 무료 체험 &nbsp;·&nbsp; <a href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의</a></p>
   </div>
 </section>
 
@@ -799,10 +761,6 @@
   var H = document.documentElement, RM = H.classList.contains('rm');
   var DPR = Math.min(window.devicePixelRatio || 1, 2);
   var Y = '#FFCD00', K = '#111111', G = '#9a9a9a';
-  var $ = function (id) { return document.getElementById(id); };
-  var all = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
-  function lerp(a, b, t) { return a + (b - a) * t; }
 
   // ---------- 도트 그림: 셔틀 버스 ----------
   function rr(x, X, Yy, w, h, r, c) { x.fillStyle = c; x.beginPath(); x.moveTo(X + r, Yy); x.arcTo(X + w, Yy, X + w, Yy + h, r); x.arcTo(X + w, Yy + h, X, Yy + h, r); x.arcTo(X, Yy + h, X, Yy, r); x.arcTo(X, Yy, X + w, Yy, r); x.closePath(); x.fill(); }
@@ -831,83 +789,65 @@
   }
   function busClass(r, g, b) { return (r > 200 && b < 110) ? Y : (r > 110 ? G : K); }
   function busPoints(w) { var step = w < 480 ? 7 : 9; return { pts: sample(w, Math.round(w / 2), drawBus, step, busClass), step: step }; }
+
   function sizeCanvas(cv, w, h) { cv.width = Math.round(w * DPR); cv.height = Math.round(h * DPR); var x = cv.getContext('2d'); x.setTransform(DPR, 0, 0, DPR, 0, 0); return x; }
 
-  var heroSec = $('top'), hero = $('heroDots'), heroRoad = $('heroRoad');
+  var hero = document.getElementById('heroDots');
   function drawHero() {
     var w = hero.clientWidth; if (!w) return;
     var b = busPoints(Math.round(w)), x = sizeCanvas(hero, w, w / 2), rad = b.step * 0.38;
     x.clearRect(0, 0, w, w / 2);
     b.pts.forEach(function (p) { circ(x, p.x, p.y, rad, p.c); });
   }
-  // 길(선)은 버스 바퀴 바로 아래 — 인트로 마지막 장면의 선과 같은 높이
-  function placeRoad() {
-    var a = hero.parentNode.getBoundingClientRect(), s = heroSec.getBoundingClientRect(), w = hero.clientWidth;
-    heroRoad.style.top = (a.top - s.top + w / 2 * 0.95 - 1.5).toFixed(1) + 'px';
-  }
-  drawHero(); placeRoad();
+  drawHero();
 
-  // ---------- 인트로: 점이 모여 버스 → 출발하며 길이 그려짐 → A1 + 슬로건 ----------
-  var heroRs = all('.h-r');
+  // ---------- 인트로 ----------
+  var heroRs = document.querySelectorAll('.h-r');
   function showHero() { heroRs.forEach(function (el) { el.classList.add('on'); }); }
   var ov = window.__sdIntro;
   if (!ov || RM) { if (ov) ov.remove(); showHero(); }
   else (function () {
     var cv = document.createElement('canvas'); ov.appendChild(cv);
-    var sk = document.createElement('span'); sk.className = 'skip'; sk.textContent = '누르면 건너뛰어요'; ov.appendChild(sk);
+    var sk = document.createElement('span'); sk.className = 'skip'; sk.textContent = '누르면 건너뜁니다'; ov.appendChild(sk);
     var vw = innerWidth, vh = innerHeight, x = sizeCanvas(cv, vw, vh);
     var r = hero.getBoundingClientRect(), bw, ox, oy;
     if (r.width && r.top < vh && r.bottom > 0) { bw = Math.round(r.width); ox = r.left; oy = r.top; }
     else { bw = Math.round(Math.min(vw * 0.84, 560)); ox = (vw - bw) / 2; oy = (vh - bw / 2) / 2; }
-    var b = busPoints(bw), rad = b.step * 0.38, fs = b.step * 1.5, u = bw / 200;
-    var roadY = oy + bw / 2 * 0.95, rear0 = ox + 6 * u;
-    var font = getComputedStyle(document.body).fontFamily;
-    function sprite(ch) { var s = document.createElement('canvas'), n = Math.ceil(fs * 1.4 * DPR); s.width = s.height = n; var c = s.getContext('2d'); c.fillStyle = '#8a8a8a'; c.font = '700 ' + (fs * DPR) + 'px ' + font; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(ch, n / 2, n / 2); return s; }
+    var b = busPoints(bw), rad = b.step * 0.38, fs = b.step * 1.5;
+    // 작은 「ㅅ」「ㄷ」 글자 스프라이트
+    function sprite(ch) { var s = document.createElement('canvas'), n = Math.ceil(fs * 1.4 * DPR); s.width = s.height = n; var c = s.getContext('2d'); c.fillStyle = '#8a8a8a'; c.font = '700 ' + (fs * DPR) + 'px ' + getComputedStyle(document.body).fontFamily; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(ch, n / 2, n / 2); return s; }
     var sp = [sprite('ㅅ'), sprite('ㄷ')], ss = fs * 1.4;
-    var P = b.pts.map(function (p, i) { return { tx: ox + p.x, ty: oy + p.y, c: p.c, sx: Math.random() * vw, sy: Math.random() * vh, d: Math.random() * 300, s: sp[i % 2] }; });
-    var LA = new Path2D('M50 6L86 42L77 51L50 24L23 51L14 42Z'), LB = new Path2D('M22 58H80V70H34V82H80V94H22Z');
-    var LS = vw < 600 ? 52 : 68, slF = vw < 600 ? 17 : 21;
-    var lyTop = roadY - LS - slF - 56; if (lyTop < 40) lyTop = roadY + 36;
+    var P = b.pts.map(function (p, i) {
+      return { tx: ox + p.x, ty: oy + p.y, c: p.c, sx: Math.random() * vw, sy: Math.random() * vh, d: Math.random() * 550, s: sp[i % 2] };
+    });
     var T0 = performance.now(), raf, done = false;
     function ease(t) { return t < 0 ? 0 : t > 1 ? 1 : 1 - Math.pow(1 - t, 3); }
-    function easeIn(t) { t = clamp(t); return t * t * t; }
+    function mix(a, b2, t) { return Math.round(a + (b2 - a) * t); }
     function frame(now) {
       var t = now - T0;
-      var v = Math.round(255 * ease((t - 600) / 350));
-      x.globalAlpha = 1; x.fillStyle = 'rgb(' + v + ',' + v + ',' + v + ')'; x.fillRect(0, 0, vw, vh);
-      var dx = easeIn((t - 1050) / 550) * (vw - ox + 40);
-      // 길: 버스 꽁무니를 따라 오른쪽으로, 그다음 왼쪽 끝까지
-      var rear = rear0 + dx, left = rear0 * (1 - ease((t - 1500) / 300));
-      if (t > 1050) { x.fillStyle = K; x.fillRect(left, roadY - 1.5, Math.max(0, Math.min(rear, vw) - left), 3); }
+      var bg = ease((t - 1500) / 450), v = mix(0, 255, bg);
+      x.fillStyle = 'rgb(' + v + ',' + v + ',' + v + ')'; x.fillRect(0, 0, vw, vh);
       for (var i = 0; i < P.length; i++) {
-        var p = P[i], a = ease((t - p.d) / 140); if (a <= 0) continue;
-        var m = ease((t - 250 - p.d * 0.5) / 600), px = p.sx + (p.tx - p.sx) * m + dx, py = p.sy + (p.ty - p.sy) * m;
-        if (px > vw + 20) continue;
+        var p = P[i], a = ease((t - p.d) / 160); if (a <= 0) continue;
+        var m = ease((t - 650 - p.d * 0.5) / 750), px = p.sx + (p.tx - p.sx) * m, py = p.sy + (p.ty - p.sy) * m;
         if (m < 1) { x.globalAlpha = a * (1 - m); x.drawImage(p.s, px - ss / 2, py - ss / 2, ss, ss); }
         if (m > 0) { x.globalAlpha = m; circ(x, px, py, rad, p.c); }
       }
-      var la = ease((t - 1550) / 300);
-      if (la > 0) {
-        var sc = LS / 88, oyl = (1 - la) * 10;
-        x.globalAlpha = la; x.save(); x.translate(vw / 2 - 36 * sc, lyTop + oyl); x.scale(sc, sc); x.translate(-14, -6); x.fillStyle = K; x.fill(LA); x.fill(LB); x.restore();
-        x.font = '800 ' + slF + 'px ' + font; x.textAlign = 'center'; x.textBaseline = 'top'; x.fillStyle = K;
-        x.fillText('Learn Better. Grow Together.', vw / 2, lyTop + LS + 18 + oyl);
-      }
       x.globalAlpha = 1;
-      if (t > 2250) return finish();
+      if (t > 2050) return finish();
       raf = requestAnimationFrame(frame);
     }
     function finish() {
       if (done) return; done = true; cancelAnimationFrame(raf);
       ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (e) { removeEventListener(e, finish, true); });
-      showHero(); ov.classList.add('out'); setTimeout(function () { ov.remove(); }, 300);
+      showHero(); ov.classList.add('out'); setTimeout(function () { ov.remove(); }, 400);
     }
     ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (e) { addEventListener(e, finish, { capture: true, passive: true }); });
     raf = requestAnimationFrame(frame);
   })();
 
   // ---------- 검은 섹션: 도트 휴대폰 ----------
-  var pc = $('phoneDots'), pPts = null, pX, pW, pH, pLast = -1;
+  var pc = document.getElementById('phoneDots'), pPts = null, pX, pW, pH, pLast = -1;
   function drawPhoneBase(x, w) {
     var u = w / 100; x.save(); x.scale(u, u);
     rr(x, 8, 2, 84, 176, 16, '#ffffff');
@@ -925,6 +865,7 @@
   function paintPhone(p) {
     if (!pPts || Math.abs(p - pLast) < 0.004) return; pLast = p;
     var rad = Math.max(6, pW / 34) * 0.38; pX.clearRect(0, 0, pW, pH);
+    // 화면 칸(16~156/180)을 아래에서 위로 노랑으로 채운다
     pPts.forEach(function (q) {
       var c = '#3a3a3a';
       if (q.c === 'S') { var f = 1 - (q.ry * 180 - 16) / 140; c = f <= p ? Y : '#242424'; }
@@ -933,124 +874,16 @@
   }
   setupPhone();
 
-  // ---------- 노선 + 고정 휴대폰 ----------
-  var route = $('route'), rtTrack = $('rtTrack'), rtFill = $('rtFill'), rtBus = $('rtBus'), rtNow = $('rtNow');
-  var rss = all('.rs', route), chs = all('.ch', route);
-  var pages = chs.map(function (c) { return c.querySelector('.pg'); }), homes = pages.map(function (p) { return p.parentNode; });
-  var stageScr = $('stageScr'), stageIn = $('stageIn'), stagePh = $('stagePh');
-  var mqWide = matchMedia('(min-width: 1024px)'), LIVE = false, cur = -1, nowIdx = -1;
-  var NAMES = rss.map(function (a) { return a.querySelector('span').innerHTML; });
-
-  // 장마다 화면 속 작은 움직임
-  var TM = {}, raf4 = 0;
-  function later(i, ms, fn) { (TM[i] = TM[i] || []).push(setTimeout(fn, ms)); }
-  var todo = all('#todo li'), attAuto = $('attAuto'), attToast = $('attToast'), attToastB = $('attToastB');
-  var map4 = $('map4'), mbus = $('mbus'), etaV = $('etaV'), s4 = all('#route4 .stop'), billSt = $('billSt');
-  function busAt(px, py) { var s = map4.clientWidth / 264; mbus.style.transform = 'translate(' + ((px - 24) * s).toFixed(1) + 'px,' + ((py - 110) * s).toFixed(1) + 'px)'; }
-  function along(pts, dur, cb) {
-    var L = [0]; for (var i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
-    var tot = L[L.length - 1], t0 = performance.now();
-    (function f(now) {
-      var k = clamp((now - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, d = e * tot, j = 1;
-      while (j < L.length - 1 && L[j] < d) j++;
-      var a = pts[j - 1], b2 = pts[j], q = (d - L[j - 1]) / ((L[j] - L[j - 1]) || 1);
-      busAt(lerp(a[0], b2[0], q), lerp(a[1], b2[1], q));
-      if (k < 1) raf4 = requestAnimationFrame(f); else if (cb) cb();
-    })(t0);
-  }
-  function shuttleEnd() { busAt(60, 75); etaV.textContent = '두 번째 정류장 · 4분 후'; s4[0].className = 'stop passed'; s4[1].className = 'stop next'; }
-  var RESET = {
-    2: function () { todo.forEach(function (li) { li.classList.remove('done'); }); },
-    3: function () { attAuto.classList.remove('on', 'press'); attToast.classList.remove('on'); },
-    4: function () { cancelAnimationFrame(raf4); busAt(24, 110); etaV.textContent = '세 번째 정류장 · 9분 후'; s4[0].className = 'stop next'; s4[1].className = 'stop'; },
-    5: function () { billSt.className = 'st n'; billSt.textContent = '안 읽음'; },
-    7: function () { pages[7].classList.remove('on-view'); }
-  };
-  var PLAY = {
-    2: function () { todo.forEach(function (li, k) { later(2, 500 + k * 420, function () { li.classList.add('done'); }); }); },
-    3: function () {
-      later(3, 700, function () { attAuto.classList.add('press'); });
-      later(3, 860, function () { attAuto.classList.remove('press'); attAuto.classList.add('on'); attToastB.textContent = '최유나 · 출석 저장했어요'; attToast.classList.add('on'); });
-      later(3, 3400, function () { attToast.classList.remove('on'); });
-    },
-    4: function () { later(4, 450, function () { along([[24, 110], [60, 110], [60, 75]], 1500, shuttleEnd); }); },
-    5: function () {
-      later(5, 900, function () { billSt.className = 'st b'; billSt.textContent = '읽음'; });
-      later(5, 2100, function () { billSt.className = 'st g'; billSt.textContent = '납부'; });
-    },
-    7: function () { later(7, 60, function () { pages[7].classList.add('on-view'); }); }
-  };
-  function stopP(i) { (TM[i] || []).forEach(clearTimeout); TM[i] = []; if (RESET[i]) RESET[i](); }
-  function playP(i) { stopP(i); if (!RM && PLAY[i]) PLAY[i](); }
-  if (RM) { shuttleEnd(); pages[7].classList.add('on-view'); }
-
-  function sizeStage() {
-    if (!LIVE) return;
-    var vh = innerHeight, s = Math.min(1, (vh - 120) / 620);
-    stagePh.style.transform = s < 1 ? 'scale(' + s.toFixed(3) + ')' : '';
-    stageIn.style.top = Math.max(80, (vh - 620 * s) / 2 + 20).toFixed(0) + 'px';
-  }
-  function setLive() {
-    var want = !RM && mqWide.matches;
-    if (want === LIVE) return;
-    LIVE = want; route.classList.toggle('live', LIVE);
-    pages.forEach(function (p, i) { stopP(i); p.classList.remove('act', 'prev'); (LIVE ? stageScr : homes[i]).appendChild(p); });
-    cur = -1; sizeStage();
-    if (!LIVE) pages.forEach(function (p, i) { if (p.__vis) playP(i); });
-  }
-  setLive();
-  if (mqWide.addEventListener) mqWide.addEventListener('change', function () { setLive(); onScroll(); });
-
-  // 폰 폭: 화면이 보이면 재생
-  if ('IntersectionObserver' in window && !RM) {
-    var ioP = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        var i = +e.target.dataset.i; e.target.__vis = e.isIntersecting;
-        if (LIVE) return;
-        if (e.isIntersecting) playP(i); else stopP(i);
-      });
-    }, { threshold: 0.45 });
-    pages.forEach(function (p) { ioP.observe(p); });
-  } else if (!RM) { pages[7].classList.add('on-view'); }
-
-  function routeProgress(vh) {
-    var mid = vh / 2, cs = chs.map(function (c) { var r = c.getBoundingClientRect(); return r.top + r.height / 2 - mid; });
-    if (cs[0] >= 0) return 0;
-    if (cs[7] <= 0) return 7;
-    for (var i = 0; i < 7; i++) if (cs[i] <= 0 && cs[i + 1] > 0) return i + (-cs[i]) / (cs[i + 1] - cs[i]);
-    return 0;
-  }
-  function paintRoute(vh) {
-    var rr0 = route.getBoundingClientRect(); if (rr0.bottom < -200 || rr0.top > vh + 200) return;
-    var p = routeProgress(vh), k = p / 7, wide = mqWide.matches;
-    if (wide) { var Hh = rtTrack.clientHeight; rtFill.style.transform = 'scaleY(' + k.toFixed(4) + ')'; rtBus.style.transform = 'translateY(' + (k * Hh).toFixed(1) + 'px)'; }
-    else { var Ww = rtTrack.clientWidth; rtFill.style.transform = 'scaleX(' + k.toFixed(4) + ')'; rtBus.style.transform = 'translateX(' + (k * Ww).toFixed(1) + 'px)'; }
-    var n = Math.round(p);
-    rss.forEach(function (a, i) { a.classList.toggle('lit', i <= p + 0.02); });
-    if (n !== nowIdx) { rss.forEach(function (a, i) { a.classList.toggle('now', i === n); if (i === n) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current'); }); rtNow.innerHTML = NAMES[n]; nowIdx = n; }
-    if (LIVE && n !== cur) {
-      pages.forEach(function (pg, i) { pg.classList.toggle('act', i === n); pg.classList.toggle('prev', i < n); });
-      if (cur >= 0) stopP(cur); playP(n); cur = n;
-    }
-  }
-  rss.forEach(function (a, i) {
-    a.addEventListener('click', function (e) {
-      e.preventDefault();
-      var r = chs[i].getBoundingClientRect(), vh = innerHeight;
-      var top = mqWide.matches ? scrollY + r.top + r.height / 2 - vh / 2 : scrollY + r.top - 124;
-      scrollTo({ top: top, behavior: RM ? 'auto' : 'smooth' });
-      history.replaceState(null, '', '#c0' + i);
-    });
-  });
-
   // ---------- 공통 요소 ----------
-  var hd = $('hd'), fc = $('float-cta'), kf = $('kakao-fab');
-  var lines = all('#lines li');
-  var zoom = document.querySelector('.zoom'), zPanel = $('zoomPanel'), zPhone = $('zoomPhone'), zTitle = $('zoomTitle');
-  var tl = $('tl'), tlFill = $('tlFill'), tlBus = $('tlBus'), tlItems = all('#tl li');
+  var hd = document.getElementById('hd'), fc = document.getElementById('float-cta'), kf = document.getElementById('kakao-fab');
+  var lines = Array.prototype.slice.call(document.querySelectorAll('#lines li'));
+  var zoom = document.querySelector('.zoom'), zPanel = document.getElementById('zoomPanel'), zPhone = document.getElementById('zoomPhone'), zTitle = document.getElementById('zoomTitle');
+  var tl = document.getElementById('tl'), tlFill = document.getElementById('tlFill'), tlItems = Array.prototype.slice.call(document.querySelectorAll('#tl li'));
   if (!RM && 'CSS' in window && CSS.supports('clip-path', 'inset(1px round 2px)')) zoom.classList.add('live');
   var ZLIVE = zoom.classList.contains('live');
 
+  function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
   var ticking = false;
   function update() {
     ticking = false;
@@ -1061,15 +894,14 @@
     // 아래 CTA 바가 뜨면 카카오 버튼을 위로 비켜 준다(모바일에서 겹친다)
     if (kf) kf.classList.toggle('lifted', showCta);
 
-    paintRoute(vh);
-
     if (!RM) {
+      // 줄별 켜짐
       var lit = 0, th = vh * 0.62;
       lines.forEach(function (li) { var r = li.getBoundingClientRect(), on = r.top + r.height / 2 < th; li.classList.toggle('lit', on); if (on) lit++; });
       paintPhone(lit / lines.length);
-      var tr = tl.getBoundingClientRect(), f = clamp((th - tr.top) / tr.height);
-      tlFill.style.transform = 'scaleY(' + f.toFixed(4) + ')';
-      tlBus.style.transform = 'translateY(' + (f * (tr.height - 16)).toFixed(1) + 'px)';
+      // 타임라인
+      var tr = tl.getBoundingClientRect(), fillH = clamp((th - tr.top) / tr.height) * (tr.height - 16);
+      tlFill.style.height = fillH + 'px';
       tlItems.forEach(function (li) { li.classList.toggle('lit', li.getBoundingClientRect().top + 14 < th); });
     }
 
@@ -1090,8 +922,7 @@
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
   addEventListener('scroll', onScroll, { passive: true });
-  var rzT; addEventListener('resize', function () { clearTimeout(rzT); rzT = setTimeout(function () { drawHero(); placeRoad(); setupPhone(); setLive(); sizeStage(); if (RM) shuttleEnd(); else busAt(24, 110); nowIdx = -1; onScroll(); }, 150); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeRoad(); onScroll(); });
+  var rzT; addEventListener('resize', function () { clearTimeout(rzT); rzT = setTimeout(function () { drawHero(); setupPhone(); placeBus(); onScroll(); }, 150); });
   update();
 
   // ---------- reveal ----------
@@ -1099,21 +930,49 @@
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
     }, { threshold: 0.12 });
-    all('.r:not(.h-r)').forEach(function (el) { io.observe(el); });
+    document.querySelectorAll('.r:not(.h-r)').forEach(function (el) { io.observe(el); });
+    var io2 = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('on-view'); io2.unobserve(e.target); } }); }, { threshold: 0.4 });
+    io2.observe(document.getElementById('mk07'));
   } else {
-    all('.r').forEach(function (el) { el.classList.add('on'); });
+    document.querySelectorAll('.r').forEach(function (el) { el.classList.add('on'); });
+    document.getElementById('mk07').classList.add('on-view');
   }
 
-  // ---------- 03 출석 — 눌러 볼 수 있다 ----------
-  var tstT;
-  $('att').addEventListener('click', function (e) {
+  // ---------- 03 출석 토글 ----------
+  var tst = document.getElementById('attToast'), tstB = document.getElementById('attToastB'), tstT;
+  document.getElementById('att').addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
-    (TM[3] || []).forEach(clearTimeout);
     b.parentNode.querySelectorAll('button').forEach(function (o) { o.classList.toggle('on', o === b); });
     var nm = b.closest('li').querySelector('.m').firstChild.textContent;
-    attToastB.textContent = nm + ' · ' + b.dataset.v + ' 저장했어요';
-    attToast.classList.add('on'); clearTimeout(tstT); tstT = setTimeout(function () { attToast.classList.remove('on'); }, 1800);
+    tstB.textContent = nm + ' · ' + b.dataset.v + ' 저장했어요';
+    tst.classList.add('on'); clearTimeout(tstT); tstT = setTimeout(function () { tst.classList.remove('on'); }, 1800);
   });
+
+  // ---------- 04 셔틀 ----------
+  var stops = Array.prototype.slice.call(document.querySelectorAll('#route .stop')), busm = document.getElementById('busm'), etaV = document.getElementById('etaV');
+  var bt = document.getElementById('busToast'), btB = document.getElementById('busToastB'), btS = document.getElementById('busToastS');
+  var mine = 2, pos = 1, etas = ['약 19분 후', '약 12분 후'];
+  function placeBus() {
+    stops.forEach(function (s, i) { s.classList.toggle('passed', i < pos); s.classList.toggle('next', i === pos); });
+    var s = stops[pos]; busm.style.top = (s.offsetTop + (s.offsetHeight - 30) / 2) + 'px';
+    if (pos < mine) etaV.innerHTML = (mine - pos + 1) + '번째<small>' + etas[pos] + '</small>';
+    else if (pos === mine) etaV.innerHTML = '지금 도착<small>16:24</small>';
+    else etaV.innerHTML = '탑승 완료<small>학원으로 가는 중</small>';
+  }
+  placeBus();
+  if (!RM && 'IntersectionObserver' in window) {
+    var busTimer = null;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting && !busTimer) busTimer = setInterval(function () {
+          pos = (pos + 1) % stops.length; placeBus();
+          var msg = pos === mine ? ['셔틀이 곧 도착해요', '래미안 3단지 · 약 1분 후'] : pos === mine + 1 ? ['하은이가 탑승했어요', '래미안 3단지 · 16:24'] : pos === stops.length - 1 ? ['학원에 도착했어요', '16:40 · 하차'] : null;
+          if (msg) { btB.textContent = msg[0]; btS.textContent = msg[1]; bt.classList.add('on'); setTimeout(function () { bt.classList.remove('on'); }, 1700); }
+        }, 2200);
+        else if (!e.isIntersecting && busTimer) { clearInterval(busTimer); busTimer = null; }
+      });
+    }, { threshold: 0.3 }).observe(document.getElementById('route'));
+  }
 })();
 </script>
 </body>
