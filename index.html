@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>서당 — 학원 운영 with 셔틀의 기준</title>
-<meta name="description" content="셔틀 어디예요, 오늘 갔어요, 수강료 얼마예요 — 학부모가 매일 묻던 것을 앱이 먼저 답합니다. 등록 신청·출결·보강·자동 청구·카드 결제·셔틀 실시간까지, 작은 학원을 위한 서당.">
-<meta property="og:title" content="서당 — 학원 운영 with 셔틀의 기준">
-<meta property="og:description" content="등록 신청·출결·자동 청구·카드 결제·셔틀 실시간 위치. 작은 학원과 스포츠 교습소를 위한 관리 앱.">
+<title>서당 — 셔틀 운행하는 학원을 위한 관리 앱</title>
+<meta name="description" content="아이가 셔틀에 타는 순간부터 내리는 순간까지, 원장님·선생님·학부모님이 바로 같이 알아요. 등록 신청·출결·보강·자동 청구·카드 결제·셔틀 실시간까지, 셔틀 운행하는 학원을 위한 서당.">
+<meta property="og:title" content="서당 — 셔틀 운행하는 학원을 위한 관리 앱">
+<meta property="og:description" content="타는 순간부터 내리는 순간까지, 모두 같이 바로 알아요. 셔틀 운행하는 학원을 위한 관리 앱.">
 <meta property="og:url" content="https://seodang.app">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#ffffff">
@@ -22,7 +22,7 @@
 <style>
   /* 첫 화면 · 기능 카드 · 도입 3단계 — 공용은 assets/site.css */
   /* hero */
-  .hero { padding: 148px 0 0; text-align: center; overflow: hidden; }
+  .hero { padding: 148px 0 120px; text-align: center; overflow: hidden; }
   .hero .eb { color: var(--ink2); }
   .hero h1 { margin-top: 16px; font-size: clamp(42px, 9.4vw, 120px); font-weight: 900; letter-spacing: -0.06em; line-height: 1.02; }
   .hero h1 mark { background: linear-gradient(transparent 64%, var(--y) 64%, var(--y) 94%, transparent 94%); color: inherit; padding: 0 .04em; }
@@ -30,9 +30,6 @@
   .hero .meta { margin-top: 26px; display: flex; justify-content: center; gap: 8px 20px; flex-wrap: wrap; font-size: 14px; color: var(--ink2); font-weight: 600; }
   .hero .meta span { display: inline-flex; align-items: center; gap: 6px; }
   .hero .meta span::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
-  .stagephone { margin-top: 72px; display: flex; justify-content: center; }
-  .grow-in { transform-origin: 50% 0; will-change: transform; }
-  .hero .stagephone { padding-bottom: 120px; }
 
   /* 기능 — 가운데 카드 하나. 다음 카드는 왼쪽에서 들어오고, 지금 카드는 오른쪽으로 빠진다(4초마다 자동) */
   .tiles { padding: 120px 0 104px; overflow: hidden; --tcw: min(1100px, 80vw); --tch: 560px; }
@@ -90,7 +87,6 @@
   @media (max-width: 600px) { .steps { padding: 120px 0; } .step { min-height: 0; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .grow-in { transform: none !important; }
     .tiles .tile { transition: opacity .45s ease !important; }
   }
 </style>
@@ -141,32 +137,15 @@
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
   <div class="wrap">
-    <p class="eb r h-r">작은 학원과 교습소를 위한 관리 앱</p>
-    <h1 class="r h-r d1">학원 운영<br>with <mark>셔틀의 기준</mark></h1>
-    <p class="sub r h-r d2">셔틀 어디예요? 오늘 갔어요? 얼마예요?<br>학부모가 매일 묻던 것, <b>앱이 먼저 답합니다.</b></p>
+    <p class="eb r h-r">셔틀 운행하는 학원을 위한 관리 앱</p>
+    <h1 class="r h-r d1">타는 순간부터<br>내리는 순간까지,<br><mark>모두 같이 바로.</mark></h1>
+    <p class="sub r h-r d2">원장님·선생님·학부모님이 같은 순간을 같이 봐요.<br><b>어떤 흐름도 놓치지 않아요.</b></p>
     <div class="links r h-r d3">
       <a class="pill-y lg" href="/app/">무료로 시작하기</a>
       <a class="lnk" href="#tiles">하루가 어떻게 바뀌는지 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a>
     </div>
     <div class="meta r h-r d4"><span>카카오 로그인</span><span>세팅은 운영팀이</span><span>문자비 0원</span></div>
   </div>
-  <div class="stagephone grow"><div class="grow-in">
-    <div class="ph"><div class="scr">
-      <div class="ab"><span class="t">오늘</span><span class="s">10월 22일 (목)</span></div>
-      <ul class="rows">
-        <li><span class="m">15:00 초등 A반<small>출석 12 / 12</small></span><span class="st g">완료</span></li>
-        <li><span class="m">16:30 셔틀 1호차<small>정류장 12곳</small></span><span class="st g">운행 중</span></li>
-        <li><span class="m">17:00 초등 B반<small>출석 안 찍음</small></span><span class="st w">대기</span></li>
-        <li><span class="m">19:00 중급반<small>8명</small></span><span class="st n">—</span></li>
-      </ul>
-      <p class="sec">오늘 할 일</p>
-      <ul class="rows">
-        <li><span class="m">보강 신청</span><span class="cnt">1</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-        <li><span class="m">안 낸 청구서</span><span class="cnt">2</span><svg class="i chev" viewBox="0 0 20 20"><path d="M8 5l5 5-5 5"/></svg></li>
-      </ul>
-      <div class="tabbar"><span class="on">홈</span><span>출석</span><span>셔틀</span><span>수강료</span><span>더보기</span></div>
-    </div></div>
-  </div></div>
 </section>
 
 <!-- ===== 기능 — 가운데 카드 하나, 4초마다 다음 카드가 왼쪽에서 들어온다 ===== -->
@@ -285,15 +264,6 @@
       <div class="step r d2"><div class="n">3</div><h4>학부모는 앱에서 등록 신청</h4><p>원장님은 승인 한 번.</p><span class="time"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>1분</span></div>
     </div>
     <div class="links r d3"><a class="pill-y lg" href="/app/">무료로 시작하기</a></div>
-  </div>
-</section>
-
-<!-- ===== FINAL ===== -->
-<section class="final gray" id="download">
-  <div class="wrap">
-    <h2 class="r">오늘 저녁,<br>전화기가 조용해집니다.</h2>
-    <div class="links r d1"><a class="pill-y lg" href="/app/">무료로 시작하기</a><a class="lnk" href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
-    <p class="note r d2">PC 웹 · 카카오 로그인 · 도입 문의 학원 무료 체험</p>
   </div>
 </section>
 
