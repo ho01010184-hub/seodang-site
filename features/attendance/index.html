@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>출석 — 서당</title>
+<meta name="description" content="출석·결석·지각을 누르는 즉시 저장되고 학부모님께 바로 알림이 가요. 그날 오는 회원만 보이는 출석부, 결석 통보, 횟수권 차감까지.">
+<meta property="og:title" content="출석 — 서당">
+<meta property="og:description" content="출석·결석·지각을 누르는 즉시 저장되고 학부모님께 바로 알림이 가요. 그날 오는 회원만 보이는 출석부, 결석 통보, 횟수권 차감까지.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script>
+(function () {
+  var h = document.documentElement; h.classList.add('js');
+  try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('rm'); } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header id="hd">
+  <div class="wrap">
+    <a class="logo" href="/"><span class="mark"></span>서당</a>
+    <nav class="gnb" aria-label="주 메뉴">
+      <div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-controls="ddA">기능 <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5L5 6.5 8 3.5"/></svg></button><div class="dd-menu" id="ddA"><div class="dd-in"><a href="/features/attendance/">출석</a><a href="/features/shuttle/">셔틀</a><a href="/features/billing/">청구·결제</a><a href="/features/notice/">공지·문의</a><a href="/features/makeup/">보강</a><a href="/features/sales/">매출·직원</a></div></div></div>
+      <a href="/pricing/">요금</a>
+      <a href="/guide/">가이드</a>
+      <a href="/#steps">도입 3단계</a>
+      <a class="nav-cta" href="/app/">시작하기</a>
+    </nav>
+    <button class="mbtn" type="button" data-mbtn aria-expanded="false" aria-controls="mnav" aria-label="메뉴 열기"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+  </div>
+</header>
+
+<div class="lnav" id="lnav" aria-hidden="true">
+  <div class="wrap">
+    <a class="nm" href="/" tabindex="-1">서당</a>
+    <nav aria-label="스크롤 메뉴"><div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-controls="ddB" tabindex="-1">기능 <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5L5 6.5 8 3.5"/></svg></button><div class="dd-menu" id="ddB"><div class="dd-in"><a href="/features/attendance/" tabindex="-1">출석</a><a href="/features/shuttle/" tabindex="-1">셔틀</a><a href="/features/billing/" tabindex="-1">청구·결제</a><a href="/features/notice/" tabindex="-1">공지·문의</a><a href="/features/makeup/" tabindex="-1">보강</a><a href="/features/sales/" tabindex="-1">매출·직원</a></div></div></div><a href="/pricing/" tabindex="-1">요금</a><a href="/guide/" tabindex="-1">가이드</a><a href="/#steps" tabindex="-1">도입 3단계</a></nav>
+    <a class="pill-y" href="/app/" tabindex="-1">무료로 시작하기</a>
+    <button class="mbtn" type="button" data-mbtn aria-expanded="false" aria-controls="mnav" aria-label="메뉴 열기" tabindex="-1"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+  </div>
+</div>
+
+<div class="mnav" id="mnav" hidden>
+  <p class="g">기능</p>
+  <div class="sub"><a href="/features/attendance/">출석</a><a href="/features/shuttle/">셔틀</a><a href="/features/billing/">청구·결제</a><a href="/features/notice/">공지·문의</a><a href="/features/makeup/">보강</a><a href="/features/sales/">매출·직원</a></div>
+  <a href="/pricing/">요금</a>
+  <a href="/guide/">가이드</a>
+  <a href="/#steps">도입 3단계</a>
+  <a class="pill-y" href="/app/">시작하기</a>
+</div>
+
+<!-- 카카오톡 채널 문의 — 채널 「서당」(pf.kakao.com/_hHeaX)
+     referrerpolicy="no-referrer": 카카오는 Referer 가 보이면 채팅 첫 줄에
+     「- 이전 페이지: https://seodang.app/」를 자동으로 붙인다(카카오 공식 답변:
+     「referer 주소를 확인할 수 있는 경우 이전 페이지 주소가 자동으로 노출」).
+     Referer 를 안 보내면 그 줄이 안 생긴다(2026-09-29). 지우지 말 것. -->
+<a class="kakao-fab" id="kakao-fab" href="https://pf.kakao.com/_hHeaX/chat" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="카카오톡으로 문의하기">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3C6.98 3 2.91 6.2 2.91 10.15c0 2.5 1.65 4.7 4.14 5.98-.18.64-.66 2.37-.75 2.74-.12.46.17.45.35.33.15-.1 2.32-1.58 3.26-2.22.68.1 1.38.15 2.09.15 5.02 0 9.09-3.2 9.09-7.15S17.02 3 12 3z"/></svg>
+  <span class="label">카카오톡 문의</span>
+</a>
+
+<main>
+<section class="fh" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eb r h-r">출석</p>
+      <h1 class="r h-r d1">수업 끝나고 출석부 정리까지,<br>많이 번거로우셨죠?</h1>
+      <p class="lead r h-r d2">출석·결석·지각을 누르는 순간 저장되고, 학부모님께는 바로 알림이 가요. 따로 정리할 출석부가 없어요.</p>
+      <div class="links r h-r d3"><a class="pill-y lg" href="/app/">무료로 시작하기</a><a class="lnk" href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    </div>
+    <div class="phw r h-r d2"><div class="noti" aria-hidden="true"><span class="ni">서</span><div class="nb"><p class="nt"><b>서당</b><small>초등 A반 · 17:02</small></p><p>하은이가 출석했어요.</p></div></div><div class="ph"><div class="scr"><div class="ab"><span class="t">초등 A반</span><span class="s">목 17:00 · 오늘 4명</span></div><ul class="rows">
+        <li><span class="av">하</span><span class="m">김하은<small>주 3회 · 월 수 목</small></span><span class="att"><span data-v="출석" class="on">출석</span><span data-v="결석">결석</span><span data-v="지각">지각</span></span></li>
+        <li><span class="av">준</span><span class="m">박서준<small>주 2회 · 화 목</small></span><span class="att"><span data-v="출석">출석</span><span data-v="결석">결석</span><span data-v="지각" class="on">지각</span></span></li>
+        <li><span class="av">윤</span><span class="m">이도윤<small>결석 통보 · 보강 10/24(금)</small></span><span class="st w">통보됨</span></li>
+        <li><span class="av">나</span><span class="m">최유나<small>주 5회</small></span><span class="att"><span data-v="출석">출석</span><span data-v="결석">결석</span><span data-v="지각">지각</span></span></li>
+      </ul><p class="ps">오늘(목) 오는 회원만 보여요</p></div></div></div>
+  </div>
+</section>
+
+<section class="pad gray">
+  <div class="wrap">
+    <p class="eb r">출석</p>
+    <h2 class="h2 r d1">누가 어떻게 쓰나요</h2>
+    <div class="cards3">
+      <div class="rc r"><span class="rk">원장님</span><p>홈 「오늘 할 일」에서 출석 안 찍은 수업을 보고 바로 찍어요. 바뀐 출석 기록은 전부 남아요.</p></div>
+      <div class="rc r"><span class="rk">선생님</span><p>관리자 권한이 없어도 맡은 수업의 출석을 찍어요.</p></div>
+      <div class="rc r"><span class="rk">학부모님</span><p>출석·결석 알림을 바로 받고, 결석은 앱에서 미리 알려요. 알림은 종류별로 끌 수 있어요.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="wrap">
+    <p class="eb r">출석</p>
+    <h2 class="h2 r d1">이렇게 돌아가요</h2>
+    <div class="row2 r">
+      <div class="dtx"><h3>누르면 바로 저장돼요</h3><ul class="dots"><li>출석·결석·지각을 <b>누르는 즉시 저장</b>돼요</li><li>따로 [저장]·[종료] 버튼이 없어요</li><li>바뀐 출석 기록은 전부 남아요</li></ul></div>
+      <div class="dtv"><div class="ph sm"><div class="scr"><div class="ab"><span class="t">출석 기록</span><span class="s">초등 A반 · 10/22</span></div><ul class="rows"><li><span class="m">김하은 · 출석<small>17:02 저장</small></span><span class="st g">저장됨</span></li><li><span class="m">박서준 · 지각<small>17:11 저장</small></span><span class="st g">저장됨</span></li><li><span class="m">박서준 · 지각 → 출석<small>17:14 원장님이 바꿈</small></span><span class="st n">기록 남음</span></li></ul></div></div></div>
+    </div>
+    <div class="row2 r">
+      <div class="dtx"><h3>그날 오는 아이만 보여요</h3><ul class="dots"><li>출석부 명단은 <b>그날 그 요일에 오는 회원만</b></li><li>주 2회·3회 회원이 한 반에 같이 다녀도 자동으로 걸러져요</li><li>홈 「오늘 할 일」에 출석 안 찍은 수업이 떠요</li></ul></div>
+      <div class="dtv"><div class="ph sm"><div class="scr"><div class="ab"><span class="t">오늘 할 일</span><span class="s">10월 22일 (목)</span></div><ul class="rows"><li><span class="m">출석 안 찍은 수업<small>초등 B반 · 15:00</small></span><span class="cnt">1</span></li><li><span class="m">보강 신청</span><span class="cnt">1</span></li><li><span class="m">답변 기다리는 문의</span><span class="cnt">2</span></li></ul></div></div></div>
+    </div>
+    <div class="row2 r">
+      <div class="dtx"><h3>결석은 학부모님이 먼저 알려요</h3><ul class="dots"><li>학부모님이 앱에서 미리 결석을 알리면 출석부에 <b>「통보됨」</b></li><li>수업 전까지 학부모님이 취소할 수 있어요</li><li>결석한 날엔 잡힌 보강 날짜가 같이 보여요</li></ul></div>
+      <div class="dtv"><div class="ph sm"><div class="scr"><div class="ab"><span class="t">결석 알리기</span><span class="s">학부모 앱</span></div><div class="eta"><div class="l">이도윤 · 10/22(목) 초등 A반</div><div class="v">결석을 알렸어요</div></div><ul class="rows"><li><span class="m">보강<small>10/24(금) 17:00 초등 A반</small></span><span class="st g">잡힘</span></li></ul><div class="abtn gr">결석 통보 취소</div><p class="ps">수업 전까지 취소할 수 있어요</p></div></div></div>
+    </div>
+    <div class="row2 r">
+      <div class="dtx"><h3>횟수권도 알아서 세요</h3><ul class="dots"><li>출석·지각·보강은 <b>1회 차감</b></li><li>결석은 차감하지 않아요</li><li>1회 남으면 다음 청구서가 자동으로 나가요</li></ul></div>
+      <div class="dtv"><div class="ph sm"><div class="scr"><div class="ab"><span class="t">주말 수영반</span><span class="s">횟수권</span></div><div class="eta"><div class="l">최유나 · 남은 횟수</div><div class="v">1회<small>/ 10회</small></div></div><ul class="rows"><li><span class="m">10/19 출석</span><span class="amt">−1</span></li><li><span class="m">10/12 결석</span><span class="st n">차감 없음</span></li><li><span class="m">10/05 보강</span><span class="amt">−1</span></li><li><span class="m">다음 청구서<small>1회 남아서</small></span><span class="st g">자동 발행</span></li></ul></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pad gray">
+  <div class="wrap">
+    <h2 class="h2 r">자주 묻는 질문</h2>
+    <div class="qas r d1">
+      <details class="qa"><summary>출석을 잘못 눌렀어요.</summary><p>다른 칸을 다시 누르면 바로 바뀌어요. 바뀐 출석 기록은 전부 남아요.</p></details>
+      <details class="qa"><summary>선생님도 출석을 찍을 수 있나요?</summary><p>네. 관리자 권한이 없는 직원도 출석은 찍을 수 있어요.</p></details>
+      <details class="qa"><summary>학부모님이 알림을 끌 수 있나요?</summary><p>네. 학부모님이 앱에서 알림을 종류별로 끌 수 있어요.</p></details>
+      <details class="qa"><summary>결석 통보는 취소할 수 있나요?</summary><p>수업 전까지 학부모님이 앱에서 취소할 수 있어요.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="pad dark">
+  <div class="wrap">
+    <p class="eb r">다른 기능</p>
+    <div class="cards3">
+      <a class="mcard r" href="/features/shuttle/"><span class="t-eb">셔틀</span><h3>학부모님 앱에 버스 위치와 「몇 번째 · 약 몇 분 후」가 떠요.</h3><span class="lnk">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></span></a>
+      <a class="mcard r" href="/features/billing/"><span class="t-eb">청구·결제</span><h3>청구일에 자동 청구, 안 낸 분께는 앱이 알려요.</h3><span class="lnk">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></span></a>
+      <a class="mcard r" href="/features/makeup/"><span class="t-eb">보강</span><h3>학부모님이 신청하고, 원장님은 승인만 하세요.</h3><span class="lnk">자세히 보기 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="r">오늘 저녁,<br>전화기가 조용해져요.</h2>
+    <div class="links r d1"><a class="pill-y lg" href="/app/">무료로 시작하기</a><a class="lnk" href="mailto:contact@seodang.app?subject=%5B%EC%84%9C%EB%8B%B9%5D%20%EB%8F%84%EC%9E%85%20%EB%AC%B8%EC%9D%98">도입 문의 <svg viewBox="0 0 10 10"><path d="M3 1.5L6.5 5 3 8.5"/></svg></a></div>
+    <p class="note r d2">PC 웹 · 카카오 로그인 · 도입 문의 학원 무료 체험</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="/terms.html">이용약관</a>
+      <a href="/privacy.html">개인정보처리방침</a>
+      <a href="/location-terms.html">위치기반서비스 이용약관</a>
+      <a href="/delete.html">계정 삭제 요청</a>
+    </div>
+    <div class="biz">
+      하이그 주식회사 · 대표이사 임호균 · 사업자등록번호 750-87-03608 · 통신판매업신고 제 2026-세종조치원-0136 호 (신고기관: 세종특별자치시)<br>
+      세종특별자치시 연서면 성제길 9 · 전화 010-8560-1204 · 문의: contact@seodang.app · 호스팅 서비스 제공자: GitHub, Inc.<br>
+      © 2026 HYGR Inc. All rights reserved.
+    </div>
+    <!-- KB국민은행 에스크로(구매안전서비스) 판매자 인증마크 — 2026-09-30.
+         통신판매업 신고에 쓰는 구매안전서비스 가입 사실 표시(전자상거래법 24조).
+         KB 가 준 소스는 form+팝업이지만, 같이 준 「에스크로 이체 바로가기 링크」가
+         더 단순하고 JS 없이도 열려서 그걸 쓴다. mHValue 는 공개 식별자(비밀 아님). -->
+    <div class="escrow">
+      <a href="https://okbfex.kbstar.com/quics?page=C016760&amp;mHValue=24c34260813b2fc3180aec485daec83e"
+         target="_blank" rel="noopener noreferrer" aria-label="KB국민은행 에스크로 판매자 인증 확인">
+        <!-- KB 원본 GIF 는 흰 바탕이라 어두운 푸터에서 흰 네모로 떴다 → 바깥 흰색만 투명으로 뺀 PNG (마크 자체는 그대로) -->
+        <img src="/img/escrow_mark.png" alt="KB에스크로이체 매매보호의 기준" width="60" height="60" loading="lazy">
+      </a>
+      <span>KB국민은행 구매안전(에스크로) 서비스 가입 — 마크를 누르면 판매자 정보를 확인할 수 있어요.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>
