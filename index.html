@@ -22,18 +22,26 @@
 <style>
   /* 첫 화면 · 기기 연동 · 기능 카드 · 비교표 · 도입 3단계 — 공용은 assets/site.css */
   /* hero */
-  .hero { padding: 168px 0 72px; text-align: center; overflow: hidden; }
+  .hero { position: relative; min-height: 100vh; min-height: 100svh; padding: 76px 0 40px; display: flex; align-items: center; text-align: center; overflow: hidden; }
+  .hero > .wrap { width: 100%; z-index: 1; }
   .hero .eb { color: var(--ink2); }
-  .hero h1 { margin-top: 16px; font-size: clamp(42px, 9.4vw, 120px); font-weight: 900; letter-spacing: -0.06em; line-height: 1.02; }
+  .hero h1 { margin-top: 18px; font-size: clamp(48px, min(14.5vw, 23svh), 184px); font-weight: 900; letter-spacing: -0.065em; line-height: 1; }
   .hero h1 mark { background: linear-gradient(transparent 64%, var(--y) 64%, var(--y) 94%, transparent 94%); color: inherit; padding: 0 .04em; }
-  .hero .links { margin-top: 48px; }
-  @media (max-width: 600px) { .hero { padding: 128px 0 48px; } .hero .links { margin-top: 36px; } }
+  .hero .links { margin-top: 48px; justify-content: center; }
+  @media (max-width: 600px) { .hero { padding: 68px 0 32px; } .hero .links { margin-top: 36px; } }
+  /* 제목 뒤를 도는 학원 버스 — 위치·기울기는 JS 가 타원 위에서 계산 */
+  .bus-track { position: absolute; left: 0; top: 0; z-index: 0; border: 2px dashed #ececec; border-radius: 50%; pointer-events: none; }
+  .bus { position: absolute; left: 0; top: 0; z-index: 0; width: 120px; opacity: 0; pointer-events: none; will-change: transform, opacity; }
+  .bus svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .bus .bd { animation: bus-bob .32s ease-in-out infinite alternate; }
+  @keyframes bus-bob { from { transform: translateY(0); } to { transform: translateY(-2.5px); } }
+  .rm .bus .bd { animation: none; }
 
   /* 기기 연동 — PC 한 대 + 휴대폰 두 대. 장면은 고정 크기로 그리고 JS 가 칸 폭에 맞춰 줄인다 */
   .sync { padding: 72px 0 140px; text-align: center; }
   .tag { display: inline-flex; align-items: center; height: 36px; padding: 0 18px; border-radius: 999px; background: var(--gray); font-size: 15px; font-weight: 800; color: var(--ink); }
   .sync .h2 { margin-top: 22px; }
-  .sync .lead { max-width: 720px; }
+  .sync .lead { max-width: 720px; margin-left: auto; margin-right: auto; }
   .scene { margin: 64px auto 0; max-width: 1140px; overflow: hidden; }
   .sc-in { position: relative; width: 1140px; height: 720px; transform-origin: 0 0; }
   .pc { position: absolute; left: 20px; top: 20px; width: 700px; background: #fff; border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 30px 60px rgba(0,0,0,.12); overflow: hidden; text-align: left; }
@@ -209,6 +217,8 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
+  <div class="bus-track" id="busTrack" aria-hidden="true"></div>
+  <div class="bus" id="bus" aria-hidden="true"><svg viewBox="0 0 120 82"><g class="bd" stroke="#111" stroke-width="4" stroke-linejoin="round"><rect x="6" y="8" width="106" height="54" rx="18" fill="#FFCD00"/><rect x="18" y="19" width="20" height="17" rx="5" fill="#fff" stroke-width="3"/><rect x="44" y="19" width="20" height="17" rx="5" fill="#fff" stroke-width="3"/><rect x="70" y="19" width="20" height="17" rx="5" fill="#fff" stroke-width="3"/><path d="M96 19h4a6 6 0 0 1 6 6v11H96z" fill="#fff" stroke-width="3"/><path d="M10 46h98" stroke-width="3"/><circle cx="104" cy="53" r="3" fill="#fff" stroke-width="2.5"/></g><g stroke="#111" stroke-width="4"><circle cx="32" cy="66" r="10" fill="#111"/><circle cx="32" cy="66" r="3.5" fill="#fff" stroke="none"/><circle cx="88" cy="66" r="10" fill="#111"/><circle cx="88" cy="66" r="3.5" fill="#fff" stroke="none"/></g></svg></div>
   <div class="wrap">
     <p class="eb r h-r">셔틀 운행하는 학원을 위한 관리 앱</p>
     <h1 class="r h-r d1">서당으로<br><mark>이어진 우리.</mark></h1>
@@ -462,6 +472,49 @@
   function all(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
   function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
   function lerp(a, b, t) { return a + (b - a) * t; }
+
+  // ---------- 첫 화면 버스: 제목을 감싸는 타원을 왼쪽에서 시작해 한 바퀴 반 돌고 오른쪽에서 사라진다 ----------
+  (function () {
+    var hero = $('top'), bus = $('bus'), track = $('busTrack'), h1 = hero && hero.querySelector('h1'); if (!bus || !h1) return;
+    var G = {}, RUN = 11000, REST = 2200, t0 = performance.now(), vis = true;
+    function measure() {
+      var hr = hero.getBoundingClientRect(), r = h1.getBoundingClientRect();
+      var fs = parseFloat(getComputedStyle(h1).fontSize), bw = Math.round(fs * 0.78);
+      G.bw = bw; G.bh = bw * 82 / 120; bus.style.width = bw + 'px';
+      G.cx = r.left - hr.left + r.width / 2; G.cy = r.top - hr.top + r.height / 2;
+      G.rx = Math.max(40, Math.min(r.width * 0.62, hr.width / 2 - bw * 0.55));
+      G.ry = Math.min(r.height * 0.82, G.cy - 60);
+      track.style.width = G.rx * 2 + 'px'; track.style.height = G.ry * 2 + 'px';
+      track.style.transform = 'translate(' + (G.cx - G.rx) + 'px,' + (G.cy - G.ry) + 'px)';
+    }
+    function place(th, op) {
+      var x = G.cx + G.rx * Math.cos(th), y = G.cy + G.ry * Math.sin(th);
+      var dx = -G.rx * Math.sin(th), dy = G.ry * Math.cos(th), flip = dx < 0 ? -1 : 1;
+      var a = Math.atan2(dy, dx) * 180 / Math.PI; if (flip < 0) a = a > 0 ? a - 180 : a + 180;
+      a = Math.max(-32, Math.min(32, a));
+      bus.style.transform = 'translate(' + (x - G.bw / 2).toFixed(1) + 'px,' + (y - G.bh / 2).toFixed(1) + 'px) rotate(' + a.toFixed(1) + 'deg) scaleX(' + flip + ')';
+      bus.style.opacity = op;
+    }
+    function frame(now) {
+      if (vis) {
+        var t = ((now - t0) % (RUN + REST)) / RUN;
+        if (t > 1) bus.style.opacity = 0;
+        else {
+          var e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; e = lerp(t, e, .35);
+          place(Math.PI + e * 3 * Math.PI, (Math.min(1, t / .07, (1 - t) / .07)).toFixed(3));
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+    function init() { measure(); if (RM) place(Math.PI * 1.78, 1); }
+    addEventListener('resize', init);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(init);
+    init(); setTimeout(init, 1300); // 제목이 떠오르는 전환(.r)이 끝난 뒤 다시 잰다
+    if (!RM) {
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { vis = es[0].isIntersecting; }, { threshold: 0 }).observe(hero);
+      requestAnimationFrame(frame);
+    }
+  })();
 
   // ---------- 기기 연동 장면: 고정 크기로 그린 장면을 칸 폭에 맞춰 줄인다 ----------
   (function () {
