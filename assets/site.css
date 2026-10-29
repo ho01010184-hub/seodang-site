@@ -374,3 +374,153 @@
     .js .r { opacity: 1 !important; transform: none !important; }
     .js .bars i { transform: none !important; }
   }
+
+  /* ===== 2026-10 추가 — 요금제 3장 · 따져 보기 · 프로·맥스 · 비교표 / 첫 화면 자동·AI·기본·요금 띠 ===== */
+  .soon { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px; background: var(--line); color: var(--ink2); font-size: 12px; font-weight: 800; letter-spacing: 0; line-height: 1; white-space: nowrap; vertical-align: 2px; }
+  .dark .soon, .plan.k .soon { background: #333; color: #c9c9c9; }
+  .scr .soon { background: #f2f3f5; color: var(--ink2); }
+  .soon.lg { height: 36px; padding: 0 18px; font-size: 15px; vertical-align: 0; }
+  .mx { display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 6px; background: var(--y); color: var(--ink); font-size: 12px; font-weight: 800; letter-spacing: 0; white-space: nowrap; }
+  .pill-y.gr { background: var(--gray); }
+  .pill-k { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; background: var(--ink); color: #fff; font-weight: 800; font-size: 17px; height: 48px; padding: 0 24px; border-radius: 999px; white-space: nowrap; transition: transform .16s var(--ease); }
+  .pill-k:hover { color: #fff; background: #333; transform: scale(1.03); }
+  .ok { display: inline-block; width: 20px; height: 20px; background: currentColor; vertical-align: middle; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10.5l4 4 8-9'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10.5l4 4 8-9'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .no { display: inline-block; width: 14px; height: 3px; border-radius: 2px; background: #cfcfcf; vertical-align: middle; }
+
+  /* 요금 — 첫 구간 */
+  .pp-top { padding: 148px 0 112px; }
+  .pp-top h1 { margin-top: 18px; font-size: clamp(42px, 7.4vw, 100px); font-weight: 900; letter-spacing: -0.055em; line-height: 1.1; text-wrap: balance; }
+  .pp-top h1 b { font-weight: 900; background: linear-gradient(transparent 64%, var(--y) 64%, var(--y) 94%, transparent 94%); padding: 0 .04em; }
+  .promo { display: inline-flex; align-items: center; height: 40px; margin-top: 28px; padding: 0 20px; border-radius: 999px; background: var(--y); font-size: 16px; font-weight: 800; color: var(--ink); }
+  .pp-top .links { margin-top: 28px; }
+  @media (max-width: 600px) { .pp-top { padding: 108px 0 80px; } }
+
+  /* 요금제 3장 */
+  .plans { padding: 120px 0; }
+  .pl3 { margin-top: 48px; padding-top: 14px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; align-items: stretch; text-align: left; }
+  .plan { position: relative; background: #fff; border-radius: 28px; padding: 36px 30px 32px; display: flex; flex-direction: column; min-width: 0; }
+  .plan.k { background: var(--ink); color: #fff; }
+  .plan .rec { position: absolute; top: -14px; left: 30px; height: 28px; padding: 0 14px; border-radius: 999px; background: var(--y); color: var(--ink); font-size: 13px; font-weight: 800; display: inline-flex; align-items: center; white-space: nowrap; }
+  .plan .pn { font-size: 22px; font-weight: 900; letter-spacing: -0.03em; }
+  .plan .pp { margin-top: 12px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .plan .pp span { font-size: 17px; font-weight: 700; color: var(--ink2); }
+  .plan .pp b { font-size: clamp(36px, 3.6vw, 48px); font-weight: 900; letter-spacing: -0.05em; line-height: 1.05; }
+  .plan .pd { margin-top: 8px; font-size: 16px; font-weight: 700; color: var(--ink2); }
+  .plan.k .pp span, .plan.k .pd { color: #c9c9c9; }
+  .pq { margin-top: 20px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
+  .pq span { border-radius: 14px; background: var(--gray); padding: 12px 14px; font-size: 16px; font-weight: 800; }
+  .pq small { display: block; font-size: 12px; font-weight: 700; color: var(--ink3); }
+  .plan.k .pq span { background: #262626; }
+  .plan.k .pq small { color: #9a9a9a; }
+  .plan .pbtn { margin-top: 20px; width: 100%; }
+  .plan .pinc { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 800; color: var(--ink3); }
+  .plan.k .pinc { border-top-color: #333; color: #9a9a9a; }
+  .pck { margin-top: 14px; display: grid; gap: 11px; }
+  .pck li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; font-weight: 600; line-height: 1.45; }
+  .pck li > svg { width: 18px; height: 18px; flex: none; margin-top: 2px; fill: none; stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .pck li > span .soon { margin-left: 6px; }
+  .plan.k .pck li { color: #e8e8e8; }
+  .plan.k .pck li > svg { stroke: var(--y); }
+  .pl-note { margin-top: 24px; text-align: center; font-size: 15px; font-weight: 600; color: var(--ink2); }
+  @media (max-width: 860px) { .plans { padding: 96px 0; } .pl3 { grid-template-columns: minmax(0,1fr); gap: 28px; } .plan.k { order: -1; } .plan { padding: 32px 22px 28px; } .plan .rec { left: 22px; } }
+
+  /* 99,000원 따져 보기 */
+  .m4 { margin-top: 48px; display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; }
+  .m4 > div { background: var(--gray); border-radius: 24px; padding: 30px 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .m4 b { font-size: clamp(28px, 2.8vw, 38px); font-weight: 900; letter-spacing: -0.05em; line-height: 1.15; text-wrap: balance; }
+  .m4 p { font-size: 16px; font-weight: 500; line-height: 1.6; color: var(--ink2); text-wrap: pretty; }
+  .m4-note { margin-top: 20px; font-size: 14px; font-weight: 600; color: var(--ink3); text-wrap: pretty; }
+  @media (max-width: 1000px) { .m4 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 600px) { .m4 { grid-template-columns: minmax(0,1fr); } }
+
+  /* 프로·맥스에서 달라지는 것 */
+  .up2 { margin-top: 56px; display: grid; gap: 12px; }
+  .upc { background: #1c1c1c; border-radius: 28px; padding: 48px 48px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 32px 48px; align-items: center; }
+  .upc .t-eb { font-size: 17px; font-weight: 800; color: var(--y); }
+  .upc h3 { margin-top: 10px; font-size: clamp(24px, 2.6vw, 34px); font-weight: 900; letter-spacing: -0.045em; line-height: 1.28; text-wrap: balance; }
+  .upc h3 .soon { margin-left: 8px; vertical-align: 6px; }
+  .upc .ud { margin-top: 24px; padding-top: 20px; border-top: 1px solid #333; font-size: 17px; font-weight: 700; color: #d6d6d6; }
+  .upc .ud .soon { margin-left: 6px; }
+  .upc .links { margin-top: 28px; }
+  .upc .pm { display: flex; justify-content: center; }
+  .upc .u2 { padding-left: 48px; border-left: 1px solid #333; }
+  @media (max-width: 860px) {
+    .upc { grid-template-columns: minmax(0,1fr); padding: 32px 22px; }
+    .upc .u2 { padding: 28px 0 0; border-left: 0; border-top: 1px solid #333; }
+  }
+
+  /* 수업 노트 다듬기 — 휴대폰 안 */
+  .scr.aino { min-height: 0; padding-bottom: 22px; }
+  .an-d { margin: 0 18px; padding: 14px 16px; border-radius: 16px; background: #f2f3f5; font-size: 14px; font-weight: 600; line-height: 1.55; color: var(--ink2); }
+  .an-ar { display: flex; align-items: center; gap: 6px; margin: 14px 18px 0; font-size: 12px; font-weight: 800; color: var(--ink3); }
+  .an-ar svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .an-p { margin: 0 18px; padding: 16px; border-radius: 16px; background: #fff8d6; box-shadow: inset 0 0 0 1.5px var(--y); font-size: 14px; font-weight: 600; line-height: 1.65; color: var(--ink); text-wrap: pretty; }
+
+  /* 요금제 비교표 — 폰에선 요금제 하나씩 */
+  .ptw { margin-top: 48px; max-width: 1040px; }
+  .pt-seg { display: none; gap: 4px; padding: 4px; border-radius: 14px; background: var(--gray); margin-bottom: 16px; }
+  .pt-seg button { flex: 1; height: 44px; border: 0; border-radius: 11px; background: none; font: 800 15px/1 var(--sans); color: var(--ink2); cursor: pointer; }
+  .pt-seg button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .ptab { width: 100%; border-collapse: separate; border-spacing: 0; text-align: left; }
+  .ptab th, .ptab td { padding: 16px 20px; border-bottom: 1px solid var(--line); font-size: 16px; line-height: 1.45; vertical-align: middle; text-wrap: pretty; }
+  .ptab thead th { border-bottom: 0; padding: 18px 20px; font-size: 18px; font-weight: 900; text-align: center; }
+  .ptab thead th small { display: block; margin-top: 2px; font-size: 13px; font-weight: 700; color: var(--ink2); }
+  .ptab thead th:first-child { text-align: left; font-size: 15px; font-weight: 800; color: var(--ink3); }
+  .ptab tbody th { font-weight: 700; }
+  .ptab tbody th .soon { margin-left: 6px; }
+  .ptab td { width: 18%; text-align: center; font-weight: 700; }
+  .ptab [data-c="2"] { background: #fff8d6; }
+  .ptab tbody td[data-c="2"] { border-bottom-color: #f3e6a8; }
+  .ptab thead th[data-c="2"] { background: var(--y); border-radius: 18px 18px 0 0; }
+  .ptab tbody tr:last-child td[data-c="2"] { border-bottom: 0; border-radius: 0 0 18px 18px; }
+  @media (max-width: 720px) {
+    .pt-seg { display: flex; }
+    .ptab th, .ptab td { padding: 14px 12px; font-size: 15px; }
+    .ptab thead th { padding: 14px 12px; font-size: 16px; }
+    .ptab td { width: 38%; }
+    .ptw[data-p="1"] .ptab [data-c="2"], .ptw[data-p="1"] .ptab [data-c="3"],
+    .ptw[data-p="2"] .ptab [data-c="1"], .ptw[data-p="2"] .ptab [data-c="3"],
+    .ptw[data-p="3"] .ptab [data-c="1"], .ptw[data-p="3"] .ptab [data-c="2"] { display: none; }
+  }
+
+  /* 첫 화면 — 원장님이 안 해도, 서당이 해요 */
+  .auto { padding: 140px 0 120px; }
+  .au-l { margin-top: 48px; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 48px; border-top: 1px solid var(--line); }
+  .au-l li { display: flex; align-items: center; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 18px; font-weight: 700; line-height: 1.45; min-width: 0; }
+  .au-l .ic { width: 36px; height: 36px; border-radius: 10px; background: var(--gray); display: grid; place-items: center; flex: none; }
+  .au-l .ic.b { background: var(--y); }
+  .au-l .tx { flex: 1; min-width: 0; text-wrap: pretty; }
+  .au-l .at { flex: none; padding: 3px 8px; border-radius: 6px; background: var(--gray); font-size: 12px; font-weight: 800; color: var(--ink2); }
+  @media (max-width: 760px) { .auto { padding: 96px 0 88px; } .au-l { grid-template-columns: minmax(0,1fr); } .au-l li { font-size: 16px; padding: 15px 0; } }
+
+  /* 첫 화면 — AI */
+  .ai { padding: 150px 0; }
+  .ai .h2 { margin-top: 22px; }
+  .ai-g { margin-top: 56px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 12px; }
+  .aic { background: #1c1c1c; border-radius: 24px; padding: 30px 28px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .aic h3 { font-size: 23px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.3; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .aic p { font-size: 16px; font-weight: 600; line-height: 1.55; color: #c9c9c9; text-wrap: pretty; }
+  .aic.big { grid-column: 1; grid-row: 1 / span 3; }
+  .aic.big .pm { margin-top: auto; padding-top: 28px; display: flex; justify-content: center; }
+  .ai-g > .aic:not(.big) { grid-column: 2; justify-content: center; }
+  .ai-trust { margin-top: 32px; max-width: 880px; display: flex; gap: 12px; align-items: flex-start; font-size: 17px; font-weight: 600; line-height: 1.6; color: #d6d6d6; text-wrap: pretty; }
+  .ai-trust svg { margin-top: 3px; color: var(--y); }
+  .ai .links { margin-top: 28px; }
+  @media (max-width: 860px) { .ai { padding: 104px 0; } .ai-g { grid-template-columns: minmax(0,1fr); } .aic.big, .ai-g > .aic:not(.big) { grid-column: auto; grid-row: auto; } .aic { padding: 26px 22px; } }
+
+  /* 첫 화면 — 기본부터 빠짐없이 */
+  .basics { padding: 140px 0; }
+  .bx6 { margin-top: 48px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+  .bx { background: #fff; border-radius: 24px; padding: 30px 28px; min-width: 0; }
+  .bx h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
+  .bx ul { margin-top: 16px; display: grid; gap: 9px; }
+  .bx li { position: relative; padding-left: 16px; font-size: 16px; font-weight: 600; line-height: 1.5; color: var(--ink2); text-wrap: pretty; }
+  .bx li::before { content: ''; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--ink); }
+  .basics .links { margin-top: 40px; }
+  @media (max-width: 1000px) { .bx6 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 600px) { .basics { padding: 96px 0; } .bx6 { grid-template-columns: minmax(0,1fr); } .bx { padding: 26px 22px; } }
+
+  /* 첫 화면 — 요금 띠 */
+  .pband { background: var(--y); }
+  .pband .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; padding-top: 28px; padding-bottom: 28px; }
+  .pband p { font-size: clamp(19px, 2vw, 26px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.35; }
