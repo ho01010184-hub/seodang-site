@@ -122,14 +122,15 @@
     .snip .ph { transform: scale(.82); transform-origin: 50% 0; }
   }
 
-  /* 비교표 — 서당 없이 vs 서당으로. 좁은 화면에선 기능마다 카드 */
+  /* 비교표 — 서당 없이 vs 서당으로. 좁은 화면에선 기능마다 카드
+     (「서당 없이」 칸은 `wo` — `.no` 는 site.css 의 회색 막대라 겹치면 칸이 어긋난다) */
   .cmp { padding: 150px 0 40px; }
   .ctab { margin: 56px auto 0; width: 100%; max-width: 1040px; border-collapse: separate; border-spacing: 0; text-align: left; }
   .ctab th, .ctab td { padding: 22px 24px; vertical-align: top; border-bottom: 1px solid var(--line); font-size: 17px; line-height: 1.55; text-wrap: pretty; }
   .ctab thead th { padding: 16px 24px; border-bottom: 0; font-size: 15px; font-weight: 800; color: var(--ink3); }
   .ctab thead th.yes { background: var(--y); color: var(--ink); border-radius: 18px 18px 0 0; }
   .ctab tbody th { width: 17%; font-weight: 800; white-space: nowrap; }
-  .ctab td.no { width: 39%; color: var(--ink2); font-weight: 500; }
+  .ctab td.wo { width: 39%; color: var(--ink2); font-weight: 500; }
   .ctab td.yes { background: #fff8d6; border-bottom-color: #f3e6a8; color: var(--ink); font-weight: 700; }
   .ctab tbody tr:last-child td.yes { border-bottom: 0; border-radius: 0 0 18px 18px; }
   @media (max-width: 720px) {
@@ -138,7 +139,7 @@
     .ctab, .ctab tbody, .ctab tr, .ctab th, .ctab td { display: block; width: auto; }
     .ctab thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
     .ctab tbody tr { margin-top: 12px; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
-    .ctab tbody th, .ctab td.no { width: auto; }
+    .ctab tbody th, .ctab td.wo { width: auto; }
     .ctab tbody th { padding: 18px 18px 6px; border: 0; font-size: 19px; white-space: normal; }
     .ctab td { padding: 10px 18px 16px; border: 0; font-size: 15px; }
     .ctab td::before { content: attr(data-l); display: block; margin-bottom: 4px; font-size: 12px; font-weight: 800; color: var(--ink3); }
@@ -211,7 +212,7 @@
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
   <div class="wrap">
-    <p class="eb r h-r">셔틀 운행하는 학원을 위한 관리 앱</p>
+    <p class="eb r h-r">셔틀 운행하는 학원을 위한 AI 관리 앱</p>
     <h1 class="r h-r d1">서당으로<br><mark>이어진 우리.</mark></h1>
     <div class="links r h-r d2">
       <a class="pill-y lg" href="/app/">무료로 시작하기</a>
@@ -397,23 +398,23 @@
   </div>
 </section>
 
-<!-- ===== 자동 — 원장님이 안 해도, 서당이 해요 ===== -->
+<!-- ===== 자동 — 원장님이 안 해도, 서당 AI가 해요(자동 기능도 AI로 소개, 2026-10-30 사용자 결정) ===== -->
 <section class="auto" id="auto-list">
   <div class="wrap">
-    <h2 class="h2 r">원장님이 안 해도,<br>서당이 해요</h2>
+    <h2 class="h2 r">원장님이 안 해도,<br>서당 AI가 해요</h2>
     <p class="lead r d1">사람이 챙기다 놓치던 일을 서당이 시간 맞춰 먼저 해요.</p>
     <ul class="au-l r d2">
-      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">매달 청구일에 청구서 자동 발행</span><span class="at">자동</span></li>
-      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">안 낸 수강료, 마감 +1·+3·+7일 자동 안내</span><span class="at">자동</span></li>
-      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">수업 10분 지나도 안 온 아이 → 학부모·원장님께</span><span class="at">자동</span></li>
-      <li><span class="ic b"><svg class="i" viewBox="0 0 20 20"><path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z"/></svg></span><span class="tx">셔틀에서 내렸는데 교실에 없는 아이 알림</span><span class="at">자동</span></li>
-      <li><span class="ic b"><svg class="i" viewBox="0 0 20 20"><path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z"/></svg></span><span class="tx">하원 셔틀을 안 탄 아이 알림</span><span class="at">자동</span></li>
-      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">첫 수업이 지났는데 출근 전인 선생님 알림</span><span class="at">자동</span></li>
-      <li><span class="ic b"><svg class="i" viewBox="0 0 20 20"><path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z"/></svg></span><span class="tx">결석하고 보강을 안 잡은 아이에게 보강 안내</span><span class="at">자동</span></li>
-      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">학원 쉬는 날 전날 저녁, 학부모께 안내</span><span class="at">자동</span></li>
-      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">휴원 기간이 끝나면 자동으로 재원</span><span class="at">자동</span></li>
-      <li><span class="ic b"><svg class="i" viewBox="0 0 20 20"><path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z"/></svg></span><span class="tx">횟수권 1회 남으면 다음 청구서 자동</span><span class="at">자동</span></li>
-      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">예약해 둔 공지, 그 시각에 자동 발송</span><span class="at">자동</span></li>
+      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">매달 청구일에 청구서 자동 발행</span><span class="at">AI</span></li>
+      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">안 낸 수강료, 마감 +1·+3·+7일 자동 안내</span><span class="at">AI</span></li>
+      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">수업 10분 지나도 안 온 아이 → 학부모·원장님께</span><span class="at">AI</span></li>
+      <li><span class="ic b"><svg class="i" viewBox="0 0 20 20"><path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z"/></svg></span><span class="tx">셔틀에서 내렸는데 교실에 없는 아이 알림</span><span class="at">AI</span></li>
+      <li><span class="ic b"><svg class="i" viewBox="0 0 20 20"><path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z"/></svg></span><span class="tx">하원 셔틀을 안 탄 아이 알림</span><span class="at">AI</span></li>
+      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">첫 수업이 지났는데 출근 전인 선생님 알림</span><span class="at">AI</span></li>
+      <li><span class="ic b"><svg class="i" viewBox="0 0 20 20"><path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z"/></svg></span><span class="tx">결석하고 보강을 안 잡은 아이에게 보강 안내</span><span class="at">AI</span></li>
+      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">학원 쉬는 날 전날 저녁, 학부모께 안내</span><span class="at">AI</span></li>
+      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">휴원 기간이 끝나면 자동으로 재원</span><span class="at">AI</span></li>
+      <li><span class="ic b"><svg class="i" viewBox="0 0 20 20"><path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z"/></svg></span><span class="tx">횟수권 1회 남으면 다음 청구서 자동</span><span class="at">AI</span></li>
+      <li><span class="ic"><svg class="i" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></span><span class="tx">예약해 둔 공지, 그 시각에 자동 발송</span><span class="at">AI</span></li>
     </ul>
   </div>
 </section>
@@ -452,14 +453,14 @@
     <table class="ctab r d1">
       <thead><tr><th scope="col">기능</th><th scope="col">서당 없이</th><th scope="col" class="yes">서당으로</th></tr></thead>
       <tbody>
-        <tr><th scope="row">출석</th><td class="no" data-l="서당 없이">종이 출석부 · 따로 문자</td><td class="yes" data-l="서당으로">누르면 저장 · 알림 자동</td></tr>
-        <tr><th scope="row">안 온 아이</th><td class="no" data-l="서당 없이">수업 끝나고 알게 됨</td><td class="yes" data-l="서당으로">10분 뒤 자동 알림</td></tr>
-        <tr><th scope="row">셔틀</th><td class="no" data-l="서당 없이">「버스 어디예요?」 전화</td><td class="yes" data-l="서당으로">위치 · 도착 시간 · 탑승 알림</td></tr>
-        <tr><th scope="row">수강료</th><td class="no" data-l="서당 없이">계산 · 문자 · 통장 확인</td><td class="yes" data-l="서당으로">자동 청구 · 카드 결제 · 미납 알림</td></tr>
-        <tr><th scope="row">공지</th><td class="no" data-l="서당 없이">단체 문자방 · 답장 세기</td><td class="yes" data-l="서당으로">앱 공지 · 참석 확인</td></tr>
-        <tr><th scope="row">보강</th><td class="no" data-l="서당 없이">전화로 날짜 맞추기</td><td class="yes" data-l="서당으로">앱 신청 · 승인 한 번</td></tr>
-        <tr><th scope="row">매출</th><td class="no" data-l="서당 없이">월말 장부 정리</td><td class="yes" data-l="서당으로">자동 정리</td></tr>
-        <tr><th scope="row">알림 비용</th><td class="no" data-l="서당 없이">문자 건당 비용</td><td class="yes" data-l="서당으로">0원</td></tr>
+        <tr><th scope="row">출석</th><td class="wo" data-l="서당 없이">종이 출석부 · 따로 문자</td><td class="yes" data-l="서당으로">누르면 저장 · 알림 자동</td></tr>
+        <tr><th scope="row">안 온 아이</th><td class="wo" data-l="서당 없이">수업 끝나고 알게 됨</td><td class="yes" data-l="서당으로">10분 뒤 자동 알림</td></tr>
+        <tr><th scope="row">셔틀</th><td class="wo" data-l="서당 없이">「버스 어디예요?」 전화</td><td class="yes" data-l="서당으로">위치 · 도착 시간 · 탑승 알림</td></tr>
+        <tr><th scope="row">수강료</th><td class="wo" data-l="서당 없이">계산 · 문자 · 통장 확인</td><td class="yes" data-l="서당으로">자동 청구 · 카드 결제 · 미납 알림</td></tr>
+        <tr><th scope="row">공지</th><td class="wo" data-l="서당 없이">단체 문자방 · 답장 세기</td><td class="yes" data-l="서당으로">앱 공지 · 참석 확인</td></tr>
+        <tr><th scope="row">보강</th><td class="wo" data-l="서당 없이">전화로 날짜 맞추기</td><td class="yes" data-l="서당으로">앱 신청 · 승인 한 번</td></tr>
+        <tr><th scope="row">매출</th><td class="wo" data-l="서당 없이">월말 장부 정리</td><td class="yes" data-l="서당으로">자동 정리</td></tr>
+        <tr><th scope="row">알림 비용</th><td class="wo" data-l="서당 없이">문자 건당 비용</td><td class="yes" data-l="서당으로">0원</td></tr>
       </tbody>
     </table>
   </div>
