@@ -1,0 +1,6 @@
+# 서당 (seodang.app) — 검색 로봇 안내
+# 모든 검색엔진이 전체 공개 페이지를 수집하도록 허용한다.
+User-agent: *
+Allow: /
+
+Sitemap: https://seodang.app/sitemap.xml
