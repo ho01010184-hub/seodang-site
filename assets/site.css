@@ -506,6 +506,16 @@
   .ai-trust { margin-top: 32px; max-width: 880px; display: flex; gap: 12px; align-items: flex-start; font-size: 17px; font-weight: 600; line-height: 1.6; color: #d6d6d6; text-wrap: pretty; }
   .ai-trust svg { margin-top: 3px; color: var(--y); }
   .ai .links { margin-top: 28px; }
+  /* 물어보기 — 채팅 말풍선(흰 폰 화면 .scr 안) */
+  .cht { flex: 1; display: flex; flex-direction: column; gap: 9px; padding: 8px 15px 18px; overflow: hidden; }
+  .cb { max-width: 84%; padding: 11px 14px; font-size: 13.5px; font-weight: 600; line-height: 1.5; text-wrap: pretty; }
+  .cb-u { align-self: flex-end; background: var(--y); color: var(--ink); border-radius: 15px 15px 5px 15px; }
+  .cb-a { align-self: flex-start; background: #f2f3f5; color: var(--ink); border-radius: 15px 15px 15px 5px; }
+  .cb-a b { font-weight: 800; }
+  .cf { align-self: flex-start; max-width: 88%; margin-top: 1px; padding: 13px 14px; border-radius: 15px 15px 15px 5px; background: #fff8d6; box-shadow: inset 0 0 0 1.5px var(--y); }
+  .cf p { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.5; text-wrap: pretty; }
+  .cf .cf-b { margin-top: 11px; display: inline-flex; height: 33px; padding: 0 16px; align-items: center; border-radius: 10px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 800; }
+  .ab .t .bolt { color: var(--y); margin-right: 2px; }
   @media (max-width: 860px) { .ai { padding: 104px 0; } .ai-g { grid-template-columns: minmax(0,1fr); } .aic.big, .ai-g > .aic:not(.big) { grid-column: auto; grid-row: auto; } .aic { padding: 26px 22px; } }
 
   /* 첫 화면 — 기본부터 빠짐없이 */
